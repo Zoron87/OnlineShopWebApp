@@ -1,0 +1,1 @@
+# ASP.NET_Core_6.0_kurators
