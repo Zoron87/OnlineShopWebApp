@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
@@ -14,6 +15,11 @@ namespace OnlineShopWebApp.Models
         public List<Product> GetAll()
         {
             return products;
+        }
+
+        public Product TryGetById(int id)
+        {
+            return products.FirstOrDefault(product => product.Id == id);
         }
     }
 }

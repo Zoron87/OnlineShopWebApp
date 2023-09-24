@@ -9,7 +9,8 @@ namespace OnlineShopWebApp.Models
     public class Product
     {
         private static int IdCounter = 1;
-        private int Id { get; set; }
+
+        public int Id { get; }
         private string Name { get; set; }
         private decimal Cost { get; set; }
         private string Description { get; set; }
@@ -26,7 +27,7 @@ namespace OnlineShopWebApp.Models
 
         public override string ToString()
         {
-            return $"{Id} \n{Name} \n{Cost}\n";
+            return $"{Id} \n{Name} \n{Cost}\n{Description}";
         }
     }
 }
