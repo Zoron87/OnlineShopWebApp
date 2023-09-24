@@ -1,15 +1,8 @@
-﻿using Microsoft.Extensions.Hosting;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Net;
-using System.Threading;
-
-namespace OnlineShopWebApp.Models
+﻿namespace OnlineShopWebApp.Models
 {
     public class Product
     {
-        private static int IdCounter = 1;
-
+        private static int counter = 1;
         public int Id { get; }
         private string Name { get; set; }
         private decimal Cost { get; set; }
@@ -17,17 +10,17 @@ namespace OnlineShopWebApp.Models
 
         public Product(string name, decimal cost, string description)
         {
-            Id = IdCounter;
+            Id = counter;
             Name = name;
             Cost = cost;
             Description = description;
 
-            Interlocked.Increment(ref IdCounter);
+            counter++;
         }
 
         public override string ToString()
         {
-            return $"{Id} \n{Name} \n{Cost}\n{Description}";
+            return $"{Id}\n{Name}\n{Cost}\n{Description}";
         }
     }
 }

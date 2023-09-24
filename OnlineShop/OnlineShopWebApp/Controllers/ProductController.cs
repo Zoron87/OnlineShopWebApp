@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using OnlineShopWebApp.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Repositories;
 
 namespace OnlineShopWebApp.Controllers
 {
-	public class ProductController : Controller
+    public class ProductController : Controller
 	{
         private ProductRepository productRepository = new ProductRepository();
         public string Index(int id)
