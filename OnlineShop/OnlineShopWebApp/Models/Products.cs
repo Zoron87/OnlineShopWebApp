@@ -4,9 +4,9 @@
     {
         private static int counter = 1;
         public int Id { get; }
-        private string Name { get; set; }
-        private decimal Cost { get; set; }
-        private string Description { get; set; }
+        public string Name { get; }
+        public decimal Cost { get; }
+        public string Description { get; }
 
         public Product(string name, decimal cost, string description)
         {
