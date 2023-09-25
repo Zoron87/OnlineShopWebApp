@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace OnlineShopWebApp.Models
+﻿namespace OnlineShopWebApp.Models
 {
     public class Product
     {
