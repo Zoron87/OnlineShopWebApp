@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Interfaces
 {
     public interface IProductStorage
     {
-        public void SaveAll(bool isAppend = false);
+        public bool SaveAll(bool isAppend = false);
 
         public List<Product> GetAll();
 

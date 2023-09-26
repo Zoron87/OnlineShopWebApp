@@ -10,14 +10,17 @@ namespace OnlineShopWebApp.Controllers
         private IProductStorage productStorageInJson = new ProductStorageInJson();
         public string Index(int id)
         {
-            var currentProduct = productStorageInJson.TryGetById(id);
-            return (currentProduct != null) ? currentProduct.ToString() : $"Продукт с id {id} не найден";
+            var product = productStorageInJson.TryGetById(id);
+            return (product != null) ? product.ToString() : $"Продукт с id {id} не найден";
         }
 
         public string SaveAll(bool isAppend = false)
         {
-            productStorageInJson.SaveAll(isAppend);
-            return "Успешно сохранили информацию в файл!";
+            if (productStorageInJson.SaveAll(isAppend))
+                return "Успешно сохранили информацию в файл!";
+
+
+           return "Ошибка сохранения информации в файл!";
         }
 
         public string GetAll()

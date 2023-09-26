@@ -9,8 +9,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Models\Product.cs">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Storages\Products.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

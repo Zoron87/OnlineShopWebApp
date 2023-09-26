@@ -5,6 +5,7 @@ using OnlineShopWebApp.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 namespace OnlineShopWebApp.Repositories
 {
@@ -22,11 +23,14 @@ namespace OnlineShopWebApp.Repositories
             return JsonConvert.DeserializeObject<List<Product>>(allProducts);
         }
 
-        public void SaveAll(bool isAppend = false)
+        public bool SaveAll(bool isAppend = false)
         {
             var allProducts = GetAll();
 
-            FileProvider.SaveInfo(productsFilePath, JsonConvert.SerializeObject(allProducts, Formatting.Indented));
+            if (FileProvider.SaveInfo(productsFilePath, JsonConvert.SerializeObject(allProducts, Formatting.Indented)))
+                return true;
+           
+            return false; 
         }
 
         public Product TryGetById(int id)
