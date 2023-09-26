@@ -1,5 +1,6 @@
 ﻿using OnlineShopWebApp.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp.Repositories
 {
@@ -15,6 +16,11 @@ namespace OnlineShopWebApp.Repositories
         public List<Product> GetAll()
         {
             return products;
+        }
+
+        public Product TryGetById(int id)
+        {
+            return products.FirstOrDefault(product => product.Id == id);
         }
     }
 }

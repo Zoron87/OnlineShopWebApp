@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using OnlineShopWebApp.Repositories;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class HomeController : Controller
-	{
-        private ProductRepository productRepository = new ProductRepository();
-        public string Index()
-		{
-			var products = productRepository.GetAll();
-			return String.Join("\n", products);
-		}
-	}
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+    }
 }

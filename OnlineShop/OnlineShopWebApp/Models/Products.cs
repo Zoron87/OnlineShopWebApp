@@ -3,10 +3,10 @@
     public class Product
     {
         private static int counter = 1;
-        private int Id { get; set; }
-        private string Name { get; set; }
-        private decimal Cost { get; set; }
-        private string Description { get; set; }
+        public int Id { get; }
+        public string Name { get; }
+        public decimal Cost { get; }
+        public string Description { get; }
 
         public Product(string name, decimal cost, string description)
         {
@@ -20,7 +20,7 @@
 
         public override string ToString()
         {
-            return $"{Id} \n{Name} \n{Cost}\n";
+            return $"{Id}\n{Name}\n{Cost}\n{Description}";
         }
     }
 }
