@@ -1,4 +1,6 @@
-﻿namespace OnlineShopWebApp.Models
+﻿using System;
+
+namespace OnlineShopWebApp.Models
 {
     public class Product
     {
@@ -20,7 +22,7 @@
 
         public override string ToString()
         {
-            return $"{Id}\n{Name}\n{Cost}\n{Description}";
+            return $"{Id}{Environment.NewLine}{Name}{Environment.NewLine}{Cost}{Environment.NewLine}{Description}";
         }
     }
 }
