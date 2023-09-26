@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq.Expressions;
 
 namespace OnlineShopWebApp.Providers
 {
@@ -6,9 +7,16 @@ namespace OnlineShopWebApp.Providers
     {
         public static bool SaveInfo(string filePath, string data, bool isAppend = false)
         {
-            using (StreamWriter sw = new StreamWriter(filePath, isAppend))
+            try
             {
-                sw.WriteLine(data);
+                using (StreamWriter sw = new StreamWriter(filePath, isAppend))
+                {
+                    sw.WriteLine(data);
+                }
+            }
+            catch
+            {
+                return false;
             }
 
             return true;
