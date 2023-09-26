@@ -9,6 +9,6 @@ namespace OnlineShopWebApp.Interfaces
 
         List<Product> GetAll();
 
-       Product TryGetById(int id);
+        Product TryGetById(int id);
     }
 }
