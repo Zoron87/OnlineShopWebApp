@@ -6,24 +6,24 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private IProductStorage productStorageInJson = new ProductStorageInJson();
+        private IProductStorage productStorage = new ProductStorageInJson();
         public IActionResult Index(int id)
         {
-            var product = productStorageInJson.TryGetById(id);
+            var product = productStorage.TryGetById(id);
 
-            return (product != null) ? View((object)product) : View("Error");
+            return (product != null) ? View(product) : View("Error");
         }
 
         public IActionResult View(int page = 1, int itemsonpage = 1)
         {
-            var products = productStorageInJson.GetProductsWithPagination(page, itemsonpage);
+            var products = productStorage.GetProductsWithPagination(page, itemsonpage);
 
-            return (products != null) ? View((object)products) : View("Error");
+            return (products != null) ? View(products) : View("Error");
         }
 
         public string SaveAll(bool isAppend = false)
         {
-            if (productStorageInJson.SaveAll(isAppend))
+            if (productStorage.SaveAll(isAppend))
                 return "Успешно сохранили информацию в файл!";
 
             return "Ошибка сохранения информации в файл!";
@@ -31,9 +31,9 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult GetAll()
         {
-            var allProducts = productStorageInJson.GetAll();
+            var allProducts = productStorage.GetAll();
 
-            return (allProducts != null) ? View((object)allProducts) : View("Error");
+            return (allProducts != null) ? View(allProducts) : View("Error");
         }
     }
 }

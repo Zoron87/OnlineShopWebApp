@@ -1,0 +1,40 @@
+﻿@model Cart;
+
+@if (Model == null)
+{
+	<h1>Корзина пустая</h1>
+}
+else
+{
+    <div class="container-fluid">
+        <div class="row">
+                <div class="table-responsive">
+                    <table class="table offcanvasCart-table">
+                        <tbody>
+                            @foreach (var item in Model.Items)
+                            {
+                                <tr>
+                                <td class="product-img-td"><a href="#"><img src="~/img/products/@item.Product.Image" alt="@item.Product.Name"></a></td>
+                                    <td><a href="#">@item.Product.Name</a></td>
+                                    <td>@item.Product.Cost р.</td>
+                                    <td>@item.Quantity</td>
+                                    <td><button class="btn btn-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                </tr>
+                             }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4" class="text-end">Total:</td>
+                                <td>@Model.Cost() р.</td>
+                            </tr>
+                        </tfoot>
+                    </table> <!-- //table offcanvasCart-table -->
+                </div>
+
+                <div class="text-end mt-3 cart-buttons">
+                    <a href="#" class="btn btn-outline-primary">Оформить заказ</a>
+                    <a href="/" class="btn btn-outline-secondary">Продолжить покупки</a>
+                </div>
+        </div>
+    </div>
+}

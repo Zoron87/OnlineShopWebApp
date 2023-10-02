@@ -11,12 +11,12 @@ namespace OnlineShopWebApp.Repositories
     public class ProductStorageInJson : IProductStorage
     {
         private static string productsFilePath = "Storages/Products.txt";
-        private static readonly List<Product> products = InitProductsList();
+        private static readonly List<Product> products = InitProducts();
         public List<Product> GetAll()
         {
             return products;
         }
-        private static List<Product> InitProductsList()
+        private static List<Product> InitProducts()
         {
             var allProducts = FileProvider.GetInfo(productsFilePath);
 
