@@ -10,19 +10,22 @@ namespace OnlineShopWebApp.Models
         public decimal Cost { get; }
         public string Description { get; }
 
-        public Product(string name, decimal cost, string description)
+        public string Img { get; }
+
+        public Product(string name, decimal cost, string description, string img)
         {
             Id = counter;
             Name = name;
             Cost = cost;
             Description = description;
+            Img = img;
 
             counter++;
         }
 
-        public override string ToString()
-        {
-            return $"{Id}{Environment.NewLine}{Name}{Environment.NewLine}{Cost}{Environment.NewLine}{Description}";
-        }
+        //public override string ToString()
+        //{
+        //    return $"{Id}{Environment.NewLine}{Name}{Environment.NewLine}{Cost}{Environment.NewLine}{Description}{Environment.NewLine}";
+        //}
     }
 }

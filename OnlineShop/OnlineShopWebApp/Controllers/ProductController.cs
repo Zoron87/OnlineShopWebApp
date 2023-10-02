@@ -8,10 +8,12 @@ namespace OnlineShopWebApp.Controllers
     public class ProductController : Controller
     {
         private IProductStorage productStorageInJson = new ProductStorageInJson();
-        public string Index(int id)
+        public IActionResult Index(int id)
         {
             var product = productStorageInJson.TryGetById(id);
-            return (product != null) ? product.ToString() : $"Продукт с id {id} не найден";
+            //product = (product != null) ? product.ToString() : $"Продукт с id {id} не найден";
+
+            return View((object)product);
         }
 
         public string SaveAll(bool isAppend = false)
