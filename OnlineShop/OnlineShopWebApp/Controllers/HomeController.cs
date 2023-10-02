@@ -12,7 +12,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var products = productStorageInJson.GetAll();
 
-            return View((object)products);
+            return (products != null) ? View((object)products) : View("Error");
         }
     }
 }

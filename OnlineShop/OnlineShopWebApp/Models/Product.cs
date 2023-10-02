@@ -9,7 +9,6 @@ namespace OnlineShopWebApp.Models
         public string Name { get; }
         public decimal Cost { get; }
         public string Description { get; }
-
         public string Img { get; }
 
         public Product(string name, decimal cost, string description, string img)
@@ -22,10 +21,5 @@ namespace OnlineShopWebApp.Models
 
             counter++;
         }
-
-        //public override string ToString()
-        //{
-        //    return $"{Id}{Environment.NewLine}{Name}{Environment.NewLine}{Cost}{Environment.NewLine}{Description}{Environment.NewLine}";
-        //}
     }
 }

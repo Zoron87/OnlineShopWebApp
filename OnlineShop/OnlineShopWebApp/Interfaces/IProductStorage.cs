@@ -10,5 +10,7 @@ namespace OnlineShopWebApp.Interfaces
         List<Product> GetAll();
 
         Product TryGetById(int id);
+
+        List<Product> GetProductsWithPagination(int page, int itemsonpage);
     }
 }

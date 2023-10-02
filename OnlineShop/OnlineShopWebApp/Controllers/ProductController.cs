@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Repositories;
-using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -11,9 +10,15 @@ namespace OnlineShopWebApp.Controllers
         public IActionResult Index(int id)
         {
             var product = productStorageInJson.TryGetById(id);
-            //product = (product != null) ? product.ToString() : $"Продукт с id {id} не найден";
 
-            return View((object)product);
+            return (product != null) ? View((object)product) : View("Error");
+        }
+
+        public IActionResult View(int page = 1, int itemsonpage = 1)
+        {
+            var products = productStorageInJson.GetProductsWithPagination(page, itemsonpage);
+
+            return (products != null) ? View((object)products) : View("Error");
         }
 
         public string SaveAll(bool isAppend = false)
@@ -21,14 +26,14 @@ namespace OnlineShopWebApp.Controllers
             if (productStorageInJson.SaveAll(isAppend))
                 return "Успешно сохранили информацию в файл!";
 
-
-           return "Ошибка сохранения информации в файл!";
+            return "Ошибка сохранения информации в файл!";
         }
 
-        public string GetAll()
+        public IActionResult GetAll()
         {
             var allProducts = productStorageInJson.GetAll();
-            return String.Join("\n", allProducts);
+
+            return (allProducts != null) ? View((object)allProducts) : View("Error");
         }
     }
 }
