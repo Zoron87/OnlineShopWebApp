@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace OnlineShopWebApp.Models
+﻿namespace OnlineShopWebApp.Models
 {
     public class Product
     {
@@ -9,15 +7,15 @@ namespace OnlineShopWebApp.Models
         public string Name { get; }
         public decimal Cost { get; }
         public string Description { get; }
-        public string Img { get; }
+        public string Image { get; }
 
-        public Product(string name, decimal cost, string description, string img)
+        public Product(string name, decimal cost, string description, string image)
         {
             Id = counter;
             Name = name;
             Cost = cost;
             Description = description;
-            Img = img;
+            Image = image;
 
             counter++;
         }
