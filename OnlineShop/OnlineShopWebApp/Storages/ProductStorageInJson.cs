@@ -42,19 +42,27 @@ namespace OnlineShopWebApp.Repositories
         public List<Product> GetProductsWithPagination(int page, int itemsonpage)
         {
             if (page <= 0) throw new Exception("Номер страницы должен быть больше нуля!");
-            if (itemsonpage <= 0) throw new Exception("Количество товаров на странице должно быть больше нуля!");
 
-            if (page > 1 && (products.Count - (page - 1) * itemsonpage <= 0))
-                throw new Exception("Такой страницы не существует!");
+            if (CheckExistPage(page, itemsonpage)) throw new Exception("Такой страницы не существует!");
 
             itemsonpage = itemsonpage < products.Count ? itemsonpage : products.Count;
 
-            var outputProducts = products.GetRange((page - 1) * itemsonpage, page > 1 ? products.Count - (page - 1) * itemsonpage : itemsonpage);
+            var outputProducts = GetOutputProducts(page, itemsonpage);
 
-            if (products.Any())
-                return outputProducts;
-
+            if (products.Any()) 
+                return GetOutputProducts(page, itemsonpage);
+            
             throw new Exception("Товаров для вывода не обнаружено!");
+        }
+
+        private static bool CheckExistPage(int page, int itemsonpage)
+        {
+            return page > 1 && (products.Count - (page - 1) * itemsonpage <= 0);
+        }
+
+        private static List<Product> GetOutputProducts(int page, int itemsonpage)
+        {
+            return products.GetRange((page - 1) * itemsonpage, page > 1 ? products.Count - (page - 1) * itemsonpage : itemsonpage);
         }
     }
 }
