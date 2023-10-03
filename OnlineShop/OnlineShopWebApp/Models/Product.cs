@@ -11,13 +11,13 @@ namespace OnlineShopWebApp.Models
         public string Description { get; }
         public string ImagePath { get; }
 
-        public Product(string name, decimal cost, string description, string imagepath)
+        public Product(string name, decimal cost, string description, string imagePath)
         {
             Id = counter;
             Name = name;
             Cost = cost;
             Description = description;
-            ImagePath = imagepath;
+            ImagePath = imagePath;
 
             counter++;
         }

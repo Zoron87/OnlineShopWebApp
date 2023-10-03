@@ -14,8 +14,8 @@ else
                             @foreach (var item in Model.Items)
                             {
                                 <tr>
-                                <td class="product-img-td"><a href="#"><img src="~/img/products/@item.Product.ImagePath" alt="@item.Product.Name"></a></td>
-                                    <td><a href="#">@item.Product.Name</a></td>
+                                <td class="product-img-td"><a href="/Product/Index/@item.Product.Id"><img src="~/img/products/@item.Product.ImagePath" alt="@item.Product.Name"></a></td>
+                                <td><a href="/Product/Index/@item.Product.Id">@item.Product.Name</a></td>
                                     <td>@item.Product.Cost р.</td>
                                     <td>@item.Quantity</td>
                                     <td><button class="btn btn-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>

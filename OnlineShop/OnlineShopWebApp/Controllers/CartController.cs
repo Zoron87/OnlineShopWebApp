@@ -28,10 +28,14 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult Add(int productId, int quantity = 1)
         {
-            var product = productStorage.TryGetById(productId);
+            if (productId > 0)
+            {
+                var product = productStorage.TryGetById(productId);
 
-            var cart = cartStorage.Add(userGuid, product);
-            return View("Index", cart);
+                var cart = cartStorage.Add(userGuid, product);
+                return cart != null ? View("Index", cart) : View("Error");
+            }
+            else return View("Error");
         }
     }
 }
