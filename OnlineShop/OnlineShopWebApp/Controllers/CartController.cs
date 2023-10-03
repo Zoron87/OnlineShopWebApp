@@ -3,26 +3,18 @@ using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Repositories;
 using OnlineShopWebApp.Storages;
-using System;
-using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        public List<CartItem> cart;
+        public Cart cart;
         CartStorage cartStorage = new CartStorage();
         IProductStorage productStorage = new ProductStorageInJson();
-        Guid userGuid;
-
-        public CartController()
-        {
-            userGuid = Guid.NewGuid();
-        }
 
         public ActionResult Index()
         {
-            var cart = cartStorage.TryGetById(userGuid);
+            cart = cartStorage.TryGetById(ShopUser.Id);
             return View(cart);
         }
 
@@ -32,7 +24,7 @@ namespace OnlineShopWebApp.Controllers
             {
                 var product = productStorage.TryGetById(productId);
 
-                var cart = cartStorage.Add(userGuid, product);
+                cart = cartStorage.Add(ShopUser.Id, product);
                 return cart != null ? View("Index", cart) : View("Error");
             }
             else return View("Error");

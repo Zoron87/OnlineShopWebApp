@@ -6,8 +6,8 @@ namespace OnlineShopWebApp.Models
 {
     public class Cart
     {   
-        public Guid UserId { get; set; }
-        public List<CartItem> Items { get; set; }
+        public Guid UserId { get; }
+        public List<CartItem> Items { get;}
 
         public Cart(Guid userId, List<CartItem> items)
         {

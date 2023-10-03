@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace OnlineShopWebApp.Models
+﻿namespace OnlineShopWebApp.Models
 {
     public class CartItem
     {

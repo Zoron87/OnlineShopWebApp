@@ -7,6 +7,7 @@ namespace OnlineShopWebApp.Controllers
     public class ProductController : Controller
     {
         private IProductStorage productStorage = new ProductStorageInJson();
+
         public IActionResult Index(int id)
         {
             var product = productStorage.TryGetById(id);
