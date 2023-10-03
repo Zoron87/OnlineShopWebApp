@@ -42,7 +42,6 @@ namespace OnlineShopWebApp.Repositories
         public List<Product> GetProductsWithPagination(int page, int itemsonpage)
         {
             if (page <= 0) throw new Exception("Номер страницы должен быть больше нуля!");
-            if (itemsonpage <= 0) throw new Exception("Количество товаров на странице должно быть больше нуля!");
 
             if (page > 1 && (products.Count - (page - 1) * itemsonpage <= 0))
                 throw new Exception("Такой страницы не существует!");
