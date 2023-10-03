@@ -35,11 +35,6 @@ namespace OnlineShopWebApp.Storages
             return cart;
         }
 
-        public List<Cart> GetAll()
-        {
-            return carts;
-        }
-
         public Cart TryGetById(Guid userId)
         {
             return carts.FirstOrDefault(c => c.UserId == userId);

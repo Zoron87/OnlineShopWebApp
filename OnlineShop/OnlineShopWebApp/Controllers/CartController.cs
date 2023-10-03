@@ -27,7 +27,8 @@ namespace OnlineShopWebApp.Controllers
                 cart = cartStorage.Add(ShopUser.Id, product);
                 return cart != null ? View("Index", cart) : View("Error");
             }
-            else return View("Error");
+
+            return View("Error");
         }
     }
 }
