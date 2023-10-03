@@ -9,15 +9,15 @@ namespace OnlineShopWebApp.Models
         public string Name { get; }
         public decimal Cost { get; }
         public string Description { get; }
-        public string Image { get; }
+        public string ImagePath { get; }
 
-        public Product(string name, decimal cost, string description, string image)
+        public Product(string name, decimal cost, string description, string imagepath)
         {
             Id = counter;
             Name = name;
             Cost = cost;
             Description = description;
-            Image = image;
+            ImagePath = imagepath;
 
             counter++;
         }
