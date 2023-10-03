@@ -11,14 +11,14 @@ namespace OnlineShopWebApp.Controllers
         {
             var product = productStorageInJson.TryGetById(id);
 
-            return (product != null) ? View(product) : View("Error");
+            return product != null ? View(product) : View("Error");
         }
 
         public IActionResult View(int page = 1, int itemsonpage = 1)
         {
             var products = productStorageInJson.GetProductsWithPagination(page, itemsonpage);
 
-            return (products != null) ? View(products) : View("Error");
+            return products != null ? View(products) : View("Error");
         }
 
         public string SaveAll(bool isAppend = false)
@@ -33,7 +33,7 @@ namespace OnlineShopWebApp.Controllers
         {
             var allProducts = productStorageInJson.GetAll();
 
-            return (allProducts != null) ? View(allProducts) : View("Error");
+            return allProducts != null ? View(allProducts) : View("Error");
         }
     }
 }

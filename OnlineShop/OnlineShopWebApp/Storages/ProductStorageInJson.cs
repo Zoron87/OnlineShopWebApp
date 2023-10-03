@@ -42,13 +42,13 @@ namespace OnlineShopWebApp.Repositories
         public List<Product> GetProductsWithPagination(int page, int itemsonpage)
         {
             if (page <= 0) throw new Exception("Номер страницы должен быть больше нуля!");
-            if (itemsonpage <= 0) throw new Exception("Количество товаров на странице должно быть больше нуля!");
 
+            if (itemsonpage <= 0) throw new Exception("Количество товаров на странице должно быть больше нуля!");
 
             if ((page - 1) * itemsonpage >= products.Count - 1)
                 throw new Exception("Такой страницы не существует!");
 
-            itemsonpage = (itemsonpage < products.Count - 1) ? itemsonpage : products.Count - 1;
+            itemsonpage = itemsonpage < products.Count - 1 ? itemsonpage : products.Count - 1;
 
             var outputProducts = products.GetRange((page - 1) * itemsonpage, itemsonpage);
 
