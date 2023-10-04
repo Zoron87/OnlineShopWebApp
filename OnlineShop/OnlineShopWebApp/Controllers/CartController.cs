@@ -8,7 +8,7 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        public Cart cart;
+        private Cart cart;
         CartStorage cartStorage = new CartStorage();
         IProductStorage productStorage = new ProductStorageInJson();
 
@@ -29,6 +29,19 @@ namespace OnlineShopWebApp.Controllers
             }
 
             return View("Error");
+        }
+
+        public IActionResult Delete(int productId, int quantity) 
+        {
+            if (productId > 0)
+            {
+                cart = cartStorage.TryGetById(ShopUser.Id);
+                if (cart != null) 
+                   cart =  cartStorage.Delete(cart, productId);
+            }
+
+            return View("Index", cart);
+
         }
     }
 }

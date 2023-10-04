@@ -1,6 +1,6 @@
 ﻿@model Cart;
 
-@if (Model == null && Model.Items.Count == 0)
+@if (Model == null || Model.Items.Count == 0)
 {
 	<h1>Корзина пустая</h1>
 }
@@ -18,7 +18,7 @@ else
                                 <td><a href="/Product/Index/@item.Product.Id">@item.Product.Name</a></td>
                                     <td>@item.Product.Cost р.</td>
                                     <td>@item.Quantity</td>
-                                    <td><button class="btn btn-danger"><i class="fa-solid fa-circle-xmark"></i></button></td>
+                                <td><a class="btn btn-danger" style="display:inline;" href="/cart/delete/?productid=@item.Product.Id"><i class="fa-solid fa-circle-xmark"></i></a></td>
                                 </tr>
                              }
                         </tbody>

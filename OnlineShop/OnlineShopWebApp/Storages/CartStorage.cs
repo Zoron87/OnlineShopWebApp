@@ -6,13 +6,14 @@ using System.Linq;
 
 namespace OnlineShopWebApp.Storages
 {
-    public class CartStorage
+    public class CartStorage : ICartStorage
     {
+        Cart cart;
         private static List<Cart> carts = new List<Cart>();
 
         public Cart Add(Guid userId, Product product)
         {
-            var cart = TryGetById(userId);
+            cart = TryGetById(userId);
 
             var cartPositon = new CartItem(product);
 
@@ -31,6 +32,14 @@ namespace OnlineShopWebApp.Storages
             }
 
             carts.Add(cart);
+
+            return cart;
+        }
+
+        public Cart Delete(Cart cart, int productId = 1)
+        {
+            var ItemForRemove = cart.Items.FirstOrDefault(ci => ci.Product.Id == productId);
+            cart.Items.Remove(ItemForRemove);
 
             return cart;
         }

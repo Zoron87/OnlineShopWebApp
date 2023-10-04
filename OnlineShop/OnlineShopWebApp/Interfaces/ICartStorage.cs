@@ -1,12 +1,12 @@
 ﻿using OnlineShopWebApp.Models;
 using System;
-using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Interfaces
 {
     public interface ICartStorage
     {
-        Cart Add(Guid userGuid, List<CartItem> cartItem);
+        Cart Add(Guid userId, Product product);
+        Cart Delete(Cart cart, int productId);
         Cart TryGetById(Guid userGuid);
     }
 }
