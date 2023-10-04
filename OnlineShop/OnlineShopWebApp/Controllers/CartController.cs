@@ -22,26 +22,23 @@ namespace OnlineShopWebApp.Controllers
         {
             if (productId > 0)
             {
-                var product = productStorage.TryGetById(productId);
-
-                cart = cartStorage.Add(ShopUser.Id, product);
+                cart = cartStorage.Add(ShopUser.Id, productId);
                 return cart != null ? View("Index", cart) : View("Error");
             }
 
             return View("Error");
         }
 
-        public IActionResult Delete(int productId, int quantity) 
+        public IActionResult Delete(int productId, int quantity)
         {
             if (productId > 0)
             {
                 cart = cartStorage.TryGetById(ShopUser.Id);
-                if (cart != null) 
-                   cart =  cartStorage.Delete(cart, productId);
+                if (cart != null)
+                    cart = cartStorage.Delete(cart, productId);
             }
 
             return View("Index", cart);
-
         }
     }
 }

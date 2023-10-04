@@ -1,5 +1,6 @@
 ﻿using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,15 @@ namespace OnlineShopWebApp.Storages
     public class CartStorage : ICartStorage
     {
         Cart cart;
+        IProductStorage productStorage = new ProductStorageInJson();
+
         private static List<Cart> carts = new List<Cart>();
 
-        public Cart Add(Guid userId, Product product)
+        public Cart Add(Guid userId, int productId)
         {
             cart = TryGetById(userId);
+
+            var product = productStorage.TryGetById(productId);
 
             var cartPositon = new CartItem(product);
 
