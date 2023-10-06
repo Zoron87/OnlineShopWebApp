@@ -19,7 +19,7 @@ namespace OnlineShopWebApp.Storages
             cart = TryGetById(userId);
 
             var product = productStorage.TryGetById(productId);
-
+             
             var cartPositon = new CartItem(product);
 
             if (cart == null)

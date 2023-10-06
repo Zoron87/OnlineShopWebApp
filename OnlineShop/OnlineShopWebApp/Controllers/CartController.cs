@@ -23,7 +23,7 @@ namespace OnlineShopWebApp.Controllers
             if (productId > 0)
             {
                 cart = cartStorage.Add(ShopUser.Id, productId);
-                return cart != null ? View("Index", cart) : View("Error");
+                return cart != null ? RedirectToAction("Index") : View("Error");
             }
 
             return View("Error");
@@ -38,7 +38,7 @@ namespace OnlineShopWebApp.Controllers
                     cart = cartStorage.Delete(cart, productId);
             }
 
-            return View("Index", cart);
+            return RedirectToAction("Index");
         }
     }
 }
