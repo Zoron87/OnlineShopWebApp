@@ -9,9 +9,9 @@ namespace OnlineShopWebApp.Controllers
         private Cart cart;
 		private readonly ICartStorage cartStorage;
 
-		public CartController(ICartStorage cartstorage)
+		public CartController(ICartStorage cartStorage)
         {
-            this.cartStorage = cartstorage;
+            this.cartStorage = cartStorage;
         }
 
         public ActionResult Index()

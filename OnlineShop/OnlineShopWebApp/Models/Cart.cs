@@ -6,7 +6,7 @@ namespace OnlineShopWebApp.Models
 {
     public class Cart
     {   
-        public int Id { get; set; }
+        public int Id { get; }
         public Guid UserId { get; }
         public List<CartItem> Items { get;}
 
