@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Storages;
 
 namespace OnlineShopWebApp
 {
@@ -18,6 +21,9 @@ namespace OnlineShopWebApp
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			services.AddSingleton<IProductStorage, ProductStorageInJson>();
+			services.AddSingleton<ICartStorage, CartStorage>();
+			services.AddTransient<ProductStorageInit>();
 			services.AddControllersWithViews();
 		}
 

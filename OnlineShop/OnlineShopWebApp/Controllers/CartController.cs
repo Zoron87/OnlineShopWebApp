@@ -1,16 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Repositories;
-using OnlineShopWebApp.Storages;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class CartController : Controller
+	public class CartController : Controller
     {
         private Cart cart;
-        CartStorage cartStorage = new CartStorage();
-        IProductStorage productStorage = new ProductStorageInJson();
+		private readonly ICartStorage cartStorage;
+
+		public CartController(ICartStorage cartstorage)
+        {
+            this.cartStorage = cartstorage;
+        }
 
         public ActionResult Index()
         {

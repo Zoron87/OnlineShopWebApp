@@ -1,7 +1,7 @@
 ﻿using OnlineShopWebApp.Models;
 using System.Collections.Generic;
 
-namespace OnlineShopWebApp.Repositories
+namespace OnlineShopWebApp.Storages
 {
     public class ProductStorageInit
     {

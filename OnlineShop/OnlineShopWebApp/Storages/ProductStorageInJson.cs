@@ -6,24 +6,32 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp.Repositories
+namespace OnlineShopWebApp.Storages
 {
-    public class ProductStorageInJson : IProductStorage
+	public class ProductStorageInJson : IProductStorage
     {
         private static string productsFilePath = "Storages/Products.txt";
-        private static readonly List<Product> products = InitProducts();
+        private readonly List<Product> products;
+		private readonly ProductStorageInit productStorageInit;
+
+		public ProductStorageInJson(ProductStorageInit productStorageInit)
+        {
+			this.productStorageInit = productStorageInit;
+            products = InitProducts();
+		}
+
         public List<Product> GetAll()
         {
             return products;
         }
-        private static List<Product> InitProducts()
+        private List<Product> InitProducts()
         {
             var allProducts = FileProvider.GetInfo(productsFilePath);
 
-            if (String.IsNullOrEmpty(allProducts))
-                return new ProductStorageInit().GetAll();
+			if (String.IsNullOrEmpty(allProducts))
+			    return productStorageInit.GetAll();
 
-            return JsonConvert.DeserializeObject<List<Product>>(allProducts);
+			return JsonConvert.DeserializeObject<List<Product>>(allProducts);
         }
 
         public bool SaveAll(bool isAppend = false)
@@ -55,12 +63,12 @@ namespace OnlineShopWebApp.Repositories
             throw new Exception("Товаров для вывода не обнаружено!");
         }
 
-        private static bool CheckExistPage(int page, int itemsonpage)
+        private bool CheckExistPage(int page, int itemsonpage)
         {
             return page > 1 && (products.Count - (page - 1) * itemsonpage <= 0);
         }
 
-        private static List<Product> GetOutputProducts(int page, int itemsonpage)
+        private List<Product> GetOutputProducts(int page, int itemsonpage)
         {
             return products.GetRange((page - 1) * itemsonpage, page > 1 ? products.Count - (page - 1) * itemsonpage : itemsonpage);
         }

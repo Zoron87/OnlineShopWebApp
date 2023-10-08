@@ -1,18 +1,21 @@
 ﻿using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineShopWebApp.Storages
 {
-    public class CartStorage : ICartStorage
+	public class CartStorage : ICartStorage
     {
         Cart cart;
-        IProductStorage productStorage = new ProductStorageInJson();
+		private List<Cart> carts = new List<Cart>();
+        private readonly IProductStorage productStorage;
 
-        private static List<Cart> carts = new List<Cart>();
+		public CartStorage(IProductStorage productStorage)
+        {
+			this.productStorage = productStorage;
+		}
 
         public Cart Add(Guid userId, int productId)
         {
