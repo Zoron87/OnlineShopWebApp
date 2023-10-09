@@ -1,21 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Storages;
 
 namespace OnlineShopWebApp.Controllers
 {
-	public class OrderController : Controller
+    public class OrderController : Controller
     {
-		//private readonly ICartStorage cartStorage;
-		private readonly Cart cart;
-		OrderItem orderDetails = new OrderItem();
+        private readonly Cart cart;
+        private readonly IOrderStorage orderStorage;
 
-		public OrderController(ICartStorage cartStorage)
+        public OrderController(ICartStorage cartStorage, IOrderStorage orderStorage)
         {
-			//this.cartStorage = cartStorage;
             cart = cartStorage.TryGetById(ShopUser.Id);
-		}
+            this.orderStorage = orderStorage;
+        }
         public ActionResult Index()
         {
             return View();
@@ -26,18 +24,17 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-		public ActionResult Thankyou()
-		{
-			return View();
-		}
-
-		[HttpPost]
-        public IActionResult Index(OrderItem orderDetails)
+        public ActionResult Thankyou()
         {
-            var order = new OrderStorage(orderDetails, cart);
-            order.Save();
-            return View("Thankyou");
+            return View();
         }
 
+        [HttpPost]
+        public IActionResult Index(OrderDetails orderDetails)
+        {
+            orderStorage.Save(orderDetails, cart, true);
+            cart.Items.Clear();
+            return View("Thankyou");
+        }
     }
 }

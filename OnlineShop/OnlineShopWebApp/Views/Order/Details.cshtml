@@ -1,23 +1,40 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Order Details Page";
 }
 
 @using (Html.BeginForm("Index", "Order", FormMethod.Post))
 {
-        <table>
-            <tr>
-                <td><p>Enter your Name</p></td>
-                <td><input type="text" name="Name" /></td>
-            </tr>
-            <tr>
-                <td><p>Enter your Email</p></td>
-                <td><input type="text" name="Email" /></td>
-            </tr>
-            <tr>
-                <td><input type="submit" value="Send" /></td>
-                <td></td>
-            </tr>
-        </table>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="mb-3 col-6">
+                <label class="form-label">Ваше имя:</label>
+                <input name="Name" class="form-control">
+            </div>
+            <div class="mb-3 col-6">
+                <label class="form-label">Электронная почта:</label>
+                <input name="Email" class="form-control">
+                <div id="emailHelp" class="form-text">Ваш электронный адрес никогда не будет передан третьей стороне.</div>
+            </div>
+
+            <div class="mb-3 col-6">
+                <label class="form-label">Телефон:</label>
+                <input name="PhoneNumber" class="form-control">
+            </div>
+            <div class="mb-3 col-6">
+                <label class="form-label">Адрес доставки:</label>
+                <input name="Address" class="form-control">
+            </div>
+
+            <div class="mb-3 col-6">
+                <label class="form-label">Дата получения:</label>
+                <input name="DeliveryDate" class="form-control">
+            </div>
+            <div class="mb-3 col-6">
+                <label class="form-label">Время:</label>
+                <input name="DeliveryTime" class="form-control">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </div>
+    </div>
 }
