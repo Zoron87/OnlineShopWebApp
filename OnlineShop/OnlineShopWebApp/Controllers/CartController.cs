@@ -24,14 +24,14 @@ namespace OnlineShopWebApp.Controllers
 		{
 			if (productId > 0)
 			{
-				cart = cartStorage.AddItem(productId);
+				cart = cartStorage.AddItem(productId, quantity);
 				return cart != null ? RedirectToAction("Index") : View("Error");
 			}
 
 			return View("Error");
 		}
 
-		public IActionResult Delete(int productId, int quantity)
+		public IActionResult Delete(int productId)
 		{
 			if (productId > 0)
 			{
@@ -50,13 +50,13 @@ namespace OnlineShopWebApp.Controllers
 
 		public IActionResult IncreaseProductCount(int productId, int quantity = 1)
 		{
-			cart = cartStorage.IncreaseProductCount(productId, quantity);
+			cart = cartStorage.Increase(productId, quantity);
 			return RedirectToAction("Index");
 		}
 
 		public IActionResult ReduceProductCount(int productId, int quantity = 1)
 		{
-			cart = cartStorage.ReduceProductCount(productId, quantity);
+			cart = cartStorage.Reduce(productId, quantity);
 			return RedirectToAction("Index");
 		}
 	}
