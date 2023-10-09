@@ -59,5 +59,16 @@ namespace OnlineShopWebApp.Controllers
 			cart = cartStorage.ReduceProductCount(productId, quantity);
 			return RedirectToAction("Index");
 		}
-	}
+
+        public IActionResult Checkout()
+        {
+            return View("Checkout");
+        }
+
+        [HttpPost]
+        public string Checkout(Checkout checkoutData)
+        {
+            return checkoutData.Email + checkoutData.Name;
+        }
+    }
 }

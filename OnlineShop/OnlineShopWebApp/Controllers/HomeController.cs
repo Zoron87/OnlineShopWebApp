@@ -18,5 +18,5 @@ namespace OnlineShopWebApp.Controllers
 
             return products != null ? View(products) : View("Error");
         }
-    }
+	}
 }
