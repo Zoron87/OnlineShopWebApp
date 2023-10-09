@@ -18,7 +18,7 @@ namespace OnlineShopWebApp.Storages
 			cart = TryGetById(ShopUser.Id);
 		}
 
-		public Cart AddItem(int productId)
+		public Cart AddItem(int productId, int quantity = 1)
 		{
 			var product = productStorage.TryGetById(productId);
 
@@ -33,7 +33,7 @@ namespace OnlineShopWebApp.Storages
 				var checkSameProduct = cart.Items.Any(ci => ci.Product.Id == product.Id);
 
 				if (checkSameProduct)
-					cart.Items.FirstOrDefault(ci => ci.Product.Id == product.Id).Quantity++;
+					cart.Items.FirstOrDefault(ci => ci.Product.Id == product.Id).Quantity += quantity;
 				else
 					cart.Items.Add(cartPositon);
 			}
@@ -43,7 +43,7 @@ namespace OnlineShopWebApp.Storages
 			return cart;
 		}
 
-		public Cart DeleteItem(int productId = 1)
+		public Cart DeleteItem(int productId)
 		{
 			var ItemForRemove = cart.Items.FirstOrDefault(ci => ci.Product.Id == productId);
 			cart.Items.Remove(ItemForRemove);
@@ -51,7 +51,7 @@ namespace OnlineShopWebApp.Storages
 			return cart;
 		}
 
-		public Cart IncreaseProductCount(int productId, int quantity = 1)
+		public Cart Increase(int productId, int quantity = 1)
 		{
 			var product = cart.Items.FirstOrDefault(pId => pId.Product.Id == productId);
 
@@ -61,7 +61,7 @@ namespace OnlineShopWebApp.Storages
 			return cart;
 		}
 
-		public Cart ReduceProductCount(int productId, int quantity = 1)
+		public Cart Reduce(int productId, int quantity = 1)
 		{
 			var product = cart.Items.FirstOrDefault(pId => pId.Product.Id == productId);
 
