@@ -7,7 +7,7 @@ namespace OnlineShopWebApp.Controllers
 	public class CartController : Controller
 	{
 		private Cart cart;
-		private readonly ICartStorage cartStorage;
+        private readonly ICartStorage cartStorage;
 
 		public CartController(ICartStorage cartStorage)
 		{
@@ -59,16 +59,5 @@ namespace OnlineShopWebApp.Controllers
 			cart = cartStorage.ReduceProductCount(productId, quantity);
 			return RedirectToAction("Index");
 		}
-
-        public IActionResult Checkout()
-        {
-            return View("Checkout");
-        }
-
-        [HttpPost]
-        public string Checkout(Checkout checkoutData)
-        {
-            return checkoutData.Email + checkoutData.Name;
-        }
     }
 }

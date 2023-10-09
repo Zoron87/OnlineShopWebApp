@@ -36,10 +36,7 @@ namespace OnlineShopWebApp.Storages
 
         public bool SaveAll(bool isAppend = false)
         {
-            if (FileProvider.SaveInfo(productsFilePath, JsonConvert.SerializeObject(products, Formatting.Indented)))
-                return true;
-
-            return false;
+            return FileProvider.SaveInfo(productsFilePath, JsonConvert.SerializeObject(products, Formatting.Indented));
         }
 
         public Product TryGetById(int id)
