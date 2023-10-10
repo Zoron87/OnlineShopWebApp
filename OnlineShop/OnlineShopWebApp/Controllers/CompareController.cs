@@ -5,13 +5,11 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CompareController : Controller
     {
-        private readonly ICompareStorage compareStorage;
-        private readonly IProductStorage productStorage;
+        private ICompareStorage compareStorage;
 
-        public CompareController(ICompareStorage compareStorage, IProductStorage productStorage)
+        public CompareController(ICompareStorage compareStorage)
         {
             this.compareStorage = compareStorage;
-            this.productStorage = productStorage;
         }
         public ActionResult Index()
         {
@@ -20,9 +18,23 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult Add(int productId)
         {
-            var product = productStorage.TryGetById(productId);
-            compareStorage.Add(product);
-            return View();
+            var compareProducts = compareStorage.Add(productId);
+
+            return View("Index", compareProducts);
+        }
+
+        public ActionResult Clear()
+        {
+            var compareProducts = compareStorage.Clear();
+
+            return View("Index", compareProducts);
+        }
+
+        public ActionResult DeleteItem(int productId)
+        {
+            var compareProducts = compareStorage.DeleteItem(productId);
+
+            return View("Index", compareProducts);
         }
     }
 }

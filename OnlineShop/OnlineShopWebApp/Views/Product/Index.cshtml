@@ -26,26 +26,30 @@
             </div>
 
             <div class="col-md-7 col-lg-8 mb-3">
-                <div class="bg-white product-content p-3 h-100">
-                    <h1 class="section-title h3">
-                        <span>
-                            @Model.Name
-                        </span>
-                    </h1>
+                @using (Html.BeginForm("AddItems", "Cart", FormMethod.Post))
+                {
+                    <div class="bg-white product-content p-3 h-100">
+                        <h1 class="section-title h3">
+                            <span>
+                                @Model.Name
+                            </span>
+                        </h1>
 
-                    <div class="product-price">
-                        @Model.Cost р.
-                    </div>
-                    <p>@Model.Description</p>
-                    <div class="product-add-to-cart">
-                        <div class="input-group">
-                            <input type="number" class="fom-control" value="1" min="1">
-                            <a href="/cart/add/?productid=@Model.Id" class="btn btn-primary" style="margin-right: 10px;"><i class="fas fa-shopping-cart"></i> В КОРЗИНУ</a>
-                            <a href="/" class="btn btn-warning"><i class="fa-solid fa-bag-shopping"></i> ПРОДОЛЖИТЬ ПОКУПКИ</a>
+                        <div class="product-price">
+                            @Model.Cost р.
+                        </div>
+                        <p>@Model.Description</p>
+                        <div class="product-add-to-cart">
+                            <div class="input-group">
+                                <input type="number" name="quantity" class="form-control" value="1" min="1">
+                                <input type="hidden" name="productId" class="form-control" value="@Model.Id">
+                                <button type="submit" class="btn btn-primary" style="margin-right: 10px;"><i class="fas fa-shopping-cart"></i> В КОРЗИНУ</button>
+                                <a href="/" class="btn btn-warning"><i class="fa-solid fa-bag-shopping"></i> ПРОДОЛЖИТЬ ПОКУПКИ</a>
+                            </div>
                         </div>
                     </div>
-                 </div>
-             </div>
+                }
+            </div>
         </div>
     </div>
 </main>

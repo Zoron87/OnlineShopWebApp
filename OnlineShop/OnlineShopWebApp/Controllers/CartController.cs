@@ -20,7 +20,19 @@ namespace OnlineShopWebApp.Controllers
             return View(cart);
         }
 
-        public ActionResult Add(int productId, int quantity = 1)
+        public ActionResult Add(int productId)
+        {
+            if (productId > 0)
+            {
+                cart = cartStorage.AddItem(productId);
+                return cart != null ? RedirectToAction("Index") : View("Error");
+            }
+
+            return View("Error");
+        }
+
+        [HttpPost]
+        public ActionResult AddItems(int productId, int quantity)
         {
             if (productId > 0)
             {
