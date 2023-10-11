@@ -6,17 +6,16 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private Cart cart;
         private readonly ICartStorage cartStorage;
 
         public CartController(ICartStorage cartStorage)
         {
             this.cartStorage = cartStorage;
-            cart = cartStorage.TryGetById(ShopUser.Id);
         }
 
         public ActionResult Index()
         {
+            var cart = cartStorage.GetCart(ShopUser.Id);
             return View(cart);
         }
 
@@ -24,7 +23,7 @@ namespace OnlineShopWebApp.Controllers
         {
             if (productId > 0)
             {
-                cart = cartStorage.AddItem(productId);
+                var cart = cartStorage.AddItem(productId);
                 return cart != null ? RedirectToAction("Index") : View("Error");
             }
 
@@ -36,7 +35,7 @@ namespace OnlineShopWebApp.Controllers
         {
             if (productId > 0)
             {
-                cart = cartStorage.AddItem(productId, quantity);
+                var cart = cartStorage.AddItem(productId, quantity);
                 return cart != null ? RedirectToAction("Index") : View("Error");
             }
 
@@ -45,6 +44,8 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Delete(int productId)
         {
+            var cart = cartStorage.GetCart(ShopUser.Id);
+
             if (cart != null && productId > 0)
                 cart = cartStorage.DeleteItem(productId);
 
@@ -53,19 +54,20 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Clear()
         {
+            var cart = cartStorage.GetCart(ShopUser.Id);
             cart.Items.Clear();
             return RedirectToAction("Index");
         }
 
         public IActionResult Increase(int productId, int quantity = 1)
         {
-            cart = cartStorage.Increase(productId, quantity);
+            var cart = cartStorage.Increase(productId, quantity);
             return RedirectToAction("Index");
         }
 
         public IActionResult Reduce(int productId, int quantity = 1)
         {
-            cart = cartStorage.Reduce(productId, quantity);
+            var cart = cartStorage.Reduce(productId, quantity);
             return RedirectToAction("Index");
         }
     }

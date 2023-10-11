@@ -18,6 +18,11 @@ namespace OnlineShopWebApp.Storages
             cart = TryGetById(ShopUser.Id);
         }
 
+        public Cart GetCart(Guid userId)
+        {
+            return TryGetById(userId);
+        }
+
         public Cart AddItem(int productId, int quantity = 1)
         {
             var product = productStorage.TryGetById(productId);

@@ -1,0 +1,57 @@
+﻿@model List<Product>;
+
+@{
+    ViewData["Title"] = "Favourite Page";
+}
+
+@if (Model == null || Model.Count == 0)
+{
+    <h3> Список избранных товаров пуст</h3>
+}
+else
+{
+    <div class="wrapper">
+        <main class="main">
+            <section class="featured-products px-lg-3">
+                <div class="container-fluid">
+                    <div class="row">
+                        <a href="/favourite/clear">Очистить список</a>
+                        @foreach (var product in Model)
+                        {
+                            <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                                <div class="product-card">
+                                    <div class="product-card-offer">
+                                        <div class="offer-hit">Hit</div>
+                                        <div class="offer-new">New</div>
+                                    </div>
+                                    <div class="product-thumb">
+                                        <a href="/Product/Index/@product.Id"><img src="~/img/products/@product.ImagePath" alt=""></a>
+                                    </div>
+                                    <div class="product-details">
+                                        <h4>
+                                            <a href="/Product/Index/@product.Id">@product.Name</a>
+                                        </h4>
+                                        <p class="product-excerpt">@product.Description</p>
+                                        <div class="product-bottom-details d-flex justify-content-between">
+                                            <div class="product-price">@product.Cost</div>
+                                            <div class="product-links">
+                                                <a href="/cart/add/?productId=@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                                    <i class="fa-solid fa-cart-shopping"></i>
+                                                </a>
+                                            </div>
+                                            <div class="product-links">
+                                                <a href="/favourite/delete/?productId=@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                                    <i class="fa-solid fa-heart-circle-minus"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+}
