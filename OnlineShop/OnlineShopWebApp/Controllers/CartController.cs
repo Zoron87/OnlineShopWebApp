@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfaces;
-using OnlineShopWebApp.Models;
-
-namespace OnlineShopWebApp.Controllers
+﻿namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
@@ -45,13 +41,13 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult IncreaseProductCount(int productId, int quantity = 1)
+        public IActionResult Increase(int productId, int quantity = 1)
         {
             cart = cartStorage.Increase(productId, quantity);
             return RedirectToAction("Index");
         }
 
-        public IActionResult ReduceProductCount(int productId, int quantity = 1)
+        public IActionResult Reduce(int productId, int quantity = 1)
         {
             cart = cartStorage.Reduce(productId, quantity);
             return RedirectToAction("Index");
