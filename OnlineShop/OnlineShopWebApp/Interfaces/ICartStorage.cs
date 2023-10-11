@@ -1,7 +1,4 @@
-﻿using OnlineShopWebApp.Models;
-using System;
-
-namespace OnlineShopWebApp.Interfaces
+﻿namespace OnlineShopWebApp.Interfaces
 {
     public interface ICartStorage
     {

@@ -50,7 +50,6 @@ namespace OnlineShopWebApp.Controllers
             cart = cartStorage.Increase(productId, quantity);
             return RedirectToAction("Index");
         }
-
         public IActionResult Reduce(int productId, int quantity = 1)
         {
             cart = cartStorage.Reduce(productId, quantity);
