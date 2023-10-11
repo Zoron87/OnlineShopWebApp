@@ -8,14 +8,12 @@ namespace OnlineShopWebApp.Storages
 {
     public class CartStorage : ICartStorage
     {
-        private Cart cart;
         private List<Cart> carts = new List<Cart>();
         private readonly IProductStorage productStorage;
 
         public CartStorage(IProductStorage productStorage)
         {
             this.productStorage = productStorage;
-            cart = TryGetById(ShopUser.Id);
         }
 
         public Cart GetCart(Guid userGuid)
@@ -28,6 +26,8 @@ namespace OnlineShopWebApp.Storages
             var product = productStorage.TryGetById(productId);
 
             var cartPositon = new CartItem(product);
+
+            var cart = GetCart(ShopUser.Id);
 
             if (cart == null)
             {
@@ -50,6 +50,8 @@ namespace OnlineShopWebApp.Storages
 
         public Cart DeleteItem(int productId)
         {
+            var cart = GetCart(ShopUser.Id);
+
             var itemForRemove = cart.Items.FirstOrDefault(cartItem => cartItem.Product.Id == productId);
             cart.Items.Remove(itemForRemove);
 
@@ -58,6 +60,8 @@ namespace OnlineShopWebApp.Storages
 
         public Cart Increase(int productId, int quantity = 1)
         {
+            var cart = GetCart(ShopUser.Id);
+
             var product = cart.Items.FirstOrDefault(p => p.Product.Id == productId);
 
             if (product != null)
@@ -70,6 +74,8 @@ namespace OnlineShopWebApp.Storages
 
         public Cart Reduce(int productId, int quantity = 1)
         {
+            var cart = GetCart(ShopUser.Id);
+
             var product = cart.Items.FirstOrDefault(p => p.Product.Id == productId);
 
             if (product == null) return cart;
