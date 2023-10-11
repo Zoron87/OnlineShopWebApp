@@ -30,10 +30,10 @@ namespace OnlineShopWebApp.Storages
             }
             else
             {
-                var checkSameProduct = cart.Items.Any(ci => ci.Product.Id == product.Id);
+                var checkSameProduct = cart.Items.Any(cartItem => cartItem.Product.Id == product.Id);
 
                 if (checkSameProduct)
-                    cart.Items.FirstOrDefault(ci => ci.Product.Id == product.Id).Quantity += quantity;
+                    cart.Items.FirstOrDefault(cartItem => cartItem.Product.Id == product.Id).Quantity += quantity;
                 else
                     cart.Items.Add(cartPositon);
             }
@@ -65,7 +65,7 @@ namespace OnlineShopWebApp.Storages
 
         public Cart Reduce(int productId, int quantity = 1)
         {
-            var product = cart.Items.FirstOrDefault(pId => pId.Product.Id == productId);
+            var product = cart.Items.FirstOrDefault(p => p.Product.Id == productId);
 
             if (product == null) return cart;
 
