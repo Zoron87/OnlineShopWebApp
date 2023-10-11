@@ -10,5 +10,5 @@ namespace OnlineShopWebApp.Interfaces
         Cart TryGetById(Guid userGuid);
         Cart Increase(int productId, int quantity = 1);
         Cart Reduce(int productId, int quantity = 1);
-	}
+	  }
 }
