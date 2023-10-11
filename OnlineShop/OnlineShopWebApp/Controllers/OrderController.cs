@@ -1,17 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly Cart cart;
         private readonly IOrderStorage orderStorage;
+        private ICartStorage cartStorage;
 
         public OrderController(ICartStorage cartStorage, IOrderStorage orderStorage)
         {
-            cart = cartStorage.TryGetById(ShopUser.Id);
+            this.cartStorage = cartStorage;
             this.orderStorage = orderStorage;
         }
         public ActionResult Index()
@@ -24,7 +25,7 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        public ActionResult Thankyou()
+        public ActionResult ThankYou()
         {
             return View();
         }
@@ -32,9 +33,20 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Index(OrderDetails orderDetails)
         {
-            orderStorage.Save(orderDetails, cart, true);
-            cart.Items.Clear();
-            return View("Thankyou");
+            var cart = cartStorage.GetCart(ShopUser.Id);
+
+            if (cart != null)
+            {
+                if (orderDetails != null)
+                {
+                    orderStorage.Save(orderDetails, cart, true);
+                    cart.Items.Clear();
+                    return View("ThankYou");
+                }
+                else
+                    throw new Exception("Заполните форму оформления заказа");
+            }
+            else throw new Exception("Добавьте товары в корзину");
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace OnlineShopWebApp.Models
+﻿using System;
+
+namespace OnlineShopWebApp.Models
 {
     public class OrderDetails
     {
@@ -7,10 +9,18 @@
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
-        public string DeliveryType { get; set; }
-        public string DeliveryDate { get; set; }
+        public enum DeliveryType
+        {
+            Самовывоз,
+            Курьер
+        }
+        public DateTime DeliveryDate { get; set; }
         public string DeliveryTime { get; set; }
-        public string PayType { get; set; }
+        public enum PayType
+        {
+            Онлайн,
+            Наличными
+        }
         public string Comment { get; set; }
     }
 }

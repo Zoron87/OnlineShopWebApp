@@ -1,5 +1,9 @@
 ﻿@model Cart;
 
+@{
+	ViewData["Title"] = "Корзина";
+}
+
 @if (Model == null || Model.Items.Count == 0 || Model.Items == null)
 {
 	<h1>Корзина пустая</h1>

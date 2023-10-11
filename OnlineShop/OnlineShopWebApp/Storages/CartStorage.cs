@@ -18,6 +18,11 @@ namespace OnlineShopWebApp.Storages
             cart = TryGetById(ShopUser.Id);
         }
 
+        public Cart GetCart(Guid userGuid)
+        {
+            return TryGetById(userGuid);
+        }
+
         public Cart AddItem(int productId, int quantity = 1)
         {
             var product = productStorage.TryGetById(productId);
@@ -30,10 +35,10 @@ namespace OnlineShopWebApp.Storages
             }
             else
             {
-                var checkSameProduct = cart.Items.Any(ci => ci.Product.Id == product.Id);
+                var checkSameProduct = cart.Items.Any(cartItem => cartItem.Product.Id == product.Id);
 
                 if (checkSameProduct)
-                    cart.Items.FirstOrDefault(ci => ci.Product.Id == product.Id).Quantity += quantity;
+                    cart.Items.FirstOrDefault(cartItem => cartItem.Product.Id == product.Id).Quantity += quantity;
                 else
                     cart.Items.Add(cartPositon);
             }
@@ -45,25 +50,27 @@ namespace OnlineShopWebApp.Storages
 
         public Cart DeleteItem(int productId)
         {
-            var ItemForRemove = cart.Items.FirstOrDefault(ci => ci.Product.Id == productId);
-            cart.Items.Remove(ItemForRemove);
+            var itemForRemove = cart.Items.FirstOrDefault(cartItem => cartItem.Product.Id == productId);
+            cart.Items.Remove(itemForRemove);
 
             return cart;
         }
 
         public Cart Increase(int productId, int quantity = 1)
         {
-            var product = cart.Items.FirstOrDefault(pId => pId.Product.Id == productId);
+            var product = cart.Items.FirstOrDefault(p => p.Product.Id == productId);
 
             if (product != null)
                 product.Quantity += quantity;
+            else
+                throw new Exception("Указанный товар не обнаружен");
 
             return cart;
         }
 
         public Cart Reduce(int productId, int quantity = 1)
         {
-            var product = cart.Items.FirstOrDefault(pId => pId.Product.Id == productId);
+            var product = cart.Items.FirstOrDefault(p => p.Product.Id == productId);
 
             if (product == null) return cart;
 
