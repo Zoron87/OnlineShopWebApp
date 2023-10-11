@@ -51,7 +51,7 @@ namespace OnlineShopWebApp.Storages
         public Cart DeleteItem(int productId)
         {
             var cart = GetCart(ShopUser.Id);
-
+            
             var itemForRemove = cart.Items.FirstOrDefault(cartItem => cartItem.Product.Id == productId);
             cart.Items.Remove(itemForRemove);
 
@@ -68,6 +68,7 @@ namespace OnlineShopWebApp.Storages
                 product.Quantity += quantity;
             else
                 throw new Exception("Указанный товар не обнаружен");
+
 
             return cart;
         }
