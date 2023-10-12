@@ -4,42 +4,39 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Storages
 {
-    public class FavouriteStorage : IFavouriteStorage
-    {
-        private readonly IProductStorage productStorage;
-        private List<Product> favouriteProducts = new List<Product>();
+	public class FavouriteStorage : IFavouriteStorage
+	{
+		private readonly IProductStorage productStorage;
+		private List<Product> favouriteProducts = new List<Product>();
 
-        public FavouriteStorage(IProductStorage productStorage)
-        {
-            this.productStorage = productStorage;
-        }
-        public List<Product> Add(int productId)
-        {
-            var product = productStorage.TryGetById(productId);
+		public FavouriteStorage(IProductStorage productStorage)
+		{
+			this.productStorage = productStorage;
+		}
+		public void Add(int productId)
+		{
+			var product = productStorage.TryGetById(productId);
 
-            if (product != null)
-                favouriteProducts.Add(product);
-            return favouriteProducts;
-        }
+			if (product != null)
+				favouriteProducts.Add(product);
+		}
 
-        public List<Product> Clear()
-        {
-            favouriteProducts.Clear();
-            return favouriteProducts;
-        }
+		public void Clear()
+		{
+			favouriteProducts.Clear();
+		}
 
-        public List<Product> Delete(int productId)
-        {
-            var product = productStorage.TryGetById(productId);
+		public void Delete(int productId)
+		{
+			var product = productStorage.TryGetById(productId);
 
-            if (product != null)
-                favouriteProducts.Remove(product);
-            return favouriteProducts;
-        }
+			if (product != null)
+				favouriteProducts.Remove(product);
+		}
 
-        public List<Product> GetAll()
-        {
-            return favouriteProducts;
-        }
-    }
+		public List<Product> GetAll()
+		{
+			return favouriteProducts;
+		}
+	}
 }

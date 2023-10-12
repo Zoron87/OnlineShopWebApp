@@ -1,4 +1,10 @@
-﻿namespace OnlineShopWebApp.Storages
+﻿using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace OnlineShopWebApp.Storages
 {
 	public class CartStorage : ICartStorage
 	{
