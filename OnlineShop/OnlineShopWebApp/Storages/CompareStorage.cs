@@ -1,5 +1,6 @@
 ﻿using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using System;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Storages
@@ -23,8 +24,7 @@ namespace OnlineShopWebApp.Storages
 		{
 			var product = productStorage.TryGetById(productId);
 
-			if (product == null)
-				throw new System.Exception("Указанный товар не найден");
+			CheckExistProduct(product);
 
 			products.Add(product);
 		}
@@ -33,8 +33,7 @@ namespace OnlineShopWebApp.Storages
 		{
 			var product = productStorage.TryGetById(productId);
 
-			if (product == null)
-				throw new System.Exception("Указанный товар не найден");
+			CheckExistProduct(product);
 
 			products.Remove(product);
 		}
@@ -42,6 +41,12 @@ namespace OnlineShopWebApp.Storages
 		public void Clear()
 		{
 			products.Clear();
+		}
+
+		private void CheckExistProduct(Product product)
+		{
+			if (product == null)
+				throw new Exception("Указанный товар не обнаружен!");
 		}
 	}
 }
