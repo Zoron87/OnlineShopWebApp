@@ -1,37 +1,24 @@
 {
-  "orderDetails": {
+  "OrderDetails": {
     "Id": 0,
-    "Name": "Nick",
-    "PhoneNumber": "12345678",
-    "Email": "mail@domain.com",
-    "Address": "адрес",
-    "DeliveryType": null,
-    "DeliveryDate": "дата",
-    "DeliveryTime": "время",
-    "PayType": null,
+    "Name": "Nikolay",
+    "Phone": "123456",
+    "Email": "test@gmail.com",
+    "Address": "ул. Пупкина",
+    "DeliveryDate": "2023-10-12T00:00:00",
     "Comment": null
   },
-  "cart": {
+  "Cart": {
     "Id": 0,
-    "UserId": "bf5c0c54-ebce-4e45-8e86-20d75c950634",
+    "UserId": "3daa5996-895d-460d-b7ad-337ba0659cc8",
     "Items": [
       {
         "Product": {
-          "Id": 1,
-          "Name": "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
-          "Cost": 99999.0,
-          "Description": "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
-          "ImagePath": "notebook_MSI_Katana_17_B12VEK-482XRU_1.jpg"
-        },
-        "Quantity": 2
-      },
-      {
-        "Product": {
-          "Id": 7,
-          "Name": "Морозильная камера Haier HF-82WAA",
-          "Cost": 19999.0,
-          "Description": "Компактная морозильная камера Haier HF-82WAA – хороший выбор для тех, кто хочет хранить дома или на даче запас замороженных продуктов и полуфабрикатов, а также делать домашние заготовки.",
-          "ImagePath": "Freezer_Haier_HF-82WAA_1.jpg"
+          "Id": 3,
+          "Name": "Холодильник Midea MDRB499FGF01IM",
+          "Cost": 39999.0,
+          "Description": "Холодильник Midea MDRB499FGF01IM, белый оснащен холодильной камерой объемом 250 л и нижней морозильной камерой объемом 76 л.",
+          "ImagePath": "Refrigerator_Midea_MDRB499FGF01IM_1.jpg"
         },
         "Quantity": 3
       }

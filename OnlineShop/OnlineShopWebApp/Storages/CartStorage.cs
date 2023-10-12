@@ -1,21 +1,18 @@
-﻿using OnlineShopWebApp.Interfaces;
-using OnlineShopWebApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace OnlineShopWebApp.Storages
+﻿namespace OnlineShopWebApp.Storages
 {
     public class CartStorage : ICartStorage
     {
-        private Cart cart;
         private List<Cart> carts = new List<Cart>();
         private readonly IProductStorage productStorage;
 
         public CartStorage(IProductStorage productStorage)
         {
             this.productStorage = productStorage;
-            cart = TryGetById(ShopUser.Id);
+        }
+
+        public Cart Get(Guid userGuid)
+        {
+            return TryGetById(userGuid);
         }
 
         public Cart AddItem(int productId, int quantity = 1)
@@ -23,6 +20,12 @@ namespace OnlineShopWebApp.Storages
             var product = productStorage.TryGetById(productId);
 
             var cartPositon = new CartItem(product, quantity);
+            if (product == null)
+                throw new Exception("Указанный товар не обнаружен");
+
+            var cartPositon = new CartItem(product);
+
+            var cart = Get(ShopUser.Id);
 
             if (cart == null)
             {
@@ -30,10 +33,10 @@ namespace OnlineShopWebApp.Storages
             }
             else
             {
-                var checkSameProduct = cart.Items.Any(ci => ci.Product.Id == product.Id);
+                var checkSameProduct = cart.Items.Any(cartItem => cartItem.Product.Id == product.Id);
 
                 if (checkSameProduct)
-                    cart.Items.FirstOrDefault(ci => ci.Product.Id == product.Id).Quantity += quantity;
+                    cart.Items.FirstOrDefault(cartItem => cartItem.Product.Id == product.Id).Quantity += quantity;
                 else
                     cart.Items.Add(cartPositon);
             }
@@ -45,25 +48,33 @@ namespace OnlineShopWebApp.Storages
 
         public Cart DeleteItem(int productId)
         {
-            var ItemForRemove = cart.Items.FirstOrDefault(ci => ci.Product.Id == productId);
-            cart.Items.Remove(ItemForRemove);
+            var cart = Get(ShopUser.Id);
+
+            var itemForRemove = cart.Items.FirstOrDefault(cartItem => cartItem.Product.Id == productId);
+            cart.Items.Remove(itemForRemove);
 
             return cart;
         }
 
         public Cart Increase(int productId, int quantity = 1)
         {
-            var product = cart.Items.FirstOrDefault(pId => pId.Product.Id == productId);
+            var cart = Get(ShopUser.Id);
+
+            var product = cart.Items.FirstOrDefault(p => p.Product.Id == productId);
 
             if (product != null)
                 product.Quantity += quantity;
+            else
+                throw new Exception("Указанный товар не обнаружен");
 
             return cart;
         }
 
         public Cart Reduce(int productId, int quantity = 1)
         {
-            var product = cart.Items.FirstOrDefault(pId => pId.Product.Id == productId);
+            var cart = Get(ShopUser.Id);
+
+            var product = cart.Items.FirstOrDefault(p => p.Product.Id == productId);
 
             if (product == null) return cart;
 

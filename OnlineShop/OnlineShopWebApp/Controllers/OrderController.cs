@@ -6,12 +6,12 @@ namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly Cart cart;
         private readonly IOrderStorage orderStorage;
+        private readonly ICartStorage cartStorage;
 
         public OrderController(ICartStorage cartStorage, IOrderStorage orderStorage)
         {
-            cart = cartStorage.TryGetById(ShopUser.Id);
+            this.cartStorage = cartStorage;
             this.orderStorage = orderStorage;
         }
         public ActionResult Index()
@@ -24,7 +24,7 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        public ActionResult Thankyou()
+        public ActionResult ThankYou()
         {
             return View();
         }
@@ -32,9 +32,16 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Index(OrderDetails orderDetails)
         {
-            orderStorage.Save(orderDetails, cart, true);
-            cart.Items.Clear();
-            return View("Thankyou");
+            var cart = cartStorage.Get(ShopUser.Id);
+
+            if (cart != null || orderDetails != null)
+            {
+                orderStorage.Save(orderDetails, cart, true);
+                cart.Items.Clear();
+                return View("ThankYou");
+            }
+            else
+                return View("Error");
         }
     }
 }

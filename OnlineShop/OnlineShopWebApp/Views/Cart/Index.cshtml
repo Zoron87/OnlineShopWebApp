@@ -1,5 +1,9 @@
 ﻿@model Cart;
 
+@{
+	ViewData["Title"] = "Корзина";
+}
+
 @if (Model == null || Model.Items.Count == 0 || Model.Items == null)
 {
 	<h1>Корзина пустая</h1>
@@ -17,9 +21,9 @@ else
 								<td class="product-img-td"><a href="/Product/Index/@item.Product.Id"><img src="~/img/products/@item.Product.ImagePath" alt="@item.Product.Name"></a></td>
 								<td><a href="/Product/Index/@item.Product.Id">@item.Product.Name</a></td>
 								<td>@item.Product.Cost р.</td>
-								<td><a href="/Cart/IncreaseProductCount/?productId=@item.Product.Id&quantity=1"><i class="fa-solid fa-plus"></i></a></td>
+								<td><a href="/Cart/Increase/?productId=@item.Product.Id&quantity=1"><i class="fa-solid fa-plus"></i></a></td>
 								<td>@item.Quantity</td>
-								<td><a href="/Cart/ReduceProductCount/?productId=@item.Product.Id&quantity=1"><i class="fa-solid fa-minus"></i></a></td>
+								<td><a href="/Cart/Reduce/?productId=@item.Product.Id&quantity=1"><i class="fa-solid fa-minus"></i></a></td>
 								<td><a class="btn btn-danger" style="display:inline;" href="/cart/delete/?productid=@item.Product.Id"><i class="fa-solid fa-circle-xmark"></i></a></td>
 							</tr>
 						}
