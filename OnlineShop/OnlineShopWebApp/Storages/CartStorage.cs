@@ -1,4 +1,10 @@
-﻿namespace OnlineShopWebApp.Storages
+﻿using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace OnlineShopWebApp.Storages
 {
     public class CartStorage : ICartStorage
     {
@@ -19,11 +25,10 @@
         {
             var product = productStorage.TryGetById(productId);
 
-            var cartPositon = new CartItem(product, quantity);
             if (product == null)
                 throw new Exception("Указанный товар не обнаружен");
 
-            var cartPositon = new CartItem(product);
+            var cartPositon = new CartItem(product, quantity);
 
             var cart = Get(ShopUser.Id);
 

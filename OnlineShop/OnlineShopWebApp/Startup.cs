@@ -1,3 +1,11 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Storages;
+
 namespace OnlineShopWebApp
 {
     public class Startup
@@ -13,7 +21,7 @@ namespace OnlineShopWebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<ICompareStorage, CompareStorage>();
-            services.AddSingleton<IOrderStorage, OrderStorage>();
+            services.AddSingleton<IOrderStorage, OrderStorageInJson>();
             services.AddSingleton<IProductStorage, ProductStorageInJson>();
             services.AddSingleton<ICartStorage, CartStorage>();
             services.AddTransient<ProductStorageInit>();
