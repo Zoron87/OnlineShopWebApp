@@ -40,8 +40,8 @@ namespace OnlineShopWebApp.Controllers
 				cart.Items.Clear();
 				return View("ThankYou");
 			}
-			else
-				return View("Error");
+
+			return View("Error");
 		}
 	}
 }

@@ -38,10 +38,10 @@ namespace OnlineShopWebApp.Storages
 			}
 			else
 			{
-				var checkSameProduct = cart.Items.Any(cartItem => cartItem.Product.Id == product.Id);
+				var checkSameProduct = cart.Items.FirstOrDefault(cartItem => cartItem.Product.Id == product.Id);
 
-				if (checkSameProduct)
-					cart.Items.FirstOrDefault(cartItem => cartItem.Product.Id == product.Id).Quantity += quantity;
+				if (checkSameProduct == null)
+					checkSameProduct.Quantity += quantity;
 				else
 					cart.Items.Add(cartPositon);
 			}
