@@ -5,8 +5,9 @@ namespace OnlineShopWebApp.Interfaces
 {
     public interface ICompareStorage
     {
+        List<Product> GetAll();
         List<Product> Add(int productId);
-        List<Product> DeleteItem(int productId);
+        List<Product> Delete(int productId);
         List<Product> Clear();
     }
 }
