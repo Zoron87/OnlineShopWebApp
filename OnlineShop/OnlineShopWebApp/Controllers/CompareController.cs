@@ -13,28 +13,29 @@ namespace OnlineShopWebApp.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            var compareProducts = compareStorage.GetAll();
+            return View(compareProducts);
         }
 
         public ActionResult Add(int productId)
         {
             var compareProducts = compareStorage.Add(productId);
 
-            return View("Index", compareProducts);
+            return RedirectToAction("Index");
         }
 
         public ActionResult Clear()
         {
             var compareProducts = compareStorage.Clear();
 
-            return View("Index", compareProducts);
+            return RedirectToAction("Index");
         }
 
-        public ActionResult DeleteItem(int productId)
+        public ActionResult Delete(int productId)
         {
-            var compareProducts = compareStorage.DeleteItem(productId);
+            var compareProducts = compareStorage.Delete(productId);
 
-            return View("Index", compareProducts);
+            return RedirectToAction("Index");
         }
     }
 }

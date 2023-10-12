@@ -14,16 +14,29 @@ namespace OnlineShopWebApp.Storages
             this.productStorage = productStorage;
         }
 
+        public List<Product> GetAll()
+        {
+            return compareProducts;
+        }
+
         public List<Product> Add(int productId)
         {
             var product = productStorage.TryGetById(productId);
+
+            if (product == null)
+                throw new System.Exception("Указанный товар не найден");
+
             compareProducts.Add(product);
             return compareProducts;
         }
 
-        public List<Product> DeleteItem(int productId)
+        public List<Product> Delete(int productId)
         {
             var product = productStorage.TryGetById(productId);
+
+            if (product == null)
+                throw new System.Exception("Указанный товар не найден");
+
             compareProducts.Remove(product);
             return compareProducts;
         }
