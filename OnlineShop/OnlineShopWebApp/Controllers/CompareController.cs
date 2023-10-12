@@ -3,39 +3,39 @@ using OnlineShopWebApp.Interfaces;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class CompareController : Controller
-    {
-        private ICompareStorage compareStorage;
+	public class CompareController : Controller
+	{
+		private ICompareStorage compareStorage;
 
-        public CompareController(ICompareStorage compareStorage)
-        {
-            this.compareStorage = compareStorage;
-        }
-        public ActionResult Index()
-        {
-            var compareProducts = compareStorage.GetAll();
-            return View(compareProducts);
-        }
+		public CompareController(ICompareStorage compareStorage)
+		{
+			this.compareStorage = compareStorage;
+		}
+		public ActionResult Index()
+		{
+			var products = compareStorage.GetAll();
+			return View(products);
+		}
 
-        public ActionResult Add(int productId)
-        {
-            var compareProducts = compareStorage.Add(productId);
+		public ActionResult Add(int productId)
+		{
+			compareStorage.Add(productId);
 
-            return RedirectToAction("Index");
-        }
+			return RedirectToAction("Index");
+		}
 
-        public ActionResult Clear()
-        {
-            var compareProducts = compareStorage.Clear();
+		public ActionResult Clear()
+		{
+			compareStorage.Clear();
 
-            return RedirectToAction("Index");
-        }
+			return RedirectToAction("Index");
+		}
 
-        public ActionResult Delete(int productId)
-        {
-            var compareProducts = compareStorage.Delete(productId);
+		public ActionResult Delete(int productId)
+		{
+			compareStorage.Delete(productId);
 
-            return RedirectToAction("Index");
-        }
-    }
+			return RedirectToAction("Index");
+		}
+	}
 }

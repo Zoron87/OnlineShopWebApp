@@ -4,47 +4,44 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Storages
 {
-    public class CompareStorage : ICompareStorage
-    {
-        private readonly IProductStorage productStorage;
-        private List<Product> compareProducts = new List<Product>();
+	public class CompareStorage : ICompareStorage
+	{
+		private readonly IProductStorage productStorage;
+		private List<Product> products = new List<Product>();
 
-        public CompareStorage(IProductStorage productStorage)
-        {
-            this.productStorage = productStorage;
-        }
+		public CompareStorage(IProductStorage productStorage)
+		{
+			this.productStorage = productStorage;
+		}
 
-        public List<Product> GetAll()
-        {
-            return compareProducts;
-        }
+		public List<Product> GetAll()
+		{
+			return products;
+		}
 
-        public List<Product> Add(int productId)
-        {
-            var product = productStorage.TryGetById(productId);
+		public void Add(int productId)
+		{
+			var product = productStorage.TryGetById(productId);
 
-            if (product == null)
-                throw new System.Exception("Указанный товар не найден");
+			if (product == null)
+				throw new System.Exception("Указанный товар не найден");
 
-            compareProducts.Add(product);
-            return compareProducts;
-        }
+			products.Add(product);
+		}
 
-        public List<Product> Delete(int productId)
-        {
-            var product = productStorage.TryGetById(productId);
+		public void Delete(int productId)
+		{
+			var product = productStorage.TryGetById(productId);
 
-            if (product == null)
-                throw new System.Exception("Указанный товар не найден");
+			if (product == null)
+				throw new System.Exception("Указанный товар не найден");
 
-            compareProducts.Remove(product);
-            return compareProducts;
-        }
+			products.Remove(product);
+		}
 
-        public List<Product> Clear()
-        {
-            compareProducts.Clear();
-            return compareProducts;
-        }
-    }
+		public void Clear()
+		{
+			products.Clear();
+		}
+	}
 }
