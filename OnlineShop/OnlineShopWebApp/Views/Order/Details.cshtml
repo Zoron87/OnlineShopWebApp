@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Order Details Page";
+    ViewData["Title"] = "Детали заказа";
 }
 
 @using (Html.BeginForm("Index", "Order", FormMethod.Post))
@@ -8,30 +8,26 @@
         <div class="row">
             <div class="mb-3 col-6">
                 <label class="form-label">Ваше имя:</label>
-                <input name="Name" class="form-control">
+                <input type="text" name="Name" class="form-control">
             </div>
             <div class="mb-3 col-6">
                 <label class="form-label">Электронная почта:</label>
-                <input name="Email" class="form-control">
+                <input type="email" name="Email" class="form-control">
                 <div id="emailHelp" class="form-text">Ваш электронный адрес никогда не будет передан третьей стороне.</div>
             </div>
 
             <div class="mb-3 col-6">
                 <label class="form-label">Телефон:</label>
-                <input name="PhoneNumber" class="form-control">
+                <input type="tel" name="Phone" class="form-control">
             </div>
             <div class="mb-3 col-6">
                 <label class="form-label">Адрес доставки:</label>
-                <input name="Address" class="form-control">
+                <input type="text" name="Address" class="form-control">
             </div>
 
             <div class="mb-3 col-6">
                 <label class="form-label">Дата получения:</label>
-                <input name="DeliveryDate" class="form-control">
-            </div>
-            <div class="mb-3 col-6">
-                <label class="form-label">Время:</label>
-                <input name="DeliveryTime" class="form-control">
+                <input type="date" name="DeliveryDate" class="form-control">
             </div>
 
             <button type="submit" class="btn btn-primary">Отправить</button>

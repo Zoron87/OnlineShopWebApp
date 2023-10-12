@@ -22,7 +22,7 @@ namespace OnlineShopWebApp
         {
             services.AddSingleton<IFavouriteStorage, FavouriteStorage>();
             services.AddSingleton<ICompareStorage, CompareStorage>();
-            services.AddSingleton<IOrderStorage, OrderStorage>();
+            services.AddSingleton<IOrderStorage, OrderStorageInJson>();
             services.AddSingleton<IProductStorage, ProductStorageInJson>();
             services.AddSingleton<ICartStorage, CartStorage>();
             services.AddTransient<ProductStorageInit>();

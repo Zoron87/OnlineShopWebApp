@@ -5,7 +5,7 @@ using OnlineShopWebApp.Providers;
 
 namespace OnlineShopWebApp.Storages
 {
-    public class OrderStorage : IOrderStorage
+    public class OrderStorageInJson : IOrderStorage
     {
         private readonly string filePath = "Storages/Orders.txt";
 
@@ -14,7 +14,7 @@ namespace OnlineShopWebApp.Storages
 
         public bool Save(OrderDetails orderDetails, Cart cart, bool isAppend = true)
         {
-            var orderStorage = new OrderStorage()
+            var orderStorage = new OrderStorageInJson()
             {
                 OrderDetails = orderDetails,
                 Cart = cart
