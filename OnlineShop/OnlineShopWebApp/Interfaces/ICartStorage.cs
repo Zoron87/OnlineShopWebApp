@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Interfaces
 {
     public interface ICartStorage
     {
-        Cart GetCart(Guid userGuid);
+        Cart Get(Guid userGuid);
         Cart AddItem(int productId, int quantity);
         Cart DeleteItem(int productId);
         Cart TryGetById(Guid userGuid);

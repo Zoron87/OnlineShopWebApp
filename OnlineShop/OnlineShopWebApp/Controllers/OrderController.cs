@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
-using System;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
         private readonly IOrderStorage orderStorage;
-        private ICartStorage cartStorage;
+        private readonly ICartStorage cartStorage;
 
         public OrderController(ICartStorage cartStorage, IOrderStorage orderStorage)
         {
@@ -33,20 +32,16 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public IActionResult Index(OrderDetails orderDetails)
         {
-            var cart = cartStorage.GetCart(ShopUser.Id);
+            var cart = cartStorage.Get(ShopUser.Id);
 
-            if (cart != null)
+            if (cart != null || orderDetails != null)
             {
-                if (orderDetails != null)
-                {
-                    orderStorage.Save(orderDetails, cart, true);
-                    cart.Items.Clear();
-                    return View("ThankYou");
-                }
-                else
-                    throw new Exception("Заполните форму оформления заказа");
+                orderStorage.Save(orderDetails, cart, true);
+                cart.Items.Clear();
+                return View("ThankYou");
             }
-            else throw new Exception("Добавьте товары в корзину");
+            else
+                return View("Error");
         }
     }
 }

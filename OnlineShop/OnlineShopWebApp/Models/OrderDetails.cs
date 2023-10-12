@@ -6,21 +6,12 @@ namespace OnlineShopWebApp.Models
     {
         public int Id { get; }
         public string Name { get; set; }
-        public string PhoneNumber { get; set; }
+        public string Phone { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
-        public enum DeliveryType
-        {
-            Самовывоз,
-            Курьер
-        }
+        public enum DeliveryType { }
         public DateTime DeliveryDate { get; set; }
-        public string DeliveryTime { get; set; }
-        public enum PayType
-        {
-            Онлайн,
-            Наличными
-        }
+        public enum PayType { }
         public string Comment { get; set; }
     }
 }
