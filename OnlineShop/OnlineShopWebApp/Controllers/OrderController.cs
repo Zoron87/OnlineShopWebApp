@@ -1,10 +1,13 @@
-﻿namespace OnlineShopWebApp.Controllers
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Models;
+
+namespace OnlineShopWebApp.Controllers
 {
     public class OrderController : Controller
     {
         private readonly ICartStorage cartStorage;
         private readonly IOrderStorage orderStorage;
-        private readonly ICartStorage cartStorage;
 
         public OrderController(ICartStorage cartStorage, IOrderStorage orderStorage)
         {
