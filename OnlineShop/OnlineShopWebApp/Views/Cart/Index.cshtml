@@ -1,46 +1,46 @@
 ﻿@model Cart;
 
 @{
-	ViewData["Title"] = "Корзина";
+    ViewData["Title"] = "Корзина";
 }
 
 @if (Model == null || Model.Items.Count == 0 || Model.Items == null)
 {
-	<h1>Корзина пустая</h1>
+    <h1>Корзина пустая</h1>
 }
 else
 {
-	<div class="container-fluid">
-		<div class="row">
-			<div class="table-responsive">
-				<table class="table offcanvasCart-table">
-					<tbody>
-						@foreach (var item in Model.Items)
-						{
-							<tr>
-								<td class="product-img-td"><a href="/Product/Index/@item.Product.Id"><img src="~/img/products/@item.Product.ImagePath" alt="@item.Product.Name"></a></td>
-								<td><a href="/Product/Index/@item.Product.Id">@item.Product.Name</a></td>
-								<td>@item.Product.Cost р.</td>
-								<td><a href="/Cart/Increase/?productId=@item.Product.Id&quantity=1"><i class="fa-solid fa-plus"></i></a></td>
-								<td>@item.Quantity</td>
-								<td><a href="/Cart/Reduce/?productId=@item.Product.Id&quantity=1"><i class="fa-solid fa-minus"></i></a></td>
-								<td><a class="btn btn-danger" style="display:inline;" href="/cart/delete/?productid=@item.Product.Id"><i class="fa-solid fa-circle-xmark"></i></a></td>
-							</tr>
-						}
-					</tbody>
-					<tfoot>
-						<tr>
-							<td colspan="4" class="text-end">Total: @Model.Cost() р.</td>
-						</tr>
-					</tfoot>
-				</table> <!-- //table offcanvasCart-table -->
-			</div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table offcanvasCart-table">
+                    <tbody>
+                        @foreach (var item in Model.Items)
+                        {
+                            <tr>
+                                <td class="product-img-td"><a href="/Product/Index/@item.Product.Id"><img src="~/img/products/@item.Product.ImagePath" alt="@item.Product.Name"></a></td>
+                                <td><a href="/Product/Index/@item.Product.Id">@item.Product.Name</a></td>
+                                <td>@item.Product.Cost р.</td>
+                                <td><a href="/Cart/Increase/?productId=@item.Product.Id&quantity=1"><i class="fa-solid fa-plus"></i></a></td>
+                                <td>@item.Quantity</td>
+                                <td><a href="/Cart/Reduce/?productId=@item.Product.Id&quantity=1"><i class="fa-solid fa-minus"></i></a></td>
+                                <td><a class="btn btn-danger" style="display:inline;" href="/cart/delete/?productid=@item.Product.Id"><i class="fa-solid fa-circle-xmark"></i></a></td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4" class="text-end">Total: @Model.Cost() р.</td>
+                        </tr>
+                    </tfoot>
+                </table> <!-- //table offcanvasCart-table -->
+            </div>
 
-			<div class="text-end mt-3 cart-buttons">
-				<a href="/Order/Details" class="btn btn-outline-primary">Оформить заказ</a>
-				<a href="/Cart/Clear" class="btn btn-outline-dark">Очистить корзину</a>
-				<a href="/" class="btn btn-outline-secondary">Вернуться на главную страницу</a>
-			</div>
-		</div>
-	</div>
+            <div class="text-end mt-3 cart-buttons">
+                <a href="/Order/Details" class="btn btn-outline-primary">Оформить заказ</a>
+                <a href="/Cart/Clear" class="btn btn-outline-dark">Очистить корзину</a>
+                <a href="/" class="btn btn-outline-secondary">Вернуться на главную страницу</a>
+            </div>
+        </div>
+    </div>
 }

@@ -31,12 +31,13 @@
                                     <h4>
                                         <a href="/Product/Index/@product.Id">@product.Name</a>
                                     </h4>
-                                        <p class="product-excerpt">@product.Description</p>
+                                    <p class="product-excerpt">@product.Description</p>
                                     <div class="product-bottom-details d-flex justify-content-between">
                                         <div class="product-price">@product.Cost</div>
                                         <div class="product-links">
-                                            <a href="/cart/add/?productId=@product.Id" class="btn btn-outline-secondary add-to-cart"><i
-                                                    class="fa-solid fa-cart-shopping"></i></a>
+                                            <a href="/cart/add/?productId=@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </a>
                                         </div>
                                         <div class="product-links">
                                             <a href="/compare/add/?productId=@product.Id" class="btn btn-outline-secondary add-to-cart">
@@ -46,7 +47,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     }
                 </div>
             </div>
