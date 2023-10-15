@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfaces;
-using OnlineShopWebApp.Models;
-
-namespace OnlineShopWebApp.Controllers
+﻿namespace OnlineShopWebApp.Controllers
 {
 	public class CartController : Controller
 	{
@@ -52,7 +48,6 @@ namespace OnlineShopWebApp.Controllers
 
 		public IActionResult Clear()
 		{
-			//cartStorage.Get(ShopUser.Id).Items.Clear();
 			cartStorage.Clear();
 			return RedirectToAction("Index");
 		}

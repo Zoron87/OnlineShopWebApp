@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfaces;
-using OnlineShopWebApp.Models;
-
-namespace OnlineShopWebApp.Controllers
+﻿namespace OnlineShopWebApp.Controllers
 {
 	public class OrderController : Controller
 	{

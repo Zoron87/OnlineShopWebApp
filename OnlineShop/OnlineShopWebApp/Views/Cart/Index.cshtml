@@ -1,12 +1,12 @@
 ﻿@model Cart;
 
 @{
-	ViewData["Title"] = "Корзина";
+    ViewData["Title"] = "Корзина";
 }
 
 @if (Model == null || Model.Items.Count == 0 || Model.Items == null)
 {
-	<h1>Корзина пустая</h1>
+    <h1>Корзина пустая</h1>
 }
 else
 {
