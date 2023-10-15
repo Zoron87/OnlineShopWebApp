@@ -16,6 +16,14 @@ namespace OnlineShopWebApp.Models
 			Items = items;
 		}
 
+		public decimal Amount
+		{
+			get
+			{
+				return Items.Sum(c => c.Quantity);
+			}
+		}
+
 		public decimal Cost()
 		{
 			return Items.Sum(s => s.Product.Cost * s.Quantity);

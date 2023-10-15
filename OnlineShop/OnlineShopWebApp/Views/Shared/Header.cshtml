@@ -1,0 +1,152 @@
+﻿<header class="header">
+    <div class="header-top py-1">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6 col-sm-4">
+                    <div class="header-top-phone d-flex align-items-center h-100">
+                        <i class="fa-solid fa-square-phone icons" style="color: #1074EB;"></i>
+                        <a href="tel:+74995555555" class="ms-2">+7 (499) 555-55-55</a>
+                    </div>
+                </div>
+                <div class="col-sm-4 d-none d-sm-block">
+                    <ul class="social-icons d-flex justify-content-center">
+                        <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-square-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-square-instagram"></i></a></li>
+                        </ui>
+                </div>
+                <div class="col-6 col-sm-4">
+                    <div class="header-top-accounts d-flex justify-content-end">
+                        <div class="btn-group me-2">
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    Войти
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Вход</a></li>
+                                    <li><a class="dropdown-item" href="#">Регистрация</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <div class="dropdown">
+                                <button class="btn btn-sm dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                    RU
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">EN</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div> <!-- //header-top-accounts-->
+                </div>
+            </div>
+        </div>
+    </div> <!-- //header-top-->
+
+    <div class="header-middle bg-white py-4">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+
+                <div class="col-sm-6">
+                    <a asp-controller="Home" asp-action="Index" class="header-logo h1">ONLINE-SHOP</a>
+                </div>
+
+                <div class="col-sm-6 mt-2 mt-md-0">
+                    <form action="">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="s" placeholder="Search..."
+                                   aria-label="Search..." aria-describedby="button-search">
+                            <button class="btn btn-outline-primary" type="submit" id="button-search">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div> <!-- //header-middle -->
+</header>
+
+<div class="header-bottom sticky-top" id="header-nav">
+    <nav class="navbar navbar-expand-md bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-start" id="offcanvasNavbar" tabindex="-1"
+                 aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Меню</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                </div> <!--//offcanvas-header-->
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" asp-controller="Home" asp-action="Index">Главная</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false" data-bs-auto-close="outside">Каталог</a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item" href="category.html">Телефоны</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="category.html">Бытовая техника</a>
+                                </li>
+                                <li class="nav-item dropend">
+                                    <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                                       data-bs-auto-close="outside">Компьютеры</a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <a class="dropdown-item" href="category.html">Ноутбуки</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="category.html">Аксессуары</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">О нас</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">Контакты</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-disabled="true">Оплата</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-disabled="true">Доставка</a>
+                        </li>
+                    </ul> <!--//navbar-nav-->
+                </div> <!--//offcanvas-body-->
+            </div><!--offcanvas-start-->
+            <div>
+                <a asp-controller="Favourite" asp-action="Index" class="btn p-1">
+                    <i class="fa-solid fa-heart icons"></i>
+                    <span class="badge text-bg-primary cart-badge bg-danger rounded-circle"></span>
+                </a>
+
+                <a asp-controller="Compare" asp-action="Index" class="btn p-1">
+                    <i class="fa-solid fa-code-compare icons"></i>
+                    <span class="badge text-bg-primary cart-badge bg-danger rounded-circle"></span>
+                </a>
+
+                <a asp-controller="Cart" asp-action="Index" class="btn p-1">
+                    <i class="fa-solid fa-cart-shopping icons"></i>
+                    <span class="badge text-bg-primary cart-badge bg-danger rounded-circle">@await Component.InvokeAsync("Cart")</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</div> <!-- //header-bottom -->
