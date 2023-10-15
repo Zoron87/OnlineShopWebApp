@@ -1,41 +1,41 @@
 ﻿@model List<Product>;
 
 @{
-    ViewData["Title"] = "Сравнение товаров";
+	ViewData["Title"] = "Сравнение товаров";
 }
 
 @if (Model == null || Model.Count == 0)
 {
-    <h3>Список для сравнения пуст!</h3>
+	<h3>Список для сравнения пуст!</h3>
 }
 else
 {
-    <div class="contianer-fluid">
-        <div class="row">
-            <a asp-asp-controller="Compare" asp-action="Clear">Очистить список</a>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Cost</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Image</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                    <tr>
-                        <td>@item.Name</td>
-                        <td>@item.Cost</td>
-                        <td>@item.Description</td>
-                        <td><img width="100px" src="/img/products/@item.ImagePath" /></td>
-                            <td><a class="btn btn-danger" style="display:inline;" asp-controller="Compare" asp-action="Delete" asp-route-productId="@item.Id"><i class="fa-solid fa-circle-xmark"></i></a></td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
+	<div class="contianer-fluid">
+		<div class="row">
+			<a asp-asp-controller="Compare" asp-action="Clear">Очистить список</a>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Name</th>
+						<th scope="col">Cost</th>
+						<th scope="col">Description</th>
+						<th scope="col">Image</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>@item.Name</td>
+							<td>@item.Cost</td>
+							<td>@item.Description</td>
+							<td><img width="100px" src="/img/products/@item.ImagePath" /></td>
+							<td><a class="btn btn-danger" style="display:inline;" asp-controller="Compare" asp-action="Delete" asp-route-productId="@item.Id"><i class="fa-solid fa-circle-xmark"></i></a></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
 }

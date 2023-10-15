@@ -62,10 +62,10 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-		public IActionResult Reduce(int productId, int quantity = 1)
-		{
-			cartStorage.Reduce(productId, quantity);
-			return RedirectToAction("Index");
-		}
-	}
+        public IActionResult Reduce(int productId, int quantity = 1)
+        {
+            cartStorage.Reduce(productId, quantity);
+            return RedirectToAction("Index");
+        }
+    }
 }
