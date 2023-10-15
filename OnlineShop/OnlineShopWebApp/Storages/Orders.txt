@@ -1,11 +1,9 @@
-[
-  {
-    "OrderDetails": {
+﻿    "OrderDetails": {
       "Id": 0,
-      "Name": null,
-      "Phone": null,
-      "Email": null,
-      "Address": null,
+      "Name": "Nikolay Syryaev",
+      "Phone": "89093735224",
+      "Email": "zoronbet@gmail.com",
+      "Address": "ул. Костина, 4, кв. 21",
       "Delivery": 0,
       "DeliveryDate": "0001-01-01T00:00:00",
       "Pay": 0,
@@ -13,17 +11,37 @@
     },
     "Cart": {
       "Id": 0,
-      "UserId": "e384fadc-eeea-4c90-b5dd-97401a7ab68c",
+      "UserId": "c6cf4dea-99ae-48d8-9ae6-bb883b4d3dc9",
       "Items": [
         {
           "Product": {
-            "Id": 1,
-            "Name": "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
-            "Cost": 99999.0,
-            "Description": "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
-            "ImagePath": "notebook_MSI_Katana_17_B12VEK-482XRU_1.jpg"
+            "Id": 3,
+            "Name": "Холодильник Midea MDRB499FGF01IM",
+            "Cost": 39999.0,
+            "Description": "Холодильник Midea MDRB499FGF01IM, белый оснащен холодильной камерой объемом 250 л и нижней морозильной камерой объемом 76 л.",
+            "ImagePath": "Refrigerator_Midea_MDRB499FGF01IM_1.jpg"
           },
           "Quantity": 5
+        },
+        {
+          "Product": {
+            "Id": 4,
+            "Name": "Робот-пылесос Dreame Bot Robot Vacuum and Mop F9 Pro White",
+            "Cost": 18999.0,
+            "Description": "Робот-пылесос Dreame Bot Robot Vacuum and Mop D9 Pro White выполняет сухую и влажную уборку и способен обработать до 160 м² площади без подзарядки",
+            "ImagePath": "Robot_Vacuum_Cleaner_Dreame_Bot_Robot_Vacuum_and_Mop_F9_Pro_1.jpg"
+          },
+          "Quantity": 9
+        },
+        {
+          "Product": {
+            "Id": 5,
+            "Name": "Электрический духовой шкаф Gorenje BO6737E02X",
+            "Cost": 29999.0,
+            "Description": "Gorenje BO6737E02X – электрический духовой шкаф с 77-литровой камерой BigSpace. За счёт внушительного объёма внутреннего пространства и его особой форме HomeMade вам будут по плечу самые смелые кулинарные эксперименты.",
+            "ImagePath": "Electric_oven_Gorenje_BO6737E02X_1.jpg"
+          },
+          "Quantity": 1
         }
       ]
     }
