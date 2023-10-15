@@ -2,7 +2,8 @@
 {
 	public class Order
 	{
-		public OrderDetails OrderDetails;
+        public int Id { get; }
+        public OrderDetails OrderDetails;
 		public Cart Cart;
 
 		public Order(OrderDetails orderDetails, Cart cart)
