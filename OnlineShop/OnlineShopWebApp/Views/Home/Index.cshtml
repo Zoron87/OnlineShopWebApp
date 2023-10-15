@@ -44,7 +44,7 @@
                                             </a>
                                         </div>
                                         <div class="product-links">
-                                            <a href="/favourite/add/?productId=@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                            <a asp-controller="Favourite" asp-action="Add" asp-route-productid="@product.Id" class="btn btn-outline-secondary add-to-cart">
                                                 <i class="fa-solid fa-star"></i>
                                             </a>
                                         </div>
