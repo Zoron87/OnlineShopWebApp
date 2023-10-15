@@ -3,25 +3,25 @@ using OnlineShopWebApp.Interfaces;
 
 namespace OnlineShopWebApp.Controllers
 {
-	public class ProductController : Controller
+    public class ProductController : Controller
     {
-		private readonly IProductStorage productStorage;
+        private readonly IProductStorage productStorage;
 
-		public ProductController(IProductStorage productStorage)
+        public ProductController(IProductStorage productStorage)
         {
-			this.productStorage = productStorage;
-		}
+            this.productStorage = productStorage;
+        }
 
-        public IActionResult Index(int id)
+        public IActionResult Index(int productId)
         {
-            var product = productStorage.TryGetById(id);
+            var product = productStorage.TryGetById(productId);
 
             return product != null ? View(product) : View("Error");
         }
 
-        public IActionResult View(int page = 1, int itemsonpage = 1)
+        public IActionResult View(int page = 1, int itemsOnPage = 1)
         {
-            var products = productStorage.GetProductsWithPagination(page, itemsonpage);
+            var products = productStorage.GetProductsWithPagination(page, itemsOnPage);
 
             return products != null ? View(products) : View("Error");
         }

@@ -25,21 +25,21 @@
                                     <div class="offer-new">New</div>
                                 </div>
                                 <div class="product-thumb">
-                                    <a href="/Product/Index/@product.Id"><img src="~/img/products/@product.ImagePath" alt="@product.Name"></a>
+                                    <a asp-controller="Product" asp-action="Index" asp-route-productid="@product.Id"><img src="~/img/products/@product.ImagePath" alt="@product.Name"></a>
                                 </div>
                                 <div class="product-details">
                                     <h4>
-                                        <a href="/Product/Index/@product.Id">@product.Name</a>
+                                        <a asp-controller="Product" asp-action="Index" asp-route-productid="@product.Id">@product.Name</a>
                                     </h4>
                                         <p class="product-excerpt">@product.Description</p>
                                     <div class="product-bottom-details d-flex justify-content-between">
                                         <div class="product-price">@product.Cost</div>
                                         <div class="product-links">
-                                            <a href="/cart/add/?productId=@product.Id" class="btn btn-outline-secondary add-to-cart"><i
-                                                    class="fa-solid fa-cart-shopping"></i></a>
+                                            <a asp-controller="Cart" asp-action="Add" asp-route-productid="@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                                <i class="fa-solid fa-cart-shopping"></i></a>
                                         </div>
                                         <div class="product-links">
-                                            <a href="/compare/add/?productId=@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                            <a asp-controller="Compare" asp-action="Add" asp-route-productid="@product.Id" class="btn btn-outline-secondary add-to-cart">
                                                 <i class="fa-solid fa-code-compare"></i>
                                             </a>
                                         </div>

@@ -9,65 +9,64 @@ using System.Linq;
 namespace OnlineShopWebApp.Storages
 {
 	public class ProductStorageInJson : IProductStorage
-    {
-        private static string productsFilePath = "Storages/Products.txt";
-        private readonly List<Product> products;
-		private readonly ProductStorageInit productStorageInit;
+	{
+		private static string productsFilePath = "Storages/Products.txt";
+		private readonly List<Product> products;
 
-		public ProductStorageInJson(ProductStorageInit productStorageInit)
-        {
-			this.productStorageInit = productStorageInit;
-            products = InitProducts();
+		public ProductStorageInJson()
+		{
+			products = InitProducts();
 		}
 
-        public List<Product> GetAll()
-        {
-            return products;
-        }
-        private List<Product> InitProducts()
-        {
-            var allProducts = FileProvider.GetInfo(productsFilePath);
+		public List<Product> GetAll()
+		{
+			return products;
+		}
+		private List<Product> InitProducts()
+		{
+			var allProducts = FileProvider.GetInfo(productsFilePath);
 
 			if (String.IsNullOrEmpty(allProducts))
-			    return productStorageInit.GetAll();
+				return DefaultProductStorage.GetAll();
 
 			return JsonConvert.DeserializeObject<List<Product>>(allProducts);
-        }
+		}
 
-        public bool SaveAll(bool isAppend = false)
-        {
-            return FileProvider.SaveInfo(productsFilePath, JsonConvert.SerializeObject(products, Formatting.Indented));
-        }
+		public bool SaveAll(bool isAppend = false)
+		{
+			return FileProvider.SaveInfo(productsFilePath, JsonConvert.SerializeObject(products, Formatting.Indented));
+		}
 
-        public Product TryGetById(int id)
-        {
-            return products.FirstOrDefault(product => product.Id == id);
-        }
+		public Product TryGetById(int id)
+		{
+			return products.FirstOrDefault(product => product.Id == id);
+		}
 
-        public List<Product> GetProductsWithPagination(int page, int itemsonpage)
-        {
-            if (page <= 0) throw new Exception("Номер страницы должен быть больше нуля!");
+		public List<Product> GetProductsWithPagination(int page, int itemsOnPage)
+		{
+			if (page <= 0) throw new Exception("Номер страницы должен быть больше нуля!");
 
-            if (CheckExistPage(page, itemsonpage)) throw new Exception("Такой страницы не существует!");
+			if (CheckExistPage(page, itemsOnPage)) throw new Exception("Такой страницы не существует!");
 
-            itemsonpage = itemsonpage < products.Count ? itemsonpage : products.Count;
+			itemsOnPage = itemsOnPage < products.Count ? itemsOnPage : products.Count;
 
-            var outputProducts = GetOutputProducts(page, itemsonpage);
+			var outputProducts = GetOutputProducts(page, itemsOnPage);
 
-            if (products.Any()) 
-                return GetOutputProducts(page, itemsonpage);
-            
-            throw new Exception("Товаров для вывода не обнаружено!");
-        }
+			if (products.Any())
+				return GetOutputProducts(page, itemsOnPage);
 
-        private bool CheckExistPage(int page, int itemsonpage)
-        {
-            return page > 1 && (products.Count - (page - 1) * itemsonpage <= 0);
-        }
+			throw new Exception("Товаров для вывода не обнаружено!");
+		}
 
-        private List<Product> GetOutputProducts(int page, int itemsonpage)
-        {
-            return products.GetRange((page - 1) * itemsonpage, page > 1 ? products.Count - (page - 1) * itemsonpage : itemsonpage);
-        }
-    }
+		private bool CheckExistPage(int page, int itemsOnPage)
+		{
+			return page > 1 && (products.Count - (page - 1) * itemsOnPage <= 0);
+		}
+
+		private List<Product> GetOutputProducts(int page, int itemsOnPage)
+		{
+			var productsForView = products.Count - (page - 1) * itemsOnPage <= itemsOnPage ? products.Count - (page - 1) * itemsOnPage : itemsOnPage;
+			return products.GetRange((page - 1) * itemsOnPage, productsForView);
+		}
+	}
 }

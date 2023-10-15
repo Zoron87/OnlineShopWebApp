@@ -2,24 +2,43 @@
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
+using System;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Storages
 {
-    public class OrderStorageInJson : IOrderStorage
-    {
-        private readonly string filePath = "Storages/Orders.txt";
+	public class OrderStorageInJson : IOrderStorage
+	{
+		private readonly string filePath = "Storages/Orders.txt";
 
-        public OrderDetails OrderDetails;
-        public Cart Cart;
+		private List<Order> orders;
 
-        public bool Save(OrderDetails orderDetails, Cart cart, bool isAppend = true)
-        {
-            var orderStorage = new OrderStorageInJson()
-            {
-                OrderDetails = orderDetails,
-                Cart = cart
-            };
-            return FileProvider.SaveInfo(filePath, JsonConvert.SerializeObject(orderStorage, Formatting.Indented), isAppend);
-        }
-    }
+		public OrderStorageInJson()
+		{
+			orders = new List<Order>();
+		}
+
+		public void Add(Order order)
+		{
+			orders = GetAll();
+
+			orders.Add(order);
+
+			SaveAll(orders);
+		}
+
+		public void SaveAll(List<Order> orders)
+		{
+			FileProvider.SaveInfo(filePath, JsonConvert.SerializeObject(orders, Formatting.Indented), false);
+		}
+
+		public List<Order> GetAll()
+		{
+			var oldOrders = FileProvider.GetInfo(filePath);
+			if (!String.IsNullOrEmpty(oldOrders))
+				return JsonConvert.DeserializeObject<List<Order>>(oldOrders);
+
+			return orders;
+		}
+	}
 }

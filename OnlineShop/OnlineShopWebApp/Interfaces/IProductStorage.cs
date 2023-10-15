@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Interfaces
 {
-    public interface IProductStorage
-    {
-        bool SaveAll(bool isAppend = false);
+	public interface IProductStorage
+	{
+		bool SaveAll(bool isAppend = false);
 
-        List<Product> GetAll();
+		List<Product> GetAll();
 
-        Product TryGetById(int id);
+		Product TryGetById(int id);
 
-        List<Product> GetProductsWithPagination(int page, int itemsonpage);
-    }
+		List<Product> GetProductsWithPagination(int page, int itemsOnPage);
+	}
 }

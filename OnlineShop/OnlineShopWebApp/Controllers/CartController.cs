@@ -52,7 +52,8 @@ namespace OnlineShopWebApp.Controllers
 
 		public IActionResult Clear()
 		{
-			cartStorage.Get(ShopUser.Id).Items.Clear();
+			//cartStorage.Get(ShopUser.Id).Items.Clear();
+			cartStorage.Clear();
 			return RedirectToAction("Index");
 		}
 
