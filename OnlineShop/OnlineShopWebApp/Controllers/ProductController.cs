@@ -3,42 +3,42 @@ using OnlineShopWebApp.Interfaces;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class ProductController : Controller
-    {
-        private readonly IProductStorage productStorage;
+	public class ProductController : Controller
+	{
+		private readonly IProductStorage productStorage;
 
-        public ProductController(IProductStorage productStorage)
-        {
-            this.productStorage = productStorage;
-        }
+		public ProductController(IProductStorage productStorage)
+		{
+			this.productStorage = productStorage;
+		}
 
-        public IActionResult Index(int productId)
-        {
-            var product = productStorage.TryGetById(productId);
+		public IActionResult Index(int productId)
+		{
+			var product = productStorage.TryGetById(productId);
 
-            return product != null ? View(product) : View("Error");
-        }
+			return product != null ? View(product) : View("Error");
+		}
 
-        public IActionResult View(int page = 1, int itemsOnPage = 1)
-        {
-            var products = productStorage.GetProductsWithPagination(page, itemsOnPage);
+		public IActionResult View(int page = 1, int itemsOnPage = 1)
+		{
+			var products = productStorage.GetProductsWithPagination(page, itemsOnPage);
 
-            return products != null ? View(products) : View("Error");
-        }
+			return products != null ? View(products) : View("Error");
+		}
 
-        public string SaveAll(bool isAppend = false)
-        {
-            if (productStorage.SaveAll(isAppend))
-                return "Успешно сохранили информацию в файл!";
+		public string SaveAll(bool isAppend = false)
+		{
+			if (productStorage.SaveAll(isAppend))
+				return "Успешно сохранили информацию в файл!";
 
-            return "Ошибка сохранения информации в файл!";
-        }
+			return "Ошибка сохранения информации в файл!";
+		}
 
-        public IActionResult GetAll()
-        {
-            var allProducts = productStorage.GetAll();
+		public IActionResult GetAll()
+		{
+			var allProducts = productStorage.GetAll();
 
-            return allProducts != null ? View(allProducts) : View("Error");
-        }
-    }
+			return allProducts != null ? View(allProducts) : View("Error");
+		}
+	}
 }
