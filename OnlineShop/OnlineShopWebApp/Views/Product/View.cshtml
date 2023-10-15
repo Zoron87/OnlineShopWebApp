@@ -28,8 +28,18 @@
                                     <div class="product-bottom-details d-flex justify-content-between">
                                         <div class="product-price">@product.Cost</div>
                                         <div class="product-links">
-                                            <a href="#" class="btn btn-outline-secondary add-to-cart">
+                                            <a asp-controller="Cart" asp-action="Add" asp-route-productid="@product.Id" class="btn btn-outline-secondary add-to-cart">
                                                 <i class="fa-solid fa-cart-shopping"></i>
+                                            </a>
+                                        </div>
+                                        <div class="product-links">
+                                            <a asp-controller="Compare" asp-action="Add" asp-route-productid="@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                                <i class="fa-solid fa-code-compare"></i>
+                                            </a>
+                                        </div>
+                                        <div class="product-links">
+                                            <a asp-controller="Favourite" asp-action="Add" asp-route-productid="@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                                <i class="fa-solid fa-star"></i>
                                             </a>
                                         </div>
                                     </div>
