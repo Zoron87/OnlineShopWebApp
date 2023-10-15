@@ -5,6 +5,7 @@ namespace OnlineShopWebApp.Interfaces
 {
     public interface ICompareStorage
     {
+        public int Amount{ get; }
         List<Product> GetAll();
         void Add(int productId);
         void Delete(int productId);

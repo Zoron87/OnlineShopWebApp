@@ -15,6 +15,14 @@ namespace OnlineShopWebApp.Storages
 			this.productStorage = productStorage;
 		}
 
+		public int Amount
+		{
+			get
+			{
+				return products.Count;
+			}
+		}
+
 		public List<Product> GetAll()
 		{
 			return products;

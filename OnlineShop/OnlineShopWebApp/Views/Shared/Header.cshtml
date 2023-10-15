@@ -132,15 +132,9 @@
                 </div> <!--//offcanvas-body-->
             </div><!--offcanvas-start-->
             <div>
-                <a asp-controller="Favourite" asp-action="Index" class="btn p-1">
-                    <i class="fa-solid fa-heart icons"></i>
-                    <span class="badge text-bg-primary cart-badge bg-danger rounded-circle"></span>
-                </a>
+                @await Component.InvokeAsync("Favourite")
 
-                <a asp-controller="Compare" asp-action="Index" class="btn p-1">
-                    <i class="fa-solid fa-code-compare icons"></i>
-                    <span class="badge text-bg-primary cart-badge bg-danger rounded-circle"></span>
-                </a>
+                @await Component.InvokeAsync("Compare")
 
                 @await Component.InvokeAsync("Cart")
             </div>

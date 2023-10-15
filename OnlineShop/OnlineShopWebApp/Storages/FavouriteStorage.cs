@@ -13,6 +13,15 @@ namespace OnlineShopWebApp.Storages
 		{
 			this.productStorage = productStorage;
 		}
+
+		public int Amount
+		{
+			get
+			{
+				return favouriteProducts.Count;
+			}
+		}
+
 		public void Add(int productId)
 		{
 			var product = productStorage.TryGetById(productId);
