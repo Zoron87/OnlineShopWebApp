@@ -4,16 +4,16 @@
     ViewData["Title"] = "Сравнение товаров";
 }
 
-@if (Model.Count == 0 || Model == null)
+@if (Model == null || Model.Count == 0)
 {
     <h3>Список для сравнения пуст!</h3>
-    <p><a href="/">Вернуться на главную страницу</a></p>
+    <p><a asp-controller="Home" asp-action="Index">Вернуться на главную страницу</a></p>
 }
 else
 {
     <div class="contianer-fluid">
         <div class="row">
-            <a href="/compare/clear">Очистить список</a>
+            <a asp-asp-controller="Compare" asp-action="Clear">Очистить список</a>
             <table class="table">
                 <thead>
                     <tr>
@@ -32,11 +32,11 @@ else
                         <td>@item.Cost</td>
                         <td>@item.Description</td>
                         <td><img width="100px" src="/img/products/@item.ImagePath" /></td>
-                            <td><a class="btn btn-danger" style="display:inline;" href="/compare/Delete/?productid=@item.Id"><i class="fa-solid fa-circle-xmark"></i></a></td>
+                            <td><a class="btn btn-danger" style="display:inline;" asp-controller="Compare" asp-action="Delete" asp-route-productId="@item.Id"><i class="fa-solid fa-circle-xmark"></i></a></td>
                     </tr>
                     }
                 </tbody>
             </table>
-       </div>
+        </div>
     </div>
 }

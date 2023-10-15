@@ -44,7 +44,7 @@
                                 <input type="number" name="quantity" class="form-control" value="1" min="1">
                                 <input type="hidden" name="productId" class="form-control" value="@Model.Id">
                                 <button type="submit" class="btn btn-primary" style="margin-right: 10px;"><i class="fas fa-shopping-cart"></i> В КОРЗИНУ</button>
-                                <a href="/" class="btn btn-warning"><i class="fa-solid fa-bag-shopping"></i> ПРОДОЛЖИТЬ ПОКУПКИ</a>
+                                <a asp-controller="Home" asp-action="Index" class="btn btn-warning"><i class="fa-solid fa-bag-shopping"></i> ПРОДОЛЖИТЬ ПОКУПКИ</a>
                             </div>
                         </div>
                     </div>

@@ -3,14 +3,14 @@ using OnlineShopWebApp.Interfaces;
 
 namespace OnlineShopWebApp.Controllers
 {
-	public class HomeController : Controller
+    public class HomeController : Controller
     {
-		private readonly IProductStorage productStorage;
+        private readonly IProductStorage productStorage;
 
-		public HomeController(IProductStorage productStorage)
+        public HomeController(IProductStorage productStorage)
         {
-			this.productStorage = productStorage;
-		}
+            this.productStorage = productStorage;
+        }
 
         public ActionResult Index()
         {
@@ -18,5 +18,5 @@ namespace OnlineShopWebApp.Controllers
 
             return products != null ? View(products) : View("Error");
         }
-	}
+    }
 }

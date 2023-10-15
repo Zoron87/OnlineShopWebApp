@@ -53,36 +53,36 @@ namespace OnlineShopWebApp.Storages
 		{
 			var cart = Get(ShopUser.Id);
 
-			var itemForRemove = cart?.Items?.FirstOrDefault(cartItem => cartItem.Product.Id == productId);
+			var cartItemForRemove = cart?.Items?.FirstOrDefault(cartItem => cartItem.Product.Id == productId);
 
-			CheckExistItem(itemForRemove);
+			CheckNullItem(cartItemForRemove);
 
-			cart.Items.Remove(itemForRemove);
+			cart.Items.Remove(cartItemForRemove);
 		}
 
 		public void Increase(int productId, int quantity = 1)
 		{
 			var cart = Get(ShopUser.Id);
 
-			var product = cart?.Items?.FirstOrDefault(p => p.Product.Id == productId);
+			var cartItem = cart?.Items?.FirstOrDefault(p => p.Product.Id == productId);
 
-			CheckExistItem(product);
+			CheckNullItem(cartItem);
 
-			product.Quantity += quantity;
+			cartItem.Quantity += quantity;
 		}
 
 		public void Reduce(int productId, int quantity = 1)
 		{
 			var cart = Get(ShopUser.Id);
 
-			var product = cart?.Items?.FirstOrDefault(p => p.Product.Id == productId);
+			var cartItem = cart?.Items?.FirstOrDefault(p => p.Product.Id == productId);
 
-			CheckExistItem(product);
+			CheckNullItem(cartItem);
 
-			if (product.Quantity - quantity <= 0)
+			if (cartItem.Quantity - quantity <= 0)
 				DeleteItem(productId);
 			else
-				product.Quantity -= quantity;
+				cartItem.Quantity -= quantity;
 		}
 
 		public Cart TryGetById(Guid userId)
@@ -90,9 +90,14 @@ namespace OnlineShopWebApp.Storages
 			return carts.FirstOrDefault(c => c.UserId == userId);
 		}
 
-		private void CheckExistItem(CartItem product)
+		public void Clear()
 		{
-			if (product == null)
+			carts.Clear();
+		}
+
+		private void CheckNullItem(CartItem cartItem)
+		{
+			if (cartItem == null)
 				throw new Exception("Указанный товар не обнаружен!");
 		}
 	}
