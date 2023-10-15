@@ -1,0 +1,31 @@
+[
+  {
+    "OrderDetails": {
+      "Id": 0,
+      "Name": null,
+      "Phone": null,
+      "Email": null,
+      "Address": null,
+      "Delivery": 0,
+      "DeliveryDate": "0001-01-01T00:00:00",
+      "Pay": 0,
+      "Comment": null
+    },
+    "Cart": {
+      "Id": 0,
+      "UserId": "e384fadc-eeea-4c90-b5dd-97401a7ab68c",
+      "Items": [
+        {
+          "Product": {
+            "Id": 1,
+            "Name": "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
+            "Cost": 99999.0,
+            "Description": "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
+            "ImagePath": "notebook_MSI_Katana_17_B12VEK-482XRU_1.jpg"
+          },
+          "Quantity": 5
+        }
+      ]
+    }
+  }
+]
