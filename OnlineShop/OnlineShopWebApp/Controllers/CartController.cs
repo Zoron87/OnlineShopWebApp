@@ -1,4 +1,8 @@
-﻿namespace OnlineShopWebApp.Controllers
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Models;
+
+namespace OnlineShopWebApp.Controllers
 {
 	public class CartController : Controller
 	{
