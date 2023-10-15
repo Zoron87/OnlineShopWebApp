@@ -18,6 +18,7 @@ namespace OnlineShopWebApp.Views.Shared.Components
 			var productCounts = cart?.Amount ?? 0;
 
 			return View("Cart", productCounts);
+;
 		}
 	}
 }

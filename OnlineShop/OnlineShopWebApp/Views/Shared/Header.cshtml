@@ -142,10 +142,7 @@
                     <span class="badge text-bg-primary cart-badge bg-danger rounded-circle"></span>
                 </a>
 
-                <a asp-controller="Cart" asp-action="Index" class="btn p-1">
-                    <i class="fa-solid fa-cart-shopping icons"></i>
-                    <span class="badge text-bg-primary cart-badge bg-danger rounded-circle">@await Component.InvokeAsync("Cart")</span>
-                </a>
+                @await Component.InvokeAsync("Cart")
             </div>
         </div>
     </nav>
