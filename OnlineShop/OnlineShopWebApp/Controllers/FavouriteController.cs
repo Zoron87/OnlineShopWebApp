@@ -29,7 +29,7 @@ namespace OnlineShopWebApp.Controllers
 			return RedirectToAction("Index");
 		}
 
-		public ActionResult Clear(int productId)
+		public ActionResult Clear()
 		{
 			favouriteStorage.Clear();
 			return RedirectToAction("Index");
