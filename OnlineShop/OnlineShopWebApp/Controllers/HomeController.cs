@@ -3,20 +3,20 @@ using OnlineShopWebApp.Interfaces;
 
 namespace OnlineShopWebApp.Controllers
 {
-	public class HomeController : Controller
-	{
-		private readonly IProductStorage productStorage;
+    public class HomeController : Controller
+    {
+        private readonly IProductStorage productStorage;
 
-		public HomeController(IProductStorage productStorage)
-		{
-			this.productStorage = productStorage;
-		}
+        public HomeController(IProductStorage productStorage)
+        {
+            this.productStorage = productStorage;
+        }
 
-		public ActionResult Index()
-		{
-			var products = productStorage.GetAll();
+        public ActionResult Index()
+        {
+            var products = productStorage.GetAll();
 
-			return products != null ? View(products) : View("Error");
-		}
-	}
+            return products != null ? View(products) : View("Error");
+        }
+    }
 }
