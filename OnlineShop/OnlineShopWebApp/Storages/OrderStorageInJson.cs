@@ -10,7 +10,6 @@ namespace OnlineShopWebApp.Storages
     public class OrderStorageInJson : IOrderStorage
     {
         private readonly string filePath = "Storages/Orders.txt";
-
         private List<Order> orders;
 
         public OrderStorageInJson()
@@ -21,11 +20,8 @@ namespace OnlineShopWebApp.Storages
         public void Add(OrderDetails orderDetails, Cart cart)
         {
             orders = GetAll();
-
             var order = new Order(orderDetails, cart);
-
             orders.Add(order);
-
             SaveAll(orders);
         }
 
