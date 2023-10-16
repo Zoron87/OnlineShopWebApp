@@ -23,18 +23,14 @@ namespace OnlineShopWebApp.Storages
         public void Add(int productId)
         {
             var product = productStorage.TryGetById(productId);
-
             CheckExistProduct(product);
-
             products.Add(product);
         }
 
         public void Delete(int productId)
         {
             var product = productStorage.TryGetById(productId);
-
             CheckExistProduct(product);
-
             products.Remove(product);
         }
 

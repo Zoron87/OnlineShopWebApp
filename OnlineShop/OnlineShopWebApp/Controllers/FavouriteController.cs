@@ -13,8 +13,8 @@ namespace OnlineShopWebApp.Controllers
 		}
 		public ActionResult Index()
 		{
-			var favouriteProducts = favouriteStorage.GetAll();
-			return View(favouriteProducts);
+			var products = favouriteStorage.GetAll();
+			return View(products);
 		}
 
 		public ActionResult Add(int productId)

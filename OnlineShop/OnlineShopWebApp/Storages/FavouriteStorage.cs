@@ -16,7 +16,6 @@ namespace OnlineShopWebApp.Storages
 		public void Add(int productId)
 		{
 			var product = productStorage.TryGetById(productId);
-
 			if (product != null)
 				favouriteProducts.Add(product);
 		}
@@ -29,7 +28,6 @@ namespace OnlineShopWebApp.Storages
 		public void Delete(int productId)
 		{
 			var product = productStorage.TryGetById(productId);
-
 			if (product != null)
 				favouriteProducts.Remove(product);
 		}
