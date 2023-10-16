@@ -18,9 +18,11 @@ namespace OnlineShopWebApp.Storages
             orders = new List<Order>();
         }
 
-        public void Add(Order order)
+        public void Add(OrderDetails orderDetails, Cart cart)
         {
             orders = GetAll();
+
+            var order = new Order(orderDetails, cart);
 
             orders.Add(order);
 
