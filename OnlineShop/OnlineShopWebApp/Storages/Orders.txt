@@ -15,11 +15,11 @@
       "Items": [
         {
           "Product": {
-            "Id": 3,
-            "Name": "Холодильник Midea MDRB499FGF01IM",
-            "Cost": 39999.0,
-            "Description": "Холодильник Midea MDRB499FGF01IM, белый оснащен холодильной камерой объемом 250 л и нижней морозильной камерой объемом 76 л.",
-            "ImagePath": "Refrigerator_Midea_MDRB499FGF01IM_1.jpg"
+            "Id": 23,
+            "Name": "������� ������� MSI Katana 17 B12VEK-482XRU",
+            "Cost": 99999.0,
+            "Description": "������� ������� MSI Katana 17 B12VEK-482XRU �������� � ����������� ������� ��������� 25,2�398�273 �� � ����� 2,6 ��.",
+            "ImagePath": "notebook_MSI_Katana_17_B12VEK-482XRU_1.jpg"
           },
           "Quantity": 5
         },
@@ -44,6 +44,37 @@
           "Quantity": 1
         }
       ]
-    }
+    },
+    "Id": 0
+  },
+  {
+    "OrderDetails": {
+      "Id": 0,
+      "Name": "Nikolay Syryaev",
+      "Phone": null,
+      "Email": null,
+      "Address": null,
+      "Delivery": 0,
+      "DeliveryDate": "0001-01-01T00:00:00",
+      "Pay": 0,
+      "Comment": null
+    },
+    "Cart": {
+      "Id": 0,
+      "UserId": "edfd49a1-333c-4a6d-a157-74b27baa0e70",
+      "Items": [
+        {
+          "Product": {
+            "Id": 2,
+            "Name": "Телевизор Samsung QE43Q60BAU",
+            "Cost": 39999.0,
+            "Description": "Телевизор Samsung QE43Q60BAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки.",
+            "ImagePath": "tv_Samsung_QE43Q60BAU_1.jpg"
+          },
+          "Quantity": 4
+        }
+      ]
+    },
+    "Id": 0
   }
 ]
