@@ -31,14 +31,14 @@ namespace OnlineShopWebApp.Storages
         public void Add(int productId)
         {
             var product = productStorage.TryGetById(productId);
-            CheckExistProduct(product);
+            CheckNullProduct(product);
             products.Add(product);
         }
 
         public void Delete(int productId)
         {
             var product = productStorage.TryGetById(productId);
-            CheckExistProduct(product);
+            CheckNullProduct(product);
             products.Remove(product);
         }
 
@@ -47,7 +47,7 @@ namespace OnlineShopWebApp.Storages
             products.Clear();
         }
 
-        private void CheckExistProduct(Product product)
+        private void CheckNullProduct(Product product)
         {
             if (product == null)
                 throw new Exception("Указанный товар не обнаружен!");

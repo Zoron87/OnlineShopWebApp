@@ -14,8 +14,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Compare
 
         public IViewComponentResult Invoke()
         {
-            var compareProductCount = compareStorage.Amount;
-
+            var compareProductCount = compareStorage?.Amount ?? 0;
             return View("Compare", compareProductCount);
         }
     }
