@@ -30,11 +30,11 @@ namespace OnlineShopWebApp.Storages
 
 			var cartPositon = new CartItem(product, quantity);
 
-			var cart = Get(ShopUser.Id);
+			var cart = Get(User.Id);
 
 			if (cart == null)
 			{
-				cart = new Cart(ShopUser.Id, new List<CartItem>() { cartPositon });
+				cart = new Cart(User.Id, new List<CartItem>() { cartPositon });
 			}
 			else
 			{
@@ -51,7 +51,7 @@ namespace OnlineShopWebApp.Storages
 
 		public void DeleteItem(int productId)
 		{
-			var cart = Get(ShopUser.Id);
+			var cart = Get(User.Id);
 
 			var cartItemForRemove = cart?.Items?.FirstOrDefault(cartItem => cartItem.Product.Id == productId);
 
@@ -62,7 +62,7 @@ namespace OnlineShopWebApp.Storages
 
 		public void Increase(int productId, int quantity = 1)
 		{
-			var cart = Get(ShopUser.Id);
+			var cart = Get(User.Id);
 
 			var cartItem = cart?.Items?.FirstOrDefault(p => p.Product.Id == productId);
 
@@ -73,7 +73,7 @@ namespace OnlineShopWebApp.Storages
 
 		public void Reduce(int productId, int quantity = 1)
 		{
-			var cart = Get(ShopUser.Id);
+			var cart = Get(User.Id);
 
 			var cartItem = cart?.Items?.FirstOrDefault(p => p.Product.Id == productId);
 
