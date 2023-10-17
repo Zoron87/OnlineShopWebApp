@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Interfaces
 {
 	public interface IFavouriteStorage
 	{
-		public int Amount { get; }
+		int Amount { get; }
 		List<Product> GetAll();
 		void Add(int productId);
 		void Delete(int productId);
