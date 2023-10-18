@@ -58,7 +58,7 @@
                 <div class="col-sm-6 mt-2 mt-md-0">
                     <form action="">
                         <div class="input-group">
-                            <input type="text" class="form-control" name="s" placeholder="Search..."
+                            <input type="text" class="form-control" name="search" placeholder="Search..."
                                    aria-label="Search..." aria-describedby="button-search">
                             <button class="btn btn-outline-primary" type="submit" id="button-search">
                                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -92,24 +92,24 @@
                             <a class="nav-link" aria-current="page" asp-controller="Home" asp-action="Index">Главная</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            <a asp-controller="Home" asp-action="Index" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
                                aria-expanded="false" data-bs-auto-close="outside">Каталог</a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="category.html">Телефоны</a>
+                                    <a class="dropdown-item" href="#">Телефоны</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="category.html">Бытовая техника</a>
+                                    <a class="dropdown-item" href="#">Бытовая техника</a>
                                 </li>
                                 <li class="nav-item dropend">
                                     <a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown"
                                        data-bs-auto-close="outside">Компьютеры</a>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
-                                            <a class="dropdown-item" href="category.html">Ноутбуки</a>
+                                            <a class="dropdown-item" href="#">Ноутбуки</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="category.html">Аксессуары</a>
+                                            <a class="dropdown-item" href="#">Аксессуары</a>
                                         </li>
                                     </ul>
                                 </li>

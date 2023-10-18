@@ -29,7 +29,6 @@ namespace OnlineShopWebApp.Storages
 				throw new Exception("Указанный товар не обнаружен");
 
 			var cartPositon = new CartItem(product, quantity);
-
 			var cart = Get(ShopUser.Id);
 
 			if (cart == null)
@@ -39,7 +38,6 @@ namespace OnlineShopWebApp.Storages
 			else
 			{
 				var checkSameProduct = cart?.Items?.FirstOrDefault(cartItem => cartItem.Product.Id == product.Id);
-
 				if (checkSameProduct != null)
 					checkSameProduct.Quantity += quantity;
 				else
@@ -52,31 +50,23 @@ namespace OnlineShopWebApp.Storages
 		public void DeleteItem(int productId)
 		{
 			var cart = Get(ShopUser.Id);
-
 			var cartItemForRemove = cart?.Items?.FirstOrDefault(cartItem => cartItem.Product.Id == productId);
-
 			CheckNullItem(cartItemForRemove);
-
 			cart.Items.Remove(cartItemForRemove);
 		}
 
 		public void Increase(int productId, int quantity = 1)
 		{
 			var cart = Get(ShopUser.Id);
-
 			var cartItem = cart?.Items?.FirstOrDefault(p => p.Product.Id == productId);
-
 			CheckNullItem(cartItem);
-
 			cartItem.Quantity += quantity;
 		}
 
 		public void Reduce(int productId, int quantity = 1)
 		{
 			var cart = Get(ShopUser.Id);
-
 			var cartItem = cart?.Items?.FirstOrDefault(p => p.Product.Id == productId);
-
 			CheckNullItem(cartItem);
 
 			if (cartItem.Quantity - quantity <= 0)

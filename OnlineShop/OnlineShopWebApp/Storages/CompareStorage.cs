@@ -11,10 +11,10 @@ namespace OnlineShopWebApp.Storages
 		private readonly IProductStorage productStorage;
 		private List<Compare> compares = new List<Compare>();
 
-		public CompareStorage(IProductStorage productStorage)
-		{
-			this.productStorage = productStorage;
-		}
+        public CompareStorage(IProductStorage productStorage)
+        {
+            this.productStorage = productStorage;
+        }
 
 		public Compare Get(Guid userId)
 		{
@@ -53,10 +53,10 @@ namespace OnlineShopWebApp.Storages
 			compare?.Products?.Clear();
 		}
 
-		private void CheckExistProduct(Product product)
-		{
-			if (product == null)
-				throw new Exception("Указанный товар не обнаружен!");
-		}
-	}
+        private void CheckNullProduct(Product product)
+        {
+            if (product == null)
+                throw new Exception("Указанный товар не обнаружен!");
+        }
+    }
 }

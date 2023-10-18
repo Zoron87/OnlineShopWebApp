@@ -7,7 +7,7 @@
 @if (Model == null || Model.Products.Count == 0)
 {
     <h3> Список избранных товаров пуст!</h3>
-    <p><a href="/">Вернуться на главную страницу</a></p>
+    <p><a asp-controller="Home" asp-action="Index">Вернуться на главную страницу</a></p>
 }
 else
 {
@@ -16,8 +16,8 @@ else
             <section class="featured-products px-lg-3">
                 <div class="container-fluid">
                     <div class="row">
-                        <a href="/favourite/clear">Очистить список</a>
-                        @foreach (var item in Model.Products)
+                        <a asp-controller="Favourite" asp-action="Clear">Очистить список</a>
+                        @foreach (var product in Model.Products)
                         {
                             <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
                                 <div class="product-card">
