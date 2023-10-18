@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult Index()
         {
-            var cart = cartStorage.Get(ShopUser.Id);
+            var cart = cartStorage.Get(Models.ShopUser.Id);
             return View(cart);
         }
 
