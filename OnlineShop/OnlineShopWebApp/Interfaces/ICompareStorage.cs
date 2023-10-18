@@ -1,14 +1,13 @@
 ﻿using OnlineShopWebApp.Models;
-using System.Collections.Generic;
+using System;
 
 namespace OnlineShopWebApp.Interfaces
 {
     public interface ICompareStorage
     {
-        public int Amount{ get; }
-        List<Product> GetAll();
+        Compare Get(Guid userId);
         void Add(int productId);
         void Delete(int productId);
-        void Clear();
+        void Clear(Guid userId);
     }
 }

@@ -2,53 +2,55 @@
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OnlineShopWebApp.Storages
 {
 	public class CompareStorage : ICompareStorage
 	{
 		private readonly IProductStorage productStorage;
-		private List<Product> products = new List<Product>();
+		private List<Compare> compares = new List<Compare>();
 
 		public CompareStorage(IProductStorage productStorage)
 		{
 			this.productStorage = productStorage;
 		}
 
-		public int Amount
+		public Compare Get(Guid userId)
 		{
-			get
-			{
-				return products.Count;
-			}
-		}
-
-		public List<Product> GetAll()
-		{
-			return products;
+			return compares.FirstOrDefault(c => c.UserId == userId);
 		}
 
 		public void Add(int productId)
 		{
 			var product = productStorage.TryGetById(productId);
 
-			CheckExistProduct(product);
+            CheckExistProduct(product);
 
-			products.Add(product);
+            var compare = Get(ShopUser.Id);
+
+			if (compare == null)
+				compare = new Compare(ShopUser.Id, new List<Product> { product });
+			else
+				compare.Products.Add(product);
+
+			compares.Add(compare);
 		}
 
 		public void Delete(int productId)
 		{
-			var product = productStorage.TryGetById(productId);
+			var compare = Get(ShopUser.Id);
+			var compareItem = compare?.Products?.FirstOrDefault(p => p.Id == productId);
 
-			CheckExistProduct(product);
-
-			products.Remove(product);
+			if (compareItem != null)
+				compare?.Products?.Remove(compareItem);
 		}
 
-		public void Clear()
+		public void Clear(Guid userId)
 		{
-			products.Clear();
+			var compare = Get(userId);
+
+			compare?.Products?.Clear();
 		}
 
 		private void CheckExistProduct(Product product)

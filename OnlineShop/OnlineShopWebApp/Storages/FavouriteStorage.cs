@@ -10,7 +10,6 @@ namespace OnlineShopWebApp.Storages
 	{
 		private readonly IProductStorage productStorage;
 		private readonly List<Favourite> favourites = new List<Favourite>();
-		//private List<Product> favouriteProducts = new List<Product>();
 
 		public FavouriteStorage(IProductStorage productStorage)
 		{
@@ -40,9 +39,9 @@ namespace OnlineShopWebApp.Storages
 
 		public void Clear(Guid userId)
 		{
-            //favourites.Products.Clear();
             var favourite = Get(ShopUser.Id);
-            favourite.Products.Clear();
+
+			favourite?.Products?.Clear();
 		}
 
 		public void Delete(int productId)
@@ -51,13 +50,7 @@ namespace OnlineShopWebApp.Storages
 			var favouriteItem = favourite?.Products?.FirstOrDefault(p => p.Id == productId);
 
 			if (favouriteItem != null)
-				favourite.Products.Remove(favouriteItem);
-				//favourite.Products.Remove(product);
+				favourite?.Products?.Remove(favouriteItem);
 		}
-
-		//public List<Favourite> GetAll()
-		//{
-		//	return favourites;
-		//}
 	}
 }

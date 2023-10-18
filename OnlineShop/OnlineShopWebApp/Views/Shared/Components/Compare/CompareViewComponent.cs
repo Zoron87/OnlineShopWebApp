@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Compare
 {
@@ -14,8 +15,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Compare
 
         public IViewComponentResult Invoke()
         {
-            var compareProductCount = compareStorage.Amount;
-
+            var compareProductCount = compareStorage?.Get(ShopUser.Id)?.Amount;
             return View("Compare", compareProductCount);
         }
     }

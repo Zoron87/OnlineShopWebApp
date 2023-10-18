@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -13,7 +14,7 @@ namespace OnlineShopWebApp.Controllers
         }
         public ActionResult Index()
         {
-            var products = compareStorage.GetAll();
+            var products = compareStorage.Get(ShopUser.Id);
             return View(products);
         }
 
@@ -26,7 +27,7 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult Clear()
         {
-            compareStorage.Clear();
+            compareStorage.Clear(ShopUser.Id);
 
             return RedirectToAction("Index");
         }

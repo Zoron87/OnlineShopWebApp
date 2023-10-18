@@ -16,7 +16,6 @@ namespace OnlineShopWebApp.Controllers
 		{
 			var products = productStorage.GetAll();
 
-			//return products != null ? View(products) : View("Error");
 			if (products != null)
 				return View(products);
 

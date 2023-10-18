@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -12,16 +13,10 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult Authorization(User user) 
-        //{
-        //    return userStorage.Login(user) ? View("SuccessAuthorization") : View("Error");
-        //}
-
-        //[HttpPost]
-        //public ActionResult Registration(User user)
-        //{
-        //    return userStorage.Registration(user) ? View("SuccessRegistration") : View("Error");
-        //}
+        [HttpPost]
+        public ActionResult Login(string email, string password, bool isRememberMe)
+        {
+            return View("SuccessAuthorization");
+        }
     }
 }

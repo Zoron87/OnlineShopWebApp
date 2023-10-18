@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
-using System;
 
 namespace OnlineShopWebApp.Controllers
 {
-	public class OrderController : Controller
+    public class OrderController : Controller
 	{
 		private readonly IOrderStorage orderStorage;
 		private readonly ICartStorage cartStorage;
@@ -38,9 +37,7 @@ namespace OnlineShopWebApp.Controllers
 			if (cart != null && orderDetails != null)
 			{
 				var order = new Order(orderDetails, cart);
-
 				orderStorage.Add(order);
-
 				cart.Items.Clear();
 
 				return View("ThankYou");
