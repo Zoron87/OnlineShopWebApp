@@ -25,7 +25,8 @@ namespace OnlineShopWebApp.Storages
 		{
 			var product = productStorage.TryGetById(productId);
 
-            CheckExistProduct(product);
+            if (product == null)
+                throw new Exception("Указанный товар не обнаружен!");
 
             var compare = Get(ShopUser.Id);
 
@@ -52,11 +53,5 @@ namespace OnlineShopWebApp.Storages
 
 			compare?.Products?.Clear();
 		}
-
-        private void CheckNullProduct(Product product)
-        {
-            if (product == null)
-                throw new Exception("Указанный товар не обнаружен!");
-        }
     }
 }

@@ -17,7 +17,7 @@ else
                 <div class="container-fluid">
                     <div class="row">
                         <a asp-controller="Favourite" asp-action="Clear">Очистить список</a>
-                        @foreach (var product in Model.Products)
+                        @foreach (var item in Model.Products)
                         {
                             <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
                                 <div class="product-card">
