@@ -11,6 +11,6 @@ namespace OnlineShopWebApp.Interfaces
 		Cart TryGetById(Guid userGuid);
 		void Increase(int productId, int quantity = 1);
 		void Reduce(int productId, int quantity = 1);
-		void Clear();
+		void Clear(Guid userId);
 	}
 }

@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult Index()
         {
-            var cart = cartStorage.Get(Models.User.Id);
+            var cart = cartStorage.Get(Models.ShopUser.Id);
             return View(cart);
         }
 
@@ -52,7 +52,7 @@ namespace OnlineShopWebApp.Controllers
 
         public IActionResult Clear()
         {
-            cartStorage.Clear();
+            cartStorage.Clear(ShopUser.Id);
             return RedirectToAction("Index");
         }
 

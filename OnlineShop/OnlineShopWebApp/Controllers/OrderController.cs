@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -32,7 +33,7 @@ namespace OnlineShopWebApp.Controllers
 		[HttpPost]
 		public IActionResult Index(OrderDetails orderDetails)
 		{
-			var cart = cartStorage.Get(Models.User.Id);
+			var cart = cartStorage.Get(ShopUser.Id);
 
 			if (cart != null && orderDetails != null)
 			{

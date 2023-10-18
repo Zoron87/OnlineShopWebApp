@@ -10,7 +10,7 @@ namespace OnlineShopWebApp.Storages
 			new Product("Ноутбук игровой MSI Katana 17 B12VEK-482XRU", 99999, "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.", "notebook_MSI_Katana_17_B12VEK-482XRU_1.jpg"),
 			new Product("Телевизор Samsung QE43Q60BAU", 39999, "Телевизор Samsung QE43Q60BAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки.", "tv_Samsung_QE43Q60BAU_1.jpg"),
 			new Product("Холодильник Midea MDRB499FGF01IM", 39999, "Холодильник Midea MDRB499FGF01IM, белый оснащен холодильной камерой объемом 250 л и нижней морозильной камерой объемом 76 л.", "Refrigerator_Midea_MDRB499FGF01IM_1.jpg"),
-			new Product("Робот-пылесос Dreame Bot Robot Vacuum and Mop F9 Pro White", 18999, "Робот-пылесос Dreame Bot Robot Vacuum and Mop D9 Pro White выполняет сухую и влажную уборку и способен обработать до 160 м² площади без подзарядки", "Robot_Vacuum_Cleaner_Dreame_Bot_Robot_Vacuum_and_Mop_F9_Pro_1.jpg"),
+			/*new Product("Робот-пылесос Dreame Bot Robot Vacuum and Mop F9 Pro White", 18999, "Робот-пылесос Dreame Bot Robot Vacuum and Mop D9 Pro White выполняет сухую и влажную уборку и способен обработать до 160 м² площади без подзарядки", "Robot_Vacuum_Cleaner_Dreame_Bot_Robot_Vacuum_and_Mop_F9_Pro_1.jpg"),
 			new Product("Электрический духовой шкаф Gorenje BO6737E02X", 29999, "Gorenje BO6737E02X – электрический духовой шкаф с 77-литровой камерой BigSpace. За счёт внушительного объёма внутреннего пространства и его особой форме HomeMade вам будут по плечу самые смелые кулинарные эксперименты.", "Electric_oven_Gorenje_BO6737E02X_1.jpg"),
 			new Product("Сплит-система Haier HSU-07HRM103/R3", 25999, "Сплит-система Haier HSU-07HRM103/R3 в корпусе белого цвета заправлена хладагентом R 32. Устройство работает на охлаждение и обогрев. Модель рекомендована для установки в помещениях площадью до 20 м². В комплект входит пульт дистанционного управления с дисплеем.", "Air_conditioner_Haier_HSU-07HRM103_1.jpg"),
 			new Product("Морозильная камера Haier HF-82WAA", 19999, "Компактная морозильная камера Haier HF-82WAA – хороший выбор для тех, кто хочет хранить дома или на даче запас замороженных продуктов и полуфабрикатов, а также делать домашние заготовки.", "Freezer_Haier_HF-82WAA_1.jpg"),
@@ -29,6 +29,7 @@ namespace OnlineShopWebApp.Storages
 			new Product("Смартфон Xiaomi Redmi Note 12S 256GB Onyx Black", 20999, "Смартфон Xiaomi Redmi Note 12S Onyx Black оснащен дисплеем диагональю 6,43 дюйма, выполненным по технологии AMOLED.", "Xiaomi_Redmi_Note_12S_256GB_Onyx_Black_smartphone_1.jpg"),
 			new Product("Смартфон Samsung Galaxy Z Fold5 512GB Phantom Black (SM-F946B)", 199999, "Складной смартфон Samsung Galaxy Z Fold5 Phantom Black (SM-F946B) оснащен 7,6-дюймовым экраном разрешением 2176x1812 пикселей, обладающим пиковой яркостью 1750 нит, что позволит смотреть кино или играть даже под солнечными лучами — изображение не поблекнет.", "Samsung_Galaxy_Z_Fold5_512GB_Phantom_Black_Smartphone_(SM-F946B)_1.jpg"),
 			new Product("Телевизор TCL 55C745", 74999, "Телевизор TCL 55C745 обладает габаритами 77х122х32 см. Вес устройства — 15 кг, без подставки — 13,5 кг.", "TV_TCL_55C745_1.jpg")
+			*/
 		};
 
 		public static List<Product> GetAll()

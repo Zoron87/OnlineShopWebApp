@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -13,7 +14,7 @@ namespace OnlineShopWebApp.Controllers
 		}
 		public ActionResult Index()
 		{
-			var favouriteProducts = favouriteStorage.GetAll();
+			var favouriteProducts = favouriteStorage.Get(ShopUser.Id);
 			return View(favouriteProducts);
 		}
 
@@ -31,7 +32,7 @@ namespace OnlineShopWebApp.Controllers
 
 		public ActionResult Clear()
 		{
-			favouriteStorage.Clear();
+			favouriteStorage.Clear(ShopUser.Id);
 			return RedirectToAction("Index");
 		}
 	}

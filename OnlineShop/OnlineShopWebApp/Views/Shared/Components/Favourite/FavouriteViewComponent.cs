@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Favourite
 {
@@ -14,7 +15,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Favourite
 
         public IViewComponentResult Invoke()
         {
-            var favouriteProductCount = favouriteStorage.Amount;
+            var favouriteProductCount = favouriteStorage?.Get(ShopUser.Id)?.Amount;
             return View("Favourite", favouriteProductCount);
         }
 

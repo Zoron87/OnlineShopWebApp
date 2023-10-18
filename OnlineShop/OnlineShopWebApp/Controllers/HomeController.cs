@@ -7,7 +7,7 @@ namespace OnlineShopWebApp.Controllers
 	{
 		private readonly IProductStorage productStorage;
 
-		public HomeController(IProductStorage productStorage, ICartStorage cartStorage, IFavouriteStorage favouriteStorage)
+		public HomeController(IProductStorage productStorage)
 		{
 			this.productStorage = productStorage;
 		}
@@ -16,7 +16,11 @@ namespace OnlineShopWebApp.Controllers
 		{
 			var products = productStorage.GetAll();
 
-			return products != null ? View(products) : View("Error");
+			//return products != null ? View(products) : View("Error");
+			if (products != null)
+				return View(products);
+
+			return View("Error");
 		}
 	}
 }

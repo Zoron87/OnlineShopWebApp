@@ -1,10 +1,10 @@
-﻿@model List<Product>;
+﻿@model Favourite;
 
 @{
     ViewData["Title"] = "Favourite Page";
 }
 
-@if (Model == null || Model.Count == 0)
+@if (Model == null || Model.Products.Count == 0)
 {
     <h3> Список избранных товаров пуст!</h3>
     <p><a href="/">Вернуться на главную страницу</a></p>
@@ -17,7 +17,7 @@ else
                 <div class="container-fluid">
                     <div class="row">
                         <a href="/favourite/clear">Очистить список</a>
-                        @foreach (var product in Model)
+                        @foreach (var item in Model.Products)
                         {
                             <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
                                 <div class="product-card">
@@ -26,22 +26,22 @@ else
                                         <div class="offer-new">New</div>
                                     </div>
                                     <div class="product-thumb">
-                                        <a asp-controller="Product" asp-action="Index" asp-route-productid="@product.Id"><img src="~/img/products/@product.ImagePath" alt=""></a>
+                                        <a asp-controller="Product" asp-action="Index" asp-route-productid="@item.Id"><img src="~/img/products/@item.ImagePath" alt=""></a>
                                     </div>
                                     <div class="product-details">
                                         <h4>
-                                            <a asp-controller="Product" asp-action="Index" asp-route-productid="@product.Id">@product.Name</a>
+                                            <a asp-controller="Product" asp-action="Index" asp-route-productid="@item.Id">@item.Name</a>
                                         </h4>
-                                        <p class="product-excerpt">@product.Description</p>
+                                        <p class="product-excerpt">@item.Description</p>
                                         <div class="product-bottom-details d-flex justify-content-between">
-                                            <div class="product-price">@product.Cost</div>
+                                            <div class="product-price">@item.Cost</div>
                                             <div class="product-links">
-                                                <a asp-controller="Cart" asp-action="Add" asp-route-productid="@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                                <a asp-controller="Cart" asp-action="Add" asp-route-productid="@item.Id" class="btn btn-outline-secondary add-to-cart">
                                                     <i class="fa-solid fa-cart-shopping"></i>
                                                 </a>
                                             </div>
                                             <div class="product-links">
-                                                <a asp-controller="Favourite" asp-action="Delete" asp-route-productid="@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                                <a asp-controller="Favourite" asp-action="Delete" asp-route-productid="@item.Id" class="btn btn-outline-secondary add-to-cart">
                                                     <i class="fa-solid fa-heart-circle-minus"></i>
                                                 </a>
                                             </div>
