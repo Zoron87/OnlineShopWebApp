@@ -83,7 +83,8 @@ namespace OnlineShopWebApp.Storages
 		public void Clear(Guid userId)
 		{
 			var cart = Get(userId);
-			carts.Remove(cart);
+			if (cart != null)
+				carts.Remove(cart);
 		}
 
 		private void CheckNullItem(CartItem cartItem)
