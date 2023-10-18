@@ -21,16 +21,16 @@ namespace OnlineShopWebApp.Storages
 			return favourites.FirstOrDefault(f => f.UserId == userId);
 		}
 
-		public void Add(int productId)
+		public void Add(Guid userId, int productId)
 		{
 			var product = productStorage.TryGetById(productId);
 
 			if (product == null)
 				throw new Exception("Указанный товар не обнаружен!");
 
-			var favourite = Get(ShopUser.Id);
+			var favourite = Get(userId);
 			if (favourite == null)
-                favourite = new Favourite(ShopUser.Id, new List<Product> { product});
+                favourite = new Favourite(userId, new List<Product> { product});
 			else
 				favourite.Products.Add(product);
 
@@ -39,14 +39,14 @@ namespace OnlineShopWebApp.Storages
 
 		public void Clear(Guid userId)
 		{
-            var favourite = Get(ShopUser.Id);
+            var favourite = Get(userId);
 
 			favourite?.Products?.Clear();
 		}
 
-		public void Delete(int productId)
+		public void Delete(Guid userId, int productId)
 		{
-            var favourite = Get(ShopUser.Id);
+            var favourite = Get(userId);
 			var favouriteItem = favourite?.Products?.FirstOrDefault(p => p.Id == productId);
 
 			if (favouriteItem != null)

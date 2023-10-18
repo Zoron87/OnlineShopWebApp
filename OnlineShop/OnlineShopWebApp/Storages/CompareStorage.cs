@@ -21,26 +21,26 @@ namespace OnlineShopWebApp.Storages
 			return compares.FirstOrDefault(c => c.UserId == userId);
 		}
 
-		public void Add(int productId)
+		public void Add(Guid userId, int productId)
 		{
 			var product = productStorage.TryGetById(productId);
 
             if (product == null)
                 throw new Exception("Указанный товар не обнаружен!");
 
-            var compare = Get(ShopUser.Id);
+            var compare = Get(userId);
 
 			if (compare == null)
-				compare = new Compare(ShopUser.Id, new List<Product> { product });
+				compare = new Compare(userId, new List<Product> { product });
 			else
 				compare.Products.Add(product);
 
 			compares.Add(compare);
 		}
 
-		public void Delete(int productId)
+		public void Delete(Guid userId, int productId)
 		{
-			var compare = Get(ShopUser.Id);
+			var compare = Get(userId);
 			var compareItem = compare?.Products?.FirstOrDefault(p => p.Id == productId);
 
 			if (compareItem != null)

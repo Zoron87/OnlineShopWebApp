@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
-using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -14,9 +11,9 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string email, string password, bool isRememberMe)
+        public ActionResult Login(Authorization authorizationData)
         {
-            return View("SuccessAuthorization");
+            return View("Success");
         }
     }
 }

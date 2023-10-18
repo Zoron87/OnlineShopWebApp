@@ -20,13 +20,13 @@ namespace OnlineShopWebApp.Controllers
 
 		public ActionResult Add(int productId)
 		{
-			favouriteStorage.Add(productId);
+			favouriteStorage.Add(ShopUser.Id, productId);
 			return RedirectToAction("Index");
 		}
 
 		public ActionResult Delete(int productId)
 		{
-			favouriteStorage.Delete(productId);
+			favouriteStorage.Delete(ShopUser.Id, productId);
 			return RedirectToAction("Index");
 		}
 

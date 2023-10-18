@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult Add(int productId)
         {
-            compareStorage.Add(productId);
+            compareStorage.Add(ShopUser.Id, productId);
 
             return RedirectToAction("Index");
         }
@@ -34,7 +34,7 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult Delete(int productId)
         {
-            compareStorage.Delete(productId);
+            compareStorage.Delete(ShopUser.Id, productId);
 
             return RedirectToAction("Index");
         }

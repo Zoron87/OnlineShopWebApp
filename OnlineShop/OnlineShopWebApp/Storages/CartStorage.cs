@@ -21,7 +21,7 @@ namespace OnlineShopWebApp.Storages
 			return TryGetById(userGuid);
 		}
 
-		public void AddItem(int productId, int quantity = 1)
+		public void AddItem(Guid userId, int productId, int quantity = 1)
 		{
 			var product = productStorage.TryGetById(productId);
 
@@ -29,11 +29,11 @@ namespace OnlineShopWebApp.Storages
 				throw new Exception("Указанный товар не обнаружен");
 
 			var cartPositon = new CartItem(product, quantity);
-			var cart = Get(ShopUser.Id);
+			var cart = Get(userId);
 
 			if (cart == null)
 			{
-				cart = new Cart(ShopUser.Id, new List<CartItem>() { cartPositon });
+				cart = new Cart(userId, new List<CartItem>() { cartPositon });
 			}
 			else
 			{
@@ -47,30 +47,30 @@ namespace OnlineShopWebApp.Storages
 			carts.Add(cart);
 		}
 
-		public void DeleteItem(int productId)
+		public void DeleteItem(Guid userId, int productId)
 		{
-			var cart = Get(ShopUser.Id);
+			var cart = Get(userId);
 			var cartItemForRemove = cart?.Items?.FirstOrDefault(cartItem => cartItem.Product.Id == productId);
 			CheckNullItem(cartItemForRemove);
 			cart.Items.Remove(cartItemForRemove);
 		}
 
-		public void Increase(int productId, int quantity = 1)
+		public void Increase(Guid userId, int productId, int quantity = 1)
 		{
-			var cart = Get(ShopUser.Id);
+			var cart = Get(userId);
 			var cartItem = cart?.Items?.FirstOrDefault(p => p.Product.Id == productId);
 			CheckNullItem(cartItem);
 			cartItem.Quantity += quantity;
 		}
 
-		public void Reduce(int productId, int quantity = 1)
+		public void Reduce(Guid userId, int productId, int quantity = 1)
 		{
-			var cart = Get(ShopUser.Id);
+			var cart = Get(userId);
 			var cartItem = cart?.Items?.FirstOrDefault(p => p.Product.Id == productId);
 			CheckNullItem(cartItem);
 
 			if (cartItem.Quantity - quantity <= 0)
-				DeleteItem(productId);
+				DeleteItem(userId, productId);
 			else
 				cartItem.Quantity -= quantity;
 		}

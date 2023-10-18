@@ -36,7 +36,6 @@ namespace OnlineShopWebApp.Controllers
 
 			if (cart != null && orderDetails != null)
 			{
-				//var order = new Order(orderDetails, cart);
 				orderStorage.Add(orderDetails, cart);
                 cart.Items.Clear();
 

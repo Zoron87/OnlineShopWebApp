@@ -6,11 +6,11 @@ namespace OnlineShopWebApp.Interfaces
     public interface ICartStorage
     {
         Cart Get(Guid userGuid);
-        void AddItem(int productId, int quantity = 1);
-        void DeleteItem(int productId);
+        void AddItem(Guid userId, int productId, int quantity = 1);
+        void DeleteItem(Guid userId, int productId);
         Cart TryGetById(Guid userGuid);
-        void Increase(int productId, int quantity = 1);
-        void Reduce(int productId, int quantity = 1);
+        void Increase(Guid userId, int productId, int quantity = 1);
+        void Reduce(Guid userId, int productId, int quantity = 1);
         void Clear(Guid userId);
     }
 }
