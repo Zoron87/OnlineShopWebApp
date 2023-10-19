@@ -10,7 +10,7 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        public ActionResult Registration(Authorization authorizationData)
+        public ActionResult Registration(Login authorizationData)
         {
             return View("Registration");
         }
@@ -22,7 +22,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult PostRegistration(Authorization authorizationData)
+        public ActionResult PostRegistration(Login authorizationData)
         {
             return View("Success");
         }
