@@ -10,21 +10,21 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
-        public ActionResult Registration(Login authorizationData)
+        public ActionResult Registration()
         {
-            return View("Registration");
+            return View();
         }
 
         [HttpPost]
         public ActionResult Login(Login loginInfo)
         {
-            return View("Success");
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
-        public ActionResult PostRegistration(Login authorizationData)
+        public ActionResult Registration(Register registerInfo)
         {
-            return View("Success");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
