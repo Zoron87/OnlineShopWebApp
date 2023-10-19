@@ -5,10 +5,10 @@ namespace OnlineShopWebApp.Providers
 {
     public static class Helpers<T>
     {
-        public static void CheckNullItem (T item)
+        public static void CheckNullItem(T item, string message)
         {
             if (item == null)
-                throw new Exception("Указанный товар не обнаружен!");
+                throw new Exception($"{message}");
         }
     }
 }
