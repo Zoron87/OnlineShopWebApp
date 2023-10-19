@@ -38,7 +38,6 @@ namespace OnlineShopWebApp.Storages
 				{
 					switch (operation)
 					{
-						default:
 						case "plus":
 							checkSameProduct.Quantity += quantity;
 							break;

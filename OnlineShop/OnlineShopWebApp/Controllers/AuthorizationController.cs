@@ -11,7 +11,7 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Authorization authorizationData)
+        public ActionResult Login(Login loginInfo)
         {
             return View("Success");
         }
