@@ -1,20 +1,20 @@
 ﻿<div class="tab-content">
     <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-        @using (Html.BeginForm("PostRegistration", "Authorization", FormMethod.Post))
+        @using (Html.BeginForm("Registration", "Authorization", FormMethod.Post))
         {
             <div class="form-outline mb-4">
                 <input type="email" name="email" class="form-control" />
-                <label class="form-label" for="loginName">Email</label>
+                <label class="form-label">Email</label>
             </div>
 
             <div class="form-outline mb-4">
                 <input name="password" type="password" class="form-control" />
-                <label class="form-label" for="loginPassword">Пароль</label>
+                <label class="form-label">Пароль</label>
             </div>
 
             <div class="form-outline mb-4">
                 <input name="confirmPassword" type="password" class="form-control" />
-                <label class="form-label" for="loginPassword">Подтверждение пароля</label>
+                <label class="form-label">Подтверждение пароля</label>
             </div>
 
             <div class="row mb-4">

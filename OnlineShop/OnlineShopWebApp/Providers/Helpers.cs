@@ -8,7 +8,7 @@ namespace OnlineShopWebApp.Providers
         public static void CheckNullItem (T item, string message)
         {
             if (item == null)
-                throw new Exception($"{message}");
+                throw new Exception(message);
         }
     }
 }
