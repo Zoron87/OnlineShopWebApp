@@ -1,5 +1,6 @@
 ﻿using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,63 +17,53 @@ namespace OnlineShopWebApp.Storages
 			this.productStorage = productStorage;
 		}
 
-		public Cart Get(Guid userGuid)
-		{
-			return TryGetById(userGuid);
-		}
-
-		public void AddItem(Guid userId, int productId, int quantity = 1)
+		public void AddItem(Guid userId, int productId, string operation, int quantity = 1)
 		{
 			var product = productStorage.TryGetById(productId);
 
-			if (product == null)
-				throw new Exception("Указанный товар не обнаружен");
+			Helpers<Product>.CheckNullItem(product);
 
 			var cartPositon = new CartItem(product, quantity);
-			var cart = Get(userId);
+			var cart = TryGetById(userId);
 
 			if (cart == null)
 			{
 				cart = new Cart(userId, new List<CartItem>() { cartPositon });
-			}
+                carts.Add(cart);
+            }
 			else
 			{
 				var checkSameProduct = cart?.Items?.FirstOrDefault(cartItem => cartItem.Product.Id == product.Id);
 				if (checkSameProduct != null)
-					checkSameProduct.Quantity += quantity;
+				{
+					switch (operation)
+					{
+						default:
+						case "plus":
+							checkSameProduct.Quantity += quantity;
+							break;
+						case "minus":
+							if (checkSameProduct.Quantity - quantity <= 0)
+								DeleteItem(userId, productId);
+							else
+								checkSameProduct.Quantity -= quantity;
+							break;
+					}
+				}
 				else
+				{
 					cart.Items.Add(cartPositon);
-			}
-
-			carts.Add(cart);
+                   
+                }
+            }
 		}
 
 		public void DeleteItem(Guid userId, int productId)
 		{
-			var cart = Get(userId);
+			var cart = TryGetById(userId);
 			var cartItemForRemove = cart?.Items?.FirstOrDefault(cartItem => cartItem.Product.Id == productId);
-			CheckNullItem(cartItemForRemove);
+            Helpers<CartItem>.CheckNullItem(cartItemForRemove);
 			cart.Items.Remove(cartItemForRemove);
-		}
-
-		public void Increase(Guid userId, int productId, int quantity = 1)
-		{
-			var cart = Get(userId);
-			var cartItem = cart?.Items?.FirstOrDefault(p => p.Product.Id == productId);
-			CheckNullItem(cartItem);
-			cartItem.Quantity += quantity;
-		}
-
-		public void Reduce(Guid userId, int productId, int quantity = 1)
-		{
-			var cart = Get(userId);
-			var cartItem = cart?.Items?.FirstOrDefault(p => p.Product.Id == productId);
-			CheckNullItem(cartItem);
-
-			if (cartItem.Quantity - quantity <= 0)
-				DeleteItem(userId, productId);
-			else
-				cartItem.Quantity -= quantity;
 		}
 
 		public Cart TryGetById(Guid userId)
@@ -82,15 +73,9 @@ namespace OnlineShopWebApp.Storages
 
 		public void Clear(Guid userId)
 		{
-			var cart = Get(userId);
+			var cart = TryGetById(userId);
 			if (cart != null)
 				carts.Remove(cart);
-		}
-
-		private void CheckNullItem(CartItem cartItem)
-		{
-			if (cartItem == null)
-				throw new Exception("Указанный товар не обнаружен!");
 		}
 	}
 }

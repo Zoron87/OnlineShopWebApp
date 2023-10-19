@@ -48,7 +48,7 @@
       "Items": [
         {
           "Product": {
-            "Id": 4,
+            "Id": 24,
             "Name": "Робот-пылесос Dreame Bot Robot Vacuum and Mop F9 Pro White",
             "Cost": 18999.0,
             "Description": "Робот-пылесос Dreame Bot Robot Vacuum and Mop D9 Pro White выполняет сухую и влажную уборку и способен обработать до 160 м² площади без подзарядки",
@@ -58,6 +58,47 @@
         }
       ],
       "Amount": 11.0
+    },
+    "Id": 0
+  },
+  {
+    "OrderDetails": {
+      "Id": 0,
+      "Name": "11111",
+      "Phone": null,
+      "Email": null,
+      "Address": null,
+      "Delivery": 0,
+      "DeliveryDate": "2023-10-19T00:00:00",
+      "Pay": 0,
+      "Comment": null
+    },
+    "Cart": {
+      "Id": 0,
+      "UserId": "0facdcd7-89a8-4c82-8eb7-91f5d8171b69",
+      "Items": [
+        {
+          "Product": {
+            "Id": 3,
+            "Name": "Холодильник Midea MDRB499FGF01IM",
+            "Cost": 39999.0,
+            "Description": "Холодильник Midea MDRB499FGF01IM, белый оснащен холодильной камерой объемом 250 л и нижней морозильной камерой объемом 76 л.",
+            "ImagePath": "Refrigerator_Midea_MDRB499FGF01IM_1.jpg"
+          },
+          "Quantity": 1
+        },
+        {
+          "Product": {
+            "Id": 4,
+            "Name": "Робот-пылесос Dreame Bot Robot Vacuum and Mop F9 Pro White",
+            "Cost": 18999.0,
+            "Description": "Робот-пылесос Dreame Bot Robot Vacuum and Mop D9 Pro White выполняет сухую и влажную уборку и способен обработать до 160 м² площади без подзарядки",
+            "ImagePath": "Robot_Vacuum_Cleaner_Dreame_Bot_Robot_Vacuum_and_Mop_F9_Pro_1.jpg"
+          },
+          "Quantity": 5
+        }
+      ],
+      "Amount": 6.0
     },
     "Id": 0
   }

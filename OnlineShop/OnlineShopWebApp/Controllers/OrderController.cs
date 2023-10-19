@@ -32,7 +32,7 @@ namespace OnlineShopWebApp.Controllers
 		[HttpPost]
 		public IActionResult Index(OrderDetails orderDetails)
 		{
-			var cart = cartStorage.Get(ShopUser.Id);
+			var cart = cartStorage.TryGetById(ShopUser.Id);
 
             if (cart != null && orderDetails != null)
             {

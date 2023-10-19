@@ -1,5 +1,6 @@
 ﻿using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace OnlineShopWebApp.Storages
 			this.productStorage = productStorage;
 		}
 
-		public Favourite Get(Guid userId)
+		public Favourite TryGetById(Guid userId)
 		{
 			return favourites.FirstOrDefault(f => f.UserId == userId);
 		}
@@ -25,10 +26,9 @@ namespace OnlineShopWebApp.Storages
 		{
 			var product = productStorage.TryGetById(productId);
 
-			if (product == null)
-				throw new Exception("Указанный товар не обнаружен!");
+            Helpers<Product>.CheckNullItem(product);
 
-			var favourite = Get(userId);
+            var favourite = TryGetById(userId);
 			if (favourite == null)
                 favourite = new Favourite(userId, new List<Product> { product});
 			else
@@ -39,14 +39,14 @@ namespace OnlineShopWebApp.Storages
 
 		public void Clear(Guid userId)
 		{
-            var favourite = Get(userId);
+            var favourite = TryGetById(userId);
 
 			favourite?.Products?.Clear();
 		}
 
 		public void Delete(Guid userId, int productId)
 		{
-            var favourite = Get(userId);
+            var favourite = TryGetById(userId);
 			var favouriteItem = favourite?.Products?.FirstOrDefault(p => p.Id == productId);
 
 			if (favouriteItem != null)

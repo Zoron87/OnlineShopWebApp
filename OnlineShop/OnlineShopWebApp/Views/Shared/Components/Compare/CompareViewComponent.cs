@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Compare
 
         public IViewComponentResult Invoke()
         {
-            var compareProductCount = compareStorage?.Get(ShopUser.Id)?.Amount;
+            var compareProductCount = compareStorage?.TryGetById(ShopUser.Id)?.Amount;
             return View("Compare", compareProductCount);
         }
     }

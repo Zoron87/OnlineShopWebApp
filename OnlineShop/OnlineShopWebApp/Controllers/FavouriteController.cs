@@ -14,7 +14,7 @@ namespace OnlineShopWebApp.Controllers
 		}
 		public ActionResult Index()
 		{
-			var products = favouriteStorage.Get(ShopUser.Id);
+			var products = favouriteStorage.TryGetById(ShopUser.Id);
 			return View(products);
 		}
 

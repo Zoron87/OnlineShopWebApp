@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Favourite
 
         public IViewComponentResult Invoke()
         {
-            var favouriteProductCount = favouriteStorage?.Get(ShopUser.Id)?.Amount;
+            var favouriteProductCount = favouriteStorage?.TryGetById(ShopUser.Id)?.Amount;
             return View("Favourite", favouriteProductCount);
         }
     }

@@ -15,15 +15,15 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult Index()
         {
-            var cart = cartStorage.Get(ShopUser.Id);
+            var cart = cartStorage.TryGetById(ShopUser.Id);
             return View(cart);
         }
 
-        public ActionResult Add(int productId)
+        public ActionResult Add(int productId, string operation="plus")
         {
             if (productId > 0)
             {
-                cartStorage.AddItem(ShopUser.Id, productId);
+                cartStorage.AddItem(ShopUser.Id, productId, operation);
                 return RedirectToAction("Index");
             }
 
@@ -31,11 +31,11 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddItems(int productId, int quantity)
+        public ActionResult AddItems(int productId, string operation, int quantity)
         {
             if (productId > 0)
             {
-                cartStorage.AddItem(ShopUser.Id, productId, quantity);
+                cartStorage.AddItem(ShopUser.Id, productId, operation="plus",  quantity);
                 return RedirectToAction("Index");
             }
 
@@ -56,16 +56,16 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Increase(int productId, int quantity = 1)
-        {
-            cartStorage.Increase(ShopUser.Id, productId, quantity);
-            return RedirectToAction("Index");
-        }
+        //public IActionResult Increase(int productId, string operation, int quantity = 1)
+        //{
+        //    cartStorage.AddItem(ShopUser.Id, productId, operation, quantity);
+        //    return RedirectToAction("Index");
+        //}
 
-        public IActionResult Reduce(int productId, int quantity = 1)
-        {
-            cartStorage.Reduce(ShopUser.Id, productId, quantity);
-            return RedirectToAction("Index");
-        }
+        //public IActionResult Reduce(int productId, int quantity = 1)
+        //{
+        //    cartStorage.Reduce(ShopUser.Id, productId, quantity);
+        //    return RedirectToAction("Index");
+        //}
     }
 }

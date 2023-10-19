@@ -1,5 +1,6 @@
 ﻿using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace OnlineShopWebApp.Storages
             this.productStorage = productStorage;
         }
 
-		public Compare Get(Guid userId)
+		public Compare TryGetById(Guid userId)
 		{
 			return compares.FirstOrDefault(c => c.UserId == userId);
 		}
@@ -25,10 +26,9 @@ namespace OnlineShopWebApp.Storages
 		{
 			var product = productStorage.TryGetById(productId);
 
-            if (product == null)
-                throw new Exception("Указанный товар не обнаружен!");
+            Helpers<Product>.CheckNullItem(product);
 
-            var compare = Get(userId);
+            var compare = TryGetById(userId);
 
 			if (compare == null)
 				compare = new Compare(userId, new List<Product> { product });
@@ -40,7 +40,7 @@ namespace OnlineShopWebApp.Storages
 
 		public void Delete(Guid userId, int productId)
 		{
-			var compare = Get(userId);
+			var compare = TryGetById(userId);
 			var compareItem = compare?.Products?.FirstOrDefault(p => p.Id == productId);
 
 			if (compareItem != null)
@@ -49,7 +49,7 @@ namespace OnlineShopWebApp.Storages
 
 		public void Clear(Guid userId)
 		{
-			var compare = Get(userId);
+			var compare = TryGetById(userId);
 
 			compare?.Products?.Clear();
 		}

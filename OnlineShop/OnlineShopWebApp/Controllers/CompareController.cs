@@ -14,7 +14,7 @@ namespace OnlineShopWebApp.Controllers
         }
         public ActionResult Index()
         {
-            var products = compareStorage.Get(ShopUser.Id);
+            var products = compareStorage.TryGetById(ShopUser.Id);
             return View(products);
         }
 

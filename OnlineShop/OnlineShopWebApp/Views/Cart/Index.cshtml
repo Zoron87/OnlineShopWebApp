@@ -22,9 +22,9 @@ else
 								<td class="product-img-td"><a asp-controller="Product" asp-action="Index" asp-route-productId="@item.Product.Id"><img src="~/img/products/@item.Product.ImagePath" alt="@item.Product.Name"></a></td>
 								<td><a asp-controller="Product" asp-action="Index" asp-route-productId="@item.Product.Id">@item.Product.Name</a></td>
 								<td>@item.Product.Cost р.</td>
-								<td><a asp-controller="Cart" asp-action="Increase" asp-route-productId="@item.Product.Id" asp-route-quantity="1"><i class="fa-solid fa-plus"></i></a></td>
+								<td><a asp-controller="Cart" asp-action="Add" asp-route-productId="@item.Product.Id" asp-route-quantity="1", asp-route-operation="plus"><i class="fa-solid fa-plus"></i></a></td>
 								<td>@item.Quantity</td>
-								<td><a asp-controller="Cart" asp-action="Reduce" asp-route-productId="@item.Product.Id" asp-route-quantity="1"><i class="fa-solid fa-minus"></i></a></td>
+								<td><a asp-controller="Cart" asp-action="Add" asp-route-productId="@item.Product.Id" asp-route-quantity="1" asp-route-operation="minus"><i class="fa-solid fa-minus"></i></a></td>
 								<td><a class="btn btn-danger" style="display:inline;" asp-controller="Cart" asp-action="Delete" asp-route-productId="@item.Product.Id"><i class="fa-solid fa-circle-xmark"></i></a></td>
 							</tr>
 						}
