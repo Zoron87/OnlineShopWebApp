@@ -1,6 +1,6 @@
 ﻿<div class="tab-content">
     <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-        @using (Html.BeginForm("Login", "Authorization", FormMethod.Post))
+        @using (Html.BeginForm("PostRegistration", "Authorization", FormMethod.Post))
         {
             <div class="form-outline mb-4">
                 <input type="email" name="email" class="form-control" />
@@ -12,6 +12,11 @@
                 <label class="form-label" for="loginPassword">Пароль</label>
             </div>
 
+            <div class="form-outline mb-4">
+                <input name="confirmPassword" type="password" class="form-control" />
+                <label class="form-label" for="loginPassword">Подтверждение пароля</label>
+            </div>
+
             <div class="row mb-4">
                 <div class="col-md-6 d-flex justify-content-center">
                     <div class="form-check mb-3 mb-md-0">
@@ -20,10 +25,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block mb-4">Войти</button>
-            <div class="text-center">
-                <p><a asp-controller="Authorization" asp-action="Registration">Регистрация нового пользователя</a></p>
-            </div>
+            <button type="submit" class="btn btn-primary btn-block mb-4">Зарегистрироваться</button>
         }
     </div>
 </div>

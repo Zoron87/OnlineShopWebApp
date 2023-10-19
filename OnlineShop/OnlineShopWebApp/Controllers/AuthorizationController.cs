@@ -10,8 +10,19 @@ namespace OnlineShopWebApp.Controllers
             return View();
         }
 
+        public ActionResult Registration(Authorization authorizationData)
+        {
+            return View("Registration");
+        }
+
         [HttpPost]
         public ActionResult Login(Authorization authorizationData)
+        {
+            return View("Success");
+        }
+
+        [HttpPost]
+        public ActionResult PostRegistration(Authorization authorizationData)
         {
             return View("Success");
         }
