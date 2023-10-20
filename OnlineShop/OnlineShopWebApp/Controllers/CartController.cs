@@ -23,7 +23,7 @@ namespace OnlineShopWebApp.Controllers
         {
             if (productId > 0)
             {
-                cartStorage.AddItem(ShopUser.Id, productId, operation);
+                cartStorage.ChangeItem(ShopUser.Id, productId, operation);
                 return RedirectToAction("Index");
             }
 
@@ -31,11 +31,11 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddItems(int productId, string operation, int quantity)
+        public ActionResult AddItems(int productId, int quantity)
         {
             if (productId > 0)
             {
-                cartStorage.AddItem(ShopUser.Id, productId, operation,  quantity);
+                cartStorage.ChangeItem(ShopUser.Id, productId, "plus", quantity);
                 return RedirectToAction("Index");
             }
 
