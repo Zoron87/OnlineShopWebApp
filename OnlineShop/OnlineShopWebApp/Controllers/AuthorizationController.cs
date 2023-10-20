@@ -5,12 +5,7 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AuthorizationController : Controller
     {
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        public ActionResult Registration()
+        public ActionResult Login()
         {
             return View();
         }
@@ -19,6 +14,11 @@ namespace OnlineShopWebApp.Controllers
         public ActionResult Login(Login loginInfo)
         {
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult Registration()
+        {
+            return View();
         }
 
         [HttpPost]
