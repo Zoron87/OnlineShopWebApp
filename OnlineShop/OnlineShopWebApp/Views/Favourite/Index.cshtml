@@ -36,7 +36,7 @@ else
                                         <div class="product-bottom-details d-flex justify-content-between">
                                             <div class="product-price">@item.Cost</div>
                                             <div class="product-links">
-                                                <a asp-controller="Cart" asp-action="Add" asp-route-productid="@item.Id" class="btn btn-outline-secondary add-to-cart">
+                                                <a asp-controller="Cart" asp-action="Add" asp-route-productid="@item.Id" asp-route-operation="plus" class="btn btn-outline-secondary add-to-cart">
                                                     <i class="fa-solid fa-cart-shopping"></i>
                                                 </a>
                                             </div>
