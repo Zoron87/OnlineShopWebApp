@@ -1,8 +1,5 @@
 ﻿<div style="float: left; margin-right: 56px;">
-    <div><a asp-controller="Administrator" asp-action="GetOrders">Заказы</a></div>
-    <div><a asp-controller="Administrator" asp-action="GetUsers">Пользователи</a></div>
-    <div><a asp-controller="Administrator" asp-action="GetRoles">Роли</a></div>
-    <div><a asp-controller="Administrator" asp-action="GetProducts">Продукты</a></div>
+   @await Html.PartialAsync("AdminMenu")
 </div>
 
 <h3>Список заказов</h3>
