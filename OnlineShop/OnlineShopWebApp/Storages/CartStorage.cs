@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Storages
 			this.productStorage = productStorage;
 		}
 
-		public void AddItem(Guid userId, int productId, string operation, int quantity = 1)
+		public void ChangeItem(Guid userId, int productId, string operation, int quantity = 1)
 		{
 			var product = productStorage.TryGetById(productId);
 
