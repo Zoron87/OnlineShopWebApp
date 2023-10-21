@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.CodeAnalysis;
+using Newtonsoft.Json;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
@@ -37,9 +38,31 @@ namespace OnlineShopWebApp.Storages
             return FileProvider.SaveInfo(productsFilePath, JsonConvert.SerializeObject(products, Formatting.Indented));
         }
 
+        public void SaveChange(int productId, Item item)
+        {
+            var product = TryGetById(productId);
+            product.Name = item.Name;
+            product.Description = item.Description;
+            product.Cost = item.Cost;
+        }
+
         public Product TryGetById(int id)
         {
-            return products.FirstOrDefault(product => product.Id == id);
+            var product = products.FirstOrDefault(product => product.Id == id);
+            Helpers<Product>.CheckNullItem(product, "Указанный товар не обнаружен");
+            return product;
+        }
+
+        public void Delete(int id)
+        {
+            var product = TryGetById(id);
+            products.Remove(product);
+        }
+
+        public void Add(Item item)
+        {
+            var product = new Product(item.Name, item.Cost, item.Description, item.ImagePath);
+            products.Add(product);
         }
 
         public List<Product> GetProductsWithPagination(int page, int itemsOnPage)

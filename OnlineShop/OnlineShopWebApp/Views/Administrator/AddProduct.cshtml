@@ -1,0 +1,22 @@
+﻿@using (Html.BeginForm("AddProduct", "Administrator"))
+{
+    <div class="form-group">
+        <label>Название:</label>
+        <input type="text" class="form-control" name="Name" value="">
+    </div>
+    <div class="form-group">
+        <label>Цена:</label>
+        <input class="form-control" name="Cost" value="">
+    </div>
+    <div class="form-group">
+        <label>Описание:</label>
+        <input class="form-control" name="Description" value="">
+    </div>
+    <div class="form-group">
+        <label>Изображение:</label>
+        <input class="form-control" name="ImagePath" value="">
+    </div>
+
+    <input class="btn-primary" type="submit" value="Сохранить" />
+    <a class="btn btn-warning" role="button" asp-controller="Administrator" asp-action="GetProducts">Отмена</a>
+}

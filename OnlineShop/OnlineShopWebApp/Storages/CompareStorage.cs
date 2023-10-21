@@ -25,9 +25,6 @@ namespace OnlineShopWebApp.Storages
 		public void Add(Guid userId, int productId)
 		{
 			var product = productStorage.TryGetById(productId);
-
-            Helpers<Product>.CheckNullItem(product, "Указанный товар не обнаружен!");
-
             var compare = TryGetById(userId);
 
 			if (compare == null)
@@ -50,7 +47,6 @@ namespace OnlineShopWebApp.Storages
 		public void Clear(Guid userId)
 		{
 			var compare = TryGetById(userId);
-
 			compare?.Products?.Clear();
 		}
     }

@@ -21,8 +21,6 @@ namespace OnlineShopWebApp.Storages
 		{
 			var product = productStorage.TryGetById(productId);
 
-			Helpers<Product>.CheckNullItem(product, "Указанный товар не обнаружен!");
-
 			var cartPositon = new CartItem(product, quantity);
 			var cart = TryGetById(userId);
 

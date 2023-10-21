@@ -1,10 +1,17 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AdministratorController : Controller
     {
+        private readonly IProductStorage productStorage;
+
+        public AdministratorController(IProductStorage productStorage)
+        {
+            this.productStorage = productStorage;
+        }
         public ActionResult Index()
         {
             return View();
@@ -27,7 +34,45 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult GetProducts()
         {
-            return View("GetProducts");
+            var products = productStorage.GetAll();
+            return View(products);
+        }
+
+        public ActionResult EditProduct(int productId)
+        {
+            var product = productStorage.TryGetById(productId);
+            return View("EditProduct", product);
+        }
+
+        public ActionResult DeleteProduct(int productId)
+        {
+            productStorage.Delete(productId);
+            if (productStorage.SaveAll())
+                return RedirectToAction("GetProducts");
+            return View("Error");
+        }
+
+        public ActionResult AddProduct()
+        {
+            return View("AddProduct");
+        }
+
+        [HttpPost]
+        public ActionResult AddProduct(Item item)
+        {
+            productStorage.Add(item);
+            if (productStorage.SaveAll())
+                return RedirectToAction("GetProducts");
+            return View("Error");
+        }
+
+        [HttpPost]
+        public ActionResult SaveProduct(int productId, Item item)
+        {
+            productStorage.SaveChange(productId, item);
+            if (productStorage.SaveAll())
+                return RedirectToAction("GetProducts");
+            return View("Error");
         }
     }
 }

@@ -40,7 +40,6 @@ namespace OnlineShopWebApp.Storages
 		public void Clear(Guid userId)
 		{
             var favourite = TryGetById(userId);
-
 			favourite?.Products?.Clear();
 		}
 

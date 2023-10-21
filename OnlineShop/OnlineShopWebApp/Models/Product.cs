@@ -4,10 +4,10 @@
     {
         private static int counter = 1;
         public int Id { get; }
-        public string Name { get; }
-        public decimal Cost { get; }
-        public string Description { get; }
-        public string ImagePath { get; }
+        public string Name { get; set; }
+        public decimal Cost { get; set; }
+        public string Description { get; set; }
+        public string ImagePath { get; set; }
 
         public Product(string name, decimal cost, string description, string imagePath)
         {
