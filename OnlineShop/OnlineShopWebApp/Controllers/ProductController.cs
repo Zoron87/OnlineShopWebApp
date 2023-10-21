@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -39,6 +40,14 @@ namespace OnlineShopWebApp.Controllers
             var allProducts = productStorage.GetAll();
 
             return allProducts != null ? View(allProducts) : View("Error");
+        }
+
+        public IActionResult Search(string search) 
+        {
+            ViewData["Search"] = search;
+            search = search.ToLower();
+            var products = productStorage.GetAll().Where(p => p.Name.ToLower().Contains(search) && p.Description.ToLower().Contains(search)).ToList();
+            return View(products);
         }
     }
 }
