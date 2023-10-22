@@ -3,12 +3,12 @@
         @using (Html.BeginForm("Login", "Authorization", FormMethod.Post))
         {
             <div class="form-outline mb-4">
-                <input type="email" name="email" class="form-control" />
+                <input type="email" name="email" class="form-control" required />
                 <label class="form-label" for="loginName">Email</label>
             </div>
 
             <div class="form-outline mb-4">
-                <input name="password" type="password" class="form-control" />
+                <input name="password" type="password" class="form-control" required />
                 <label class="form-label" for="loginPassword">Пароль</label>
             </div>
 
