@@ -19,15 +19,10 @@ namespace OnlineShopWebApp.Controllers
             return View(cart);
         }
 
-        public ActionResult Add(int productId, string operation)
+        public ActionResult Add(int productId)
         {
-            if (productId > 0)
-            {
-                cartStorage.ChangeItem(ShopUser.Id, productId, operation);
-                return RedirectToAction("Index");
-            }
-
-            return View("Error");
+            cartStorage.AddItem(ShopUser.Id, productId);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -35,18 +30,16 @@ namespace OnlineShopWebApp.Controllers
         {
             if (productId > 0)
             {
-                cartStorage.ChangeItem(ShopUser.Id, productId, "plus", quantity);
+                cartStorage.AddItem(ShopUser.Id, productId, quantity);
                 return RedirectToAction("Index");
             }
 
             return View("Error");
         }
 
-        public IActionResult Delete(int productId)
+        public ActionResult Reduce(int productId)
         {
-            if (productId > 0)
-                cartStorage.DeleteItem(ShopUser.Id, productId);
-
+            cartStorage.Reduce(ShopUser.Id, productId);
             return RedirectToAction("Index");
         }
 

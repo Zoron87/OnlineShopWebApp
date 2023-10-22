@@ -17,7 +17,7 @@ namespace OnlineShopWebApp.Storages
 			this.productStorage = productStorage;
 		}
 
-		public void ChangeItem(Guid userId, int productId, string operation, int quantity = 1)
+		public void AddItem(Guid userId, int productId, int quantity = 1)
 		{
 			var product = productStorage.TryGetById(productId);
 
@@ -33,25 +33,22 @@ namespace OnlineShopWebApp.Storages
 			{
 				var checkSameProduct = cart?.Items?.FirstOrDefault(cartItem => cartItem.Product.Id == product.Id);
 				if (checkSameProduct != null)
-				{
-					switch (operation)
-					{
-						case "plus":
-							checkSameProduct.Quantity += quantity;
-							break;
-						case "minus":
-							if (checkSameProduct.Quantity - quantity <= 0)
-								DeleteItem(userId, productId);
-							else
-								checkSameProduct.Quantity -= quantity;
-							break;
-					}
-				}
+                    checkSameProduct.Quantity += quantity;
 				else
-				{
 					cart.Items.Add(cartPositon);
-                   
-                }
+            }
+		}
+
+		public void Reduce(Guid userId, int productId)
+		{
+			var cart = TryGetById(userId);
+			var checkSameProduct = cart?.Items?.FirstOrDefault(cartItem => cartItem.Product.Id == productId);
+			if (checkSameProduct != null)
+			{
+                if (checkSameProduct.Quantity <= 1)
+                    DeleteItem(userId, productId);
+                else
+                    checkSameProduct.Quantity--;
             }
 		}
 
