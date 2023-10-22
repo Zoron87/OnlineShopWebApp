@@ -1,22 +1,27 @@
-﻿<div class="tab-content">
+﻿@model Login
+
+<div class="tab-content">
     <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
         @using (Html.BeginForm("Login", "Authorization", FormMethod.Post))
         {
+            <div class="validation" asp-validation-summary="ModelOnly"></div>
             <div class="form-outline mb-4">
-                <input type="email" name="email" class="form-control" required />
-                <label class="form-label" for="loginName">Email</label>
+                <label asp-for="Email">Email:</label><br />
+                <input type="email" asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email"></span>
             </div>
 
             <div class="form-outline mb-4">
-                <input name="password" type="password" class="form-control" required />
-                <label class="form-label" for="loginPassword">Пароль</label>
+                <label asp-for="Password">Пароль:</label><br />
+                <input type="password" asp-for"Password" class="form-control" />
+                <span asp-validation-for="Password"></span>
             </div>
 
             <div class="row mb-4">
                 <div class="col-md-6 d-flex justify-content-center">
                     <div class="form-check mb-3 mb-md-0">
                         @Html.CheckBox("isRememberMe", true)
-                        <label class="form-check-label" for="loginCheck"> Запомнить меня? </label>
+                        <label class="form-check-label"> Запомнить меня? </label>
                     </div>
                 </div>
             </div>

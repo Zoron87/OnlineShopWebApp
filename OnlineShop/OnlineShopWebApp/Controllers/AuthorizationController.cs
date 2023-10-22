@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Models;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -13,7 +14,9 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public ActionResult Login(Login loginInfo)
         {
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+                return RedirectToAction("Index", "Home");
+            return View(loginInfo);
         }
 
         public ActionResult Registration()
@@ -24,7 +27,18 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public ActionResult Registration(Register registerInfo)
         {
-            return RedirectToAction("Index", "Home");
+            if (registerInfo.Email == registerInfo.Password)
+                ModelState.AddModelError("", "Email и пароль не должны совпадать");
+
+            if (registerInfo.Password != registerInfo.ConfirmPassword)
+                ModelState.AddModelError("", "Пароли не совпадают");
+
+            if (String.IsNullOrEmpty(registerInfo.Password) || String.IsNullOrEmpty(registerInfo.ConfirmPassword))
+                ModelState.AddModelError("", "Пароль не может быть пустым");
+
+            if (ModelState.IsValid)
+                return RedirectToAction("Index", "Home");
+            return View(registerInfo);
         }
     }
 }
