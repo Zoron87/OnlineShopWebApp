@@ -49,7 +49,7 @@ namespace OnlineShopWebApp.Storages
         public Product TryGetById(int id)
         {
             var product = products.FirstOrDefault(product => product.Id == id);
-            Helpers<Product>.CheckNullItem(product, "Указанный товар не обнаружен");
+            product.CheckNullItem("Указанный товар не обнаружен");
             return product;
         }
 
