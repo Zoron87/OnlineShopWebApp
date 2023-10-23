@@ -46,7 +46,7 @@ namespace OnlineShopWebApp.Controllers
         {
             ViewData["Search"] = search;
             search = search.ToLower();
-            var products = productStorage.GetAll().Where(p => p.Name.ToLower().Contains(search) && p.Description.ToLower().Contains(search)).ToList();
+            var products = productStorage.GetAll().Where(p => p.Name.ToLower().Contains(search) || p.Description.ToLower().Contains(search)).ToList();
             return View(products);
         }
     }
