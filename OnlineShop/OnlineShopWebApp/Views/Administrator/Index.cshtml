@@ -1,4 +1,4 @@
-﻿<div><a asp-controller="Administrator" asp-action="GetOrders">Заказы</a></div>
-<div><a asp-controller="Administrator" asp-action="GetUsers">Пользователи</a></div>
-<div><a asp-controller="Administrator" asp-action="GetRoles">Роли</a></div>
-<div><a asp-controller="Administrator" asp-action="GetProducts">Продукты</a></div>
+﻿<div style="float: left; margin-right: 56px;">
+    @await Html.PartialAsync("AdminMenu")
+</div>
+<h3>Панель администратора</h3>
