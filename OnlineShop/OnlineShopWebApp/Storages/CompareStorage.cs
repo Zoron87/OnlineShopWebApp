@@ -26,7 +26,7 @@ namespace OnlineShopWebApp.Storages
 		{
 			var product = productStorage.TryGetById(productId);
 
-            Helpers<Product>.CheckNullItem(product, "Указанный товар не обнаружен!");
+            product.CheckNullItem("Указанный товар не обнаружен!");
 
             var compare = TryGetById(userId);
 

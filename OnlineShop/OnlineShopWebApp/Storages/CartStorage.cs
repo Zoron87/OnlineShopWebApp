@@ -21,7 +21,7 @@ namespace OnlineShopWebApp.Storages
 		{
 			var product = productStorage.TryGetById(productId);
 
-			Helpers<Product>.CheckNullItem(product, "Указанный товар не обнаружен!");
+            product.CheckNullItem("Указанный товар не обнаружен!");
 
 			var cartPositon = new CartItem(product, quantity);
 			var cart = TryGetById(userId);
@@ -61,7 +61,7 @@ namespace OnlineShopWebApp.Storages
 		{
 			var cart = TryGetById(userId);
 			var cartItemForRemove = cart?.Items?.FirstOrDefault(cartItem => cartItem.Product.Id == productId);
-            Helpers<CartItem>.CheckNullItem(cartItemForRemove, "Указанная позиция не обнаружена!");
+            cartItemForRemove.CheckNullItem("Указанная позиция не обнаружена!");
 			cart.Items.Remove(cartItemForRemove);
 		}
 
