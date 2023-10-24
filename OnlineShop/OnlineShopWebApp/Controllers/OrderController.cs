@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using System;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -32,18 +34,27 @@ namespace OnlineShopWebApp.Controllers
 		[HttpPost]
 		public IActionResult Index(OrderDetails orderDetails)
 		{
-			var cart = cartStorage.TryGetById(ShopUser.Id);
+			if (orderDetails.Name.Any(c => char.IsDigit(c)))
+				ModelState.AddModelError("", "В имени получателя допустимо использовать только буквы");
 
-            if (cart != null && orderDetails != null)
-            {
-                orderStorage.Add(orderDetails, cart);
+			if (orderDetails.DeliveryDate <= DateTime.Now)
+				ModelState.AddModelError("", "Нельзя выбрать дату доставки ранее текущей");
 
-                cart.Items.Clear();
+			if (ModelState.IsValid)
+			{
+				var cart = cartStorage.TryGetById(ShopUser.Id);
 
-				return View("ThankYou");
+				if (cart != null && orderDetails != null)
+				{
+					orderStorage.Add(orderDetails, cart);
+
+					cart.Items.Clear();
+
+					return View("ThankYou");
+				}
 			}
 
-            return View("Error");
+            return View("Details", orderDetails);
         }
     }
 }

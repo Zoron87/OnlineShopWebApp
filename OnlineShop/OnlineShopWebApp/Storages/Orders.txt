@@ -79,7 +79,7 @@
       "Items": [
         {
           "Product": {
-            "Id": 3,
+            "Id": 25,
             "Name": "Холодильник Midea MDRB499FGF01IM",
             "Cost": 39999.0,
             "Description": "Холодильник Midea MDRB499FGF01IM, белый оснащен холодильной камерой объемом 250 л и нижней морозильной камерой объемом 76 л.",
@@ -89,7 +89,7 @@
         },
         {
           "Product": {
-            "Id": 4,
+            "Id": 26,
             "Name": "Робот-пылесос Dreame Bot Robot Vacuum and Mop F9 Pro White",
             "Cost": 18999.0,
             "Description": "Робот-пылесос Dreame Bot Robot Vacuum and Mop D9 Pro White выполняет сухую и влажную уборку и способен обработать до 160 м² площади без подзарядки",
@@ -99,6 +99,68 @@
         }
       ],
       "Amount": 6.0
+    },
+    "Id": 0
+  },
+  {
+    "OrderDetails": {
+      "Id": 0,
+      "Name": "65546",
+      "Phone": "8909373",
+      "Email": "znbet@gmail.com",
+      "Address": "ул. Костина, ",
+      "Delivery": 0,
+      "DeliveryDate": "2023-10-25T00:00:00",
+      "Pay": 0,
+      "Comment": null
+    },
+    "Cart": {
+      "Id": 0,
+      "UserId": "13d4e1fc-a120-414e-b62c-aa6d330f0d35",
+      "Items": [
+        {
+          "Product": {
+            "Id": 27,
+            "Name": "Холодильник Midea MDRB499FGF01IM",
+            "Cost": 39999.0,
+            "Description": "Холодильник Midea MDRB499FGF01IM, белый оснащен холодильной камерой объемом 250 л и нижней морозильной камерой объемом 76 л.",
+            "ImagePath": "Refrigerator_Midea_MDRB499FGF01IM_1.jpg"
+          },
+          "Quantity": 1
+        }
+      ],
+      "Amount": 1.0
+    },
+    "Id": 0
+  },
+  {
+    "OrderDetails": {
+      "Id": 0,
+      "Name": "Nikolay Syryaev",
+      "Phone": "890937352",
+      "Email": "zoronbet@gmail.com",
+      "Address": "ул. Костина, 4",
+      "Delivery": 0,
+      "DeliveryDate": "2023-10-25T00:00:00",
+      "Pay": 0,
+      "Comment": null
+    },
+    "Cart": {
+      "Id": 0,
+      "UserId": "38d22f95-574d-468e-99c3-4084c08780a4",
+      "Items": [
+        {
+          "Product": {
+            "Id": 7,
+            "Name": "Морозильная камера Haier HF-82WAA",
+            "Cost": 19999.0,
+            "Description": "Компактная морозильная камера Haier HF-82WAA – хороший выбор для тех, кто хочет хранить дома или на даче запас замороженных продуктов и полуфабрикатов, а также делать домашние заготовки.",
+            "ImagePath": "Freezer_Haier_HF-82WAA_1.jpg"
+          },
+          "Quantity": 1
+        }
+      ],
+      "Amount": 1.0
     },
     "Id": 0
   }
