@@ -9,14 +9,14 @@
   {
     "Id": 2,
     "Name": "Телевизор Samsung QE43Q60BAU1",
-    "Cost": 39998.0,
+    "Cost": 69999.0,
     "Description": "Телевизор Samsung QE43Q60BAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки.",
     "ImagePath": "tv_Samsung_QE43Q60BAU_1.jpg"
   },
   {
     "Id": 3,
     "Name": "Холодильник Midea MDRB499FGF01IM",
-    "Cost": 39999.0,
+    "Cost": 79999.0,
     "Description": "Холодильник Midea MDRB499FGF01IM, белый оснащен холодильной камерой объемом 250 л и нижней морозильной камерой объемом 76 л.",
     "ImagePath": "Refrigerator_Midea_MDRB499FGF01IM_1.jpg"
   },

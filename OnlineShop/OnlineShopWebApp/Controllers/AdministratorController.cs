@@ -60,19 +60,25 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public ActionResult AddProduct(Item item)
         {
-            productStorage.Add(item);
-            if (productStorage.SaveAll())
-                return RedirectToAction("GetProducts");
-            return View("Error");
+            if (ModelState.IsValid)
+            {
+                productStorage.Add(item);
+                if (productStorage.SaveAll())
+                    return RedirectToAction("GetProducts");
+            }
+            return View(item);
         }
 
         [HttpPost]
         public ActionResult SaveProduct(int productId, Item item)
         {
-            productStorage.SaveChange(productId, item);
-            if (productStorage.SaveAll())
-                return RedirectToAction("GetProducts");
-            return View("Error");
+            if (ModelState.IsValid)
+            {
+                productStorage.SaveChange(productId, item);
+                if (productStorage.SaveAll())
+                    return RedirectToAction("GetProducts");
+            }
+            return View(item);
         }
     }
 }
