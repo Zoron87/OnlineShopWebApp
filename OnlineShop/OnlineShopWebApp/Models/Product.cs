@@ -20,8 +20,6 @@ namespace OnlineShopWebApp.Models
         [StringLength(999, MinimumLength = 10, ErrorMessage = "Описание продукта должно составлять от {2} до {1} символов")]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "НЕ указано изображение продукта")]
-        [StringLength(100, MinimumLength = 4, ErrorMessage = "Изображение продукта должно составлять от {2} до {1} символов")]
         public string ImagePath { get; set; }
 
         public Product(string name, decimal cost, string description, string imagePath)
