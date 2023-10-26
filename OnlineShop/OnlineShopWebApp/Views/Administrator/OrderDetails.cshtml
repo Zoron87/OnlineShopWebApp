@@ -1,0 +1,76 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "Детали заказа";
+}
+
+@if (Model == null)
+{
+    <h3>Вы не указали номер заказа!</h3>
+}
+else
+{
+    <form asp-controller="Administrator" asp-action="UpdateOrderStatus" asp-route-orderid="@Model.Id">
+
+        <h3 class="text-center">Заказ состоит из след. товаров:</h3>
+        <table cellpadding="10" style="text-align: center; margin: 10px; margin: auto" border="1px solid blue">
+            <thead>
+                <tr>
+                    <th scope="col">Наименование</th>
+                    <th scope="col">Стоимость</th>
+                    <th scope="col">Количество</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model.Cart.Items)
+            {
+                <tbody>
+                    <tr>
+                        <td class="text-center">@item.Product.Name</td>
+                        <td class="text-center">@item.Product.Cost</td>
+                        <td class="text-center">@item.Quantity</td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+
+        <h3 class="text-center">Детали заказа:</h3>
+        <table style="border-collapse: collapse; width: 100%; margin: auto" border="1px solid blue">
+            <tbody>
+                <tr class="text-center">
+                    <td style="width: 50%;">Id заказа</td>
+                    <td style="width: 50%;">@Model.Id</td>
+                </tr>
+                <tr class="text-center">
+                    <td style="width: 50%;">Общая стоимость заказа</td>
+                    <td style="width: 50%;"><strong>@Model.Cart.Cost()</strong></td>
+                </tr>
+                <tr class="text-center">
+                    <td style="width: 50%;">Имя покупателя</td>
+                    <td style="width: 50%;">@Model.OrderDetails.Name</td>
+                </tr>
+                <tr class="text-center">
+                    <td style="width: 50%;">Email покупателя</td>
+                    <td style="width: 50%;">@Model.OrderDetails.Email</td>
+                </tr>
+                <tr class="text-center">
+                    <td style="width: 50%;">Адрес покупателя</td>
+                    <td style="width: 50%;">@Model.OrderDetails.Address</td>
+                </tr>
+                <tr class="text-center">
+                    <td style="width: 50%;">Статус заказа</td>
+                    <td style="padding: 10px;">
+                        <select asp-for="@Model.OrderStatus" class="form-control" style="border: 1px solid red;"
+                                asp-items="Html.GetEnumSelectList<OrderStatus>()">
+                            <option>Select type ...</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <button type="submit" class="btn btn-primary text-center" style="text-align:center;">Обновить статус заказа</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+}

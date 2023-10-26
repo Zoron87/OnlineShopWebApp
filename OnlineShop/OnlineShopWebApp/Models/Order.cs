@@ -1,15 +1,21 @@
-﻿namespace OnlineShopWebApp.Models
+﻿using System;
+
+namespace OnlineShopWebApp.Models
 {
 	public class Order
 	{
-        public int Id { get; }
-        public OrderDetails OrderDetails;
+		public Guid Id { get; set; }
+		public OrderDetails OrderDetails;
 		public Cart Cart;
 
-		public Order(OrderDetails orderDetails, Cart cart)
-		{
-			OrderDetails = orderDetails;
-			Cart = cart;
-		}
-	}
+		public OrderStatus OrderStatus { get; set; }
+		public DateTime CreatedTime { get; set; }
+
+        public Order()
+        {
+            Id = Guid.NewGuid();
+			OrderStatus = OrderStatus.Created;
+			CreatedTime = DateTime.Now;
+        }
+    }
 }

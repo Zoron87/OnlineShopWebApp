@@ -2,166 +2,120 @@
   {
     "OrderDetails": {
       "Id": 0,
-      "Name": "1111",
-      "Phone": null,
-      "Email": null,
-      "Address": null,
+      "Name": "Марат Сафин",
+      "Phone": "3243243",
+      "Email": "safin@mail.ru",
+      "Address": "Адрес",
       "Delivery": 0,
-      "DeliveryDate": "0001-01-01T00:00:00",
+      "DeliveryDate": "2023-10-27T00:00:00",
       "Pay": 0,
       "Comment": null
     },
     "Cart": {
       "Id": 0,
-      "UserId": "4d427e12-2dac-4f5b-8c4e-6c8df96d9196",
+      "UserId": "4b51bb8d-6f57-4887-912a-879f833aef4e",
       "Items": [
         {
           "Product": {
-            "Id": 23,
+            "Id": 33,
             "Name": "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
             "Cost": 99999.0,
             "Description": "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
             "ImagePath": "notebook_MSI_Katana_17_B12VEK-482XRU_1.jpg"
           },
-          "Quantity": 1
+          "Quantity": 4
         }
       ],
-      "Amount": 1.0
+      "Amount": 4.0
     },
-    "Id": 0
+    "Id": "1160c1f4-280d-4741-b40d-6999c7dd29a4",
+    "OrderStatus": 2,
+    "CreatedTime": "2023-10-26T15:54:06.0011242+04:00"
   },
   {
     "OrderDetails": {
       "Id": 0,
-      "Name": "111",
-      "Phone": null,
-      "Email": null,
-      "Address": null,
+      "Name": "Вася Пупкин",
+      "Phone": "42394372",
+      "Email": "pupkin@mail.ru",
+      "Address": "Адрес Васи",
       "Delivery": 0,
-      "DeliveryDate": "0001-01-01T00:00:00",
+      "DeliveryDate": "2023-10-28T00:00:00",
       "Pay": 0,
       "Comment": null
     },
     "Cart": {
       "Id": 0,
-      "UserId": "98448a96-edb2-4193-a223-28e56e328bf0",
+      "UserId": "08f625bd-7139-4126-a0ec-96ccf9b22d61",
       "Items": [
         {
           "Product": {
-            "Id": 24,
-            "Name": "Робот-пылесос Dreame Bot Robot Vacuum and Mop F9 Pro White",
-            "Cost": 18999.0,
-            "Description": "Робот-пылесос Dreame Bot Robot Vacuum and Mop D9 Pro White выполняет сухую и влажную уборку и способен обработать до 160 м² площади без подзарядки",
-            "ImagePath": "Robot_Vacuum_Cleaner_Dreame_Bot_Robot_Vacuum_and_Mop_F9_Pro_1.jpg"
-          },
-          "Quantity": 11
-        }
-      ],
-      "Amount": 11.0
-    },
-    "Id": 0
-  },
-  {
-    "OrderDetails": {
-      "Id": 0,
-      "Name": "11111",
-      "Phone": null,
-      "Email": null,
-      "Address": null,
-      "Delivery": 0,
-      "DeliveryDate": "2023-10-19T00:00:00",
-      "Pay": 0,
-      "Comment": null
-    },
-    "Cart": {
-      "Id": 0,
-      "UserId": "0facdcd7-89a8-4c82-8eb7-91f5d8171b69",
-      "Items": [
-        {
-          "Product": {
-            "Id": 25,
+            "Id": 34,
             "Name": "Холодильник Midea MDRB499FGF01IM",
-            "Cost": 39999.0,
+            "Cost": 21999.0,
+            "Description": "Планшет Honor Pad X9 Wi-Fi Space Gray 5301AGJC функционирует на базе предустановленной ОС MagicOS 7.1.",
+            "ImagePath": "Refrigerator_Midea_MDRB499FGF01IM_1.jpg"
+          },
+          "Quantity": 2
+        }
+      ],
+      "Amount": 2.0
+    },
+    "Id": "75b31be6-b4b8-49e8-bcf4-0217fe036382",
+    "OrderStatus": 4,
+    "CreatedTime": "2023-10-26T17:04:55.4086068+04:00"
+  },
+  {
+    "OrderDetails": {
+      "Id": 0,
+      "Name": "Тарас Бульба",
+      "Phone": "32043280",
+      "Email": "bulba@mail.ru",
+      "Address": "Адрес Тараса",
+      "Delivery": 0,
+      "DeliveryDate": "2023-10-27T00:00:00",
+      "Pay": 0,
+      "Comment": null
+    },
+    "Cart": {
+      "Id": 0,
+      "UserId": "3ca5c3d0-e337-4cac-8a0b-6c54470c83bc",
+      "Items": [
+        {
+          "Product": {
+            "Id": 35,
+            "Name": "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
+            "Cost": 99999.0,
+            "Description": "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
+            "ImagePath": "notebook_MSI_Katana_17_B12VEK-482XRU_1.jpg"
+          },
+          "Quantity": 3
+        },
+        {
+          "Product": {
+            "Id": 36,
+            "Name": "Телевизор Samsung QE43Q60BAU1",
+            "Cost": 69999.0,
+            "Description": "Телевизор Samsung QE43Q60BAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки.",
+            "ImagePath": "tv_Samsung_QE43Q60BAU_1.jpg"
+          },
+          "Quantity": 2
+        },
+        {
+          "Product": {
+            "Id": 37,
+            "Name": "Холодильник Midea MDRB499FGF01IM",
+            "Cost": 79999.0,
             "Description": "Холодильник Midea MDRB499FGF01IM, белый оснащен холодильной камерой объемом 250 л и нижней морозильной камерой объемом 76 л.",
             "ImagePath": "Refrigerator_Midea_MDRB499FGF01IM_1.jpg"
           },
           "Quantity": 1
-        },
-        {
-          "Product": {
-            "Id": 26,
-            "Name": "Робот-пылесос Dreame Bot Robot Vacuum and Mop F9 Pro White",
-            "Cost": 18999.0,
-            "Description": "Робот-пылесос Dreame Bot Robot Vacuum and Mop D9 Pro White выполняет сухую и влажную уборку и способен обработать до 160 м² площади без подзарядки",
-            "ImagePath": "Robot_Vacuum_Cleaner_Dreame_Bot_Robot_Vacuum_and_Mop_F9_Pro_1.jpg"
-          },
-          "Quantity": 5
         }
       ],
       "Amount": 6.0
     },
-    "Id": 0
-  },
-  {
-    "OrderDetails": {
-      "Id": 0,
-      "Name": "65546",
-      "Phone": "8909373",
-      "Email": "znbet@gmail.com",
-      "Address": "ул. Костина, ",
-      "Delivery": 0,
-      "DeliveryDate": "2023-10-25T00:00:00",
-      "Pay": 0,
-      "Comment": null
-    },
-    "Cart": {
-      "Id": 0,
-      "UserId": "13d4e1fc-a120-414e-b62c-aa6d330f0d35",
-      "Items": [
-        {
-          "Product": {
-            "Id": 27,
-            "Name": "Холодильник Midea MDRB499FGF01IM",
-            "Cost": 39999.0,
-            "Description": "Холодильник Midea MDRB499FGF01IM, белый оснащен холодильной камерой объемом 250 л и нижней морозильной камерой объемом 76 л.",
-            "ImagePath": "Refrigerator_Midea_MDRB499FGF01IM_1.jpg"
-          },
-          "Quantity": 1
-        }
-      ],
-      "Amount": 1.0
-    },
-    "Id": 0
-  },
-  {
-    "OrderDetails": {
-      "Id": 0,
-      "Name": "Nikolay Syryaev",
-      "Phone": "890937352",
-      "Email": "zoronbet@gmail.com",
-      "Address": "ул. Костина, 4",
-      "Delivery": 0,
-      "DeliveryDate": "2023-10-25T00:00:00",
-      "Pay": 0,
-      "Comment": null
-    },
-    "Cart": {
-      "Id": 0,
-      "UserId": "38d22f95-574d-468e-99c3-4084c08780a4",
-      "Items": [
-        {
-          "Product": {
-            "Id": 7,
-            "Name": "Морозильная камера Haier HF-82WAA",
-            "Cost": 19999.0,
-            "Description": "Компактная морозильная камера Haier HF-82WAA – хороший выбор для тех, кто хочет хранить дома или на даче запас замороженных продуктов и полуфабрикатов, а также делать домашние заготовки.",
-            "ImagePath": "Freezer_Haier_HF-82WAA_1.jpg"
-          },
-          "Quantity": 1
-        }
-      ],
-      "Amount": 1.0
-    },
-    "Id": 0
+    "Id": "47c37b11-4543-42b6-ba81-cbaed6588294",
+    "OrderStatus": 2,
+    "CreatedTime": "2023-10-26T22:37:03.868737+04:00"
   }
 ]

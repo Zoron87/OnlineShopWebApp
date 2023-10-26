@@ -1,17 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using System;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AdministratorController : Controller
     {
         private readonly IProductStorage productStorage;
+		private readonly IOrderStorage orderStorage;
 
-        public AdministratorController(IProductStorage productStorage)
+		public AdministratorController(IProductStorage productStorage, IOrderStorage orderStorage)
         {
             this.productStorage = productStorage;
-        }
+			this.orderStorage = orderStorage;
+		}
         public ActionResult Index()
         {
             return View();
@@ -19,10 +23,24 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult GetOrders()
         {
-            return View("GetOrders");
+            var orders = orderStorage.GetAll();
+            return View("GetOrders", orders);
         }
 
-        public ActionResult GetUsers()
+		public ActionResult OrderDetails(Guid orderId)
+		{
+            var order = orderStorage.Get(orderId);
+			return View(order);
+		}
+
+        [HttpPost]
+        public IActionResult UpdateOrderStatus(Guid orderId, OrderStatus orderStatus)
+        { 
+            orderStorage.UpdateStatus(orderId, orderStatus);
+            return RedirectToAction("GetOrders");
+        }
+
+		public ActionResult GetUsers()
         {
             return View("GetUsers");
         }
