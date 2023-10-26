@@ -2,7 +2,6 @@
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using System;
-using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {

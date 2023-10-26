@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Xml.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-	public enum OrderStatus
+    public enum OrderStatus
 	{
 		[Display(Name = "Создан")]
 		Created,
