@@ -15,7 +15,7 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Не указан телефон получателя")]
         [Phone(ErrorMessage = "Указан некорректный телефон получателя")]
         [StringLength(20, MinimumLength = 6, ErrorMessage = "Длина строки телефона должна быть от {2} до {1} символов")]
-        [RegularExpression("((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}", ErrorMessage = "Указан некоррктный телефон получателя")]
+        [RegularExpression("((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}", ErrorMessage = "Указан некорректный телефон получателя")]
         public string Phone { get; set; }
 
         [Required(ErrorMessage = "Не указана электронная почта получателя")]

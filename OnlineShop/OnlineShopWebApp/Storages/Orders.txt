@@ -17,7 +17,7 @@
       "Items": [
         {
           "Product": {
-            "Id": 33,
+            "Id": 40,
             "Name": "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
             "Cost": 99999.0,
             "Description": "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
@@ -50,7 +50,7 @@
       "Items": [
         {
           "Product": {
-            "Id": 34,
+            "Id": 41,
             "Name": "Холодильник Midea MDRB499FGF01IM",
             "Cost": 21999.0,
             "Description": "Планшет Honor Pad X9 Wi-Fi Space Gray 5301AGJC функционирует на базе предустановленной ОС MagicOS 7.1.",
@@ -83,7 +83,7 @@
       "Items": [
         {
           "Product": {
-            "Id": 35,
+            "Id": 42,
             "Name": "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
             "Cost": 99999.0,
             "Description": "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
@@ -93,7 +93,7 @@
         },
         {
           "Product": {
-            "Id": 36,
+            "Id": 43,
             "Name": "Телевизор Samsung QE43Q60BAU1",
             "Cost": 69999.0,
             "Description": "Телевизор Samsung QE43Q60BAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки.",
@@ -103,7 +103,7 @@
         },
         {
           "Product": {
-            "Id": 37,
+            "Id": 44,
             "Name": "Холодильник Midea MDRB499FGF01IM",
             "Cost": 79999.0,
             "Description": "Холодильник Midea MDRB499FGF01IM, белый оснащен холодильной камерой объемом 250 л и нижней морозильной камерой объемом 76 л.",
@@ -117,5 +117,38 @@
     "Id": "47c37b11-4543-42b6-ba81-cbaed6588294",
     "OrderStatus": 2,
     "CreatedTime": "2023-10-26T22:37:03.868737+04:00"
+  },
+  {
+    "OrderDetails": {
+      "Id": 0,
+      "Name": "Милана",
+      "Phone": "34932749",
+      "Email": "milana@mail.ru",
+      "Address": "Адрес Миланы",
+      "Delivery": 0,
+      "DeliveryDate": "2023-10-28T00:00:00",
+      "Pay": 0,
+      "Comment": null
+    },
+    "Cart": {
+      "Id": 0,
+      "UserId": "194fd233-9e12-4dc1-a348-1e8c6565ba80",
+      "Items": [
+        {
+          "Product": {
+            "Id": 45,
+            "Name": "Телевизор Samsung QE43Q60BAU1",
+            "Cost": 69999.0,
+            "Description": "Телевизор Samsung QE43Q60BAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки.",
+            "ImagePath": "tv_Samsung_QE43Q60BAU_1.jpg"
+          },
+          "Quantity": 5
+        }
+      ],
+      "Amount": 5.0
+    },
+    "Id": "81a06043-4dfa-437e-bbd7-d78fa336d4f9",
+    "OrderStatus": 1,
+    "CreatedTime": "2023-10-27T15:09:09.6146499+04:00"
   }
 ]
