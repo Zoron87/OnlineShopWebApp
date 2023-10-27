@@ -26,8 +26,7 @@
             </div>
 
             <div class="col-md-7 col-lg-8 mb-3">
-                @using (Html.BeginForm("AddItems", "Cart", FormMethod.Post))
-                {
+                <form method="post" asp-controller="Cart" asp-action="AddItems" asp-route-productId="@Model.Id">
                     <div class="bg-white product-content p-3 h-100">
                         <h1 class="section-title h3">
                             <span>
@@ -42,13 +41,12 @@
                         <div class="product-add-to-cart">
                             <div class="input-group">
                                 <input type="number" name="quantity" class="form-control" value="1" min="1">
-                                <input type="hidden" name="productId" class="form-control" value="@Model.Id">
                                 <button type="submit" class="btn btn-primary" style="margin-right: 10px;"><i class="fas fa-shopping-cart"></i> В КОРЗИНУ</button>
                                 <a asp-controller="Home" asp-action="Index" class="btn btn-warning"><i class="fa-solid fa-bag-shopping"></i> ПРОДОЛЖИТЬ ПОКУПКИ</a>
                             </div>
                         </div>
                     </div>
-                }
+                </form>
             </div>
         </div>
     </div>

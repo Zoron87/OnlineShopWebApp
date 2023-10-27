@@ -2,8 +2,7 @@
 
 <div class="tab-content">
     <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-        @using (Html.BeginForm("Registration", "Authorization", FormMethod.Post))
-        {
+        <form method="post" asp-controller="Authorization" asp-action="Registration">
             <div class="validation" asp-validation-summary="ModelOnly"></div>
             <div class="form-outline mb-4">
                 <label asp-for="Email">Email:</label><br />
@@ -32,6 +31,6 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block mb-4">Зарегистрироваться</button>
-        }
+         </form>
     </div>
 </div>
