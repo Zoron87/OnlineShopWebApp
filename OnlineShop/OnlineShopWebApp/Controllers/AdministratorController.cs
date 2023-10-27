@@ -77,6 +77,9 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public ActionResult AddProduct(Item item)
         {
+            if (string.IsNullOrWhiteSpace(item.ImagePath))
+                item.ImagePath = "blank-product.jpg";
+
             if (ModelState.IsValid)
             {
                 productStorage.Add(item);
@@ -89,6 +92,9 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public ActionResult SaveProduct(int productId, Item item)
         {
+            if (string.IsNullOrWhiteSpace(item.ImagePath))
+                item.ImagePath = "blank-product.jpg";
+
             if (ModelState.IsValid)
             {
                 productStorage.SaveChange(productId, item);
