@@ -6,6 +6,7 @@ namespace OnlineShopWebApp.Models
     {
         [Required(ErrorMessage = "Не указана электронная почта пользователя")]
         [EmailAddress(ErrorMessage = "Укажите корректный электронный адрес пользователя")]
+        [RegularExpression("^[a-zA-Z0-9._-]+@[а-яА-Яa-zA-Z0-9._-]+\\.[а-яА-Яa-zA-Z0-9_-]+$", ErrorMessage = "Укажите корректный электронный адрес пользователя")]
         [StringLength(40, MinimumLength = 5, ErrorMessage = "Длина строки email должна быть от {2} до {1} символов")]
         public string Email { get; set; }
 

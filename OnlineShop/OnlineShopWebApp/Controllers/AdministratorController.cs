@@ -2,6 +2,7 @@
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using System;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -9,12 +10,14 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductStorage productStorage;
 		private readonly IOrderStorage orderStorage;
+        private readonly IRoleStorage roleStorage;
 
-		public AdministratorController(IProductStorage productStorage, IOrderStorage orderStorage)
+        public AdministratorController(IProductStorage productStorage, IOrderStorage orderStorage, IRoleStorage roleStorage)
         {
             this.productStorage = productStorage;
 			this.orderStorage = orderStorage;
-		}
+            this.roleStorage = roleStorage;
+        }
         public ActionResult Index()
         {
             return View();
@@ -41,12 +44,41 @@ namespace OnlineShopWebApp.Controllers
 
 		public ActionResult GetUsers()
         {
-            return View("GetUsers");
+            return View();
         }
 
         public ActionResult GetRoles()
         {
-            return View("GetRoles");
+            var roles = roleStorage.GetAll();
+            return View(roles);
+        }
+
+        public ActionResult AddRole()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddRole(Role role)
+        {
+            var roles = roleStorage.GetAll();
+            if (roles.Any(r => r.Name.ToLower() == role.Name.ToLower()))
+            {
+                ModelState.AddModelError("Name", $"Роль {role.Name} уже существует");
+            }
+
+            if (ModelState.IsValid)
+            {
+                roleStorage.Add(role);
+                return RedirectToAction("GetRoles");
+            }
+            return View(role);
+        }
+
+        public ActionResult DeleteRole(string name)
+        {
+            roleStorage.Delete(name);
+            return RedirectToAction("GetRoles");
         }
 
         public ActionResult GetProducts()

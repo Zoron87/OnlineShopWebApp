@@ -11,6 +11,5 @@ namespace OnlineShopWebApp.Interfaces
 		List<Order> GetAll();
 		Order Get(Guid orderId);
 		void UpdateStatus(Guid orderId, OrderStatus orderStatus);
-
     }
 }

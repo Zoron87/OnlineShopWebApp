@@ -1,0 +1,18 @@
+﻿@model Role
+
+<form method="post" asp-controller="Administrator" asp-action="AddRole">
+    <div asp-validation-summary="ModelOnly"></div>
+    <div class="form-group">
+        <label asp-for="Name">Название:</label>
+        <input asp-for="Name" class="form-control">
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Описание:</label>
+        <input asp-for="Description" class="form-control">
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    <input class="btn-primary" type="submit" value="Сохранить" />
+    <a class="btn btn-warning" role="button" asp-controller="Administrator" asp-action="GetRoles">Отмена</a>
+</form>

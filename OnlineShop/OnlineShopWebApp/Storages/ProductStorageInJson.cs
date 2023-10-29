@@ -56,7 +56,8 @@ namespace OnlineShopWebApp.Storages
         public void Delete(int id)
         {
             var product = TryGetById(id);
-            products.Remove(product);
+            if (product != null)
+                products.Remove(product);
         }
 
         public void Add(Item item)
