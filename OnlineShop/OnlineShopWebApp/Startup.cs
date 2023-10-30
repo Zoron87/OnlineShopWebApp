@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Storages;
+using Serilog;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -54,8 +55,8 @@ namespace OnlineShopWebApp
                 SupportedUICultures = new List<CultureInfo> { defaultCulture }
             };
 
+            app.UseSerilogRequestLogging();
             app.UseRequestLocalization(localizationOptions);
-
             app.UseHttpsRedirection();
 			app.UseStaticFiles();
 
