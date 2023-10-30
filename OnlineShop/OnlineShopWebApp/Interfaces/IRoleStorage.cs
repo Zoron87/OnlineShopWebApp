@@ -1,4 +1,4 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShopWebApp.Areas.Administrator.Models;
 using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Interfaces

@@ -42,7 +42,7 @@ else
 							<td>@order.CreatedTime.ToString("dd:MM:yyyy-HH:mm")</td>
 							<td><strong>@order.Cart.Cost()</strong></td>
 							<td>@EnumHelper.GetDisplayName(@order.OrderStatus)</td>
-							<td><a asp-controller="Administrator" asp-action="OrderDetails" asp-route-orderid="@order.Id" class="btn btn-primary">Подробнее</a></td>
+							<td><a asp-controller="Order" asp-action="OrderDetails" asp-route-orderid="@order.Id" class="btn btn-primary">Подробнее</a></td>
 						</tr>
 						i++;
 					}

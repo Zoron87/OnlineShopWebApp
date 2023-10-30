@@ -2,7 +2,7 @@
 
 namespace OnlineShopWebApp.Models
 {
-	public class Order
+    public class Order
 	{
 		public Guid Id { get; set; }
 		public OrderDetails OrderDetails;

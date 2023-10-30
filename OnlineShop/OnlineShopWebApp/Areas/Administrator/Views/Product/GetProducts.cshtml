@@ -10,7 +10,7 @@
     </div>
     <div class="col-9">
         <h3>Список продуктов</h3>
-        <p><a asp-controller="Administrator" asp-action="AddProduct">Добавить новый продукт</a></p>
+        <p><a asp-controller="Product" asp-action="AddProduct">Добавить новый продукт</a></p>
         <table class="table">
             <thead>
                 <tr>
@@ -28,8 +28,8 @@
                         <th scope="row">@product.Id</th>
                         <td>@product.Name</td>
                         <td>@product.Cost</td>
-                        <td><a asp-controller="Administrator" asp-action="EditProduct" asp-route-productid="@product.Id">Редактировать</a></td>
-                        <td><a asp-controller="Administrator" asp-action="DeleteProduct" asp-route-productid="@product.Id">Удалить</a></td>
+                        <td><a asp-controller="Product" asp-action="EditProduct" asp-route-productid="@product.Id">Редактировать</a></td>
+                        <td><a asp-controller="Product" asp-action="DeleteProduct" asp-route-productid="@product.Id">Удалить</a></td>
                     </tr>
                 </tbody>
             }

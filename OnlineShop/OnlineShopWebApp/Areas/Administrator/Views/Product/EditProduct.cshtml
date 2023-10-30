@@ -1,28 +1,28 @@
 ﻿@model Product
 
-<form method="post" asp-controller="Administrator" asp-action="AddProduct">
+<form method="post" asp-controller="Product" asp-action="SaveProduct" asp-route-productId="@Model.Id">
     <div asp-validation-summary="ModelOnly"></div>
     <div class="form-group">
         <label asp-for="Name">Название:</label>
-        <input asp-for="Name" class="form-control">
+        <input asp-for="Name" class="form-control" value="@Model.Name">
         <span asp-validation-for="Name"></span>
     </div>
     <div class="form-group">
         <label asp-for="Cost">Цена:</label>
-        <input asp-for="Cost" class="form-control">
+        <input asp-for="Cost" class="form-control" value="@Model.Cost">
         <span asp-validation-for="Cost"></span>
     </div>
     <div class="form-group">
         <label asp-for="Description">Описание:</label>
-        <input asp-for="Description" class="form-control">
+        <input asp-for="Description" class="form-control" value="@Model.Description">
         <span asp-validation-for="Description"></span>
     </div>
     <div class="form-group">
         <label asp-for="ImagePath">Изображение:</label>
-        <input asp-for="ImagePath" class="form-control">
+        <input asp-for="ImagePath" class="form-control" value="@Model.ImagePath">
         <span asp-validation-for="ImagePath"></span>
     </div>
 
     <input class="btn-primary" type="submit" value="Сохранить" />
-    <a class="btn btn-warning" role="button" asp-controller="Administrator" asp-action="GetProducts">Отмена</a>
+    <a class="btn btn-warning" role="button" asp-controller="Administrator" asp-action="GetProducts" asp-area="Administrator">Отмена</a>
 </form>

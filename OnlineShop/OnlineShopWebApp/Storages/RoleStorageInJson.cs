@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
+using OnlineShopWebApp.Areas.Administrator.Models;
 using OnlineShopWebApp.Interfaces;
-using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
 using System.Collections.Generic;
 using System.Linq;

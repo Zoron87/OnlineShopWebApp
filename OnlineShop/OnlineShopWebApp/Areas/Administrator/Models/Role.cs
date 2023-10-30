@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Cors;
-using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace OnlineShopWebApp.Models
+namespace OnlineShopWebApp.Areas.Administrator.Models
 {
     public class Role
     {

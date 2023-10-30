@@ -17,7 +17,7 @@
       "Items": [
         {
           "Product": {
-            "Id": 23,
+            "Id": 51,
             "Name": "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
             "Cost": 99999.0,
             "Description": "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
@@ -29,7 +29,7 @@
       "Amount": 4.0
     },
     "Id": "1160c1f4-280d-4741-b40d-6999c7dd29a4",
-    "OrderStatus": 2,
+    "OrderStatus": 0,
     "CreatedTime": "2023-10-26T15:54:06.0011242+04:00"
   },
   {
@@ -50,7 +50,7 @@
       "Items": [
         {
           "Product": {
-            "Id": 24,
+            "Id": 52,
             "Name": "Холодильник Midea MDRB499FGF01IM",
             "Cost": 21999.0,
             "Description": "Планшет Honor Pad X9 Wi-Fi Space Gray 5301AGJC функционирует на базе предустановленной ОС MagicOS 7.1.",
@@ -62,7 +62,7 @@
       "Amount": 2.0
     },
     "Id": "75b31be6-b4b8-49e8-bcf4-0217fe036382",
-    "OrderStatus": 4,
+    "OrderStatus": 0,
     "CreatedTime": "2023-10-26T17:04:55.4086068+04:00"
   },
   {
@@ -83,7 +83,7 @@
       "Items": [
         {
           "Product": {
-            "Id": 25,
+            "Id": 53,
             "Name": "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
             "Cost": 99999.0,
             "Description": "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
@@ -93,7 +93,7 @@
         },
         {
           "Product": {
-            "Id": 26,
+            "Id": 54,
             "Name": "Телевизор Samsung QE43Q60BAU1",
             "Cost": 69999.0,
             "Description": "Телевизор Samsung QE43Q60BAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки.",
@@ -103,7 +103,7 @@
         },
         {
           "Product": {
-            "Id": 27,
+            "Id": 55,
             "Name": "Холодильник Midea MDRB499FGF01IM",
             "Cost": 79999.0,
             "Description": "Холодильник Midea MDRB499FGF01IM, белый оснащен холодильной камерой объемом 250 л и нижней морозильной камерой объемом 76 л.",
@@ -136,7 +136,7 @@
       "Items": [
         {
           "Product": {
-            "Id": 28,
+            "Id": 56,
             "Name": "Телевизор Samsung QE43Q60BAU1",
             "Cost": 69999.0,
             "Description": "Телевизор Samsung QE43Q60BAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки.",
@@ -169,7 +169,7 @@
       "Items": [
         {
           "Product": {
-            "Id": 2,
+            "Id": 57,
             "Name": "Телевизор Samsung QE43Q60BAU1",
             "Cost": 69999.0,
             "Description": "Телевизор Samsung QE43Q60BAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки.",
@@ -183,5 +183,48 @@
     "Id": "4bd397f8-78cf-4223-8f51-fd5fc3b43fa4",
     "OrderStatus": 0,
     "CreatedTime": "2023-10-27T15:44:43.3345432+04:00"
+  },
+  {
+    "OrderDetails": {
+      "Id": 0,
+      "Name": "Мишка",
+      "Phone": "239432497",
+      "Email": "mishka@mail.ru",
+      "Address": "Адрес Мишки",
+      "Delivery": 0,
+      "DeliveryDate": "2023-11-01T00:00:00",
+      "Pay": 0,
+      "Comment": null
+    },
+    "Cart": {
+      "Id": 0,
+      "UserId": "b7df8351-8d1a-4752-8aa1-e9627ba22c9e",
+      "Items": [
+        {
+          "Product": {
+            "Id": 58,
+            "Name": "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
+            "Cost": 99999.0,
+            "Description": "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
+            "ImagePath": "notebook_MSI_Katana_17_B12VEK-482XRU_1.jpg"
+          },
+          "Quantity": 3
+        },
+        {
+          "Product": {
+            "Id": 59,
+            "Name": "Телевизор Samsung QE43Q60BAU1",
+            "Cost": 69999.0,
+            "Description": "Телевизор Samsung QE43Q60BAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки.",
+            "ImagePath": "tv_Samsung_QE43Q60BAU_1.jpg"
+          },
+          "Quantity": 2
+        }
+      ],
+      "Amount": 5.0
+    },
+    "Id": "7cd76e72-f9a9-43bd-a9a7-226dcabb5429",
+    "OrderStatus": 1,
+    "CreatedTime": "2023-10-31T00:45:26.7944482+04:00"
   }
 ]

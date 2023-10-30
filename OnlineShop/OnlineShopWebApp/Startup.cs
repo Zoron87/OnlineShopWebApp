@@ -66,7 +66,11 @@ namespace OnlineShopWebApp
 
 			app.UseEndpoints(endpoints =>
 			{
-				endpoints.MapControllerRoute(
+                endpoints.MapControllerRoute(
+                    name: "MyArea",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id=0}");
+
+                endpoints.MapControllerRoute(
 					name: "default",
 					pattern: "{controller=Home}/{action=Index}/{id=0}");
 			});
