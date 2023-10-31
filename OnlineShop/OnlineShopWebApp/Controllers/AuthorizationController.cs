@@ -1,11 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using System;
+using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
 {
     public class AuthorizationController : Controller
     {
+        private readonly IUserStorage userStorage;
+
+        public AuthorizationController(IUserStorage userStorage)
+        {
+            this.userStorage = userStorage;
+        }
         public ActionResult Login()
         {
             return View();
@@ -14,8 +22,16 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public ActionResult Login(Login loginInfo)
         {
+            if (!userStorage.CheckExistUser(loginInfo))
+            {
+                ModelState.AddModelError("", "Пользователь с таким email или паролем не найден!");
+            }
+
             if (ModelState.IsValid)
-                return RedirectToAction("Index", "Home");
+            {
+                ViewData["UserEmail"] = loginInfo.Email;
+                return View("Success");
+            }
             return View(loginInfo);
         }
 
@@ -36,8 +52,17 @@ namespace OnlineShopWebApp.Controllers
             if (String.IsNullOrEmpty(registerInfo.Password) || String.IsNullOrEmpty(registerInfo.ConfirmPassword))
                 ModelState.AddModelError("", "Пароль не может быть пустым");
 
+            if (userStorage.GetAll().Any(u => u.Email == registerInfo.Email))
+            {
+                ModelState.AddModelError("Email", "Такой email уже зарегистрирован. Используйте другой");
+            }
+
             if (ModelState.IsValid)
-                return RedirectToAction("Index", "Home");
+            {
+                userStorage.Add(registerInfo);
+                ViewData["UserEmail"] = registerInfo.Email;
+                return View("Success");
+            }
             return View(registerInfo);
         }
     }

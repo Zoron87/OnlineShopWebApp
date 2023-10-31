@@ -42,7 +42,7 @@ namespace OnlineShopWebApp.Controllers
 
 			if (ModelState.IsValid)
 			{
-				var cart = cartStorage.TryGetById(ShopUser.Id);
+				var cart = cartStorage.TryGetById(StaticUser.Id);
 
 				if (cart != null && orderDetails != null)
 				{

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Models;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -7,7 +8,7 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly IProductStorage productStorage;
 
-		public HomeController(IProductStorage productStorage)
+        public HomeController(IProductStorage productStorage)
 		{
 			this.productStorage = productStorage;
 		}

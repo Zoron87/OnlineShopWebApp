@@ -10,7 +10,7 @@ namespace OnlineShopWebApp.Storages
     public class RoleStorageInJson : IRoleStorage
     {
         private List<Role> roles;
-        private string filePath = "Storages/Roles.txt";
+        private string filePath = "Storages/Roles.json";
 
         public RoleStorageInJson()
         {

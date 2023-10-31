@@ -11,7 +11,7 @@ namespace OnlineShopWebApp.Storages
 {
     public class ProductStorageInJson : IProductStorage
     {
-        private static string productsFilePath = "Storages/Products.txt";
+        private static string productsFilePath = "Storages/Products.json";
         private readonly List<Product> products;
 
         public ProductStorageInJson()

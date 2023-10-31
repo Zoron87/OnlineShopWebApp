@@ -15,13 +15,13 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult Index()
         {
-            var cart = cartStorage.TryGetById(ShopUser.Id);
+            var cart = cartStorage.TryGetById(StaticUser.Id);
             return View(cart);
         }
 
         public ActionResult Add(int productId)
         {
-            cartStorage.AddItem(ShopUser.Id, productId);
+            cartStorage.AddItem(StaticUser.Id, productId);
             return RedirectToAction("Index");
         }
 
@@ -30,7 +30,7 @@ namespace OnlineShopWebApp.Controllers
         {
             if (productId > 0)
             {
-                cartStorage.AddItem(ShopUser.Id, productId, quantity);
+                cartStorage.AddItem(StaticUser.Id, productId, quantity);
                 return RedirectToAction("Index");
             }
 
@@ -39,19 +39,19 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult Reduce(int productId)
         {
-            cartStorage.Reduce(ShopUser.Id, productId);
+            cartStorage.Reduce(StaticUser.Id, productId);
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int productId)
         {
-            cartStorage.DeleteItem(ShopUser.Id, productId);
+            cartStorage.DeleteItem(StaticUser.Id, productId);
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
-            cartStorage.Clear(ShopUser.Id);
+            cartStorage.Clear(StaticUser.Id);
             return RedirectToAction("Index");
         }
     }

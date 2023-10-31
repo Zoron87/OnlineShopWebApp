@@ -2,11 +2,18 @@
 
 namespace OnlineShopWebApp.Models
 {
-    public static class ShopUser
+    public class ShopUser
     {
-        public static Guid Id = Guid.NewGuid();
-        public static string Name { get; set; }
-        public static string Email { get; set; }
-        public static string Password { get; set; }
+        public Guid Id = Guid.NewGuid();
+        public string Email { get; set; }
+        public string Password { get; set; }
+
+        public ShopUser() { }
+
+        public ShopUser(string Email, string Password)
+        {
+            this.Email = Email;
+            this.Password = Password;
+        }
     }
 }

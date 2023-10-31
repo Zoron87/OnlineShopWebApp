@@ -1,4 +1,46 @@
-﻿<div style="float: left; margin-right: 56px;">
-    @await Html.PartialAsync("AdminMenu")
-</div>
-<h3>Список пользователей</h3>
+﻿@model List<OnlineShopWebApp.Models.ShopUser>
+
+@{
+    ViewData["Title"] = "Список пользователей";
+    int i = 1;
+}
+
+@if (Model == null || Model.Count == 0)
+{
+    <h3>Список пользователей пуст!</h3>
+}
+else
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                @await Html.PartialAsync("AdminMenu")
+            </div>
+            <div class="col-9">
+                <h3>Список ролей</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">№</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Пароль</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    @foreach (var user in Model)
+                    {
+                        <tbody class="table-group-divider">
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>@user.Email</td>
+                                <td>@user.Password</td>
+                                <td><a class="btn btn-danger" asp-controller="User" asp-action="Delete" asp-route-email="@user.Email">Удалить</a></td>
+                            </tr>
+                        </tbody>
+                        i++;
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+}

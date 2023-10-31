@@ -10,7 +10,7 @@ namespace OnlineShopWebApp.Storages
 {
     public class OrderStorageInJson : IOrderStorage
     {
-        private readonly string filePath = "Storages/Orders.txt";
+        private readonly string filePath = "Storages/Orders.json";
         private List<Order> orders;
 
         public OrderStorageInJson()
