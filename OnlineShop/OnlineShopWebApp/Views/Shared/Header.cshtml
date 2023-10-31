@@ -24,8 +24,8 @@
                                     Войти
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a asp-controller="Authorization" asp-action="Login" class="dropdown-item">Вход</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Authorization" asp-action="Registration">Регистрация</a></li>
+                                    <li><a asp-controller="Authorization" asp-action="Login" asp-area="" class="dropdown-item">Вход</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Authorization" asp-action="Registration" asp-area="">Регистрация</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
             <div class="row align-items-center">
 
                 <div class="col-sm-6">
-                    <a asp-controller="Home" asp-action="Index" class="header-logo h1">ONLINE-SHOP</a>
+                    <a asp-controller="Home" asp-action="Index" asp-area="" class="header-logo h1">ONLINE-SHOP</a>
                 </div>
 
                 <div class="col-sm-6 mt-2 mt-md-0">

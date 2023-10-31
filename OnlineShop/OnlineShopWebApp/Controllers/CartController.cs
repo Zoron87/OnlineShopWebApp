@@ -43,6 +43,12 @@ namespace OnlineShopWebApp.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Delete(int productId)
+        {
+            cartStorage.DeleteItem(ShopUser.Id, productId);
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Clear()
         {
             cartStorage.Clear(ShopUser.Id);
