@@ -18,6 +18,6 @@ namespace OnlineShopWebApp.Models
         [StringLength(20, MinimumLength = 6, ErrorMessage = "Длина строки подтверждающего пароля должна быть от {2} до {1} символов")]
         [Compare("Password", ErrorMessage = "Введенные пароли не совпадают")]
         public string ConfirmPassword { get; set; }
-        public string IsRememberMe { get; set; }
+        public bool IsRememberMe { get; set; }
     }
 }

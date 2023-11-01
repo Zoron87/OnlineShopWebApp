@@ -1,0 +1,53 @@
+﻿@model ShopUser
+
+@{
+    ViewData["Title"] = "Детали пользователя";
+}
+
+@if (Model == null)
+{
+    <h3>Вы не выбрали пользователя!</h3>
+    <p><a asp-controller="Home" asp-action="Index">Вернуться на главную страницу</a></p>
+}
+else
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                @await Html.PartialAsync("AdminMenu")
+            </div>
+            <div class="col-9">
+                <h3 class="text-center">Пользователь @Model.Email:</h3>
+                <table style="border-collapse: collapse; width: 100%; margin: auto" border="1px solid blue">
+                    <tbody>
+                        <tr class="text-center">
+                            <td style="width: 50%;">Имя пользователя</td>
+                            <td style="width: 50%;">@Model.Name</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td style="width: 50%;">Email пользователя</td>
+                            <td style="width: 50%;">@Model.Email</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td style="width: 50%;">Роль пользователя</td>
+                            <td style="width: 50%;">@Model.Role</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td style="width: 50%;">Пароль пользователя</td>
+                            <td style="width: 50%;">@Model.Password</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle float-end mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Действия
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" asp-controller="User" asp-action="Edit" asp-route-email="@Model.Email">Редактирование данных</a></li>
+                        <li><a class="dropdown-item" asp-controller="User" asp-action="Delete" asp-route-email="@Model.Email">Удалить пользователя</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}

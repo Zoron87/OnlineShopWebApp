@@ -8,6 +8,7 @@
 @if (Model == null || Model.Count == 0)
 {
     <h3>Список пользователей пуст!</h3>
+    <a class="btn btn-primary" asp-controller="User" asp-action="Add">Добавить пользователя</a>
 }
 else
 {
@@ -17,13 +18,14 @@ else
                 @await Html.PartialAsync("AdminMenu")
             </div>
             <div class="col-9">
-                <h3>Список ролей</h3>
+                <h3>Список пользователей</h3>
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">№</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Пароль</th>
+                            <th scope="col">Роль</th>
+                            <th scope="col"></th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -32,14 +34,16 @@ else
                         <tbody class="table-group-divider">
                             <tr>
                                 <th scope="row">@i</th>
-                                <td>@user.Email</td>
-                                <td>@user.Password</td>
+                                <td><a asp-controller="User" asp-action="Details" asp-route-email="@user.Email">@user.Email</a></td>
+                                <td>@user.Role</td>
+                                <td><a class="btn btn-primary" asp-controller="User" asp-action="Details" asp-route-email="@user.Email">Подробнее</a></td>
                                 <td><a class="btn btn-danger" asp-controller="User" asp-action="Delete" asp-route-email="@user.Email">Удалить</a></td>
                             </tr>
                         </tbody>
                         i++;
                     }
                 </table>
+                <a class="btn btn-primary" asp-controller="User" asp-action="Add">Добавить пользователя</a>
             </div>
         </div>
     </div>
