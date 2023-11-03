@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Storages;
 using Serilog;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace OnlineShopWebApp
 			services.AddSingleton<IOrderStorage, OrderStorageInJson>();
 			services.AddSingleton<IProductStorage, ProductStorageInJson>();
 			services.AddSingleton<ICartStorage, CartStorage>();
+            services.AddSingleton<ShopUser>();
 			services.AddControllersWithViews();
 		}
 

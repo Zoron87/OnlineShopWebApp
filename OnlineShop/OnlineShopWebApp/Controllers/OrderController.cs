@@ -9,13 +9,15 @@ namespace OnlineShopWebApp.Controllers
     public class OrderController : Controller
 	{
 		private readonly IOrderStorage orderStorage;
-		private readonly ICartStorage cartStorage;
+        private readonly ShopUser shopUser;
+        private readonly ICartStorage cartStorage;
 
-		public OrderController(ICartStorage cartStorage, IOrderStorage orderStorage)
+		public OrderController(ICartStorage cartStorage, IOrderStorage orderStorage, ShopUser shopUser)
 		{
 			this.cartStorage = cartStorage;
 			this.orderStorage = orderStorage;
-		}
+            this.shopUser = shopUser;
+        }
 		public ActionResult Index()
 		{
 			return View();
@@ -42,7 +44,7 @@ namespace OnlineShopWebApp.Controllers
 
 			if (ModelState.IsValid)
 			{
-				var cart = cartStorage.TryGetById(StaticUser.Id);
+				var cart = cartStorage.TryGetById(shopUser.Id);
 
 				if (cart != null && orderDetails != null)
 				{

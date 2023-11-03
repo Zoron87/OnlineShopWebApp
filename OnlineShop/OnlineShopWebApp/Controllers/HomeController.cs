@@ -11,7 +11,7 @@ namespace OnlineShopWebApp.Controllers
         public HomeController(IProductStorage productStorage)
 		{
 			this.productStorage = productStorage;
-		}
+        }
 
         public ActionResult Index()
         {

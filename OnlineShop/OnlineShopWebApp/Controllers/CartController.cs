@@ -7,21 +7,23 @@ namespace OnlineShopWebApp.Controllers
     public class CartController : Controller
     {
         private readonly ICartStorage cartStorage;
+        private readonly ShopUser shopUser;
 
-        public CartController(ICartStorage cartStorage)
+        public CartController(ICartStorage cartStorage, ShopUser shopUser)
         {
             this.cartStorage = cartStorage;
+            this.shopUser = shopUser;
         }
 
         public ActionResult Index()
         {
-            var cart = cartStorage.TryGetById(StaticUser.Id);
+            var cart = cartStorage.TryGetById(shopUser.Id);
             return View(cart);
         }
 
         public ActionResult Add(int productId)
         {
-            cartStorage.AddItem(StaticUser.Id, productId);
+            cartStorage.AddItem(shopUser.Id, productId);
             return RedirectToAction("Index");
         }
 
@@ -30,7 +32,7 @@ namespace OnlineShopWebApp.Controllers
         {
             if (productId > 0)
             {
-                cartStorage.AddItem(StaticUser.Id, productId, quantity);
+                cartStorage.AddItem(shopUser.Id, productId, quantity);
                 return RedirectToAction("Index");
             }
 
@@ -39,19 +41,19 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult Reduce(int productId)
         {
-            cartStorage.Reduce(StaticUser.Id, productId);
+            cartStorage.Reduce(shopUser.Id, productId);
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int productId)
         {
-            cartStorage.DeleteItem(StaticUser.Id, productId);
+            cartStorage.DeleteItem(shopUser.Id, productId);
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
-            cartStorage.Clear(StaticUser.Id);
+            cartStorage.Clear(shopUser.Id);
             return RedirectToAction("Index");
         }
     }

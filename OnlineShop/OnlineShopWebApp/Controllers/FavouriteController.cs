@@ -7,32 +7,34 @@ namespace OnlineShopWebApp.Controllers
 	public class FavouriteController : Controller
 	{
 		private readonly IFavouriteStorage favouriteStorage;
+        private readonly ShopUser shopUser;
 
-        public FavouriteController(IFavouriteStorage favouriteStorage)
-		{
+        public FavouriteController(IFavouriteStorage favouriteStorage, ShopUser shopUser)
+        {
 			this.favouriteStorage = favouriteStorage;
-		}
+            this.shopUser = shopUser;
+        }
 		public ActionResult Index()
 		{
-			var products = favouriteStorage.TryGetById(StaticUser.Id);
+			var products = favouriteStorage.TryGetById(shopUser.Id);
 			return View(products);
 		}
 
 		public ActionResult Add(int productId)
 		{
-			favouriteStorage.Add(StaticUser.Id, productId);
+			favouriteStorage.Add(shopUser.Id, productId);
 			return RedirectToAction("Index");
 		}
 
 		public ActionResult Delete(int productId)
 		{
-			favouriteStorage.Delete(StaticUser.Id, productId);
+			favouriteStorage.Delete(shopUser.Id, productId);
 			return RedirectToAction("Index");
 		}
 
 		public ActionResult Clear()
 		{
-			favouriteStorage.Clear(StaticUser.Id);
+			favouriteStorage.Clear(shopUser.Id);
 			return RedirectToAction("Index");
 		}
 	}
