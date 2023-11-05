@@ -14,19 +14,19 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         {
             this.roleStorage = roleStorage;
         }
-        public ActionResult GetRoles()
+        public ActionResult Index()
         {
             var roles = roleStorage.GetAll();
             return View(roles);
         }
 
-        public ActionResult AddRole()
+        public ActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddRole(Role role)
+        public ActionResult Add(Role role)
         {
             var roles = roleStorage.GetAll();
             if (roles.Any(r => r.Name.ToLower() == role.Name.ToLower()))
@@ -37,15 +37,15 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             if (ModelState.IsValid)
             {
                 roleStorage.Add(role);
-                return RedirectToAction("GetRoles");
+                return RedirectToAction("Index");
             }
             return View(role);
         }
 
-        public ActionResult DeleteRole(string name)
+        public ActionResult Delete(string name)
         {
             roleStorage.Delete(name);
-            return RedirectToAction("GetRoles");
+            return RedirectToAction("Index");
         }
     }
 }

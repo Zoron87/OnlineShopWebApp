@@ -20,7 +20,7 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             this.userStorage = userStorage;
             this.roleStorage = roleStorage;
         }
-        public ActionResult GetUsers()
+        public ActionResult Index()
         {
             var users = userStorage.GetAll();
             return View(users);
@@ -29,7 +29,7 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         public ActionResult Delete(string Email)
         {
             userStorage.Delete(Email);
-            return RedirectToAction("GetUsers");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Add()
@@ -57,7 +57,7 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             if (ModelState.IsValid)
             {
                 userStorage.Add(registerInfo);
-                return RedirectToAction("GetUsers");
+                return RedirectToAction("Index");
             }
             return View(registerInfo);
         }
@@ -81,7 +81,7 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             if (ModelState.IsValid)
             {
                 userStorage.Edit(shopUser);
-                return RedirectToAction("GetUsers");
+                return RedirectToAction("Index");
             }
             return View(shopUser);
         }

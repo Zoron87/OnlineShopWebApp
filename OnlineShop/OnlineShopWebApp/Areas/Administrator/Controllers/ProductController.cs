@@ -13,33 +13,33 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         {
             this.productStorage = productStorage;
         }
-        public ActionResult GetProducts()
+        public ActionResult Index()
         {
             var products = productStorage.GetAll();
             return View(products);
         }
 
-        public ActionResult EditProduct(int productId)
+        public ActionResult Edit(int productId)
         {
             var product = productStorage.TryGetById(productId);
-            return View("EditProduct", product);
+            return View(product);
         }
 
-        public ActionResult DeleteProduct(int productId)
+        public ActionResult Delete(int productId)
         {
             productStorage.Delete(productId);
             if (productStorage.SaveAll())
-                return RedirectToAction("GetProducts");
+                return RedirectToAction("Index");
             return View("Error");
         }
 
-        public ActionResult AddProduct()
+        public ActionResult Add()
         {
-            return View("AddProduct");
+            return View();
         }
 
         [HttpPost]
-        public ActionResult AddProduct(Item item)
+        public ActionResult Add(Item item)
         {
             if (string.IsNullOrWhiteSpace(item.ImagePath))
                 item.ImagePath = "blank-product.jpg";
@@ -48,13 +48,13 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             {
                 productStorage.Add(item);
                 if (productStorage.SaveAll())
-                    return RedirectToAction("GetProducts");
+                    return RedirectToAction("Index");
             }
             return View(item);
         }
 
         [HttpPost]
-        public ActionResult SaveProduct(int productId, Item item)
+        public ActionResult Save(int productId, Item item)
         {
             if (string.IsNullOrWhiteSpace(item.ImagePath))
                 item.ImagePath = "blank-product.jpg";
@@ -63,7 +63,7 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             {
                 productStorage.SaveChange(productId, item);
                 if (productStorage.SaveAll())
-                    return RedirectToAction("GetProducts");
+                    return RedirectToAction("Index");
             }
             return View(item);
         }

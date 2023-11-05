@@ -52,7 +52,7 @@ else
                                                     Вы действительно хотите удалить пользователя '<strong>@user.Email</strong>'?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button asp-controller="User" asp-action="GetUsers" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
                                                     <a asp-area="Administrator" asp-controller="User" asp-action="Delete" asp-route-email="@user.Email" type="button" class="btn btn-primary">Да</a>
                                                 </div>
                                             </div>

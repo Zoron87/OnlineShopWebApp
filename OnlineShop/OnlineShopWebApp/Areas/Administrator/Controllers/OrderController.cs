@@ -14,23 +14,23 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         {
             this.orderStorage = orderStorage;
         }
-        public ActionResult GetOrders()
+        public ActionResult Index()
         {
             var orders = orderStorage.GetAll();
-            return View("GetOrders", orders);
+            return View(orders);
         }
 
-        public ActionResult OrderDetails(Guid orderId)
+        public ActionResult Details(Guid orderId)
         {
             var order = orderStorage.Get(orderId);
             return View(order);
         }
 
         [HttpPost]
-        public IActionResult UpdateOrderStatus(Guid orderId, OrderStatus orderStatus)
+        public IActionResult UpdateStatus(Guid orderId, OrderStatus orderStatus)
         {
             orderStorage.UpdateStatus(orderId, orderStatus);
-            return RedirectToAction("GetOrders");
+            return RedirectToAction("Index");
         }
     }
 }

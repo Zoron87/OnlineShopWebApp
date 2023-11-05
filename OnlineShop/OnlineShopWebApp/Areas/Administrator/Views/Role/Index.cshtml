@@ -7,7 +7,7 @@
 @if (Model == null || Model.Count == 0)
 {
     <h3>Список ролей пуст!</h3>
-    <p><a class="btn btn-primary float-start mb-3" asp-controller="Role" asp-action="AddRole">Добавить новую роль</a></p>
+    <p><a class="btn btn-primary float-start mb-3" asp-controller="Role" asp-action="Add">Добавить новую роль</a></p>
 }
 else
 {
@@ -34,13 +34,13 @@ else
                                 <th scope="row">@i</th>
                                 <td>@role.Name</td>
                                 <td>@role.Description</td>
-                                <td><a class="btn btn-danger" asp-controller="Role" asp-action="DeleteRole" asp-route-name="@role.Name">Удалить</a></td>
+                                <td><a class="btn btn-danger" asp-controller="Role" asp-action="Delete" asp-route-name="@role.Name">Удалить</a></td>
                             </tr>
                         </tbody>
                         i++;
                     }
                 </table>
-                <p><a class="btn btn-primary float-end mb-3" asp-controller="Role" asp-action="AddRole">Добавить новую роль</a></p>
+                <p><a class="btn btn-primary float-end mb-3" asp-controller="Role" asp-action="Add">Добавить новую роль</a></p>
             </div>
         </div>
     </div>

@@ -1,0 +1,57 @@
+﻿@model List<Product>
+
+@{
+    ViewData["Title"] = "Редактирование продукта";
+}
+
+<div class="row">
+    <div class="col-3">
+        @await Html.PartialAsync("AdminMenu")
+    </div>
+    <div class="col-9">
+        <h3>Список продуктов</h3>
+        <p><a asp-controller="Product" asp-action="Add">Добавить новый продукт</a></p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            @foreach (var product in Model)
+            {
+                <tbody class="table-group-divider">
+                    <tr>
+                        <th scope="row">@product.Id</th>
+                        <td>@product.Name</td>
+                        <td>@product.Cost</td>
+                        <td><a class="btn btn-primary" asp-controller="Product" asp-action="Edit" asp-route-productid="@product.Id">Редактировать</a></td>
+                        <td>
+                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-product-@product.Id">Удалить</a>
+                            <div class="modal fade" id="delete-product-@product.Id" tabindex="-1" aria-labelledby="DeleteProductModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="DeleteUserModalLabel">Подтвердите операцию удаления</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Вы действительно хотите удалить товар '<strong>@product.Name</strong>'?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                                            <a asp-controller="Product" asp-action="Delete" asp-route-productid="@product.Id" type="button" class="btn btn-primary">Да</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
