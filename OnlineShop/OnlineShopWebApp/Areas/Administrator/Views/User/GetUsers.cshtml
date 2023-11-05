@@ -37,7 +37,28 @@ else
                                 <td><a asp-controller="User" asp-action="Details" asp-route-email="@user.Email">@user.Email</a></td>
                                 <td>@user.Role</td>
                                 <td><a class="btn btn-primary" asp-controller="User" asp-action="Details" asp-route-email="@user.Email">Подробнее</a></td>
-                                <td><a class="btn btn-danger" asp-controller="User" asp-action="Delete" asp-route-email="@user.Email">Удалить</a></td>
+                                <td>
+                                    <a class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#modal-delete-user">
+                                        Удалить
+                                    </a>
+                                    <div class="modal fade" id="modal-delete-user" tabindex="-1" aria-labelledby="DeleteUserModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="DeleteUserModalLabel">Подтвердите операцию удаления</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Вы действительно хотите удалить пользователя '<strong>@user.Email</strong>'?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button asp-controller="User" asp-action="GetUsers" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                                                    <a asp-area="Administrator" asp-controller="User" asp-action="Delete" asp-route-email="@user.Email" type="button" class="btn btn-primary">Да</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                         i++;

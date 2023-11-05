@@ -1,16 +1,9 @@
 [
   {
-    "Id": "d14aef3b-fadc-42bb-ae52-67a75a153795",
-    "Email": "435345@mail.ru",
-    "Role": "User",
-    "Name": "Павел",
-    "Password": "12345677"
-  },
-  {
-    "Id": "21e51bb9-5f5b-4a63-91fa-a67a8deb92cb",
+    "Id": "e94e7c8f-fd05-4a3c-b544-26ae35f7662a",
     "Email": "vasya@mail.ru",
-    "Role": "Manager",
-    "Name": "Вася",
+    "Role": null,
+    "Name": null,
     "Password": "123456"
   }
 ]
