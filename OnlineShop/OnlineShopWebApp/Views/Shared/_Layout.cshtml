@@ -9,15 +9,14 @@
 	<link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-	<div class="wrapper">
-		@await Html.PartialAsync("Header");
-		<div class="container">
-			<main role="main" class="pb-3">
+		<div class="wrapper">
+			@await Html.PartialAsync("Header")
+			<main role="main">
 				@RenderBody()
 			</main>
 		</div>
 
-		@await Html.PartialAsync("Footer");
+		@await Html.PartialAsync("Footer")
 
 		<button id="top">
 			<i class="fa-solid fa-angles-up"></i>

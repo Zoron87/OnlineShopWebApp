@@ -1,16 +1,16 @@
 [
   {
-    "Id": "773dbdbb-37bb-4dbe-956f-80464f96b83d",
-    "Email": "pupkin@mail.ru",
-    "Role": "Admin",
-    "Name": "Вася",
-    "Password": "123456"
-  },
-  {
     "Id": "d83ec088-b5e2-4475-92e7-09f7ba059867",
     "Email": "mail22@domain.com",
+    "Role": "User",
+    "Name": "Маня",
+    "Password": "222222"
+  },
+  {
+    "Id": "b67b9cc8-7afd-4b7f-ba99-690256fa1733",
+    "Email": "pupkin@mail.ru",
     "Role": null,
     "Name": null,
-    "Password": "222222"
+    "Password": "123456"
   }
 ]

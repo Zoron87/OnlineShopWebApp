@@ -5,28 +5,33 @@
     int i = 1;
 }
 
-@if (Model == null || Model.Count == 0)
-{
-    <h3>Список пользователей пуст!</h3>
-    <a class="btn btn-primary" asp-controller="User" asp-action="Add">Добавить пользователя</a>
-}
-else
-{
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-3">
-                @await Html.PartialAsync("AdminMenu")
-            </div>
-            <div class="col-9">
-                <h3>Список пользователей</h3>
-                <table class="table">
-                    <thead>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            @await Html.PartialAsync("AdminMenu")
+        </div>
+        <div class="col-md-9">
+            @if (Model == null || Model.Count == 0)
+            {
+                <h3>Список пользователей пуст!</h3>
+                <div class="text-start mt-3 cart-buttons">
+                    <div><a role="button" class="btn btn-warning float-start" asp-controller="User" asp-action="Add">Добавить пользователя</a></div>
+                </div>
+            }
+            else
+            {
+                <h3 class="section-title mb-3"><span>Список пользователей</span></h3>
+                <div class="text-end mt-3 cart-buttons">
+                    <a role="button" class="btn btn-warning float-end mb-3 p-2" asp-controller="User" asp-action="Add">Добавить пользователя</a>
+                </div>
+                <table class="table align-middle text-center table-hover">
+                    <thead class="table-dark">
                         <tr>
                             <th scope="col">№</th>
                             <th scope="col">Email</th>
                             <th scope="col">Роль</th>
-                            <th scope="col"></th>
-                            <th scope="col"></th>
+                            <th scope="col"><i class="fa-solid fa-pen-to-square"></th>
+                            <th scope="col"><i class="fa-regular fa-trash-can"></th>
                         </tr>
                     </thead>
                     @foreach (var user in Model)
@@ -37,11 +42,8 @@ else
                                 <td><a asp-controller="User" asp-action="Details" asp-route-email="@user.Email">@user.Email</a></td>
                                 <td>@user.Role</td>
                                 <td><a class="btn btn-primary" asp-controller="User" asp-action="Details" asp-route-email="@user.Email">Подробнее</a></td>
-                                <td>
-                                    <a class="btn btn-danger"  data-bs-toggle="modal" data-bs-target="#modal-delete-user">
-                                        Удалить
-                                    </a>
-                                    <div class="modal fade" id="modal-delete-user" tabindex="-1" aria-labelledby="DeleteUserModalLabel" aria-hidden="true">
+                                <td><a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete-user-@user.Id">Удалить</a>
+                                    <div class="modal fade" id="modal-delete-user-@user.Id" tabindex="-1" aria-labelledby="DeleteUserModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -63,9 +65,8 @@ else
                         </tbody>
                         i++;
                     }
-                </table>
-                <a class="btn btn-primary" asp-controller="User" asp-action="Add">Добавить пользователя</a>
-            </div>
+                </table> 
+            }
         </div>
     </div>
-}
+</div>

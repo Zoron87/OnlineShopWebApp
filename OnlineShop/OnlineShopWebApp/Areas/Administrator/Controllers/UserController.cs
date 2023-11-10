@@ -26,9 +26,9 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             return View(users);
         }
 
-        public ActionResult Delete(string Email)
+        public ActionResult Delete(string email)
         {
-            userStorage.Delete(Email);
+            userStorage.Delete(email);
             return RedirectToAction("Index");
         }
 

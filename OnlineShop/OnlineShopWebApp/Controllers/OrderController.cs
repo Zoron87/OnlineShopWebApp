@@ -25,7 +25,11 @@ namespace OnlineShopWebApp.Controllers
 
 		public ActionResult Details()
 		{
-			return View();
+            var cart = cartStorage.TryGetById(shopUser.Id);
+
+            if (cart != null)
+                return View(cart);
+			return View("Error");
 		}
 
 		public ActionResult ThankYou()
@@ -36,7 +40,7 @@ namespace OnlineShopWebApp.Controllers
 		[HttpPost]
 		public IActionResult Index(OrderDetails orderDetails)
 		{
-			if (orderDetails.Name.Any(c => char.IsDigit(c)))
+			if (orderDetails.Name == null || orderDetails.Name.Any(c => char.IsDigit(c)))
 				ModelState.AddModelError("", "В имени получателя допустимо использовать только буквы");
 
 			if (orderDetails.DeliveryDate <= DateTime.Now)
@@ -54,7 +58,7 @@ namespace OnlineShopWebApp.Controllers
 				}
 			}
 
-            return View("Details", orderDetails);
+            return View(orderDetails);
         }
     }
 }

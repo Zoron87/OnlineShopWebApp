@@ -9,5 +9,11 @@
 			Product = product;
 			Quantity = quantity;
 		}
+
+		public decimal Cost()
+		{
+			return Product.Cost * Quantity;
+		}
+
 	}
 }

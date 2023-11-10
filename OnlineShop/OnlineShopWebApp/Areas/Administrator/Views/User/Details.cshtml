@@ -4,21 +4,23 @@
     ViewData["Title"] = "Детали пользователя";
 }
 
-@if (Model == null)
-{
-    <h3>Вы не выбрали пользователя!</h3>
-    <p><a asp-controller="Home">Вернуться на главную страницу</a></p>
-}
-else
-{
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-3">
-                @await Html.PartialAsync("AdminMenu")
-            </div>
-            <div class="col-9">
-                <h3 class="text-center">Пользователь @Model.Email:</h3>
-                <table style="border-collapse: collapse; width: 100%; margin: auto" border="1px solid blue">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            @await Html.PartialAsync("AdminMenu")
+        </div>
+        <div class="col-sm-9">
+            @if (Model == null)
+            {
+                <h3>Вы не выбрали пользователя!</h3>
+                <div class="text-start mt-3 cart-buttons">
+                    <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Вернуться на главную страницу</a>
+                </div>
+            }
+            else
+            {
+                <h3 class="section-title mb-3"><span>Сведения о пользователе @Model.Email</span></h3>
+                <table class="table align-middle text-center table-hover">
                     <tbody>
                         <tr class="text-center">
                             <td style="width: 50%;">Имя пользователя</td>
@@ -46,8 +48,8 @@ else
                         <li><a class="dropdown-item" asp-controller="User" asp-action="Edit" asp-route-email="@Model.Email">Редактирование данных</a></li>
                         <li><a class="dropdown-item" asp-controller="User" asp-action="Delete" asp-route-email="@Model.Email">Удалить пользователя</a></li>
                     </ul>
-                </div>
-            </div>
+                </div>         
+}
         </div>
     </div>
-}
+</div>

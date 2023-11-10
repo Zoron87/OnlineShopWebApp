@@ -22,6 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="wwwroot\lib\font-awesome\all.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Storages\Products.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

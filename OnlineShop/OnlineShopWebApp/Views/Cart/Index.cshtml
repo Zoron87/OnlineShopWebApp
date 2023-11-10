@@ -4,44 +4,87 @@
 	ViewData["Title"] = "Корзина";
 }
 
-@if (Model == null || Model.Items.Count == 0 || Model.Items == null)
-{
-	<h1>Корзина пуста</h1>
-	<p><a asp-controller="Home" asp-action="Index">Вернуться на главную страницу</a></p>
-}
-else
-{
-	<div class="container-fluid">
-		<div class="row">
-			<div class="table-responsive">
-				<table class="table offcanvasCart-table">
-					<tbody>
-						@foreach (var item in Model.Items)
-						{
-							<tr>
-								<td class="product-img-td"><a asp-controller="Product" asp-action="Index" asp-route-productId="@item.Product.Id"><img src="~/img/products/@item.Product.ImagePath" alt="@item.Product.Name"></a></td>
-								<td><a asp-controller="Product" asp-action="Index" asp-route-productId="@item.Product.Id">@item.Product.Name</a></td>
-								<td>@item.Product.Cost р.</td>
-								<td><a asp-controller="Cart" asp-action="Add" asp-route-productId="@item.Product.Id"><i class="fa-solid fa-plus"></i></a></td>
-								<td>@item.Quantity</td>
-								<td><a asp-controller="Cart" asp-action="Reduce" asp-route-productId="@item.Product.Id"><i class="fa-solid fa-minus"></i></a></td>
-								<td><a class="btn btn-danger" style="display:inline;" asp-controller="Cart" asp-action="Delete" asp-route-productId="@item.Product.Id"><i class="fa-solid fa-circle-xmark"></i></a></td>
-							</tr>
-						}
-					</tbody>
-					<tfoot>
-						<tr>
-							<td colspan="4" class="text-end">Total: @Model.Cost() р.</td>
-						</tr>
-					</tfoot>
-				</table> <!-- //table offcanvasCart-table -->
-			</div>
+<div class="container">
+    <div class="row">
+        @if (Model == null || Model.Items.Count == 0 || Model.Items == null)
+        {
+	        <h3>Корзина пуста</h3>
+            <div class="text-start mb-3 mt-3 cart-buttons">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Вернуться на главную страницу</a>
+            </div>
+        }
+        else
+        {
+            <h2 class="section-title"><span>Корзина</span></h2>
+            <div class="btn-group-container d-flex">
+                <div class="col-lg-8">
+                    <div class="cart-content p-2 h-100">
+                        <div class="table-responsive">
+                            <div class="text-end pb-2 cart-buttons">
+                                <a asp-controller="Cart" asp-action="Clear" class="btn btn-outline-dark">Очистить корзину</a>
+                                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Вернуться на главную страницу</a>
+                            </div>
+                            <table class="table align-middle text-center table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Фото</th>
+                                        <th>Наименование</th>
+                                        <th>Цена, р.</th>
+                                        <th>Количество</th>
+                                        <th><i class="fa-regular fa-trash-can"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Items)
+                                    {
+                                        <tr>
+                                            <td class="product-img-td"><a asp-controller="Product" asp-action="Index" asp-route-productId="@item.Product.Id"><img src="~/img/products/@item.Product.ImagePath" alt="@item.Product.Name"></a></td>
+                                            <td>
+                                                <a asp-controller="Product" asp-action="Index" asp-route-productId="@item.Product.Id" class="cart-content-title">
+                                                    @item.Product.Name
+                                                </a>
+                                            </td>
+                                            <td>@item.Product.Cost</td>
+                                            <td>
+                                                <div class="d-flex justify-content-between">
+                                                    <div><a asp-controller="Cart" asp-action="Add" asp-route-productId="@item.Product.Id"><i class="fa-solid fa-plus"></i></a></div>
+                                                    <div>@item.Quantity</div>
+                                                    <div><a asp-controller="Cart" asp-action="Reduce" asp-route-productId="@item.Product.Id"><i class="fa-solid fa-minus"></i></a></div>
+                                                </div>
+                                            <td><a class="btn btn-danger" style="display:inline;" asp-controller="Cart" asp-action="Delete" asp-route-productId="@item.Product.Id"><i class="fa-solid fa-circle-xmark"></i></a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="cart-summary p-3 sidebar">
+                        <h5 class="section-title"><span>Детали заказа:</span></h5>
 
-			<div class="text-end mt-3 cart-buttons">
-				<a asp-controller="Order" asp-action="Details" class="btn btn-outline-primary">Оформить заказ</a>
-				<a asp-controller="Cart" asp-action="Clear" class="btn btn-outline-dark">Очистить корзину</a>
-				<a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Вернуться на главную страницу</a>
-			</div>
-		</div>
-	</div>
-}
+                        <div class="d-flex justify-content-between my-3">
+                            <h6>Стоимость товаров (@Model.Amount шт.):</h6>
+                            <h6>@Model.Cost() р.</h6>
+                        </div>
+
+                        <div class="d-flex justify-content-between my-3 border-bottom">
+                            <h6>Стоимость доставки</h6>
+                            <h6>0 р.</h6>
+                        </div>
+
+                        <div class="d-flex justify-content-between my-3">
+                            <h4>ИТОГО:</h4>
+                            <h4>@Model.Cost() р.</h4>
+                        </div>
+
+                        <div class="d-grid">
+                            <a asp-controller="Order" asp-action="Details" class="btn btn-primary">Оформить заказ</a>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        }
+    </div>
+</div>
+
