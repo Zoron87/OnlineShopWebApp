@@ -11,11 +11,13 @@ namespace OnlineShopWebApp.Storages
 	{
 		private List<Cart> carts = new List<Cart>();
 		private readonly IProductStorage productStorage;
+        private readonly ShopUser shopUser;
 
-		public CartStorage(IProductStorage productStorage)
+        public CartStorage(IProductStorage productStorage, ShopUser shopUser)
 		{
 			this.productStorage = productStorage;
-		}
+            this.shopUser = shopUser;
+        }
 
 		public void AddItem(Guid userId, int productId, int quantity = 1)
 		{

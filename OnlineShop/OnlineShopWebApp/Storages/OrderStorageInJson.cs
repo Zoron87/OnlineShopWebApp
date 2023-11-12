@@ -18,10 +18,10 @@ namespace OnlineShopWebApp.Storages
             orders = new List<Order>();
         }
 
-        public void Add(OrderDetails orderDetails, Cart cart)
+        public void Add(OrderMiddle orderMiddle)
         {
             orders = GetAll();
-            var order = new Order() { OrderDetails = orderDetails, Cart = cart };
+            var order = new Order() { OrderMiddle = orderMiddle };
             orders.Add(order);
             SaveAll(orders);
         }
@@ -53,6 +53,34 @@ namespace OnlineShopWebApp.Storages
                 return JsonConvert.DeserializeObject<List<Order>>(oldOrders);
 
             return orders;
+        }
+
+        public void Delete(Order order)
+        {
+            orders = GetAll();
+            if (orders != null)
+            {
+                var orderForDelete = orders.FirstOrDefault(o => o.Id == order.Id);
+                orders.Remove(orderForDelete);
+                SaveAll(orders);
+            }
+        }
+
+        public void Mapping(Order order, OrderDetails orderDetails)
+        {
+            order.OrderMiddle.Name = orderDetails.Name;
+            order.OrderMiddle.Email = orderDetails.Email;
+            order.OrderMiddle.Address = orderDetails.Address;
+            order.OrderMiddle.Comment = orderDetails.Comment;
+            order.OrderMiddle.Delivery = orderDetails.Delivery;
+            order.OrderMiddle.DeliveryDate = orderDetails.DeliveryDate;
+            order.OrderMiddle.Pay = orderDetails.Pay;
+            order.OrderMiddle.Phone = orderDetails.Phone;
+        }
+
+        public bool CheckBlankEmail(OrderMiddle orderMiddle)
+        {
+            return orders.Any(el => el.OrderMiddle.Cart.UserId == orderMiddle.Cart.UserId && String.IsNullOrEmpty(el.OrderMiddle.Email));
         }
     }
 }

@@ -26,11 +26,18 @@ namespace OnlineShopWebApp.Controllers
 		public ActionResult Details()
 		{
             var cart = cartStorage.TryGetById(shopUser.Id);
+			if (cart != null)
+			{
+				var orderMiddle = new OrderMiddle() { Cart = cart };
 
-            if (cart != null)
-                return View(cart);
+                if (!orderStorage.CheckBlankEmail(orderMiddle))
+                {
+					orderStorage.Add(orderMiddle);
+				}
+				return View(orderMiddle);
+			}
 			return View("Error");
-		}
+        }
 
 		public ActionResult ThankYou()
 		{
@@ -43,22 +50,25 @@ namespace OnlineShopWebApp.Controllers
 			if (orderDetails.Name == null || orderDetails.Name.Any(c => char.IsDigit(c)))
 				ModelState.AddModelError("", "В имени получателя допустимо использовать только буквы");
 
-			if (orderDetails.DeliveryDate <= DateTime.Now)
+			if (orderDetails.DeliveryDate.AddDays(1) < DateTime.Now)
 				ModelState.AddModelError("", "Нельзя выбрать дату доставки ранее текущей");
+
+            var orders = orderStorage.GetAll();
+            var order = orders.FirstOrDefault(el => el.OrderMiddle.Cart.UserId == shopUser.Id && String.IsNullOrEmpty(el.OrderMiddle.Email));
+            orderStorage.Mapping(order, orderDetails);
 
 			if (ModelState.IsValid)
 			{
-				var cart = cartStorage.TryGetById(shopUser.Id);
-
-				if (cart != null && orderDetails != null)
+				if (orderDetails != null || order != null)
 				{
-					orderStorage.Add(orderDetails, cart);
-					cart.Items.Clear();
+					orderStorage.Delete(order);
+                    orderStorage.SaveAll(orders);
+					cartStorage.Clear(shopUser.Id);
 					return View("ThankYou");
 				}
 			}
 
-            return View(orderDetails);
+            return View("Details", order.OrderMiddle);
         }
     }
 }

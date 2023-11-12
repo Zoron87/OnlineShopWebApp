@@ -572,7 +572,7 @@ footer {
         text-decoration: none;
     }
 
-.field-validation-error {
+.field-validation-error, .validation-summary-errors {
     color: #d24a43;
 }
 

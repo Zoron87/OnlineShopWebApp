@@ -1,230 +1,34 @@
 [
   {
-    "OrderDetails": {
-      "Id": 0,
-      "Name": "Марат Сафин",
-      "Phone": "3243243",
-      "Email": "safin@mail.ru",
-      "Address": "Адрес",
-      "Delivery": 0,
-      "DeliveryDate": "2023-10-27T00:00:00",
-      "Pay": 0,
-      "Comment": null
+    "Id": "734e54ba-d49b-43d2-87bb-d4ab42cada83",
+    "OrderMiddle": {
+      "Name": null,
+      "Phone": null,
+      "Email": null,
+      "Address": null,
+      "Delivery": null,
+      "DeliveryDate": "2023-11-13T01:08:11.8601208+04:00",
+      "Pay": null,
+      "Comment": null,
+      "Cart": {
+        "Id": 0,
+        "UserId": "7160f100-d073-42ab-91ea-0fd94012aa5a",
+        "Items": [
+          {
+            "Product": {
+              "Id": 1,
+              "Name": "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
+              "Cost": 99999.0,
+              "Description": "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
+              "ImagePath": "notebook_MSI_Katana_17_B12VEK-482XRU_1.jpg"
+            },
+            "Quantity": 1
+          }
+        ],
+        "Amount": 1.0
+      }
     },
-    "Cart": {
-      "Id": 0,
-      "UserId": "4b51bb8d-6f57-4887-912a-879f833aef4e",
-      "Items": [
-        {
-          "Product": {
-            "Id": 68,
-            "Name": "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
-            "Cost": 99999.0,
-            "Description": "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
-            "ImagePath": "notebook_MSI_Katana_17_B12VEK-482XRU_1.jpg"
-          },
-          "Quantity": 4
-        }
-      ],
-      "Amount": 4.0
-    },
-    "Id": "1160c1f4-280d-4741-b40d-6999c7dd29a4",
-    "OrderStatus": 2,
-    "CreatedTime": "2023-10-26T15:54:06.0011242+04:00"
-  },
-  {
-    "OrderDetails": {
-      "Id": 0,
-      "Name": "Вася Пупкин",
-      "Phone": "42394372",
-      "Email": "pupkin@mail.ru",
-      "Address": "Адрес Васи",
-      "Delivery": 0,
-      "DeliveryDate": "2023-10-28T00:00:00",
-      "Pay": 0,
-      "Comment": null
-    },
-    "Cart": {
-      "Id": 0,
-      "UserId": "08f625bd-7139-4126-a0ec-96ccf9b22d61",
-      "Items": [
-        {
-          "Product": {
-            "Id": 69,
-            "Name": "Холодильник Midea MDRB499FGF01IM",
-            "Cost": 21999.0,
-            "Description": "Планшет Honor Pad X9 Wi-Fi Space Gray 5301AGJC функционирует на базе предустановленной ОС MagicOS 7.1.",
-            "ImagePath": "Refrigerator_Midea_MDRB499FGF01IM_1.jpg"
-          },
-          "Quantity": 2
-        }
-      ],
-      "Amount": 2.0
-    },
-    "Id": "75b31be6-b4b8-49e8-bcf4-0217fe036382",
     "OrderStatus": 0,
-    "CreatedTime": "2023-10-26T17:04:55.4086068+04:00"
-  },
-  {
-    "OrderDetails": {
-      "Id": 0,
-      "Name": "Тарас Бульба",
-      "Phone": "32043280",
-      "Email": "bulba@mail.ru",
-      "Address": "Адрес Тараса",
-      "Delivery": 0,
-      "DeliveryDate": "2023-10-27T00:00:00",
-      "Pay": 0,
-      "Comment": null
-    },
-    "Cart": {
-      "Id": 0,
-      "UserId": "3ca5c3d0-e337-4cac-8a0b-6c54470c83bc",
-      "Items": [
-        {
-          "Product": {
-            "Id": 70,
-            "Name": "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
-            "Cost": 99999.0,
-            "Description": "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
-            "ImagePath": "notebook_MSI_Katana_17_B12VEK-482XRU_1.jpg"
-          },
-          "Quantity": 3
-        },
-        {
-          "Product": {
-            "Id": 71,
-            "Name": "Телевизор Samsung QE43Q60BAU1",
-            "Cost": 69999.0,
-            "Description": "Телевизор Samsung QE43Q60BAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки.",
-            "ImagePath": "tv_Samsung_QE43Q60BAU_1.jpg"
-          },
-          "Quantity": 2
-        },
-        {
-          "Product": {
-            "Id": 72,
-            "Name": "Холодильник Midea MDRB499FGF01IM",
-            "Cost": 79999.0,
-            "Description": "Холодильник Midea MDRB499FGF01IM, белый оснащен холодильной камерой объемом 250 л и нижней морозильной камерой объемом 76 л.",
-            "ImagePath": "Refrigerator_Midea_MDRB499FGF01IM_1.jpg"
-          },
-          "Quantity": 1
-        }
-      ],
-      "Amount": 6.0
-    },
-    "Id": "47c37b11-4543-42b6-ba81-cbaed6588294",
-    "OrderStatus": 2,
-    "CreatedTime": "2023-10-26T22:37:03.868737+04:00"
-  },
-  {
-    "OrderDetails": {
-      "Id": 0,
-      "Name": "Милана",
-      "Phone": "34932749",
-      "Email": "milana@mail.ru",
-      "Address": "Адрес Миланы",
-      "Delivery": 0,
-      "DeliveryDate": "2023-10-28T00:00:00",
-      "Pay": 0,
-      "Comment": null
-    },
-    "Cart": {
-      "Id": 0,
-      "UserId": "194fd233-9e12-4dc1-a348-1e8c6565ba80",
-      "Items": [
-        {
-          "Product": {
-            "Id": 73,
-            "Name": "Телевизор Samsung QE43Q60BAU1",
-            "Cost": 69999.0,
-            "Description": "Телевизор Samsung QE43Q60BAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки.",
-            "ImagePath": "tv_Samsung_QE43Q60BAU_1.jpg"
-          },
-          "Quantity": 5
-        }
-      ],
-      "Amount": 5.0
-    },
-    "Id": "81a06043-4dfa-437e-bbd7-d78fa336d4f9",
-    "OrderStatus": 1,
-    "CreatedTime": "2023-10-27T15:09:09.6146499+04:00"
-  },
-  {
-    "OrderDetails": {
-      "Id": 0,
-      "Name": "Долгопупс",
-      "Phone": "234832048",
-      "Email": "dolgopups@mail.ru",
-      "Address": "Адрес пупса",
-      "Delivery": 0,
-      "DeliveryDate": "2023-10-28T00:00:00",
-      "Pay": 0,
-      "Comment": null
-    },
-    "Cart": {
-      "Id": 0,
-      "UserId": "66ac4b2c-c562-47e6-a21f-e337bf3c3eff",
-      "Items": [
-        {
-          "Product": {
-            "Id": 74,
-            "Name": "Телевизор Samsung QE43Q60BAU1",
-            "Cost": 69999.0,
-            "Description": "Телевизор Samsung QE43Q60BAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки.",
-            "ImagePath": "tv_Samsung_QE43Q60BAU_1.jpg"
-          },
-          "Quantity": 5
-        }
-      ],
-      "Amount": 5.0
-    },
-    "Id": "4bd397f8-78cf-4223-8f51-fd5fc3b43fa4",
-    "OrderStatus": 0,
-    "CreatedTime": "2023-10-27T15:44:43.3345432+04:00"
-  },
-  {
-    "OrderDetails": {
-      "Id": 0,
-      "Name": "Мишка",
-      "Phone": "239432497",
-      "Email": "mishka@mail.ru",
-      "Address": "Адрес Мишки",
-      "Delivery": 0,
-      "DeliveryDate": "2023-11-01T00:00:00",
-      "Pay": 0,
-      "Comment": null
-    },
-    "Cart": {
-      "Id": 0,
-      "UserId": "b7df8351-8d1a-4752-8aa1-e9627ba22c9e",
-      "Items": [
-        {
-          "Product": {
-            "Id": 75,
-            "Name": "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
-            "Cost": 99999.0,
-            "Description": "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
-            "ImagePath": "notebook_MSI_Katana_17_B12VEK-482XRU_1.jpg"
-          },
-          "Quantity": 3
-        },
-        {
-          "Product": {
-            "Id": 76,
-            "Name": "Телевизор Samsung QE43Q60BAU1",
-            "Cost": 69999.0,
-            "Description": "Телевизор Samsung QE43Q60BAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки.",
-            "ImagePath": "tv_Samsung_QE43Q60BAU_1.jpg"
-          },
-          "Quantity": 2
-        }
-      ],
-      "Amount": 5.0
-    },
-    "Id": "7cd76e72-f9a9-43bd-a9a7-226dcabb5429",
-    "OrderStatus": 1,
-    "CreatedTime": "2023-10-31T00:45:26.7944482+04:00"
+    "CreatedTime": "2023-11-13T01:08:11.8619501+04:00"
   }
 ]
