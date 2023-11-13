@@ -60,7 +60,8 @@
 
                 </div>
             </div>
-            <div class="col-lg-4 mb-3 mt-4">
+            @await Component.InvokeAsync("CartInfoFull")
+            @*<div class="col-lg-4 mb-3 mt-4">
                 <div class="cart-summary p-3 sidebar h-100">
                     <h5 class="section-title"><span>Сумма заказа:</span></h5>
                     <div class="table-responsive">
@@ -99,7 +100,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div>*@
         </div>
     </form>
 </div>
