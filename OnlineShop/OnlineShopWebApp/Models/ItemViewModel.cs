@@ -1,10 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Item
+    public class ItemViewModel
     {
-        public int Id { get; }
+        public Guid Id { get;}
 
         [Required(ErrorMessage = "Не указано наименование продукта")]
         [StringLength(100, MinimumLength = 2, ErrorMessage = "Длина строки имени должна быть от {2} до {1} символов")]

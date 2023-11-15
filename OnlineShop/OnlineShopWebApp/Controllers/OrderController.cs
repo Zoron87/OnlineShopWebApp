@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using OnlineShop.DB;
+using OnlineShop.DB.Interfaces;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using System;
@@ -11,12 +14,14 @@ namespace OnlineShopWebApp.Controllers
 		private readonly IOrderStorage orderStorage;
         private readonly ShopUser shopUser;
         private readonly ICartStorage cartStorage;
+		private readonly DatabaseContext databaseContext;
 
-		public OrderController(ICartStorage cartStorage, IOrderStorage orderStorage, ShopUser shopUser)
+		public OrderController(ICartStorage cartStorage, IOrderStorage orderStorage, ShopUser shopUser, DatabaseContext databaseContext)
 		{
 			this.cartStorage = cartStorage;
 			this.orderStorage = orderStorage;
             this.shopUser = shopUser;
+            this.databaseContext = databaseContext;
         }
 		public ActionResult Index()
 		{
@@ -25,8 +30,8 @@ namespace OnlineShopWebApp.Controllers
 
 		public ActionResult Details()
 		{
-            var cart = cartStorage.TryGetById(shopUser.Id);
-			if (cart != null)
+			var cart = databaseContext.Carts.Include(el => el.Items).ThenInclude(el => el.Product).FirstOrDefault(u => u.UserId == shopUser.Id);
+            if (cart != null)
 			{
 				var orderMiddle = new OrderMiddle() { Cart = cart };
 

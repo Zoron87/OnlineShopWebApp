@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfaces;
+using OnlineShop.DB.Interfaces;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Providers;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -17,35 +19,30 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult Index()
         {
-            var cart = cartStorage.TryGetById(shopUser.Id);
-            return View(cart);
+            var cartViewModel = cartStorage.TryGetById(shopUser.Id)?.ToCartViewModel();
+            return View(cartViewModel);
         }
 
-        public ActionResult Add(int productId)
+        public ActionResult Add(Guid productId)
         {
             cartStorage.AddItem(shopUser.Id, productId);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult AddItems(int productId, int quantity)
+        public ActionResult AddItems(Guid productId, int quantity)
         {
-            if (productId > 0)
-            {
-                cartStorage.AddItem(shopUser.Id, productId, quantity);
-                return RedirectToAction("Index");
-            }
-
-            return View("Error");
+            cartStorage.AddItem(shopUser.Id, productId, quantity);
+            return RedirectToAction("Index");
         }
 
-        public ActionResult Reduce(int productId)
+        public ActionResult Reduce(Guid productId)
         {
             cartStorage.Reduce(shopUser.Id, productId);
             return RedirectToAction("Index");
         }
 
-        public ActionResult Delete(int productId)
+        public ActionResult Delete(Guid productId)
         {
             cartStorage.DeleteItem(shopUser.Id, productId);
             return RedirectToAction("Index");

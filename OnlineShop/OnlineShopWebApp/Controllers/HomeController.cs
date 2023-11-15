@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfaces;
+using OnlineShop.DB.Interfaces;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Providers;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -15,9 +17,8 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult Index()
         {
-            var products = productStorage.GetAll();
-
-            return products != null ? View(products) : View("Error");
+            var productsViewModel = productStorage.GetAll().ToProductsViewModel();
+            return productsViewModel != null ? View(productsViewModel) : View("Error");
         }
     }
 }

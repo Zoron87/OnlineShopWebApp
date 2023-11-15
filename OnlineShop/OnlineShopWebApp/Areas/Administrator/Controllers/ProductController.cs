@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfaces;
+using OnlineShop.DB.Interfaces;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Providers;
+using System;
 
 namespace OnlineShopWebApp.Areas.Administrator.Controllers
 {
@@ -15,22 +18,20 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         }
         public ActionResult Index()
         {
-            var products = productStorage.GetAll();
-            return View(products);
+            var productsViewModel = productStorage.GetAll().ToProductsViewModel();
+            return View(productsViewModel);
         }
 
-        public ActionResult Edit(int productId)
+        public ActionResult Edit(Guid productId)
         {
-            var product = productStorage.TryGetById(productId);
+            var product = productStorage.TryGetById(productId).ToProductViewModel();
             return View(product);
         }
 
-        public ActionResult Delete(int productId)
+        public ActionResult Delete(Guid productId)
         {
             productStorage.Delete(productId);
-            if (productStorage.SaveAll())
-                return RedirectToAction("Index");
-            return View("Error");
+            return RedirectToAction("Index");
         }
 
         public ActionResult Add()
@@ -39,31 +40,31 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Item item)
+        public ActionResult Add(ItemViewModel item)
         {
             if (string.IsNullOrWhiteSpace(item.ImagePath))
                 item.ImagePath = "blank-product.jpg";
 
             if (ModelState.IsValid)
             {
-                productStorage.Add(item);
-                if (productStorage.SaveAll())
-                    return RedirectToAction("Index");
+                var productDb = new Product().ItemViewModelToProduct(item);
+                productStorage.Add(productDb);
+                return RedirectToAction("Index");
             }
             return View(item);
         }
 
         [HttpPost]
-        public ActionResult Save(int productId, Item item)
+        public ActionResult Save(Guid productId, ItemViewModel item)
         {
             if (string.IsNullOrWhiteSpace(item.ImagePath))
                 item.ImagePath = "blank-product.jpg";
 
             if (ModelState.IsValid)
             {
-                productStorage.SaveChange(productId, item);
-                if (productStorage.SaveAll())
-                    return RedirectToAction("Index");
+                var product = productStorage.TryGetById(productId).ItemViewModelToProduct(item);
+                productStorage.SaveChange();
+                return RedirectToAction("Index");
             }
             return View(item);
         }

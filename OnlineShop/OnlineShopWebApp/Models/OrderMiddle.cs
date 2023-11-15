@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineShop.DB.Models;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models

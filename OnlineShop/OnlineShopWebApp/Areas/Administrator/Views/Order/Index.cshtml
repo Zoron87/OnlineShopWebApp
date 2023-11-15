@@ -41,7 +41,7 @@
 								<td>@order.OrderMiddle.Name</td>
 								<td>@order.OrderMiddle.Email</td>
 								<td>@order.CreatedTime.ToString("dd:MM:yyyy-HH:mm")</td>
-								<td><strong>@order.OrderMiddle.Cart.Cost()</strong></td>
+								<td><strong>order.OrderMiddle.Cart.Cost()</strong></td>
 								<td>@EnumHelper.GetDisplayName(@order.OrderStatus)</td>
 								<td><a asp-controller="Order" asp-action="Details" asp-route-orderid="@order.Id" role="button" class="btn btn-primary">Подробнее</a></td>
 							</tr>

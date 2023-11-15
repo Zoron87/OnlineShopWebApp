@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Product
+    public class ProductViewModel
     {
-        private static int counter = 1;
-        public int Id { get; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Не указано наименование продукта")]
         [StringLength(100, MinimumLength = 2, ErrorMessage = "Длина строки имени должна быть от {2} до {1} символов")]
@@ -21,16 +21,5 @@ namespace OnlineShopWebApp.Models
         public string Description { get; set; }
 
         public string ImagePath { get; set; }
-
-        public Product(string name, decimal cost, string description, string imagePath)
-        {
-            Id = counter;
-            Name = name;
-            Cost = cost;
-            Description = description;
-            ImagePath = imagePath;
-
-            counter++;
-        }
     }
 }

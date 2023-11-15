@@ -1,13 +1,13 @@
-﻿using OnlineShopWebApp.Interfaces;
+﻿using OnlineShop.DB.Interfaces;
+using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineShopWebApp.Storages
 {
-	public class CompareStorage : ICompareStorage
+    public class CompareStorage : ICompareStorage
 	{
 		private readonly IProductStorage productStorage;
 		private List<Compare> compares = new List<Compare>();
@@ -22,20 +22,20 @@ namespace OnlineShopWebApp.Storages
 			return compares.FirstOrDefault(c => c.UserId == userId);
 		}
 
-		public void Add(Guid userId, int productId)
+		public void Add(Guid userId, Guid productId)
 		{
 			var product = productStorage.TryGetById(productId);
             var compare = TryGetById(userId);
 
-			if (compare == null)
-				compare = new Compare(userId, new List<Product> { product });
-			else
-				compare.Products.Add(product);
+			//if (compare == null)
+			//	compare = new Compare(userId, new List<ProductViewModel> { product });
+			//else
+			//	compare.Products.Add(product);
 
 			compares.Add(compare);
 		}
 
-		public void Delete(Guid userId, int productId)
+		public void Delete(Guid userId, Guid productId)
 		{
 			var compare = TryGetById(userId);
 			var compareItem = compare?.Products?.FirstOrDefault(p => p.Id == productId);

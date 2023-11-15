@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
-using System.Linq;
 using System;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Collections.Generic;
-using OnlineShopWebApp.Areas.Administrator.Models;
+using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Administrator.Controllers
 {

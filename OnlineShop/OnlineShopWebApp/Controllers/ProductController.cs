@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfaces;
+using OnlineShop.DB.Interfaces;
+using OnlineShopWebApp.Providers;
+using System;
 using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
@@ -13,33 +15,16 @@ namespace OnlineShopWebApp.Controllers
             this.productStorage = productStorage;
         }
 
-        public IActionResult Index(int productId)
+        public IActionResult Index(Guid productId)
         {
-            var product = productStorage.TryGetById(productId);
-
+            var product = productStorage.TryGetById(productId).ToProductViewModel();
             return product != null ? View(product) : View("Error");
         }
 
         public IActionResult View(int page = 1, int itemsOnPage = 1)
         {
-            var products = productStorage.GetProductsWithPagination(page, itemsOnPage);
-
+            var products = productStorage.GetProductsWithPagination(page, itemsOnPage).ToProductsViewModel();
             return products != null ? View(products) : View("Error");
-        }
-
-        public string SaveAll(bool isAppend = false)
-        {
-            if (productStorage.SaveAll(isAppend))
-                return "Успешно сохранили информацию в файл!";
-
-            return "Ошибка сохранения информации в файл!";
-        }
-
-        public IActionResult GetAll()
-        {
-            var allProducts = productStorage.GetAll();
-
-            return allProducts != null ? View(allProducts) : View("Error");
         }
 
         public IActionResult Search(string search) 
@@ -47,7 +32,9 @@ namespace OnlineShopWebApp.Controllers
             ViewData["Search"] = search;
             search = search.ToLower();
             var products = productStorage.GetAll().Where(p => p.Name.ToLower().Contains(search) || p.Description.ToLower().Contains(search)).ToList();
-            return View(products);
+            var productsViewModel = Mapping.ToProductsViewModel(products);
+
+            return View(productsViewModel);
         }
     }
 }

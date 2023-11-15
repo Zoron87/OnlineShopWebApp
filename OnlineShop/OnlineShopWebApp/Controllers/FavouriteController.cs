@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using System;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -20,13 +21,13 @@ namespace OnlineShopWebApp.Controllers
 			return View(products);
 		}
 
-		public ActionResult Add(int productId)
+		public ActionResult Add(Guid productId)
 		{
 			favouriteStorage.Add(shopUser.Id, productId);
 			return RedirectToAction("Index");
 		}
 
-		public ActionResult Delete(int productId)
+		public ActionResult Delete(Guid productId)
 		{
 			favouriteStorage.Delete(shopUser.Id, productId);
 			return RedirectToAction("Index");

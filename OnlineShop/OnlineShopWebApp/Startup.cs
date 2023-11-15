@@ -1,9 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OnlineShop.DB;
+using OnlineShop.DB.Interfaces;
+using OnlineShop.DB.Storages;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Storages;
@@ -13,7 +17,7 @@ using System.Globalization;
 
 namespace OnlineShopWebApp
 {
-	public class Startup
+    public class Startup
 	{
 		public Startup(IConfiguration configuration)
 		{
@@ -25,13 +29,18 @@ namespace OnlineShopWebApp
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
+			string connection = Configuration.GetConnectionString("online_shop");
+			// добавляем контекст MobileContext в качестве 
+			services.AddDbContext<DatabaseContext>(options =>
+				options.UseSqlServer(connection));
+
             services.AddSingleton<IUserStorage, UserStorageInJson>();
             services.AddSingleton<IRoleStorage, RoleStorageInJson>();
-            services.AddSingleton<IFavouriteStorage, FavouriteStorage>();
-			services.AddSingleton<ICompareStorage, CompareStorage>();
+            services.AddTransient<IFavouriteStorage, FavouriteStorage>();
+			services.AddTransient<ICompareStorage, CompareStorage>();
 			services.AddSingleton<IOrderStorage, OrderStorageInJson>();
-			services.AddSingleton<IProductStorage, ProductStorageInJson>();
-			services.AddSingleton<ICartStorage, CartStorage>();
+			services.AddTransient<IProductStorage, ProductDBStorage>();
+			services.AddTransient<ICartStorage, CartDBStorage>();
             services.AddSingleton<ShopUser>();
 			services.AddControllersWithViews();
 		}

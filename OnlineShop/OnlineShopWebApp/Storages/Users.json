@@ -5,12 +5,5 @@
     "Role": "User",
     "Name": "Маня",
     "Password": "222222"
-  },
-  {
-    "Id": "b67b9cc8-7afd-4b7f-ba99-690256fa1733",
-    "Email": "pupkin@mail.ru",
-    "Role": null,
-    "Name": null,
-    "Password": "123456"
   }
 ]

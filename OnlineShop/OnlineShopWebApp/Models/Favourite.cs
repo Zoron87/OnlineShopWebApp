@@ -7,8 +7,8 @@ namespace OnlineShopWebApp.Models
     {
         public int Id { get; }
         public Guid UserId { get; }
-        public List<Product> Products { get; set; }
-        public Favourite(Guid userId, List<Product> products)
+        public List<ProductViewModel> Products { get; set; }
+        public Favourite(Guid userId, List<ProductViewModel> products)
         {
             UserId = userId;
             Products = products;
