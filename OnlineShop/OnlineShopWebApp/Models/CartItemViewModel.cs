@@ -4,8 +4,8 @@ namespace OnlineShopWebApp.Models
 {
     public class CartItemViewModel
     {
-        public Guid Id { get; set; }
-        public ProductViewModel Product { get; set; }
+        public Guid Id { get; }
+        public ProductViewModel Product { get; }
         public int Quantity { get; set; }
         public CartItemViewModel(ProductViewModel product, int quantity = 1)
         {

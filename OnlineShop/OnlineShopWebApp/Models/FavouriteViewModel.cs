@@ -3,12 +3,13 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Favourite
+    public class FavouriteViewModel
     {
         public int Id { get; }
         public Guid UserId { get; }
         public List<ProductViewModel> Products { get; set; }
-        public Favourite(Guid userId, List<ProductViewModel> products)
+        public FavouriteViewModel() { }
+        public FavouriteViewModel(Guid userId, List<ProductViewModel> products)
         {
             UserId = userId;
             Products = products;

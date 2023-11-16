@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Models
 {
-    public class Compare
+    public class CompareViewModel
     {
         public int Id { get; }
-        public Guid UserId { get; }
+        public Guid UserId { get; set; }
         public List<ProductViewModel> Products { get; set; }
-        public Compare(Guid userId, List<ProductViewModel> products)
+        public CompareViewModel(Guid userId, List<ProductViewModel> products)
         {
             UserId = userId;
             Products = products;

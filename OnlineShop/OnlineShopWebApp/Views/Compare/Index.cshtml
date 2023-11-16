@@ -1,4 +1,4 @@
-﻿@model Compare
+﻿@model CompareViewModel
 
 @{
 	ViewData["Title"] = "Сравнение товаров";
@@ -35,7 +35,7 @@
 							<td>@item.Name</td>
 							<td>@item.Cost</td>
 							<td>@item.Description</td>
-							<td><img width="100px" src="/img/products/@item.ImagePath" /></td>
+							<td><img style="width: 100px" src="/img/products/@item.ImagePath" /></td>
 							<td><a class="btn btn-danger" style="display:inline;" asp-controller="Compare" asp-action="Delete" asp-route-productId="@item.Id"><i class="fa-solid fa-circle-xmark"></i></a></td>
 						</tr>
 					}

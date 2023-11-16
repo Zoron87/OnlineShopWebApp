@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Providers;
 using System;
+using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -17,9 +20,9 @@ namespace OnlineShopWebApp.Controllers
         }
 		public ActionResult Index()
 		{
-			var products = favouriteStorage.TryGetById(shopUser.Id);
-			return View(products);
-		}
+			var favouriteProductsViewModel = favouriteStorage.TryGetById(shopUser.Id)?.ToFavouriteViewModel();
+            return View(favouriteProductsViewModel);
+        }
 
 		public ActionResult Add(Guid productId)
 		{

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OnlineShopWebApp.Interfaces;
+using OnlineShop.DB.Interfaces;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Providers;
 using System;
 
 namespace OnlineShopWebApp.Controllers
@@ -17,8 +18,8 @@ namespace OnlineShopWebApp.Controllers
         }
         public ActionResult Index()
         {
-            var products = compareStorage.TryGetById(shopUser.Id);
-            return View(products);
+            var compareProductsViewModel = compareStorage.TryGetById(shopUser.Id)?.ToCompareViewModel();
+            return View(compareProductsViewModel);
         }
 
         public ActionResult Add(Guid productId)

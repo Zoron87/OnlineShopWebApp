@@ -56,7 +56,6 @@ namespace OnlineShopWebApp.Providers
                 cartItemsViewModel.Add(new CartItemViewModel(productViewModel, item.Quantity));
             }
             var cartViewModel = new CartViewModel(cart.UserId, cartItemsViewModel);
-            cartViewModel.Id = cart.Id;
 
             return cartViewModel;
         }
@@ -69,6 +68,32 @@ namespace OnlineShopWebApp.Providers
             product.ImagePath = item.ImagePath;
 
             return product;
+        }
+
+        public static FavouriteViewModel ToFavouriteViewModel(this Favourite favourite)
+        {
+            var productsViewModel = new List<ProductViewModel>();
+            foreach (var product in favourite.Products)
+            {
+                var productViewModel = ToProductViewModel(product);
+                productsViewModel.Add(productViewModel);
+            }
+            var favouriteProductsViewModel = new FavouriteViewModel(favourite.UserId, productsViewModel);
+
+            return favouriteProductsViewModel;
+        }
+
+        public static CompareViewModel ToCompareViewModel(this Compare compares)
+        {
+            var productsViewModel = new List<ProductViewModel>();
+
+            foreach (var product in compares.Products)
+            {
+                var productViewModel = ToProductViewModel(product);
+                productsViewModel.Add(productViewModel);
+            }
+            var compareViewModel = new CompareViewModel(compares.UserId, productsViewModel);
+            return compareViewModel;
         }
     }
 

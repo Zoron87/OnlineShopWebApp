@@ -6,10 +6,9 @@ namespace OnlineShopWebApp.Models
 {
     public class CartViewModel
     {
-        public Guid Id { get; set; }
-        public Guid UserId { get; set; }
+        public Guid Id { get; }
+        public Guid UserId { get; }
         public List<CartItemViewModel> Items { get; set; }
-
         public CartViewModel(Guid userId, List<CartItemViewModel> items)
         {
             UserId = userId;

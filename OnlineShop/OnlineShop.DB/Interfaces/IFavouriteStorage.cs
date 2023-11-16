@@ -1,11 +1,11 @@
-﻿using OnlineShopWebApp.Models;
+﻿using OnlineShop.DB.Models;
 using System;
 
 namespace OnlineShopWebApp.Interfaces
 {
-    public interface ICompareStorage
+    public interface IFavouriteStorage
     {
-        Compare TryGetById(Guid userId);
+        Favourite TryGetById(Guid userId);
         void Add(Guid userId, Guid productId);
         void Delete(Guid userId, Guid productId);
         void Clear(Guid userId);
