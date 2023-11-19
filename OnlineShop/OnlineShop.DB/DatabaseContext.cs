@@ -9,6 +9,7 @@ namespace OnlineShop.DB
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Favourite> Favourites { get; set; }
         public DbSet<Compare> Compares { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {

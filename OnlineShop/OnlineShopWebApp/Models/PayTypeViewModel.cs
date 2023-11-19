@@ -1,6 +1,6 @@
 ﻿namespace OnlineShopWebApp.Models
 {
-    public enum PayType
+    public enum PayTypeViewModel
     {
         Онлайн,
         Наличными

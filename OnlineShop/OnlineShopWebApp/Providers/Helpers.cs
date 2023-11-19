@@ -95,6 +95,95 @@ namespace OnlineShopWebApp.Providers
             var compareViewModel = new CompareViewModel(compares.UserId, productsViewModel);
             return compareViewModel;
         }
+
+        public static List<OrderViewModel> ToOrdersViewModel(this List<Order> orders)
+        {
+            var ordersViewModel = new List<OrderViewModel>();
+            foreach (var order in orders)
+            {
+                var orderViewModel = order.ToOrderViewModel();
+                ordersViewModel.Add(orderViewModel);
+            }
+            return ordersViewModel;
+        }
+
+        public static OrderViewModel ToOrderViewModel(this Order order)
+        {
+            var orderViewModel = new OrderViewModel();
+            orderViewModel.Id = order.Id;
+            orderViewModel.OrderStatus = (OrderStatusViewModel)order.OrderStatus;
+            orderViewModel.CreatedTime = order.CreatedTime;
+
+            orderViewModel.OrderMiddle = new OrderMiddleViewModel();
+            orderViewModel.OrderMiddle.Address = order.OrderMiddle.Address;
+            orderViewModel.OrderMiddle.Name = order.OrderMiddle.Name;
+            orderViewModel.OrderMiddle.Email = order.OrderMiddle.Email;
+            orderViewModel.OrderMiddle.Delivery = (DeliveryTypeViewModel?)order.OrderMiddle.Delivery;
+            orderViewModel.OrderMiddle.DeliveryDate = order.OrderMiddle.DeliveryDate;
+            orderViewModel.OrderMiddle.Pay = (PayTypeViewModel?)order.OrderMiddle.Pay;
+            orderViewModel.OrderMiddle.Comment = order.OrderMiddle.Comment;
+            orderViewModel.OrderMiddle.Phone = order.OrderMiddle.Phone;
+
+            orderViewModel.OrderMiddle.Items = new List<CartItemViewModel>();
+            foreach (var item in order.OrderMiddle.Items)
+            {
+                var cartItemViewModel = new CartItemViewModel();
+                cartItemViewModel.Quantity = item.Quantity;
+
+                cartItemViewModel.Product = new ProductViewModel(); ;
+                cartItemViewModel.Product.Id = item.Product.Id;
+                cartItemViewModel.Product.Name = item.Product.Name;
+                cartItemViewModel.Product.Description = item.Product.Description;
+                cartItemViewModel.Product.Cost = item.Product.Cost;
+                cartItemViewModel.Product.ImagePath = item.Product.ImagePath;
+
+                orderViewModel.OrderMiddle.Items.Add(cartItemViewModel);
+            }
+            return orderViewModel;
+        }
+
+        public static OrderMiddleViewModel ToOrderViewModel(this OrderMiddle orderMiddle)
+        {
+            var orderMiddleViewModel = new OrderMiddleViewModel();
+            orderMiddleViewModel.Address = orderMiddle.Address;
+            orderMiddleViewModel.Name = orderMiddle.Name;
+            orderMiddleViewModel.Email = orderMiddle.Email;
+            orderMiddleViewModel.Delivery = (DeliveryTypeViewModel?)orderMiddle.Delivery;
+            orderMiddleViewModel.DeliveryDate = orderMiddle.DeliveryDate;
+            orderMiddleViewModel.Pay = orderMiddleViewModel.Pay;
+            orderMiddleViewModel.Comment = orderMiddle.Comment;
+            orderMiddleViewModel.Phone = orderMiddle.Phone;
+
+            return orderMiddleViewModel;
+        }
+
+        public static OrderMiddleViewModel ToOrderMiddleViewModel(this Order order)
+        {
+            var orderMiddleViewModel = new OrderMiddleViewModel();
+            orderMiddleViewModel.Name = order.OrderMiddle.Name;
+            orderMiddleViewModel.Email = order.OrderMiddle.Email;
+            orderMiddleViewModel.Address = order.OrderMiddle.Address;
+            orderMiddleViewModel.Phone = order.OrderMiddle.Phone;
+            orderMiddleViewModel.DeliveryDate = order.OrderMiddle.DeliveryDate;
+            orderMiddleViewModel.Delivery = (DeliveryTypeViewModel?)order.OrderMiddle.Delivery;
+            orderMiddleViewModel.Pay = (PayTypeViewModel?)order.OrderMiddle.Pay;
+
+            return orderMiddleViewModel;
+        }
+
+        public static OrderDetails ToOrderDetails(this OrderDetailsViewModel orderDetailsViewModel)
+        {
+            var orderDetails = new OrderDetails();
+            orderDetails.Name = orderDetailsViewModel.Name;
+            orderDetails.Email = orderDetailsViewModel.Email;
+            orderDetails.Phone = orderDetailsViewModel.Phone;
+            orderDetails.DeliveryDate = orderDetailsViewModel.DeliveryDate;
+            orderDetails.Address = orderDetailsViewModel.Address;
+            orderDetails.Delivery = (DeliveryType)orderDetailsViewModel.Delivery;
+            orderDetails.Comment = orderDetailsViewModel.Comment;
+
+            return orderDetails;
+        }
     }
 
     public class EnumHelper

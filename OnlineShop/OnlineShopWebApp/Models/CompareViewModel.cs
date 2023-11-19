@@ -6,7 +6,7 @@ namespace OnlineShopWebApp.Models
     public class CompareViewModel
     {
         public int Id { get; }
-        public Guid UserId { get; set; }
+        public Guid UserId { get; }
         public List<ProductViewModel> Products { get; set; }
         public CompareViewModel(Guid userId, List<ProductViewModel> products)
         {

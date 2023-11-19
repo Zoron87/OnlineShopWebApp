@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using OnlineShop.DB;
 using OnlineShop.DB.Interfaces;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Providers;
 using System;
 using System.Linq;
 
@@ -12,36 +12,28 @@ namespace OnlineShopWebApp.Controllers
     public class OrderController : Controller
 	{
 		private readonly IOrderStorage orderStorage;
+		private readonly ICartStorage cartStorage;
         private readonly ShopUser shopUser;
-        private readonly ICartStorage cartStorage;
-		private readonly DatabaseContext databaseContext;
 
-		public OrderController(ICartStorage cartStorage, IOrderStorage orderStorage, ShopUser shopUser, DatabaseContext databaseContext)
+        public OrderController(ICartStorage cartStorage, IOrderStorage orderStorage, ShopUser shopUser)
 		{
 			this.cartStorage = cartStorage;
 			this.orderStorage = orderStorage;
-            this.shopUser = shopUser;
-            this.databaseContext = databaseContext;
+			this.shopUser = shopUser;
         }
-		public ActionResult Index()
+
+        public ActionResult Index()
 		{
-			return View();
+			var orders = orderStorage.GetAll();
+            return View(orders);
 		}
 
 		public ActionResult Details()
 		{
-			var cart = databaseContext.Carts.Include(el => el.Items).ThenInclude(el => el.Product).FirstOrDefault(u => u.UserId == shopUser.Id);
-            if (cart != null)
-			{
-				var orderMiddle = new OrderMiddle() { Cart = cart };
-
-                if (!orderStorage.CheckBlankEmail(orderMiddle))
-                {
-					orderStorage.Add(orderMiddle);
-				}
-				return View(orderMiddle);
-			}
-			return View("Error");
+			var order = orderStorage.TryGetById(shopUser.Id);
+            var cart = cartStorage.TryGetById(shopUser.Id);
+            var orderMiddleViewModel = new OrderMiddle(){ Items = cart.Items, DeliveryDate = DateTime.Now }.ToOrderViewModel();
+			return View(orderMiddleViewModel);
         }
 
 		public ActionResult ThankYou()
@@ -50,30 +42,30 @@ namespace OnlineShopWebApp.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Index(OrderDetails orderDetails)
+		public IActionResult Index(OrderDetailsViewModel orderDetailsViewModel)
 		{
-			if (orderDetails.Name == null || orderDetails.Name.Any(c => char.IsDigit(c)))
+			if (orderDetailsViewModel.Name == null || orderDetailsViewModel.Name.Any(c => char.IsDigit(c)))
 				ModelState.AddModelError("", "В имени получателя допустимо использовать только буквы");
 
-			if (orderDetails.DeliveryDate.AddDays(1) < DateTime.Now)
+			if (orderDetailsViewModel.DeliveryDate.AddDays(1) < DateTime.Now)
 				ModelState.AddModelError("", "Нельзя выбрать дату доставки ранее текущей");
 
-            var orders = orderStorage.GetAll();
-            var order = orders.FirstOrDefault(el => el.OrderMiddle.Cart.UserId == shopUser.Id && String.IsNullOrEmpty(el.OrderMiddle.Email));
-            orderStorage.Mapping(order, orderDetails);
+            var order = orderStorage.GetAll().FirstOrDefault(el => el.UserId == shopUser.Id);
+			var cart = cartStorage.TryGetById(shopUser.Id);
+
+			if (order == null)
+				order = new Order() { UserId = shopUser.Id };
+
+			order.OrderMiddle = new OrderMiddle() { Items = cart.Items };
+            orderStorage.Mapping(order, orderDetailsViewModel.ToOrderDetails());
 
 			if (ModelState.IsValid)
 			{
-				if (orderDetails != null || order != null)
-				{
-					orderStorage.Delete(order);
-                    orderStorage.SaveAll(orders);
-					cartStorage.Clear(shopUser.Id);
-					return View("ThankYou");
-				}
+                orderStorage.Add(order);
+                cartStorage.Clear(shopUser.Id);
+                return View("ThankYou");
 			}
-
-            return View("Details", order.OrderMiddle);
+            return View("Details", order.ToOrderMiddleViewModel());
         }
     }
 }

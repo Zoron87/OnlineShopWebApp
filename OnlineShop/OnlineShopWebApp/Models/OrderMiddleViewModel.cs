@@ -1,12 +1,14 @@
-﻿using System;
+﻿using OnlineShop.DB.Models;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace OnlineShopWebApp.Models
 {
-    public class OrderDetails
+    public class OrderMiddleViewModel
     {
-        public int Id { get; }
-
+        public Guid Id { get; }
         [Required(ErrorMessage = "Не указано имя получателя товара")]
         [RegularExpression("^[a-zA-Zа-яА-ЯёЁ\\s]+$", ErrorMessage = "В имени получателя допустимо использовать только буквы")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Длина строки имени должна быть от {2} до {1} символов")]
@@ -27,15 +29,29 @@ namespace OnlineShopWebApp.Models
         [StringLength(255, MinimumLength = 5, ErrorMessage = "Длина строки адреса должна быть от {2} до {1} символов")]
         public string Address { get; set; }
 
-        public DeliveryType Delivery { get; set; }
+        public DeliveryTypeViewModel? Delivery { get; set; }
 
         [Required(ErrorMessage = "Не указана предпочтительная дата доставки")]        
         public DateTime DeliveryDate { get; set; }
 
         [Required(ErrorMessage = "Не выбран способ оплаты")]
-        public PayType Pay { get; set; }
+        public PayTypeViewModel? Pay { get; set; }
 
         [StringLength(255, MinimumLength = 0, ErrorMessage = "Длина строки адреса должна быть от {2} до {1} символов")]
         public string Comment { get; set; }
+
+        public List<CartItemViewModel> Items { get; set; }
+
+        public OrderMiddleViewModel()
+        {
+            DeliveryDate = DateTime.Now;
+            Pay = null;
+            Delivery = null;
+        }
+
+        public decimal Cost()
+        {
+            return Items.Sum(el => el.Product.Cost * el.Quantity);
+        }
     }
 }

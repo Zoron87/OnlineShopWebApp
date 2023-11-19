@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Interfaces;
-using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Providers;
 using System;
 
 namespace OnlineShopWebApp.Areas.Administrator.Controllers
@@ -16,14 +17,14 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         }
         public ActionResult Index()
         {
-            var orders = orderStorage.GetAll();
-            return View(orders);
+            var ordersViewModel = orderStorage.GetAll().ToOrdersViewModel();
+            return View(ordersViewModel);
         }
 
         public ActionResult Details(Guid orderId)
         {
-            var order = orderStorage.Get(orderId);
-            return View(order);
+            var orderViewModel = orderStorage.TryGetById(orderId).ToOrderViewModel();
+            return View(orderViewModel);
         }
 
         [HttpPost]

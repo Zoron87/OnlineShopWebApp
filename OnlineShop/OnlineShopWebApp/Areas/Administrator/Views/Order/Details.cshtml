@@ -1,4 +1,4 @@
-﻿@model Order
+﻿@model OrderViewModel
 
 @{
     ViewData["Title"] = "Детали заказа";
@@ -25,7 +25,7 @@
                             <th scope="col">Количество</th>
                         </tr>
                     </thead>
-                    @foreach (var item in Model.OrderMiddle.Cart.Items)
+                    @foreach (var item in Model.OrderMiddle.Items)
                     {
                         <tbody>
                             <tr>
@@ -46,7 +46,7 @@
                         </tr>
                         <tr class="text-center">
                             <td style="width: 50%;">Общая стоимость заказа</td>
-                            <td style="width: 50%;"><strong>Model.OrderMiddle.Cart.Cost()</strong></td>
+                            <td style="width: 50%;"><strong>@Model.OrderMiddle.Cost()</strong></td>
                         </tr>
                         <tr class="text-center">
                             <td style="width: 50%;">Имя покупателя</td>
@@ -68,10 +68,18 @@
                             <td style="width: 50%;">@Model.OrderMiddle.Delivery</td>
                         </tr>
                         <tr class="text-center">
+                            <td style="width: 50%;">Способ оплаты:</td>
+                            <td style="width: 50%;">@Model.OrderMiddle.Pay</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td style="width: 50%;">Комментарий:</td>
+                            <td style="width: 50%;">@Model.OrderMiddle.Comment</td>
+                        </tr>
+                        <tr class="text-center">
                             <td style="width: 50%;">Статус заказа</td>
                             <td style="padding: 10px;">
                                 <select asp-for="@Model.OrderStatus" class="form-control" style="border: 1px solid red;"
-                                        asp-items="Html.GetEnumSelectList<OrderStatus>()">
+                                        asp-items="Html.GetEnumSelectList<OrderStatusViewModel>()">
                                     <option>Select type ...</option>
                                 </select>
                             </td>

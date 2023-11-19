@@ -1,68 +1,55 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Interfaces;
-using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OnlineShopWebApp.Storages
+namespace OnlineShop.DB.Storages
 {
-    public class OrderStorageInJson : IOrderStorage
+    public class OrderDBStorage : IOrderStorage
     {
-        private readonly string filePath = "Storages/Orders.json";
-        private List<Order> orders;
+        private readonly DatabaseContext databaseContext;
 
-        public OrderStorageInJson()
+        public OrderDBStorage(DatabaseContext databaseContext)
         {
-            orders = new List<Order>();
+            this.databaseContext = databaseContext;
         }
 
-        public void Add(OrderMiddle orderMiddle)
+        public void Add(Order order)
         {
-            orders = GetAll();
-            var order = new Order() { OrderMiddle = orderMiddle };
-            orders.Add(order);
-            SaveAll(orders);
+           databaseContext.Orders.Add(order);
+           databaseContext.SaveChanges();
         }
 
-        public Order Get(Guid orderId)
+        public Order TryGetById(Guid orderId)
         {
             return GetAll().FirstOrDefault(order => order.Id == orderId);
         }
 
-        public void SaveAll(List<Order> orders)
-        {
-            FileProvider.SaveInfo(filePath, JsonConvert.SerializeObject(orders, Formatting.Indented), false);
-        }
-
         public void UpdateStatus(Guid orderId, OrderStatus orderStatus)
         {
-            orders = GetAll();
+            var orders = GetAll();
             if (orders != null)
             {
                 orders.FirstOrDefault(order => order.Id == orderId).OrderStatus = orderStatus;
-                SaveAll(orders);
+                databaseContext.SaveChanges();
             }
         }
 
         public List<Order> GetAll()
         {
-            var oldOrders = FileProvider.GetInfo(filePath);
-            if (!String.IsNullOrEmpty(oldOrders))
-                return JsonConvert.DeserializeObject<List<Order>>(oldOrders);
-
-            return orders;
+            return databaseContext.Orders.Include(el => el.OrderMiddle).ThenInclude(el => el.Items).ThenInclude(el => el.Product).ToList();
         }
 
         public void Delete(Order order)
         {
-            orders = GetAll();
+            var orders = GetAll();
             if (orders != null)
             {
                 var orderForDelete = orders.FirstOrDefault(o => o.Id == order.Id);
                 orders.Remove(orderForDelete);
-                SaveAll(orders);
+                databaseContext.SaveChanges();
             }
         }
 
@@ -76,11 +63,6 @@ namespace OnlineShopWebApp.Storages
             order.OrderMiddle.DeliveryDate = orderDetails.DeliveryDate;
             order.OrderMiddle.Pay = orderDetails.Pay;
             order.OrderMiddle.Phone = orderDetails.Phone;
-        }
-
-        public bool CheckBlankEmail(OrderMiddle orderMiddle)
-        {
-            return orders.Any(el => el.OrderMiddle.Cart.UserId == orderMiddle.Cart.UserId && String.IsNullOrEmpty(el.OrderMiddle.Email));
         }
     }
 }
