@@ -6,7 +6,7 @@ namespace OnlineShop.DB.Models
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
-        public OrderMiddle OrderMiddle { get; set; }
+        public OrderDetails OrderDetails { get; set; }
         public OrderStatus OrderStatus { get; set; }
         public DateTime CreatedTime { get; set; }
 

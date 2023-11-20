@@ -39,7 +39,7 @@ namespace OnlineShop.DB.Storages
 
         public List<Order> GetAll()
         {
-            return databaseContext.Orders.Include(el => el.OrderMiddle).ThenInclude(el => el.Items).ThenInclude(el => el.Product).ToList();
+            return databaseContext.Orders.Include(el => el.OrderDetails).ThenInclude(el => el.Items).ThenInclude(el => el.Product).ToList();
         }
 
         public void Delete(Order order)
@@ -55,14 +55,14 @@ namespace OnlineShop.DB.Storages
 
         public void Mapping(Order order, OrderDetails orderDetails)
         {
-            order.OrderMiddle.Name = orderDetails.Name;
-            order.OrderMiddle.Email = orderDetails.Email;
-            order.OrderMiddle.Address = orderDetails.Address;
-            order.OrderMiddle.Comment = orderDetails.Comment;
-            order.OrderMiddle.Delivery = orderDetails.Delivery;
-            order.OrderMiddle.DeliveryDate = orderDetails.DeliveryDate;
-            order.OrderMiddle.Pay = orderDetails.Pay;
-            order.OrderMiddle.Phone = orderDetails.Phone;
+            order.OrderDetails.Name = orderDetails.Name;
+            order.OrderDetails.Email = orderDetails.Email;
+            order.OrderDetails.Address = orderDetails.Address;
+            order.OrderDetails.Comment = orderDetails.Comment;
+            order.OrderDetails.Delivery = orderDetails.Delivery;
+            order.OrderDetails.DeliveryDate = orderDetails.DeliveryDate;
+            order.OrderDetails.Pay = orderDetails.Pay;
+            order.OrderDetails.Phone = orderDetails.Phone;
         }
     }
 }

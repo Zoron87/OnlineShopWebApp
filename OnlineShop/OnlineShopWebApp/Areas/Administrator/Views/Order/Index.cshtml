@@ -38,10 +38,10 @@
                         {
                             <tr>
                                 <td><a>@(i + 1)</a></td>
-                                <td>@order.OrderMiddle.Name</td>
-                                <td>@order.OrderMiddle.Email</td>
+                                <td>@order.OrderDetails.Name</td>
+                                <td>@order.OrderDetails.Email</td>
                                 <td>@order.CreatedTime.ToString("dd:MM:yyyy-HH:mm")</td>
-                                <td><strong>@order.OrderMiddle.Cost()</strong></td>
+                                <td><strong>@order.OrderDetails.Cost()</strong></td>
                                 <td>@EnumHelper.GetDisplayName(@order.OrderStatus)</td>
                                 <td><a asp-controller="Order" asp-action="Details" asp-route-orderid="@order.Id" role="button" class="btn btn-primary">Подробнее</a></td>
                             </tr>

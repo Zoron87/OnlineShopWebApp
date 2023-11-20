@@ -25,7 +25,7 @@
                             <th scope="col">Количество</th>
                         </tr>
                     </thead>
-                    @foreach (var item in Model.OrderMiddle.Items)
+                    @foreach (var item in Model.OrderDetails.Items)
                     {
                         <tbody>
                             <tr>
@@ -46,34 +46,34 @@
                         </tr>
                         <tr class="text-center">
                             <td style="width: 50%;">Общая стоимость заказа</td>
-                            <td style="width: 50%;"><strong>@Model.OrderMiddle.Cost()</strong></td>
+                            <td style="width: 50%;"><strong>@Model.OrderDetails.Cost()</strong></td>
                         </tr>
                         <tr class="text-center">
                             <td style="width: 50%;">Имя покупателя</td>
-                            <td style="width: 50%;">@Model.OrderMiddle.Name</td>
+                            <td style="width: 50%;">@Model.OrderDetails.Name</td>
                         </tr>
                         <tr class="text-center">
                             <td style="width: 50%;">Email покупателя</td>
-                            <td style="width: 50%;">@Model.OrderMiddle.Email</td>
+                            <td style="width: 50%;">@Model.OrderDetails.Email</td>
                         </tr>
                         <tr class="text-center">
                             <td style="width: 50%;">Адрес покупателя</td>
-                            <td style="width: 50%;">@Model.OrderMiddle.Address</td>
+                            <td style="width: 50%;">@Model.OrderDetails.Address</td>
                         </tr>
                         <tr class="text-center">
                             <td style="width: 50%;">Желаемая дата доставки</td>
-                            <td style="width: 50%;">@Model.OrderMiddle.DeliveryDate</td>
+                            <td style="width: 50%;">@Model.OrderDetails.DeliveryDate</td>
                         <tr class="text-center">
                             <td style="width: 50%;">Выбранный способ доставки</td>
-                            <td style="width: 50%;">@Model.OrderMiddle.Delivery</td>
+                            <td style="width: 50%;">@Model.OrderDetails.Delivery</td>
                         </tr>
                         <tr class="text-center">
                             <td style="width: 50%;">Способ оплаты:</td>
-                            <td style="width: 50%;">@Model.OrderMiddle.Pay</td>
+                            <td style="width: 50%;">@Model.OrderDetails.Pay</td>
                         </tr>
                         <tr class="text-center">
                             <td style="width: 50%;">Комментарий:</td>
-                            <td style="width: 50%;">@Model.OrderMiddle.Comment</td>
+                            <td style="width: 50%;">@Model.OrderDetails.Comment</td>
                         </tr>
                         <tr class="text-center">
                             <td style="width: 50%;">Статус заказа</td>
