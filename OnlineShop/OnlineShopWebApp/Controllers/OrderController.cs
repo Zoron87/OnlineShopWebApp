@@ -32,7 +32,7 @@ namespace OnlineShopWebApp.Controllers
 		{
 			var order = orderStorage.TryGetById(shopUser.Id);
             var cart = cartStorage.TryGetById(shopUser.Id);
-            var orderMiddleViewModel = new OrderMiddle(){ Items = cart.Items, DeliveryDate = DateTime.Now }.ToOrderViewModel();
+            var orderMiddleViewModel = new OrderDetails(){ Items = cart.Items, DeliveryDate = DateTime.Now }.ToOrderViewModel();
 			return View(orderMiddleViewModel);
         }
 
@@ -56,7 +56,7 @@ namespace OnlineShopWebApp.Controllers
 			if (order == null)
 				order = new Order() { UserId = shopUser.Id };
 
-			order.OrderMiddle = new OrderMiddle() { Items = cart.Items };
+			order.OrderDetails = new OrderDetails() { Items = cart.Items };
             orderStorage.Mapping(order, orderDetailsViewModel.ToOrderDetails());
 
 			if (ModelState.IsValid)
@@ -65,7 +65,7 @@ namespace OnlineShopWebApp.Controllers
                 cartStorage.Clear(shopUser.Id);
                 return View("ThankYou");
 			}
-            return View("Details", order.ToOrderMiddleViewModel());
+            return View("Details", order.ToOrderDetailsViewModel());
         }
     }
 }

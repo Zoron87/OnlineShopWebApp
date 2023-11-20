@@ -2,6 +2,7 @@
 {
     public enum PayTypeViewModel
     {
+        Нет,
         Онлайн,
         Наличными
     }

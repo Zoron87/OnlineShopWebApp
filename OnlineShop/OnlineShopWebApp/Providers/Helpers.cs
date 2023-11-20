@@ -114,18 +114,18 @@ namespace OnlineShopWebApp.Providers
             orderViewModel.OrderStatus = (OrderStatusViewModel)order.OrderStatus;
             orderViewModel.CreatedTime = order.CreatedTime;
 
-            orderViewModel.OrderMiddle = new OrderMiddleViewModel();
-            orderViewModel.OrderMiddle.Address = order.OrderMiddle.Address;
-            orderViewModel.OrderMiddle.Name = order.OrderMiddle.Name;
-            orderViewModel.OrderMiddle.Email = order.OrderMiddle.Email;
-            orderViewModel.OrderMiddle.Delivery = (DeliveryTypeViewModel?)order.OrderMiddle.Delivery;
-            orderViewModel.OrderMiddle.DeliveryDate = order.OrderMiddle.DeliveryDate;
-            orderViewModel.OrderMiddle.Pay = (PayTypeViewModel?)order.OrderMiddle.Pay;
-            orderViewModel.OrderMiddle.Comment = order.OrderMiddle.Comment;
-            orderViewModel.OrderMiddle.Phone = order.OrderMiddle.Phone;
+            orderViewModel.OrderDetails = new OrderDetailsViewModel();
+            orderViewModel.OrderDetails.Address = order.OrderDetails.Address;
+            orderViewModel.OrderDetails.Name = order.OrderDetails.Name;
+            orderViewModel.OrderDetails.Email = order.OrderDetails.Email;
+            orderViewModel.OrderDetails.Delivery = (DeliveryTypeViewModel?)order.OrderDetails.Delivery;
+            orderViewModel.OrderDetails.DeliveryDate = order.OrderDetails.DeliveryDate;
+            orderViewModel.OrderDetails.Pay = (PayTypeViewModel?)order.OrderDetails.Pay;
+            orderViewModel.OrderDetails.Comment = order.OrderDetails.Comment;
+            orderViewModel.OrderDetails.Phone = order.OrderDetails.Phone;
 
-            orderViewModel.OrderMiddle.Items = new List<CartItemViewModel>();
-            foreach (var item in order.OrderMiddle.Items)
+            orderViewModel.OrderDetails.Items = new List<CartItemViewModel>();
+            foreach (var item in order.OrderDetails.Items)
             {
                 var cartItemViewModel = new CartItemViewModel();
                 cartItemViewModel.Quantity = item.Quantity;
@@ -137,14 +137,14 @@ namespace OnlineShopWebApp.Providers
                 cartItemViewModel.Product.Cost = item.Product.Cost;
                 cartItemViewModel.Product.ImagePath = item.Product.ImagePath;
 
-                orderViewModel.OrderMiddle.Items.Add(cartItemViewModel);
+                orderViewModel.OrderDetails.Items.Add(cartItemViewModel);
             }
             return orderViewModel;
         }
 
-        public static OrderMiddleViewModel ToOrderViewModel(this OrderMiddle orderMiddle)
+        public static OrderDetailsViewModel ToOrderViewModel(this OrderDetails orderMiddle)
         {
-            var orderMiddleViewModel = new OrderMiddleViewModel();
+            var orderMiddleViewModel = new OrderDetailsViewModel();
             orderMiddleViewModel.Address = orderMiddle.Address;
             orderMiddleViewModel.Name = orderMiddle.Name;
             orderMiddleViewModel.Email = orderMiddle.Email;
@@ -157,16 +157,16 @@ namespace OnlineShopWebApp.Providers
             return orderMiddleViewModel;
         }
 
-        public static OrderMiddleViewModel ToOrderMiddleViewModel(this Order order)
+        public static OrderDetailsViewModel ToOrderDetailsViewModel(this Order order)
         {
-            var orderMiddleViewModel = new OrderMiddleViewModel();
-            orderMiddleViewModel.Name = order.OrderMiddle.Name;
-            orderMiddleViewModel.Email = order.OrderMiddle.Email;
-            orderMiddleViewModel.Address = order.OrderMiddle.Address;
-            orderMiddleViewModel.Phone = order.OrderMiddle.Phone;
-            orderMiddleViewModel.DeliveryDate = order.OrderMiddle.DeliveryDate;
-            orderMiddleViewModel.Delivery = (DeliveryTypeViewModel?)order.OrderMiddle.Delivery;
-            orderMiddleViewModel.Pay = (PayTypeViewModel?)order.OrderMiddle.Pay;
+            var orderMiddleViewModel = new OrderDetailsViewModel();
+            orderMiddleViewModel.Name = order.OrderDetails.Name;
+            orderMiddleViewModel.Email = order.OrderDetails.Email;
+            orderMiddleViewModel.Address = order.OrderDetails.Address;
+            orderMiddleViewModel.Phone = order.OrderDetails.Phone;
+            orderMiddleViewModel.DeliveryDate = order.OrderDetails.DeliveryDate;
+            orderMiddleViewModel.Delivery = (DeliveryTypeViewModel?)order.OrderDetails.Delivery;
+            orderMiddleViewModel.Pay = (PayTypeViewModel?)order.OrderDetails.Pay;
 
             return orderMiddleViewModel;
         }

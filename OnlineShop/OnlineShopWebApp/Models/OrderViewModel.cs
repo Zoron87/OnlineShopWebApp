@@ -6,7 +6,7 @@ namespace OnlineShopWebApp.Models
 	{
 		public Guid Id { get; set; }
         public Guid UserId { get; }
-        public OrderMiddleViewModel OrderMiddle { get; set; }
+        public OrderDetailsViewModel OrderDetails { get; set; }
 		public OrderStatusViewModel OrderStatus { get; set; }
 		public DateTime CreatedTime { get; set; } 
     }

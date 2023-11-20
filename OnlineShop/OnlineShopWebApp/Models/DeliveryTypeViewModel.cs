@@ -2,7 +2,9 @@
 {
     public enum DeliveryTypeViewModel
     {
+        Нет,
         Самовывоз,
-        Курьер
+        Курьер,
+        
     }
 }
