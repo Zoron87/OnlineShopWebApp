@@ -42,8 +42,9 @@ namespace OnlineShopWebApp
 			services.AddTransient<IProductStorage, ProductDBStorage>();
 			services.AddTransient<ICartStorage, CartDBStorage>();
             services.AddSingleton<ShopUser>();
-			services.AddControllersWithViews().AddRazorRuntimeCompilation();
+			services.AddControllersWithViews();
 		}
+
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -86,6 +87,6 @@ namespace OnlineShopWebApp
 					name: "default",
 					pattern: "{controller=Home}/{action=Index}/{id=0}");
 			});
-		}
+        }
 	}
 }
