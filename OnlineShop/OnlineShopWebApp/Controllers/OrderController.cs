@@ -32,8 +32,8 @@ namespace OnlineShopWebApp.Controllers
 		{
 			var order = orderStorage.TryGetById(shopUser.Id);
             var cart = cartStorage.TryGetById(shopUser.Id);
-            var orderMiddleViewModel = new OrderDetails(){ Items = cart.Items, DeliveryDate = DateTime.Now }.ToOrderViewModel();
-			return View(orderMiddleViewModel);
+            var orderDetailViewModel = new OrderDetails(){ Items = cart.Items, DeliveryDate = DateTime.Now }.ToOrderViewModel();
+			return View(orderDetailViewModel);
         }
 
 		public ActionResult ThankYou()

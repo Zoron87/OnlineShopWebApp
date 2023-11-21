@@ -142,33 +142,33 @@ namespace OnlineShopWebApp.Providers
             return orderViewModel;
         }
 
-        public static OrderDetailsViewModel ToOrderViewModel(this OrderDetails orderMiddle)
+        public static OrderDetailsViewModel ToOrderViewModel(this OrderDetails orderDetails)
         {
-            var orderMiddleViewModel = new OrderDetailsViewModel();
-            orderMiddleViewModel.Address = orderMiddle.Address;
-            orderMiddleViewModel.Name = orderMiddle.Name;
-            orderMiddleViewModel.Email = orderMiddle.Email;
-            orderMiddleViewModel.Delivery = (DeliveryTypeViewModel?)orderMiddle.Delivery;
-            orderMiddleViewModel.DeliveryDate = orderMiddle.DeliveryDate;
-            orderMiddleViewModel.Pay = orderMiddleViewModel.Pay;
-            orderMiddleViewModel.Comment = orderMiddle.Comment;
-            orderMiddleViewModel.Phone = orderMiddle.Phone;
+            var orderDetailViewModel = new OrderDetailsViewModel();
+            orderDetailViewModel.Address = orderDetails.Address;
+            orderDetailViewModel.Name = orderDetails.Name;
+            orderDetailViewModel.Email = orderDetails.Email;
+            orderDetailViewModel.Delivery = (DeliveryTypeViewModel?)orderDetails.Delivery;
+            orderDetailViewModel.DeliveryDate = orderDetails.DeliveryDate;
+            orderDetailViewModel.Pay = (PayTypeViewModel?)orderDetails.Pay;
+            orderDetailViewModel.Comment = orderDetails.Comment;
+            orderDetailViewModel.Phone = orderDetails.Phone;
 
-            return orderMiddleViewModel;
+            return orderDetailViewModel;
         }
 
         public static OrderDetailsViewModel ToOrderDetailsViewModel(this Order order)
         {
-            var orderMiddleViewModel = new OrderDetailsViewModel();
-            orderMiddleViewModel.Name = order.OrderDetails.Name;
-            orderMiddleViewModel.Email = order.OrderDetails.Email;
-            orderMiddleViewModel.Address = order.OrderDetails.Address;
-            orderMiddleViewModel.Phone = order.OrderDetails.Phone;
-            orderMiddleViewModel.DeliveryDate = order.OrderDetails.DeliveryDate;
-            orderMiddleViewModel.Delivery = (DeliveryTypeViewModel?)order.OrderDetails.Delivery;
-            orderMiddleViewModel.Pay = (PayTypeViewModel?)order.OrderDetails.Pay;
+            var orderDetailViewModel = new OrderDetailsViewModel();
+            orderDetailViewModel.Name = order.OrderDetails.Name;
+            orderDetailViewModel.Email = order.OrderDetails.Email;
+            orderDetailViewModel.Address = order.OrderDetails.Address;
+            orderDetailViewModel.Phone = order.OrderDetails.Phone;
+            orderDetailViewModel.DeliveryDate = order.OrderDetails.DeliveryDate;
+            orderDetailViewModel.Delivery = (DeliveryTypeViewModel?)order.OrderDetails.Delivery;
+            orderDetailViewModel.Pay = (PayTypeViewModel?)order.OrderDetails.Pay;
 
-            return orderMiddleViewModel;
+            return orderDetailViewModel;
         }
 
         public static OrderDetails ToOrderDetails(this OrderDetailsViewModel orderDetailsViewModel)
