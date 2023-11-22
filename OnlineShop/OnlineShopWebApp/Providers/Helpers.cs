@@ -110,36 +110,39 @@ namespace OnlineShopWebApp.Providers
         public static OrderViewModel ToOrderViewModel(this Order order)
         {
             var orderViewModel = new OrderViewModel();
-            orderViewModel.Id = order.Id;
-            orderViewModel.OrderStatus = (OrderStatusViewModel)order.OrderStatus;
-            orderViewModel.CreatedTime = order.CreatedTime;
-
-            orderViewModel.OrderDetails = new OrderDetailsViewModel();
-            orderViewModel.OrderDetails.Address = order.OrderDetails.Address;
-            orderViewModel.OrderDetails.Name = order.OrderDetails.Name;
-            orderViewModel.OrderDetails.Email = order.OrderDetails.Email;
-            orderViewModel.OrderDetails.Delivery = (DeliveryTypeViewModel?)order.OrderDetails.Delivery;
-            orderViewModel.OrderDetails.DeliveryDate = order.OrderDetails.DeliveryDate;
-            orderViewModel.OrderDetails.Pay = (PayTypeViewModel?)order.OrderDetails.Pay;
-            orderViewModel.OrderDetails.Comment = order.OrderDetails.Comment;
-            orderViewModel.OrderDetails.Phone = order.OrderDetails.Phone;
-
-            orderViewModel.OrderDetails.Items = new List<CartItemViewModel>();
-            foreach (var item in order.OrderDetails.Items)
+            if (order != null)
             {
-                var cartItemViewModel = new CartItemViewModel();
-                cartItemViewModel.Quantity = item.Quantity;
+                orderViewModel.Id = order.Id;
+                orderViewModel.OrderStatus = (OrderStatusViewModel)order.OrderStatus;
+                orderViewModel.CreatedTime = order.CreatedTime;
 
-                cartItemViewModel.Product = new ProductViewModel(); ;
-                cartItemViewModel.Product.Id = item.Product.Id;
-                cartItemViewModel.Product.Name = item.Product.Name;
-                cartItemViewModel.Product.Description = item.Product.Description;
-                cartItemViewModel.Product.Cost = item.Product.Cost;
-                cartItemViewModel.Product.ImagePath = item.Product.ImagePath;
+                orderViewModel.OrderDetails = new OrderDetailsViewModel();
+                orderViewModel.OrderDetails.Address = order.OrderDetails.Address;
+                orderViewModel.OrderDetails.Name = order.OrderDetails.Name;
+                orderViewModel.OrderDetails.Email = order.OrderDetails.Email;
+                orderViewModel.OrderDetails.Delivery = (DeliveryTypeViewModel?)order.OrderDetails.Delivery;
+                orderViewModel.OrderDetails.DeliveryDate = order.OrderDetails.DeliveryDate;
+                orderViewModel.OrderDetails.Pay = (PayTypeViewModel?)order.OrderDetails.Pay;
+                orderViewModel.OrderDetails.Comment = order.OrderDetails.Comment;
+                orderViewModel.OrderDetails.Phone = order.OrderDetails.Phone;
 
-                orderViewModel.OrderDetails.Items.Add(cartItemViewModel);
+                orderViewModel.OrderDetails.Items = new List<CartItemViewModel>();
+                foreach (var item in order.OrderDetails.Items)
+                {
+                    var cartItemViewModel = new CartItemViewModel();
+                    cartItemViewModel.Quantity = item.Quantity;
+
+                    cartItemViewModel.Product = new ProductViewModel(); ;
+                    cartItemViewModel.Product.Id = item.Product.Id;
+                    cartItemViewModel.Product.Name = item.Product.Name;
+                    cartItemViewModel.Product.Description = item.Product.Description;
+                    cartItemViewModel.Product.Cost = item.Product.Cost;
+                    cartItemViewModel.Product.ImagePath = item.Product.ImagePath;
+
+                    orderViewModel.OrderDetails.Items.Add(cartItemViewModel);
+                }
             }
-            return orderViewModel;
+                return orderViewModel;
         }
 
         public static OrderDetailsViewModel ToOrderViewModel(this OrderDetails orderDetails)

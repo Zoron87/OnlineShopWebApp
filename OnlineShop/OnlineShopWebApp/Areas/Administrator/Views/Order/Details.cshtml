@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row">
-        @if (Model == null)
+        @if (Model == null || Model.OrderDetails == null || Model.OrderDetails.Items.Count == 0)
         {
             <h3>Вы не указали номер заказа!</h3>
             <div class="text-start mt-3 cart-buttons">

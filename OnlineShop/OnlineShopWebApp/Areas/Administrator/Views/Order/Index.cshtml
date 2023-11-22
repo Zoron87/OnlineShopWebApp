@@ -30,7 +30,7 @@
                             <th scope="col">Дата</th>
                             <th scope="col">Сумма, р</th>
                             <th scope="col">Статус</th>
-                            <th scope="col"><i class="fa-solid fa-pen-to-square"></i></th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,7 +43,10 @@
                                 <td>@order.CreatedTime.ToString("dd:MM:yyyy-HH:mm")</td>
                                 <td><strong>@order.OrderDetails.Cost()</strong></td>
                                 <td>@EnumHelper.GetDisplayName(@order.OrderStatus)</td>
-                                <td><a asp-controller="Order" asp-action="Details" asp-route-orderid="@order.Id" role="button" class="btn btn-primary">Подробнее</a></td>
+                                <td><a asp-controller="Order" asp-action="Details" asp-route-orderid="@order.Id" role="button" class="btn primary-color">
+                                        <i class="fa-solid fa-pen-to-square h5"></i>
+                                    </a>
+                                </td>
                             </tr>
                             i++;
                         }

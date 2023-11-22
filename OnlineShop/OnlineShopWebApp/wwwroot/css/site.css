@@ -60,6 +60,14 @@ img {
     background-color: var(--accent-color);
     color: var(--contrast-color)
 }
+
+.red {
+    color: var(--red-color);
+}
+
+.primary-color {
+    color: var(--accent-color);
+}
 /* ========================================== General ======================================== */
 
 .wrapper {

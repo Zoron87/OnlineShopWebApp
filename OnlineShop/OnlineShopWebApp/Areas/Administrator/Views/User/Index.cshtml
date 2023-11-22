@@ -30,8 +30,8 @@
                             <th scope="col">№</th>
                             <th scope="col">Email</th>
                             <th scope="col">Роль</th>
-                            <th scope="col"><i class="fa-solid fa-pen-to-square"></th>
-                            <th scope="col"><i class="fa-regular fa-trash-can"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     @foreach (var user in Model)
@@ -41,8 +41,14 @@
                                 <th scope="row">@i</th>
                                 <td><a asp-controller="User" asp-action="Details" asp-route-email="@user.Email">@user.Email</a></td>
                                 <td>@user.Role</td>
-                                <td><a class="btn btn-primary" asp-controller="User" asp-action="Details" asp-route-email="@user.Email">Подробнее</a></td>
-                                <td><a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-delete-user-@user.Id">Удалить</a>
+                                <td><a class="btn primary-color" asp-controller="User" asp-action="Details" asp-route-email="@user.Email">
+                                        <i class="fa-solid fa-pen-to-square h5"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a class="btn red" data-bs-toggle="modal" data-bs-target="#modal-delete-user-@user.Id">
+                                        <i class="fa-regular fa-trash-can h5"></i>
+                                     </a>
                                     <div class="modal fade" id="modal-delete-user-@user.Id" tabindex="-1" aria-labelledby="DeleteUserModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
