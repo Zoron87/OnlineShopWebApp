@@ -20,9 +20,10 @@ namespace OnlineShopWebApp
 				var services = scope.ServiceProvider;
 
 				var userManager = services.GetRequiredService<UserManager<User>>();
-                var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+				var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 				IdentityInitializer.Initialize(userManager, roleManager);
-            }
+			}
+			host.Run();
 		}
 
 		public static IHostBuilder CreateHostBuilder(string[] args) =>

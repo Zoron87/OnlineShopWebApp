@@ -32,7 +32,7 @@ namespace OnlineShopWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = _signInManager.PasswordSignInAsync(loginInfo.Email.ToLower(), loginInfo.Password, loginInfo.IsRememberMe, false).Result;
+                var result = _signInManager.PasswordSignInAsync(loginInfo.Email, loginInfo.Password, loginInfo.IsRememberMe, false).Result;
                 if (result.Succeeded)
                     return RedirectToAction(nameof(HomeController.Index), "Home");
                 else ModelState.AddModelError("", "Неправильный пароль");

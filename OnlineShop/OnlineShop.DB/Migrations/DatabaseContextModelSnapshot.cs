@@ -181,7 +181,7 @@ namespace OnlineShop.DB.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("27a322ab-8741-480d-baca-6455fc6bb941"),
+                            Id = new Guid("042d4bc6-57ba-4162-b294-d93b12fd53c2"),
                             Cost = 99999m,
                             Description = "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
                             ImagePath = "notebook_MSI_Katana_17_B12VEK-482XRU_1.jpg",
@@ -189,7 +189,7 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cd86869c-da4e-4feb-96ef-0e9e464fbe28"),
+                            Id = new Guid("d3365847-1cee-48d2-8836-1b8a0f322772"),
                             Cost = 69999m,
                             Description = "Телевизор Samsung QE43QBAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки. ",
                             ImagePath = "tv_Samsung_QE43QBAU_1.jpg",
@@ -197,7 +197,7 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f830594d-db8f-4752-9fac-c892f6a8cff3"),
+                            Id = new Guid("2c7b1c7d-865c-4144-a26c-12033d0c5986"),
                             Cost = 79999m,
                             Description = "Холодильник Midea MDRB499FG1IM, белый оснащен холодильной камерой объемом 2 л и нижней морозильной камерой объемом 76 л.",
                             ImagePath = "Refrigerator_Midea_MDRB499FG1IM_1.jpg",
@@ -205,7 +205,7 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1361d9db-4717-4b93-b7da-fb991e0d8d65"),
+                            Id = new Guid("45627111-c239-4b23-8060-c52680ce9e15"),
                             Cost = 18999m,
                             Description = "Робот-пылесос Dreame Bot Robot Vacuum and Mop D9 Pro White выполняет сухую и влажную уборку и способен обработать до 1 м² площади без подзарядки",
                             ImagePath = "Robot_Vacuum_Cleaner_Dreame_Bot_Robot_Vacuum_and_Mop_F9_Pro_1.jpg",
@@ -213,7 +213,7 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f508947e-1ad5-4866-85bf-e85300629536"),
+                            Id = new Guid("4fed5a9e-fbce-4d90-84c1-849e6557c7d3"),
                             Cost = 29999m,
                             Description = "Gorenje BO67372X – электрический духовой шкаф с 77-литровой камерой BigSpace. За счёт внушительного объёма внутреннего пространства и его особой форме HomeMade вам будут по плечу самые смелые кулинарные эксперименты.",
                             ImagePath = "Electric_oven_Gorenje_BO67372X_1.jpg",
@@ -221,7 +221,7 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("94138c9b-ccea-42c0-88bd-8f565f12dddb"),
+                            Id = new Guid("c210fdb9-89e9-4d77-8c64-0890eac193fc"),
                             Cost = 25999m,
                             Description = "Сплит-система Haier HSU7HRM3/R3 в корпусе белого цвета заправлена хладагентом R 32. Устройство работает на охлаждение и обогрев. Модель рекомендована для установки в помещениях площадью до  м². В комплект входит пульт дистанционного управления с дисплеем.",
                             ImagePath = "Air_conditioner_Haier_HSU7HRM3_1.jpg",
@@ -229,7 +229,7 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("307c53fe-b3fd-4a08-afd4-f0af7e498d43"),
+                            Id = new Guid("27b30ede-1bfc-463d-8695-ff79d826c0bd"),
                             Cost = 19999m,
                             Description = "Компактная морозильная камера Haier HF-82WAA – хороший выбор для тех, кто хочет хранить дома или на даче запас замороженных продуктов и полуфабрикатов, а также делать домашние заготовки.",
                             ImagePath = "Freezer_Haier_HF-82WAA_1.jpg",
@@ -237,15 +237,15 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cdfdaf2e-74f1-4b66-9e8e-be498574aeb3"),
+                            Id = new Guid("2f690f3d-a773-4551-895b-e60f4a8885e2"),
                             Cost = 21999m,
-                            Description = "Планшет Honor Pad X9 Wi-Fi Space Gray 51AGJC функционирует на базе предустановленной ОС MagicOS 7.1.",
+                            Description = "Холодильник Midea MDRB499FG1IM",
                             ImagePath = "Refrigerator_Midea_MDRB499FG1IM_1.jpg",
                             Name = "Холодильник Midea MDRB499FG1IM"
                         },
                         new
                         {
-                            Id = new Guid("cbb523ca-72ad-47be-af7a-fd15b4f7312c"),
+                            Id = new Guid("ec793d51-c3f6-4e6c-a2cf-ed0fbd8f5331"),
                             Cost = 999m,
                             Description = "Встраиваемая электрическая панель Gorenje ECT641BX снабжена четырьмя конфорками, установленными под стеклокерамической поверхностью.",
                             ImagePath = "Built-in_electric_panel_Gorenje_ECT641BX_1.jpg",
@@ -253,7 +253,7 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6dd73216-53d9-45ef-9fcb-221eebfded1d"),
+                            Id = new Guid("d41b92fb-56ef-4631-88e0-0004e8cb4538"),
                             Cost = 999m,
                             Description = "Консоль PlayStation 5 CFI-120/16/18)A оборудована внутренним хранилищем данных емкостью 825 Гб. Этот вид консоли поддерживает воспроизводство формата Blu-Ray и технологию HDR.",
                             ImagePath = "Sony_PlayStation_5_Blu-ray_Edition_Console_CFI-12_1.jpg",
@@ -261,15 +261,15 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4afa22d0-0507-4692-8c13-9009bd03f28c"),
+                            Id = new Guid("8b94ec16-4e2b-468e-b79a-0631a6ab75fa"),
                             Cost = 24999m,
                             Description = "Смартфон Honor X9A 59ALXQ, черный — модель среднего класса с экраном диагональю 6,67 дюймов и премиальным дизайном.",
-                            ImagePath = "HONOR X9a_6_128GB_59ALXQ_Black_smartphone_1.jpg",
+                            ImagePath = "HONOR X9a_6_128GB_5109ALXQ_Black_smartphone_1.jpg",
                             Name = "Смартфон HONOR X9a 6/128GB 59ALXQ Black"
                         },
                         new
                         {
-                            Id = new Guid("9f5aebd3-a023-415e-bb6f-119bbc440272"),
+                            Id = new Guid("1bca1003-ee31-4cfa-846a-a207b7cf7a02"),
                             Cost = 27999m,
                             Description = "Beko WSPE7612W – узкая стиральная машина, которая точно поместится в вашей ванной комнате.",
                             ImagePath = "Beko_WSPE7612W_narrow_washing_machine_1.jpg",
@@ -277,7 +277,7 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("58845c38-2f65-4627-83fe-5bac410c1f0b"),
+                            Id = new Guid("9dbd6dfe-7e6a-46cb-b748-62e6902912ea"),
                             Cost = 93999m,
                             Description = "Холодильник Haier HRF-541DG7RU — это устройство Side-by-Side с множеством функций, которые помогут в повседневной жизни.",
                             ImagePath = "Refrigerator_(Side-by-Side)_Haier_HRF-541DG7RU_1.jpg",
@@ -285,7 +285,7 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1f15639a-e9bc-4b20-a5c3-cbbe40941971"),
+                            Id = new Guid("60313c4e-232c-4cd3-a59b-c783e845cb28"),
                             Cost = 78999m,
                             Description = "Смартфон Nothing Phone 2 Dark Gray (65) — 6,55-дюймовый экран с матрицей OLED, поддерживающий разрешение 2412х пикселей.",
                             ImagePath = "Nothing_Phone_12_256GB_Dark_Gray_(65)_Smartphone_1.jpg",
@@ -293,7 +293,7 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d1f70630-c795-4791-83b7-a5f9c2cbeacd"),
+                            Id = new Guid("baae640b-e85b-4f28-acd3-0617ffea48c7"),
                             Cost = 658999m,
                             Description = "Холодильник с нижней морозильной камерой Kuppersbusch FKG 98 S представлен в корпусе черного цвета.",
                             ImagePath = "Refrigerator_Kuppersbusch_FKG_98_S_1.jpg",
@@ -301,23 +301,23 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("99e9feff-4716-4436-8c94-a270731ff1cc"),
+                            Id = new Guid("035f8c05-4e98-442b-a7e5-2ba709b6f494"),
                             Cost = 314999m,
                             Description = "Игровой ноутбук MSI Raider GE78 HX 13VH-5RU (MS-17S1) — модель в пластиковом корпусе черного цвета, которая поставляется с предустановленной ОС Windows 11 «Домашняя».",
-                            ImagePath = "MSI_Raider_GE78_HX_13VH-5RU_Gaming_Notebook_(MS-17S1)_1.jpg",
+                            ImagePath = "MSI_Raider_GE78_HX_13VH-205RU_Gaming_Notebook_(MS-17S1)_1.jpg",
                             Name = "Ноутбук игровой MSI Raider GE78 HX 13VH-5RU (MS-17S1)"
                         },
                         new
                         {
-                            Id = new Guid("32d8c66f-94ea-4d57-9f16-9f92be319a72"),
+                            Id = new Guid("3602937d-ae80-4442-a1e0-087102c2447a"),
                             Cost = 311199m,
                             Description = "Компактный духовой шкаф Kuppersbusch CBP 65 стильно выглядит и предоставляет широкие возможности для приготовления повседневной еды и угощения на праздничный стол.",
-                            ImagePath = "Kuppersbusch_CBP_65_W2_Black_Chrome_Premium_Compact_Oven_1.jpg",
+                            ImagePath = "Kuppersbusch_CBP_6550.0_W2_Black_Chrome_Premium_Compact_Oven_1.jpg",
                             Name = "Компактный духовой шкаф Премиум Kuppersbusch CBP 65 W2 Black Chrome"
                         },
                         new
                         {
-                            Id = new Guid("7b0e978a-216f-48cb-8bac-fe798c20946c"),
+                            Id = new Guid("c42d5e2c-e5f1-450e-8357-4aa2e5a887c6"),
                             Cost = 129999m,
                             Description = "Игровой ноутбук Thunderobot 911 M G2 Pro 7 представлен в пластиковом корпусе серого цвета — модель с предустановленной ОС Windows 11, время автономной работы которой достигает 4,5 часов.",
                             ImagePath = "Thunderobot_911_M_G2_Pro_7_gaming_laptop_J090DRU_1.jpg",
@@ -325,7 +325,7 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5c1756fc-1158-4998-bf85-4a529f3b4942"),
+                            Id = new Guid("b9da4173-4634-4b8c-8831-d05a28fd7ff1"),
                             Cost = 679999m,
                             Description = "Телевизор LG OLED83C3RLA отличается диагональю экрана 83. Разрешение экрана — 4К. Устройство выполнено на базе технологии Dolby Vision, благодаря чему картинка будет всегда оставаться яркой, контрастной и насыщенной",
                             ImagePath = "LG_OLED83C3RLA_TV_set_1.jpg",
@@ -333,7 +333,7 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("16459fdc-0b0e-43e6-ac94-c25f2db4d2c0"),
+                            Id = new Guid("7c17b590-67b2-4a2a-bd65-71a402915649"),
                             Cost = 999m,
                             Description = "Смартфон Xiaomi Redmi Note 12S Onyx Black оснащен дисплеем диагональю 6,43 дюйма, выполненным по технологии AMOLED.",
                             ImagePath = "Xiaomi_Redmi_Note_12S_256GB_Onyx_Black_smartphone_1.jpg",
@@ -341,7 +341,7 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d9b1386b-e798-4d42-995a-ef119abe8840"),
+                            Id = new Guid("cf7007a4-1776-4b25-af34-3051a6f2b106"),
                             Cost = 199999m,
                             Description = "Складной смартфон Samsung Galaxy Z Fold5 Phantom Black (SM-F946B) оснащен 7,6-дюймовым экраном разрешением 2176x1812 пикселей, обладающим пиковой яркостью 17 нит, что позволит смотреть кино или играть даже под солнечными лучами — изображение не поблекнет.",
                             ImagePath = "Samsung_Galaxy_Z_Fold5_512GB_Phantom_Black_Smartphone_(SM-F946B)_1.jpg",
@@ -349,7 +349,7 @@ namespace OnlineShop.DB.Migrations
                         },
                         new
                         {
-                            Id = new Guid("07d40682-a299-4142-8122-87cc4f1eb264"),
+                            Id = new Guid("ebbe1bc9-b4eb-4711-9055-aa36cafaf182"),
                             Cost = 74999m,
                             Description = "Телевизор TCL 55C745 обладает габаритами 77х122х32 см. Вес устройства — 15 кг, без подставки — 13,5 кг.",
                             ImagePath = "TV_TCL_55C745_1.jpg",
