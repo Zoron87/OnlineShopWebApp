@@ -12,6 +12,6 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Не указан пароль пользователя")]
         [StringLength(20, MinimumLength = 6, ErrorMessage = "Длина строки пароля должна быть от {2} до {1} символов")]
         public string Password { get; set; }
-        public string IsRememberMe { get; set; }
+        public bool IsRememberMe { get; set; }
     }
 }

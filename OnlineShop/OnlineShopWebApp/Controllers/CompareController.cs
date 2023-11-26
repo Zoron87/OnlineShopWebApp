@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB.Interfaces;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
@@ -6,6 +7,7 @@ using System;
 
 namespace OnlineShopWebApp.Controllers
 {
+    [Authorize]
     public class CompareController : Controller
     {
         private ICompareStorage compareStorage;

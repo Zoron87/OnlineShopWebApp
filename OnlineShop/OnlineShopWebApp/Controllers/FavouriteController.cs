@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB.Models;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
@@ -8,7 +9,8 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
 {
-	public class FavouriteController : Controller
+    [Authorize]
+    public class FavouriteController : Controller
 	{
 		private readonly IFavouriteStorage favouriteStorage;
         private readonly ShopUser shopUser;

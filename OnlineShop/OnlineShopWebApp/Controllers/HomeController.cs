@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB.Interfaces;
-using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
-using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
 {

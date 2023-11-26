@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.DB.Models;
 using System;
-using System.Drawing;
 
 namespace OnlineShop.DB
 {

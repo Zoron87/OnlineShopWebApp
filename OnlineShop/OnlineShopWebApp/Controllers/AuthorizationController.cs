@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using System;
@@ -8,11 +10,17 @@ namespace OnlineShopWebApp.Controllers
 {
     public class AuthorizationController : Controller
     {
-        private readonly IUserStorage userStorage;
+        //private readonly IUserStorage userStorage;
+        //private readonly IUsersManager usersManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;  // для хранения кук
 
-        public AuthorizationController(IUserStorage userStorage)
+        public AuthorizationController(SignInManager<User> signInManager, UserManager<User> userInManager)
         {
-            this.userStorage = userStorage;
+            //this.usersManager = usersManager;
+            _signInManager = signInManager;
+            _userManager = userInManager;
+            //this.userStorage = userStorage;
         }
         public ActionResult Login()
         {
@@ -22,15 +30,12 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public ActionResult Login(Login loginInfo)
         {
-            if (!userStorage.CheckExistUser(loginInfo))
-            {
-                ModelState.AddModelError("", "Пользователь с таким email или паролем не найден!");
-            }
-
             if (ModelState.IsValid)
             {
-                ViewData["UserEmail"] = loginInfo.Email;
-                return View("Success");
+                var result = _signInManager.PasswordSignInAsync(loginInfo.Email.ToLower(), loginInfo.Password, loginInfo.IsRememberMe, false).Result;
+                if (result.Succeeded)
+                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                else ModelState.AddModelError("", "Неправильный пароль");
             }
             return View(loginInfo);
         }
@@ -52,14 +57,14 @@ namespace OnlineShopWebApp.Controllers
             if (String.IsNullOrEmpty(registerInfo.Password) || String.IsNullOrEmpty(registerInfo.ConfirmPassword))
                 ModelState.AddModelError("", "Пароль не может быть пустым");
 
-            if (userStorage.GetAll().Any(u => u.Email == registerInfo.Email))
-            {
-                ModelState.AddModelError("Email", "Такой email уже зарегистрирован. Используйте другой");
-            }
+            //if (userStorage.GetAll().Any(u => u.Email == registerInfo.Email))
+            //{
+            //    ModelState.AddModelError("Email", "Такой email уже зарегистрирован. Используйте другой");
+            //}
 
             if (ModelState.IsValid)
             {
-                userStorage.Add(registerInfo);
+                //userStorage.Add(registerInfo);
                 ViewData["UserEmail"] = registerInfo.Email;
                 return View("Success");
             }

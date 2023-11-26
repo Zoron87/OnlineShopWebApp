@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -7,11 +8,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OnlineShop.DB;
 using OnlineShop.DB.Interfaces;
+using OnlineShop.DB.Models;
 using OnlineShop.DB.Storages;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Storages;
 using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 
@@ -33,6 +36,25 @@ namespace OnlineShopWebApp
 			// добавляем контекст MobileContext в качестве 
 			services.AddDbContext<DatabaseContext>(options =>
 				options.UseSqlServer(connection));
+
+			// Добавляем контекст IdentityContext в качестве сервиса в приложение
+			services.AddDbContext<IdentityContext>(options =>
+				options.UseSqlServer(connection));
+
+			services.AddIdentity<User, IdentityRole>() // указываем тип пользователя и роли
+				.AddEntityFrameworkStores<IdentityContext>(); // устанавливаем тип хранилища - наш контекст
+
+			// настройки кук
+			services.ConfigureApplicationCookie(options =>
+			{
+				options.ExpireTimeSpan = TimeSpan.FromHours(24);
+				options.LoginPath = "/Account/Login";
+				options.LogoutPath = "/Account/Logout";
+				options.Cookie = new Microsoft.AspNetCore.Http.CookieBuilder
+				{
+					IsEssential = true
+				};
+			});
 
             services.AddSingleton<IUserStorage, UserStorageInJson>();
             services.AddSingleton<IRoleStorage, RoleStorageInJson>();
@@ -74,6 +96,9 @@ namespace OnlineShopWebApp
 			app.UseStaticFiles();
 
 			app.UseRouting();
+
+			app.UseAuthentication();
+			app.UseAuthorization();
 
 			app.UseAuthorization();
 
