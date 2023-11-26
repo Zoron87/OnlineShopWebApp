@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Список продуктов";
+    int i=1;
 }
 
 <div class="container">
@@ -29,6 +30,7 @@
                         <tr>
                             <th scope="col">№</th>
                             <th scope="col">Название</th>
+                            <th scope="col">Изображение</th>
                             <th scope="col">Цена</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
@@ -38,8 +40,9 @@
                     {
                         <tbody class="table-group-divider">
                             <tr>
-                                <th scope="row">@product.Id</th>
+                                <th scope="row">@i</th>
                                 <td>@product.Name</td>
+                                <td><img style="width: 50px;" src="/img/products/@product.ImagePath" /></td>
                                 <td>@product.Cost</td>
                                 <td><a class="btn primary-color" asp-controller="Product" asp-action="Edit" asp-route-productid="@product.Id"><i class="fa-solid fa-pen-to-square h5"></i></a></td>
                                 <td>
@@ -64,6 +67,7 @@
                                 </td>
                             </tr>
                         </tbody>
+                        i++;
                     }
                 </table>
             }

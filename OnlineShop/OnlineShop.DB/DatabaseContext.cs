@@ -67,7 +67,7 @@ namespace OnlineShop.DB
                    Name = "Сплит-система Haier HSU7HRM3/R3",
                    Cost = 25999,
                    Description = "Сплит-система Haier HSU7HRM3/R3 в корпусе белого цвета заправлена хладагентом R 32. Устройство работает на охлаждение и обогрев. Модель рекомендована для установки в помещениях площадью до  м². В комплект входит пульт дистанционного управления с дисплеем.",
-                   ImagePath = "Air_conditioner_Haier_HSU7HRM3_1.jpg"
+                   ImagePath = "Air_conditioner_Haier_HSU7HRM3_1.jpg" 
                },
                new Product()
                {
@@ -82,7 +82,7 @@ namespace OnlineShop.DB
                    Id = Guid.NewGuid(),
                    Name = "Холодильник Midea MDRB499FG1IM",
                    Cost = 21999,
-                   Description = "Планшет Honor Pad X9 Wi-Fi Space Gray 51AGJC функционирует на базе предустановленной ОС MagicOS 7.1.",
+                   Description = "Холодильник Midea MDRB499FG1IM",
                    ImagePath = "Refrigerator_Midea_MDRB499FG1IM_1.jpg"
                },
                new Product()
@@ -107,7 +107,7 @@ namespace OnlineShop.DB
                    Name = "Смартфон HONOR X9a 6/128GB 59ALXQ Black",
                    Cost = 24999,
                    Description = "Смартфон Honor X9A 59ALXQ, черный — модель среднего класса с экраном диагональю 6,67 дюймов и премиальным дизайном.",
-                   ImagePath = "HONOR X9a_6_128GB_59ALXQ_Black_smartphone_1.jpg"
+                   ImagePath = "HONOR X9a_6_128GB_5109ALXQ_Black_smartphone_1.jpg"
                },
                new Product()
                {
@@ -147,7 +147,7 @@ namespace OnlineShop.DB
                    Name = "Ноутбук игровой MSI Raider GE78 HX 13VH-5RU (MS-17S1)",
                    Cost = 314999,
                    Description = "Игровой ноутбук MSI Raider GE78 HX 13VH-5RU (MS-17S1) — модель в пластиковом корпусе черного цвета, которая поставляется с предустановленной ОС Windows 11 «Домашняя».",
-                   ImagePath = "MSI_Raider_GE78_HX_13VH-5RU_Gaming_Notebook_(MS-17S1)_1.jpg"
+                   ImagePath = "MSI_Raider_GE78_HX_13VH-205RU_Gaming_Notebook_(MS-17S1)_1.jpg"
                },
                new Product()
                {
@@ -155,7 +155,7 @@ namespace OnlineShop.DB
                    Name = "Компактный духовой шкаф Премиум Kuppersbusch CBP 65 W2 Black Chrome",
                    Cost = 311199,
                    Description = "Компактный духовой шкаф Kuppersbusch CBP 65 стильно выглядит и предоставляет широкие возможности для приготовления повседневной еды и угощения на праздничный стол.",
-                   ImagePath = "Kuppersbusch_CBP_65_W2_Black_Chrome_Premium_Compact_Oven_1.jpg"
+                   ImagePath = "Kuppersbusch_CBP_6550.0_W2_Black_Chrome_Premium_Compact_Oven_1.jpg"
                },
                new Product()
                {
