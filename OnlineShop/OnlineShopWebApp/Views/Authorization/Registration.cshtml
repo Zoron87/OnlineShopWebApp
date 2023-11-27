@@ -9,7 +9,7 @@
                     <div class="col-md-6 offset-md-3">
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                                <form method="post" asp-controller="Authorization" asp-action="Registration">
+                                <form method="post" asp-controller="Authorization" asp-action="Registration" asp-route-returnUrl="@Model.ReturnUrl">
                                     <div class="validation" asp-validation-summary="ModelOnly"></div>
                                     <div class="form-outline mb-4">
                                         <label asp-for="Email">Email:</label><br />

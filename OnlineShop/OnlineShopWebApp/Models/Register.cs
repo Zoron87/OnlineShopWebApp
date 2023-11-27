@@ -19,5 +19,7 @@ namespace OnlineShopWebApp.Models
         [Compare("Password", ErrorMessage = "Введенные пароли не совпадают")]
         public string ConfirmPassword { get; set; }
         public bool IsRememberMe { get; set; }
+
+        public string ReturnUrl { get; set; }
     }
 }

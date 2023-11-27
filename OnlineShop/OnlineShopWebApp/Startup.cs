@@ -48,8 +48,8 @@ namespace OnlineShopWebApp
 			services.ConfigureApplicationCookie(options =>
 			{
 				options.ExpireTimeSpan = TimeSpan.FromHours(24);
-				options.LoginPath = "/Account/Login";
-				options.LogoutPath = "/Account/Logout";
+				options.LoginPath = "/Authorization/Login";
+				options.LogoutPath = "/Authorization/Logout";
 				options.Cookie = new Microsoft.AspNetCore.Http.CookieBuilder
 				{
 					IsEssential = true

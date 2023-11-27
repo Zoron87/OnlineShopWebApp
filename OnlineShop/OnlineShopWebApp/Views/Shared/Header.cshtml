@@ -128,26 +128,26 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-disabled="true">Доставка</a>
                         </li>
+                        @if (User.IsInRole(Constants.AdminRoleName))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Index" asp-area="Administrator">Администратор</a>
+                            </li>
+                        }
+
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                @User.Identity.Name
+                                <a class="nav-link" aria-disabled="true">@User.Identity.Name</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Authorization" asp-action="Logout">Выход</a>
+                                <a class="nav-link" asp-area="" asp-controller="Authorization" asp-action="Logout">Выход</a>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Authorization" asp-action="Login">Войти</a>
-                            </li>
-                        }
-
-                        @if (User.IsInRole(Constants.AdminRoleName))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Home" asp-action="Index" asp-area="Administrator">Администратор</a>
                             </li>
                         }
                     </ul> <!--//navbar-nav-->
