@@ -16,13 +16,11 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserController(IUserStorage userStorage, IRoleStorage roleStorage, UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager)
+        public UserController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
             _roleManager = roleManager;
 
         }
