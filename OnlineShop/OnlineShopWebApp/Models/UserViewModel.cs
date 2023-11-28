@@ -1,12 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 
 namespace OnlineShopWebApp.Models
 {
-    public class ShopUser
+    public class UserViewModel
     {
-        public Guid Id = Guid.NewGuid();
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Email пользователя обязателен")]
         [EmailAddress(ErrorMessage = "Некорректный email пользователя")]
@@ -15,13 +14,13 @@ namespace OnlineShopWebApp.Models
         public string Email { get; set; }
 
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Допустимое количество символов от {2} до {1}")]
-        public string Role { get; set; }
-
-        [StringLength(20, MinimumLength = 2, ErrorMessage = "Допустимое количество символов от {2} до {1}")]
         public string Name { get; set; }
 
+        [StringLength(20, MinimumLength = 2, ErrorMessage = "Допустимое количество символов от {2} до {1}")]
+        public string Role { get; set; }
+
         [Required(ErrorMessage = "Пароль пользователя обязателен")]
-        [StringLength(20, MinimumLength = 6, ErrorMessage = "Допустимое количество символов от {2} до {1}")]
+        [StringLength(100, MinimumLength = 6, ErrorMessage = "Допустимое количество символов от {2} до {1}")]
         public string Password { get; set; }
     }
 }

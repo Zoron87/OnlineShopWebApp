@@ -2,8 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
 using OnlineShop.DB.Models;
+using OnlineShopWebApp.Areas.Administrator.Models;
 using OnlineShopWebApp.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
@@ -56,7 +58,7 @@ namespace OnlineShopWebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new User { Email = registerInfo.Email, UserName = registerInfo.Email };
+                var user = new User { Email = registerInfo.Email, UserName = registerInfo.Email, Role = Constants.UserRoleName };
                 var result = _userManager.CreateAsync(user, registerInfo.Password).Result;
                 if (result.Succeeded)
                 {

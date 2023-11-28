@@ -8,9 +8,9 @@ namespace OnlineShopWebApp.Views.Shared.Components.CartInfoFull
     public class CartInfoFullViewComponent : ViewComponent
     {
         private readonly ICartStorage cartStorage;
-        private readonly ShopUser shopUser;
+        private readonly UserViewModel shopUser;
 
-        public CartInfoFullViewComponent(ICartStorage cartStorage, ShopUser shopUser)
+        public CartInfoFullViewComponent(ICartStorage cartStorage, UserViewModel shopUser)
         {
             this.cartStorage = cartStorage;
             this.shopUser = shopUser;

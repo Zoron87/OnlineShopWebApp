@@ -63,7 +63,7 @@ namespace OnlineShopWebApp
 			services.AddTransient<IOrderStorage, OrderDBStorage>();
 			services.AddTransient<IProductStorage, ProductDBStorage>();
 			services.AddTransient<ICartStorage, CartDBStorage>();
-            services.AddSingleton<ShopUser>();
+            services.AddSingleton<UserViewModel>();
 			services.AddControllersWithViews();
 		}
 

@@ -10,7 +10,7 @@ using OnlineShop.DB;
 namespace OnlineShop.DB.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20231127071145_Identity")]
+    [Migration("20231128213431_Identity")]
     partial class Identity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -193,6 +193,9 @@ namespace OnlineShop.DB.Migrations.Identity
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");

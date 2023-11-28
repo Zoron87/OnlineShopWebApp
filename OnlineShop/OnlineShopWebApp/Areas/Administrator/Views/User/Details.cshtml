@@ -1,4 +1,4 @@
-﻿@model ShopUser
+﻿@model User
 
 @{
     ViewData["Title"] = "Детали пользователя";
@@ -19,24 +19,24 @@
             }
             else
             {
-                <h3 class="section-title mb-3"><span>Сведения о пользователе @Model.Email</span></h3>
+                <h3 class="section-title mb-3"><span>Сведения о пользователе @Model.UserName</span></h3>
                 <table class="table align-middle text-center table-hover">
                     <tbody>
                         <tr class="text-center">
-                            <td style="width: 50%;">Имя</td>
-                            <td style="width: 50%;">@Model.Name</td>
+                            <td style="width: 50%;">UserName</td>
+                            <td style="width: 50%;">@Model.UserName</td>
                         </tr>
                         <tr class="text-center">
                             <td style="width: 50%;">Email</td>
                             <td style="width: 50%;">@Model.Email</td>
                         </tr>
                         <tr class="text-center">
-                            <td style="width: 50%;">Роль</td>
-                            <td style="width: 50%;">@Model.Role</td>
+                            <td style="width: 50%;">Роли</td>
+                            <td style="width: 50%;" value="@Model.Role">@Model.Role</td>
                         </tr>
                         <tr class="text-center">
-                            <td style="width: 50%;">Пароль</td>
-                            <td style="width: 50%;">@Model.Password</td>
+                            <td style="width: 50%;">Хеш пароля</td>
+                            <td style="width: 50%;">@Model.PasswordHash</td>
                         </tr>
                     </tbody>
                 </table>

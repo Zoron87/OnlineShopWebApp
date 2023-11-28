@@ -11,34 +11,34 @@ namespace OnlineShopWebApp.Controllers
     public class CompareController : Controller
     {
         private ICompareStorage compareStorage;
-        private readonly ShopUser shopUser;
+        private readonly UserViewModel userViewModel;
 
-        public CompareController(ICompareStorage compareStorage, ShopUser shopUser)
+        public CompareController(ICompareStorage compareStorage, UserViewModel shopUser)
         {
             this.compareStorage = compareStorage;
-            this.shopUser = shopUser;
+            this.userViewModel = shopUser;
         }
         public ActionResult Index()
         {
-            var compareProductsViewModel = compareStorage.TryGetById(shopUser.Id)?.ToCompareViewModel();
+            var compareProductsViewModel = compareStorage.TryGetById(userViewModel.Id)?.ToCompareViewModel();
             return View(compareProductsViewModel);
         }
 
         public ActionResult Add(Guid productId)
         {
-            compareStorage.Add(shopUser.Id, productId);
+            compareStorage.Add(userViewModel.Id, productId);
             return RedirectToAction("Index");
         }
 
         public ActionResult Clear()
         {
-            compareStorage.Clear(shopUser.Id);
+            compareStorage.Clear(userViewModel.Id);
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(Guid productId)
         {
-            compareStorage.Delete(shopUser.Id, productId);
+            compareStorage.Delete(userViewModel.Id, productId);
             return RedirectToAction("Index");
         }
     }

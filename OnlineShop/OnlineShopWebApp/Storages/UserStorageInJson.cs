@@ -10,15 +10,15 @@ namespace OnlineShopWebApp.Storages
     public class UserStorageInJson : IUserStorage
     {
         private string filePath = "Storages/Users.json";
-        private List<ShopUser> users;
+        private List<UserViewModel> users;
         public UserStorageInJson()
         {
-            users = new List<ShopUser>();
+            users = new List<UserViewModel>();
         }
         public void Add(Register register)
         {
             var users = GetAll();
-            users.Add(new ShopUser() { Email = register.Email, Password = register.Password });
+            users.Add(new UserViewModel() { Email = register.Email, Password = register.Password });
             SaveAll(users);
         }
 
@@ -37,7 +37,7 @@ namespace OnlineShopWebApp.Storages
             SaveAll(users);
         }
 
-        public ShopUser TryGetByEmail(string Email)
+        public UserViewModel TryGetByEmail(string Email)
         {
             var users = GetAll();
             var user = users.FirstOrDefault(u => u.Email == Email);
@@ -45,20 +45,20 @@ namespace OnlineShopWebApp.Storages
             return user;
         }
 
-        private void SaveAll(List<ShopUser> users)
+        private void SaveAll(List<UserViewModel> users)
         {
             FileProvider.SaveInfo(filePath, JsonConvert.SerializeObject(users, Formatting.Indented));
         }
 
-        public List<ShopUser> GetAll()
+        public List<UserViewModel> GetAll()
         {
             var oldUsers = FileProvider.GetInfo(filePath);
             if (!string.IsNullOrEmpty(oldUsers))
-                return JsonConvert.DeserializeObject<List<ShopUser>>(oldUsers);
+                return JsonConvert.DeserializeObject<List<UserViewModel>>(oldUsers);
             return users;
         }
 
-        public void Edit(ShopUser shopUser)
+        public void Edit(UserViewModel shopUser)
         {
             var users = GetAll();
             var user = users.FirstOrDefault(u => u.Email == shopUser.Email);

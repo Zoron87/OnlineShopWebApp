@@ -7,9 +7,9 @@ namespace OnlineShopWebApp.Interfaces
     {
         void Add(Register register);
         void Delete(string Email);
-        List<ShopUser> GetAll();
+        List<UserViewModel> GetAll();
         bool CheckExistUser(Login loginInfo);
-        ShopUser TryGetByEmail(string Email);
-        void Edit(ShopUser shopUser);
+        UserViewModel TryGetByEmail(string Email);
+        void Edit(UserViewModel shopUser);
     }
 }

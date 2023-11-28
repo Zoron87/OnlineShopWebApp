@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using OnlineShop.DB.Models;
+using System.Collections.Generic;
 
 namespace OnlineShop.DB
 {
@@ -22,10 +23,12 @@ namespace OnlineShop.DB
 
             if (userManager.FindByNameAsync(adminEmail).Result == null)
             {
-                var admin = new User { Email = adminEmail, UserName = adminEmail};
+                var admin = new User { Email = adminEmail, UserName = adminEmail, Role = Constants.AdminRoleName };
                 var result = userManager.CreateAsync(admin, password).Result;
                 if (result.Succeeded)
+                {
                     userManager.AddToRoleAsync(admin, Constants.AdminRoleName).Wait();
+                }
                 else
                     throw new System.Exception("Дефолтный администратор не был добавлен!");
             }
