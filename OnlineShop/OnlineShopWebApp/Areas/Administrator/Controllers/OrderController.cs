@@ -12,28 +12,28 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
     [Authorize(Roles = Constants.AdminRoleName)]
     public class OrderController : Controller
     {
-        private readonly IOrderStorage orderStorage;
+        private readonly IOrderStorage _orderStorage;
 
         public OrderController(IOrderStorage orderStorage)
         {
-            this.orderStorage = orderStorage;
+            this._orderStorage = orderStorage;
         }
         public ActionResult Index()
         {
-            var ordersViewModel = orderStorage.GetAll().ToOrdersViewModel();
+            var ordersViewModel = _orderStorage.GetAll().ToOrdersViewModel();
             return View(ordersViewModel);
         }
 
         public ActionResult Details(Guid orderId)
         {
-            var orderViewModel = orderStorage.TryGetById(orderId).ToOrderViewModel();
+            var orderViewModel = _orderStorage.TryGetById(orderId).ToOrderViewModel();
             return View(orderViewModel);
         }
 
         [HttpPost]
         public IActionResult UpdateStatus(Guid orderId, OrderStatus orderStatus)
         {
-            orderStorage.UpdateStatus(orderId, orderStatus);
+            _orderStorage.UpdateStatus(orderId, orderStatus);
             return RedirectToAction("Index");
         }
     }

@@ -207,7 +207,7 @@ namespace OnlineShopWebApp.Providers
         public static UserViewModel ToUserViewModel(this User user)
         {
             var userViewModel = new UserViewModel();
-            userViewModel.Id = new Guid(user.Id.ToString());
+            userViewModel.Id = Guid.Parse(user.Id);
             userViewModel.Name = user.UserName;
             userViewModel.Email = user.Email;
             userViewModel.Password = user.PasswordHash;

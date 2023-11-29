@@ -9,16 +9,16 @@ namespace OnlineShop.DB.Storages
 {
     public class CartDBStorage : ICartStorage
     {
-        private readonly DatabaseContext databaseContext;
+        private readonly DatabaseContext _databaseContext;
 
         public CartDBStorage(DatabaseContext databaseContext)
         {
-            this.databaseContext = databaseContext;
+            this._databaseContext = databaseContext;
         }
 
         public void AddItem(Guid userId, Guid productId, int quantity = 1)
         {
-            var product = databaseContext.Products.FirstOrDefault(p => p.Id == productId);
+            var product = _databaseContext.Products.FirstOrDefault(p => p.Id == productId);
 
             var cartPositon = new CartItem()
             {
@@ -34,8 +34,8 @@ namespace OnlineShop.DB.Storages
                     UserId = userId,
                     Items = new List<CartItem>() { cartPositon }
                 };
-                databaseContext.Carts.Add(cart);
-                databaseContext.SaveChanges();
+                _databaseContext.Carts.Add(cart);
+                _databaseContext.SaveChanges();
             }
             else
             {
@@ -45,7 +45,7 @@ namespace OnlineShop.DB.Storages
                 else
                     cart.Items.Add(cartPositon);
 
-                databaseContext.SaveChanges();
+                _databaseContext.SaveChanges();
             }
         }
 
@@ -60,7 +60,7 @@ namespace OnlineShop.DB.Storages
                 else
                     checkSameProduct.Quantity--;
 
-                databaseContext.SaveChanges();
+                _databaseContext.SaveChanges();
             }
         }
 
@@ -71,14 +71,14 @@ namespace OnlineShop.DB.Storages
             {
                 var cartItemForRemove = cart.Items.FirstOrDefault(el => el.Product.Id == productId);
                 if (cartItemForRemove != null)
-                    databaseContext.Carts.FirstOrDefault(el => el == cart).Items.Remove(cartItemForRemove);
+                    _databaseContext.Carts.FirstOrDefault(el => el == cart).Items.Remove(cartItemForRemove);
             }
-            databaseContext.SaveChanges();
+            _databaseContext.SaveChanges();
         }
 
         public Cart TryGetById(Guid userId)
         {
-            return databaseContext.Carts.Include(el => el.Items).ThenInclude(el => el.Product).FirstOrDefault(c => c.UserId == userId);
+            return _databaseContext.Carts.Include(el => el.Items).ThenInclude(el => el.Product).FirstOrDefault(c => c.UserId == userId);
         }
 
         public void Clear(Guid userId)
@@ -86,8 +86,8 @@ namespace OnlineShop.DB.Storages
             var cart = TryGetById(userId);
             if (cart != null)
             {
-                databaseContext.Carts.Remove(cart);
-                databaseContext.SaveChanges();
+                _databaseContext.Carts.Remove(cart);
+                _databaseContext.SaveChanges();
             }
         }
     }

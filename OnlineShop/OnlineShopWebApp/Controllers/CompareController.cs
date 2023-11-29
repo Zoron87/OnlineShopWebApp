@@ -7,38 +7,37 @@ using System;
 
 namespace OnlineShopWebApp.Controllers
 {
-    [Authorize]
     public class CompareController : Controller
     {
-        private ICompareStorage compareStorage;
-        private readonly UserViewModel userViewModel;
+        private readonly ICompareStorage _compareStorage;
+        private readonly UserViewModel _userViewModel;
 
-        public CompareController(ICompareStorage compareStorage, UserViewModel shopUser)
+        public CompareController(ICompareStorage compareStorage, UserViewModel userViewModel)
         {
-            this.compareStorage = compareStorage;
-            this.userViewModel = shopUser;
+            this._compareStorage = compareStorage;
+            this._userViewModel = userViewModel;
         }
         public ActionResult Index()
         {
-            var compareProductsViewModel = compareStorage.TryGetById(userViewModel.Id)?.ToCompareViewModel();
+            var compareProductsViewModel = _compareStorage.TryGetById(_userViewModel.Id)?.ToCompareViewModel();
             return View(compareProductsViewModel);
         }
 
         public ActionResult Add(Guid productId)
         {
-            compareStorage.Add(userViewModel.Id, productId);
+            _compareStorage.Add(_userViewModel.Id, productId);
             return RedirectToAction("Index");
         }
 
         public ActionResult Clear()
         {
-            compareStorage.Clear(userViewModel.Id);
+            _compareStorage.Clear(_userViewModel.Id);
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(Guid productId)
         {
-            compareStorage.Delete(userViewModel.Id, productId);
+            _compareStorage.Delete(_userViewModel.Id, productId);
             return RedirectToAction("Index");
         }
     }

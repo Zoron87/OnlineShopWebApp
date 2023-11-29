@@ -9,49 +9,49 @@ namespace OnlineShopWebApp.Controllers
 {
     public class CartController : Controller
     {
-        private readonly ICartStorage cartStorage;
-        private readonly UserViewModel userViewModel;
+        private readonly ICartStorage _cartStorage;
+        private readonly UserViewModel _userViewModel;
 
         public CartController(ICartStorage cartStorage, UserViewModel userViewModel)
         {
-            this.cartStorage = cartStorage;
-            this.userViewModel = userViewModel;
+            this._cartStorage = cartStorage;
+            this._userViewModel = userViewModel;
         }
 
         public ActionResult Index()
         {
-            var cartViewModel = cartStorage.TryGetById(userViewModel.Id)?.ToCartViewModel();
+            var cartViewModel = _cartStorage.TryGetById(_userViewModel.Id)?.ToCartViewModel();
             return View(cartViewModel);
         }
 
         public ActionResult Add(Guid productId)
         {
-            cartStorage.AddItem(userViewModel.Id, productId);
+            _cartStorage.AddItem(_userViewModel.Id, productId);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public ActionResult AddItems(Guid productId, int quantity)
         {
-            cartStorage.AddItem(userViewModel.Id, productId, quantity);
+            _cartStorage.AddItem(_userViewModel.Id, productId, quantity);
             return RedirectToAction("Index");
         }
 
         public ActionResult Reduce(Guid productId)
         {
-            cartStorage.Reduce(userViewModel.Id, productId);
+            _cartStorage.Reduce(_userViewModel.Id, productId);
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(Guid productId)
         {
-            cartStorage.DeleteItem(userViewModel.Id, productId);
+            _cartStorage.DeleteItem(_userViewModel.Id, productId);
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
-            cartStorage.Clear(userViewModel.Id);
+            _cartStorage.Clear(_userViewModel.Id);
             return RedirectToAction("Index");
         }
     }

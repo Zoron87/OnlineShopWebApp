@@ -10,32 +10,32 @@ namespace OnlineShopWebApp.Storages
 {
     public class CompareStorage : ICompareStorage
 	{
-		private readonly DatabaseContext databaseContext;
+		private readonly DatabaseContext _databaseContext;
 
         public CompareStorage(DatabaseContext databaseContext)
         {
-            this.databaseContext = databaseContext;
+            this._databaseContext = databaseContext;
         }
 
         public Compare TryGetById(Guid userId)
 		{
-			return databaseContext.Compares.Include(el => el.Products).FirstOrDefault(c => c.UserId == userId);
+			return _databaseContext.Compares.Include(el => el.Products).FirstOrDefault(c => c.UserId == userId);
 		}
 
 		public void Add(Guid userId, Guid productId)
 		{
-			var product = databaseContext.Products.FirstOrDefault(el => el.Id == productId);
+			var product = _databaseContext.Products.FirstOrDefault(el => el.Id == productId);
             var compare = TryGetById(userId);
 
 			if (compare == null)
 			{
 				compare = new Compare() { UserId = userId, Products = new List<Product> { product } };
-                databaseContext.Compares.Add(compare);
+                _databaseContext.Compares.Add(compare);
             }
 			else
 				compare.Products.Add(product);
 
-			databaseContext.SaveChanges();
+			_databaseContext.SaveChanges();
         }
 
 		public void Delete(Guid userId, Guid productId)
@@ -45,14 +45,14 @@ namespace OnlineShopWebApp.Storages
 
 			if (compareItem != null)
 				compare?.Products?.Remove(compareItem);
-			databaseContext.SaveChanges();
+			_databaseContext.SaveChanges();
 		}
 
 		public void Clear(Guid userId)
 		{
 			var compare = TryGetById(userId);
 			compare?.Products?.Clear();
-			databaseContext.SaveChanges();
+			_databaseContext.SaveChanges();
 		}
     }
 }

@@ -8,18 +8,18 @@ namespace OnlineShopWebApp.Views.Shared.Components.Compare
 {
     public class CompareViewComponent : ViewComponent
     {
-        private readonly ICompareStorage compareStorage;
-        private readonly UserViewModel userViewModel;
+        private readonly ICompareStorage _compareStorage;
+        private readonly UserViewModel _userViewModel;
 
-        public CompareViewComponent(ICompareStorage compareStorage, UserViewModel shopUser)
+        public CompareViewComponent(ICompareStorage compareStorage, UserViewModel userViewModel)
         {
-            this.compareStorage = compareStorage;
-            this.userViewModel = shopUser;
+            this._compareStorage = compareStorage;
+            this._userViewModel = userViewModel;
         }
 
         public IViewComponentResult Invoke()
         {
-            var compareProductViewModel = compareStorage?.TryGetById(userViewModel.Id)?.ToCompareViewModel();
+            var compareProductViewModel = _compareStorage?.TryGetById(_userViewModel.Id)?.ToCompareViewModel();
             return View("Compare", compareProductViewModel?.Amount ?? 0);
         }
                 

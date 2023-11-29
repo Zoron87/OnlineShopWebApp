@@ -43,10 +43,4 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Storages\Products.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>

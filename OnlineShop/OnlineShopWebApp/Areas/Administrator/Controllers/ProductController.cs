@@ -13,27 +13,27 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
     [Authorize(Roles = Constants.AdminRoleName)]
     public class ProductController : Controller
     {
-        private readonly IProductStorage productStorage;
+        private readonly IProductStorage _productStorage;
 
         public ProductController(IProductStorage productStorage)
         {
-            this.productStorage = productStorage;
+            this._productStorage = productStorage;
         }
         public ActionResult Index()
         {
-            var productsViewModel = productStorage.GetAll().ToProductsViewModel();
+            var productsViewModel = _productStorage.GetAll().ToProductsViewModel();
             return View(productsViewModel);
         }
 
         public ActionResult Edit(Guid productId)
         {
-            var product = productStorage.TryGetById(productId).ToProductViewModel();
+            var product = _productStorage.TryGetById(productId).ToProductViewModel();
             return View(product);
         }
 
         public ActionResult Delete(Guid productId)
         {
-            productStorage.Delete(productId);
+            _productStorage.Delete(productId);
             return RedirectToAction("Index");
         }
 
@@ -51,7 +51,7 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             if (ModelState.IsValid)
             {
                 var productDb = new Product().ItemViewModelToProduct(item);
-                productStorage.Add(productDb);
+                _productStorage.Add(productDb);
                 return RedirectToAction("Index");
             }
             return View(item);
@@ -65,8 +65,8 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
 
             if (ModelState.IsValid)
             {
-                var product = productStorage.TryGetById(productId).ItemViewModelToProduct(item);
-                productStorage.SaveChange();
+                var product = _productStorage.TryGetById(productId).ItemViewModelToProduct(item);
+                _productStorage.SaveChange();
                 return RedirectToAction("Index");
             }
             return View(item);

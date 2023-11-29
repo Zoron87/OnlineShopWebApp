@@ -10,6 +10,6 @@ namespace OnlineShopWebApp.Interfaces
         List<UserViewModel> GetAll();
         bool CheckExistUser(Login loginInfo);
         UserViewModel TryGetByEmail(string Email);
-        void Edit(UserViewModel shopUser);
+        void Edit(UserViewModel userViewModel);
     }
 }

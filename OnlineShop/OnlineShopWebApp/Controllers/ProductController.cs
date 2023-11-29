@@ -8,22 +8,22 @@ namespace OnlineShopWebApp.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductStorage productStorage;
+        private readonly IProductStorage _productStorage;
 
         public ProductController(IProductStorage productStorage)
         {
-            this.productStorage = productStorage;
+            this._productStorage = productStorage;
         }
 
         public IActionResult Index(Guid productId)
         {
-            var product = productStorage.TryGetById(productId).ToProductViewModel();
+            var product = _productStorage.TryGetById(productId).ToProductViewModel();
             return product != null ? View(product) : View("Error");
         }
 
         public IActionResult View(int page = 1, int itemsOnPage = 1)
         {
-            var products = productStorage.GetProductsWithPagination(page, itemsOnPage).ToProductsViewModel();
+            var products = _productStorage.GetProductsWithPagination(page, itemsOnPage).ToProductsViewModel();
             return products != null ? View(products) : View("Error");
         }
 
@@ -31,7 +31,7 @@ namespace OnlineShopWebApp.Controllers
         {
             ViewData["Search"] = search;
             search = search.ToLower();
-            var productsViewModel = productStorage.GetAll().Where(p => p.Name.ToLower().Contains(search) || p.Description.ToLower().Contains(search)).ToList().ToProductsViewModel();
+            var productsViewModel = _productStorage.GetAll().Where(p => p.Name.ToLower().Contains(search) || p.Description.ToLower().Contains(search)).ToList().ToProductsViewModel();
 
             return View(productsViewModel);
         }

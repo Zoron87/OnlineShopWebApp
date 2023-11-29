@@ -8,17 +8,17 @@ namespace OnlineShopWebApp.Views.Shared.Components.Cart
 {
     public class CartViewComponent : ViewComponent
     {
-        private readonly ICartStorage cartStorage;
-        private readonly UserViewModel userViewModel;
+        private readonly ICartStorage _cartStorage;
+        private readonly UserViewModel _userViewModel;
 
-        public CartViewComponent(ICartStorage cartStorage, UserViewModel shopUser)
+        public CartViewComponent(ICartStorage cartStorage, UserViewModel userViewModel)
         {
-            this.cartStorage = cartStorage;
-            this.userViewModel = shopUser;
+            this._cartStorage = cartStorage;
+            this._userViewModel = userViewModel;
         }
         public IViewComponentResult Invoke()
         {
-            var cartViewModel = cartStorage.TryGetById(userViewModel.Id)?.ToCartViewModel();
+            var cartViewModel = _cartStorage.TryGetById(_userViewModel.Id)?.ToCartViewModel();
             var productCounts = cartViewModel?.Amount ?? 0;
             return View("Cart", productCounts);
         }

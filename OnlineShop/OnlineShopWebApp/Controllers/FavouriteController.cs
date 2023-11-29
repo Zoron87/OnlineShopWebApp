@@ -9,38 +9,37 @@ using System.Collections.Generic;
 
 namespace OnlineShopWebApp.Controllers
 {
-    [Authorize]
     public class FavouriteController : Controller
 	{
-		private readonly IFavouriteStorage favouriteStorage;
-        private readonly UserViewModel userViewModel;
+		private readonly IFavouriteStorage _favouriteStorage;
+        private readonly UserViewModel _userViewModel;
 
-        public FavouriteController(IFavouriteStorage favouriteStorage, UserViewModel shopUser)
+        public FavouriteController(IFavouriteStorage favouriteStorage, UserViewModel userViewModel)
         {
-			this.favouriteStorage = favouriteStorage;
-            this.userViewModel = shopUser;
+			this._favouriteStorage = favouriteStorage;
+            this._userViewModel = userViewModel;
         }
 		public ActionResult Index()
 		{
-			var favouriteProductsViewModel = favouriteStorage.TryGetById(userViewModel.Id)?.ToFavouriteViewModel();
+			var favouriteProductsViewModel = _favouriteStorage.TryGetById(_userViewModel.Id)?.ToFavouriteViewModel();
             return View(favouriteProductsViewModel);
         }
 
 		public ActionResult Add(Guid productId)
 		{
-			favouriteStorage.Add(userViewModel.Id, productId);
+			_favouriteStorage.Add(_userViewModel.Id, productId);
 			return RedirectToAction("Index");
 		}
 
 		public ActionResult Delete(Guid productId)
 		{
-			favouriteStorage.Delete(userViewModel.Id, productId);
+			_favouriteStorage.Delete(_userViewModel.Id, productId);
 			return RedirectToAction("Index");
 		}
 
 		public ActionResult Clear()
 		{
-			favouriteStorage.Clear(userViewModel.Id);
+			_favouriteStorage.Clear(_userViewModel.Id);
 			return RedirectToAction("Index");
 		}
 	}

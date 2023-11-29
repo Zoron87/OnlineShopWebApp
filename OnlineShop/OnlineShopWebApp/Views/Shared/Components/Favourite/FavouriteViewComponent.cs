@@ -7,18 +7,18 @@ namespace OnlineShopWebApp.Views.Shared.Components.Favourite
 {
     public class FavouriteViewComponent : ViewComponent
     {
-        private readonly IFavouriteStorage favouriteStorage;
-        private readonly UserViewModel userViewModel;
+        private readonly IFavouriteStorage _favouriteStorage;
+        private readonly UserViewModel _userViewModel;
 
-        public FavouriteViewComponent(IFavouriteStorage favouriteStorage, UserViewModel shopUser)
+        public FavouriteViewComponent(IFavouriteStorage favouriteStorage, UserViewModel userViewModel)
         {
-            this.favouriteStorage = favouriteStorage;
-            this.userViewModel = shopUser;
+            this._favouriteStorage = favouriteStorage;
+            this._userViewModel = userViewModel;
         }
 
         public IViewComponentResult Invoke()
         {
-            var favouriteProductsViewModel = favouriteStorage.TryGetById(userViewModel.Id)?.ToFavouriteViewModel();
+            var favouriteProductsViewModel = _favouriteStorage.TryGetById(_userViewModel.Id)?.ToFavouriteViewModel();
             return View("Favourite", favouriteProductsViewModel?.Amount ?? 0);
         }
     }

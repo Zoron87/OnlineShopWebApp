@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using OnlineShop.DB.Models;
-using System.Collections.Generic;
 
 namespace OnlineShop.DB
 {

@@ -7,18 +7,18 @@ namespace OnlineShopWebApp.Views.Shared.Components.CartInfoShort
 {
     public class CartInfoShortViewComponent : ViewComponent
     {
-        private readonly ICartStorage cartStorage;
-        private readonly UserViewModel shopUser;
+        private readonly ICartStorage _cartStorage;
+        private readonly UserViewModel _userViewModel;
 
-        public CartInfoShortViewComponent(ICartStorage cartStorage, UserViewModel shopUser)
+        public CartInfoShortViewComponent(ICartStorage cartStorage, UserViewModel userViewModel)
         {
-            this.cartStorage = cartStorage;
-            this.shopUser = shopUser;
+            this._cartStorage = cartStorage;
+            this._userViewModel = userViewModel;
         }
 
         public IViewComponentResult Invoke()
         {
-            var cartViewModel = cartStorage.TryGetById(shopUser.Id)?.ToCartViewModel();
+            var cartViewModel = _cartStorage.TryGetById(_userViewModel.Id)?.ToCartViewModel();
             return View("CartInfoShort", cartViewModel);
         }
     }

@@ -11,6 +11,7 @@ using OnlineShop.DB.Models;
 using OnlineShop.DB.Storages;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Providers;
 using OnlineShopWebApp.Storages;
 using Serilog;
 using System;
@@ -42,10 +43,11 @@ namespace OnlineShopWebApp
 
 			services.AddIdentity<User, UserRole>() // указываем тип пользователя и роли
 				.AddRoles<UserRole>()
-				.AddEntityFrameworkStores<IdentityContext>(); // устанавливаем тип хранилища - наш контекст
+				.AddEntityFrameworkStores<IdentityContext>() // устанавливаем тип хранилища - наш контекст
+				.AddErrorDescriber<CustomIdentityErrorDescriber>(); // Переписываем описания ошибок Identity
 
-			// настройки кук
-			services.ConfigureApplicationCookie(options =>
+            // настройки кук
+            services.ConfigureApplicationCookie(options =>
 			{
 				options.ExpireTimeSpan = TimeSpan.FromHours(24);
 				options.LoginPath = "/Authorization/Login";
@@ -56,8 +58,8 @@ namespace OnlineShopWebApp
 				};
 			});
 
-            services.AddSingleton<IUserStorage, UserStorageInJson>();
-            services.AddSingleton<IRoleStorage, RoleStorageInJson>();
+            //services.AddSingleton<IUserStorage, UserStorageInJson>();
+            //services.AddSingleton<IRoleStorage, RoleStorageInJson>();
             services.AddTransient<IFavouriteStorage, FavouriteStorage>();
 			services.AddTransient<ICompareStorage, CompareStorage>();
 			services.AddTransient<IOrderStorage, OrderDBStorage>();
