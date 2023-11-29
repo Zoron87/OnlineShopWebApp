@@ -6,19 +6,19 @@ namespace OnlineShop.DB
 {
     public class IdentityInitializer
     {
-        public static void Initialize(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public static void Initialize(UserManager<User> userManager, RoleManager<UserRole> roleManager)
         {
             var adminEmail = "admin@example.com";
             var password = "Admin123456!";
 
             if (roleManager.FindByNameAsync(Constants.AdminRoleName).Result == null)
             {
-                roleManager.CreateAsync(new IdentityRole(Constants.AdminRoleName)).Wait();
+                roleManager.CreateAsync(new UserRole(Constants.AdminRoleName, "Учетная запись, обладающая административными правами")).Wait();
             }
 
             if (roleManager.FindByNameAsync(Constants.UserRoleName).Result == null) 
             {
-                roleManager.CreateAsync(new IdentityRole(Constants.UserRoleName)).Wait();
+                roleManager.CreateAsync(new UserRole(Constants.UserRoleName, "Учетная запись обычного пользователя")).Wait();
             }
 
             if (userManager.FindByNameAsync(adminEmail).Result == null)

@@ -1,4 +1,5 @@
 ﻿using OnlineShop.DB.Models;
+using OnlineShopWebApp.Areas.Administrator.Models;
 using OnlineShopWebApp.Models;
 using System;
 using System.Collections.Generic;
@@ -186,6 +187,33 @@ namespace OnlineShopWebApp.Providers
             orderDetails.Comment = orderDetailsViewModel.Comment;
 
             return orderDetails;
+        }
+
+        public static List<RoleViewModel> ToRoleViewModel(this List<UserRole> roles)
+        {
+            var rolesViewModel = new List<RoleViewModel>();
+            foreach (var role in roles)
+            {
+                var roleViewModel = new RoleViewModel();
+                roleViewModel.Name = role.Name;
+                roleViewModel.Description = role.Description;
+
+                rolesViewModel.Add(roleViewModel);
+            }
+
+            return rolesViewModel;
+        }
+
+        public static UserViewModel ToUserViewModel(this User user)
+        {
+            var userViewModel = new UserViewModel();
+            userViewModel.Id = new Guid(user.Id.ToString());
+            userViewModel.Name = user.UserName;
+            userViewModel.Email = user.Email;
+            userViewModel.Password = user.PasswordHash;
+            userViewModel.Role = user.Role;
+
+            return userViewModel;
         }
     }
 

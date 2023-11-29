@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -41,7 +40,8 @@ namespace OnlineShopWebApp
 			services.AddDbContext<IdentityContext>(options =>
 				options.UseSqlServer(connection));
 
-			services.AddIdentity<User, IdentityRole>() // указываем тип пользователя и роли
+			services.AddIdentity<User, UserRole>() // указываем тип пользователя и роли
+				.AddRoles<UserRole>()
 				.AddEntityFrameworkStores<IdentityContext>(); // устанавливаем тип хранилища - наш контекст
 
 			// настройки кук

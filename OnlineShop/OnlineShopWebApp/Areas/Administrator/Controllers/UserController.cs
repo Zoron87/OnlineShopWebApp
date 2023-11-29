@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using OnlineShop.DB;
 using OnlineShop.DB.Models;
-using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
+using OnlineShopWebApp.Providers;
 using System;
 using System.Linq;
 
@@ -16,9 +16,9 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<UserRole> _roleManager;
 
-        public UserController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public UserController(UserManager<User> userManager, RoleManager<UserRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -82,16 +82,8 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
 
         public IActionResult Edit(string Email)
         {
-            var user = _userManager.FindByEmailAsync(Email).Result;
+            var userViewModel = _userManager.FindByEmailAsync(Email).Result.ToUserViewModel();
             ViewBag.Role = new SelectList(_roleManager.Roles.AsEnumerable(), "Name", "Name");
-
-            var userViewModel = new UserViewModel();
-            userViewModel.Id = new Guid(user.Id.ToString());
-            userViewModel.Name = user.UserName;
-            userViewModel.Email = user.Email;
-            userViewModel.Password = user.PasswordHash;
-            userViewModel.Role = user.Role;
-
             return View(userViewModel);
         }
 

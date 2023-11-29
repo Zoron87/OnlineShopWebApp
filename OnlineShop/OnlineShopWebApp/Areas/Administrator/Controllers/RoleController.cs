@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Areas.Administrator.Models;
-using OnlineShopWebApp.Interfaces;
+using OnlineShopWebApp.Providers;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineShopWebApp.Areas.Administrator.Controllers
@@ -11,16 +15,18 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
     [Authorize(Roles = Constants.AdminRoleName)]
     public class RoleController : Controller
     {
-        private readonly IRoleStorage roleStorage;
+        private readonly RoleManager<UserRole> _roleManager;
+        private readonly UserManager<User> _userManager;
 
-        public RoleController(IRoleStorage roleStorage)
+        public RoleController(RoleManager<UserRole> roleManager, UserManager<User> userManager)
         {
-            this.roleStorage = roleStorage;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
         public ActionResult Index()
         {
-            var roles = roleStorage.GetAll();
-            return View(roles);
+            var rolesViewModel = _roleManager.Roles.ToList().ToRoleViewModel();
+            return View(rolesViewModel);
         }
 
         public ActionResult Add()
@@ -29,25 +35,33 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Role role)
+        public ActionResult Add(RoleViewModel roleViewModel)
         {
-            var roles = roleStorage.GetAll();
-            if (roles.Any(r => r.Name.ToLower() == role.Name.ToLower()))
-            {
-                ModelState.AddModelError("Name", $"Роль {role.Name} уже существует");
-            }
+            var roles = _roleManager.Roles.ToList();
+            if (roles.Any(r => r.Name.ToLower() == roleViewModel.Name.ToString().ToLower()))
+                ModelState.AddModelError("Name", $"Роль {roleViewModel.Name} уже существует");
 
             if (ModelState.IsValid)
             {
-                roleStorage.Add(role);
+                _roleManager.CreateAsync(new UserRole(roleViewModel.Name, roleViewModel.Description)).Wait();
                 return RedirectToAction("Index");
             }
-            return View(role);
+            return View(roleViewModel);
         }
 
-        public ActionResult Delete(string name)
+        public ActionResult Delete(RoleViewModel roleViewModel)
         {
-            roleStorage.Delete(name);
+            var role = _roleManager.Roles.FirstOrDefault(r => r.Name == roleViewModel.Name);
+            var user = _userManager.Users.FirstOrDefault(u => u.Role == roleViewModel.Name);
+
+            if (user != null) 
+            {
+                var RolesViewModel = new List<RoleViewModel>();
+                ModelState.AddModelError("", $"У роли {roleViewModel.Name} есть привязки к пользователям.");
+                throw new Exception($"У роли {roleViewModel.Name} есть привязки к пользователям.");
+            }
+
+            _roleManager.DeleteAsync(role).Wait();
             return RedirectToAction("Index");
         }
     }

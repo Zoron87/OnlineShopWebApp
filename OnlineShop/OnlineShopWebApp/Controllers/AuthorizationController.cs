@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
 using OnlineShop.DB.Models;
-using OnlineShopWebApp.Areas.Administrator.Models;
 using OnlineShopWebApp.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace OnlineShopWebApp.Controllers
@@ -47,6 +45,10 @@ namespace OnlineShopWebApp.Controllers
         [HttpPost]
         public ActionResult Registration(Register registerInfo)
         {
+            var checkEmail = _userManager.FindByEmailAsync(registerInfo.Email).Result;
+            if (checkEmail != null)
+                ModelState.AddModelError("Email", "Данный email уже используется. Укажите другой!");
+
             if (registerInfo.Email == registerInfo.Password)
                 ModelState.AddModelError("", "Email и пароль не должны совпадать");
 
