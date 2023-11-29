@@ -58,8 +58,6 @@ namespace OnlineShopWebApp
 				};
 			});
 
-            //services.AddSingleton<IUserStorage, UserStorageInJson>();
-            //services.AddSingleton<IRoleStorage, RoleStorageInJson>();
             services.AddTransient<IFavouriteStorage, FavouriteStorage>();
 			services.AddTransient<ICompareStorage, CompareStorage>();
 			services.AddTransient<IOrderStorage, OrderDBStorage>();
