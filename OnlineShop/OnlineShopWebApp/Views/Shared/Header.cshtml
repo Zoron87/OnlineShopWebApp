@@ -18,19 +18,44 @@
                 </div>
                 <div class="col-6 col-sm-4">
                     <div class="header-top-accounts d-flex justify-content-end">
-                        <div class="btn-group me-2">
-                            <div class="dropdown">
-                                <button class="btn btn-sm dropdown-toggle" type="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                    Войти
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a asp-controller="Authorization" asp-action="Login" asp-area="" class="dropdown-item">Вход</a></li>
-                                    <li><a class="dropdown-item" asp-controller="Authorization" asp-action="Registration" asp-area="">Регистрация</a></li>
-                                </ul>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="btn-group me-2">
+                                <div class="dropdown">
+                                    <img class="avatar" src="https://sun156-1.userapi.com/s/v1/ig2/W0_quY3RdeOJNBRyRz9jU1gQqBWIRmZvq4VCFgY5MJsuzcHS6ebk9DfmlxXtLsvhddN7UrEl9rMZ4qVLEWOSbFjs.jpg?size=200x200&quality=95&crop=0,5,400,400&ava=1" alt="">
+                                    <button class="btn btn-sm dropdown-toggle float-end" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" aria-disabled="true">Профиль(@User.Identity.Name)</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-area="" asp-controller="Authorization" asp-action="Logout">Выход</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
-
+                        }
+                        else
+                        {
+                            <div class="btn-group me-2">
+                                <div class="dropdown">
+                                    <button class="btn btn-sm dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        Войти
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a asp-controller="Authorization" asp-action="Login" asp-area="" class="dropdown-item">Вход</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Authorization" asp-action="Registration" asp-area="">Регистрация</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        }
                         <div class="btn-group">
                             <div class="dropdown">
                                 <button class="btn btn-sm dropdown-toggle" type="button"
@@ -132,22 +157,6 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Home" asp-action="Index" asp-area="Administrator">Администратор</a>
-                            </li>
-                        }
-
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" aria-disabled="true">@User.Identity.Name</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Authorization" asp-action="Logout">Выход</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Authorization" asp-action="Login">Войти</a>
                             </li>
                         }
                     </ul> <!--//navbar-nav-->
