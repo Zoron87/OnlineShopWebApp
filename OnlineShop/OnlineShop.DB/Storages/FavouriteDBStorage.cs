@@ -19,12 +19,12 @@ namespace OnlineShopWebApp.Storages
 
         public Favourite TryGetById(Guid userId)
 		{
-			return _databaseContext.Favourites.Include(el => el.Products).FirstOrDefault(f => f.UserId == userId);
+			return _databaseContext.Favourites.Include(el => el.Products).ThenInclude(p => p.ImagesPath).FirstOrDefault(f => f.UserId == userId);
 		}
 
 		public void Add(Guid userId, Guid productId)
 		{
-			var product = _databaseContext.Products.FirstOrDefault(el => el.Id == productId);
+			var product = _databaseContext.Products.Include(p => p.ImagesPath).FirstOrDefault(el => el.Id == productId);
 
 			if (product == null) throw new Exception("Указанный товар не обнаружен!");
 
@@ -50,7 +50,7 @@ namespace OnlineShopWebApp.Storages
 		public void Delete(Guid userId, Guid productId)
 		{
             var favourite = TryGetById(userId);
-			var favouriteItem = _databaseContext?.Products?.FirstOrDefault(p => p.Id == productId);
+			var favouriteItem = _databaseContext?.Products?.Include(p => p.ImagesPath).FirstOrDefault(p => p.Id == productId);
 
 			if (favouriteItem != null)
 				favourite?.Products?.Remove(favouriteItem);

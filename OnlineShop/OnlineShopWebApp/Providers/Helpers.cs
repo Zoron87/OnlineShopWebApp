@@ -38,7 +38,18 @@ namespace OnlineShopWebApp.Providers
             productViewModel.Name = product.Name;
             productViewModel.Description = product.Description;
             productViewModel.Cost = product.Cost;
-            productViewModel.ImagePath = product.ImagePath;
+
+            var imagesViewModel = new List<ImageViewModel>();
+            foreach (var item in product.ImagesPath)
+            {
+                var imageViewModel = new ImageViewModel();
+                imageViewModel.Id = item.Id;
+                imageViewModel.ProductId = item.ProductId;
+                imageViewModel.URL = item.URL;
+
+                imagesViewModel.Add(imageViewModel);
+            }
+            productViewModel.ImagesPath = imagesViewModel;
 
             return productViewModel;
         }
@@ -53,7 +64,19 @@ namespace OnlineShopWebApp.Providers
                 productViewModel.Name = item.Product.Name;
                 productViewModel.Description = item.Product.Description;
                 productViewModel.Cost = item.Product.Cost;
-                productViewModel.ImagePath = item.Product.ImagePath;
+
+                var imagesViewModel = new List<ImageViewModel>();  
+                foreach (var image in item.Product.ImagesPath)
+                {
+                    var imageViewModel = new ImageViewModel();
+                    imageViewModel.Id= image.Id;
+                    imageViewModel.ProductId = image.ProductId;
+                    imageViewModel.URL = image.URL;
+
+                    imagesViewModel.Add(imageViewModel) ;
+                }
+
+                productViewModel.ImagesPath = imagesViewModel;
                 cartItemsViewModel.Add(new CartItemViewModel(productViewModel, item.Quantity));
             }
             var cartViewModel = new CartViewModel(cart.UserId, cartItemsViewModel);
@@ -66,7 +89,17 @@ namespace OnlineShopWebApp.Providers
             product.Name = item.Name;
             product.Description = item.Description;
             product.Cost = item.Cost;
-            product.ImagePath = item.ImagePath;
+
+            var images = new List<Image>();
+            foreach (var i in item.ImagesPath)
+            {
+                var image = new Image();
+                image.Id = i.Id;
+                image.ProductId = i.ProductId;
+                image.URL = i.URL;
+                images.Add(image);
+            }
+            product.ImagesPath = images;
 
             return product;
         }
@@ -138,8 +171,18 @@ namespace OnlineShopWebApp.Providers
                     cartItemViewModel.Product.Name = item.Product.Name;
                     cartItemViewModel.Product.Description = item.Product.Description;
                     cartItemViewModel.Product.Cost = item.Product.Cost;
-                    cartItemViewModel.Product.ImagePath = item.Product.ImagePath;
+                    
+                    var imagesViewModel = new List<ImageViewModel>();
+                    foreach (var image in item.Product.ImagesPath)
+                    {
+                        var imageViewModel = new ImageViewModel();
+                        imageViewModel.Id = image.Id;
+                        imageViewModel.ProductId = image.ProductId;
+                        imageViewModel.URL = image.URL;
 
+                        imagesViewModel.Add(imageViewModel);
+                    }
+                    cartItemViewModel.Product.ImagesPath = imagesViewModel;
                     orderViewModel.OrderDetails.Items.Add(cartItemViewModel);
                 }
             }
@@ -200,7 +243,6 @@ namespace OnlineShopWebApp.Providers
 
                 rolesViewModel.Add(roleViewModel);
             }
-
             return rolesViewModel;
         }
 

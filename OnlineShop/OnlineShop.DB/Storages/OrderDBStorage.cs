@@ -39,7 +39,7 @@ namespace OnlineShop.DB.Storages
 
         public List<Order> GetAll()
         {
-            return _databaseContext.Orders.Include(el => el.OrderDetails).ThenInclude(el => el.Items).ThenInclude(el => el.Product).ToList();
+            return _databaseContext.Orders.Include(el => el.OrderDetails).ThenInclude(el => el.Items).ThenInclude(el => el.Product).ThenInclude(el => el.ImagesPath).ToList();
         }
 
         public void Delete(Order order)

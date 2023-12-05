@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShopWebApp.Models
@@ -20,6 +22,8 @@ namespace OnlineShopWebApp.Models
         [StringLength(999, MinimumLength = 10, ErrorMessage = "Описание продукта должно составлять от {2} до {1} символов")]
         public string Description { get; set; }
 
-        public string ImagePath { get; set; }
+        public List<IFormFile> UploadedFiles { get; set; }
+
+        public List<ImageViewModel> ImagesPath { get; set; }
     }
 }

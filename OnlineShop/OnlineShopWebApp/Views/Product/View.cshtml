@@ -16,7 +16,7 @@
                                 <div class="offer-new">New</div>
                             </div>
                             <div class="product-thumb">
-                                <a asp-controller="Product" asp-action="Index" asp-route-productId="@product.Id"><img src="~/img/products/@product.ImagePath" alt=""></a>
+                                <a asp-controller="Product" asp-action="Index" asp-route-productId="@product.Id"><img src="@product.ImagesPath[0].URL" alt=""></a>
                             </div>
                             <div class="product-details">
                                 <h4>

@@ -19,12 +19,12 @@ namespace OnlineShopWebApp.Storages
 
         public Compare TryGetById(Guid userId)
 		{
-			return _databaseContext.Compares.Include(el => el.Products).FirstOrDefault(c => c.UserId == userId);
+			return _databaseContext.Compares.Include(el => el.Products).ThenInclude(p => p.ImagesPath).FirstOrDefault(c => c.UserId == userId);
 		}
 
 		public void Add(Guid userId, Guid productId)
 		{
-			var product = _databaseContext.Products.FirstOrDefault(el => el.Id == productId);
+			var product = _databaseContext.Products.Include(p => p.ImagesPath).FirstOrDefault(el => el.Id == productId);
             var compare = TryGetById(userId);
 
 			if (compare == null)

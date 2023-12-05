@@ -10,8 +10,8 @@ using OnlineShop.DB;
 namespace OnlineShop.DB.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20231129224656_Identity")]
-    partial class Identity
+    [Migration("20231205211249_AddIdentity")]
+    partial class AddIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

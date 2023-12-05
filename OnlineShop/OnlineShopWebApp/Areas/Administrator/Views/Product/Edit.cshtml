@@ -1,12 +1,17 @@
 ﻿@model ProductViewModel
 
+@{
+    ViewData["Title"] = "Редактирование продукта";
+    int i = 0;
+}
+
 <div class="container">
     <div class="row">
         <div class="col-md-3">
             @await Html.PartialAsync("AdminMenu")
         </div>
         <div class="col-md-9">
-            <form method="post" asp-controller="Product" asp-action="Save" asp-route-productId="@Model.Id">
+            <form method="post" asp-controller="Product" asp-action="Save" asp-route-productId="@Model.Id" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly"></div>
                 <div class="form-group">
                     <label asp-for="Name">Название:</label>
@@ -23,10 +28,45 @@
                     <textarea asp-for="Description" class="form-control" value="@Model.Description" placeholder="Описание продукта" rows="3"></textarea>
                     <span asp-validation-for="Description"></span>
                 </div>
+
                 <div class="form-group">
-                    <label asp-for="ImagePath">Изображение:</label>
-                    <input asp-for="ImagePath" class="form-control" value="@Model.ImagePath" placeholder="Изображение продукта">
-                    <span asp-validation-for="ImagePath"></span>
+                    <label asp-for="ImagesPath">Ранее загруженные изображения:</label>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-5 col-lg-4 mb-3">
+                                <div class="bg-white h-100">
+                                    <div id="carouselExample" class="carousel slide">
+                                        <div class="carousel-inner">
+                                            @foreach (var image in Model.ImagesPath)
+                                            {
+                                                <input asp-for="ImagesPath" class="form-control" type="hidden" name="ImagesPath" value="@Model.ImagesPath[i].URL" />
+                                                <div class="carousel-item active">
+                                                    <img src="@Model.ImagesPath[i].URL" class="d-block w-100" alt="@Model.Name">
+                                                </div>
+                                                i++;
+                                            }
+                                        </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span asp-validation-for="ImagesPath"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UploadedFiles">Заменить изображения (укажите любое кол-во):</label>
+                    <input asp-for="UploadedFiles" class="form-control" value="@Model.ImagesPath">
+                    <span asp-validation-for="UploadedFiles"></span>
                 </div>
 
                 <div class="d-grid gap-2 d-md-block mt-3">

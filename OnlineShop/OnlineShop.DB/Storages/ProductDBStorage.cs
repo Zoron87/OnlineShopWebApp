@@ -1,4 +1,5 @@
-﻿using OnlineShop.DB.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using OnlineShop.DB.Interfaces;
 using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace OnlineShop.DB.Storages
 
         public List<Product> GetAll()
         {
-            return _databaseContext.Products.ToList();
+            return _databaseContext.Products.Include(p => p.ImagesPath).ToList();
         }
 
         public void SaveChange()
@@ -27,7 +28,7 @@ namespace OnlineShop.DB.Storages
 
         public Product TryGetById(Guid id)
         {
-            var product = _databaseContext.Products.FirstOrDefault(product => product.Id == id);
+            var product = _databaseContext.Products.Include(p => p.ImagesPath).FirstOrDefault(product => product.Id == id);
             if (product == null) throw new Exception("Указанный продукт не обнаружен!");
             return product;
         }
@@ -68,9 +69,9 @@ namespace OnlineShop.DB.Storages
         private List<Product> GetOutputProducts(int page, int itemsOnPage)
         {
             if (page > 1)
-                return _databaseContext.Products.Skip(page - 1 * itemsOnPage).Take(itemsOnPage).ToList();
+                return _databaseContext.Products.Include(el => el.ImagesPath).Skip((page - 1) * itemsOnPage).Take(itemsOnPage).ToList();
 
-            return _databaseContext.Products.Take(itemsOnPage).ToList();
+            return _databaseContext.Products.Include(el => el.ImagesPath).Take(itemsOnPage).ToList();
         }
     }
 }

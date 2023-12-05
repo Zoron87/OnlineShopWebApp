@@ -38,7 +38,7 @@
                                     @foreach (var item in Model.Items)
                                     {
                                         <tr>
-                                            <td class="product-img-td"><a asp-controller="Product" asp-action="Index" asp-route-productId="@item.Product.Id"><img src="~/img/products/@item.Product.ImagePath" alt="@item.Product.Name"></a></td>
+                                            <td class="product-img-td"><a asp-controller="Product" asp-action="Index" asp-route-productId="@item.Product.Id"><img src="@item.Product.ImagesPath[0].URL" alt="@item.Product.Name"></a></td>
                                             <td>
                                                 <a asp-controller="Product" asp-action="Index" asp-route-productId="@item.Product.Id" class="cart-content-title">
                                                     @item.Product.Name

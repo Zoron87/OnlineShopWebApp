@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
 using OnlineShop.DB.Interfaces;
@@ -14,10 +15,13 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
     public class ProductController : Controller
     {
         private readonly IProductStorage _productStorage;
+        private readonly ImageProvider _imageProvider;
+        private readonly string imageProductsFolder = "/img/products/";
 
-        public ProductController(IProductStorage productStorage)
+        public ProductController(IProductStorage productStorage, IWebHostEnvironment appEnvironent, ImageProvider imageProvider)
         {
-            this._productStorage = productStorage;
+            _productStorage = productStorage;
+            _imageProvider = imageProvider;
         }
         public ActionResult Index()
         {
@@ -43,10 +47,15 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Add(ItemViewModel item)
         {
-            if (string.IsNullOrWhiteSpace(item.ImagePath))
-                item.ImagePath = "blank-product.jpg";
+            var imagesViewModel = _imageProvider.AddImages(item, imageProductsFolder);
+
+            if (imagesViewModel.Count == 0)
+                imagesViewModel.Add(new ImageViewModel() { URL = imageProductsFolder + "blank-product.jpg" });
+
+            item.ImagesPath = imagesViewModel;
 
             if (ModelState.IsValid)
             {
@@ -60,8 +69,7 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         [HttpPost]
         public ActionResult Save(Guid productId, ItemViewModel item)
         {
-            if (string.IsNullOrWhiteSpace(item.ImagePath))
-                item.ImagePath = "blank-product.jpg";
+            item.ImagesPath = _imageProvider.AddImages(item, imageProductsFolder);
 
             if (ModelState.IsValid)
             {

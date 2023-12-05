@@ -18,7 +18,7 @@ namespace OnlineShop.DB.Storages
 
         public void AddItem(Guid userId, Guid productId, int quantity = 1)
         {
-            var product = _databaseContext.Products.FirstOrDefault(p => p.Id == productId);
+            var product = _databaseContext.Products.Include(el => el.ImagesPath).FirstOrDefault(p => p.Id == productId);
 
             var cartPositon = new CartItem()
             {
@@ -78,7 +78,7 @@ namespace OnlineShop.DB.Storages
 
         public Cart TryGetById(Guid userId)
         {
-            return _databaseContext.Carts.Include(el => el.Items).ThenInclude(el => el.Product).FirstOrDefault(c => c.UserId == userId);
+            return _databaseContext.Carts.Include(el => el.Items).ThenInclude(el => el.Product).ThenInclude(el => el.ImagesPath).FirstOrDefault(c => c.UserId == userId);
         }
 
         public void Clear(Guid userId)
