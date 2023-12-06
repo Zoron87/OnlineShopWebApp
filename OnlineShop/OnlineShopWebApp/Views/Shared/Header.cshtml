@@ -159,6 +159,12 @@
                                 <a class="nav-link" asp-controller="Home" asp-action="Index" asp-area="Administrator">Администратор</a>
                             </li>
                         }
+                        @if (User.IsInRole(Constants.UserRoleName))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="Index" asp-area="">Личный кабинет</a>
+                            </li>
+                        }
                     </ul> <!--//navbar-nav-->
                 </div> <!--//offcanvas-body-->
             </div><!--offcanvas-start-->

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB.Interfaces;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
 using System;
@@ -11,47 +13,55 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly ICartStorage _cartStorage;
         private readonly UserViewModel _userViewModel;
+        private readonly UserManager<User> _userManager;
 
-        public CartController(ICartStorage cartStorage, UserViewModel userViewModel)
+        public CartController(ICartStorage cartStorage, UserViewModel userViewModel, UserManager<User> userManager)
         {
-            this._cartStorage = cartStorage;
-            this._userViewModel = userViewModel;
+            _cartStorage = cartStorage;
+            _userViewModel = userViewModel;
+            _userManager = userManager;
         }
 
         public ActionResult Index()
         {
-            var cartViewModel = _cartStorage.TryGetById(_userViewModel.Id)?.ToCartViewModel();
+            var userId = User.Identity.IsAuthenticated ? _userManager.GetUserAsync(User).Result.Id : _userViewModel.Id.ToString();
+            var cartViewModel = _cartStorage.TryGetById(userId)?.ToCartViewModel();
             return View(cartViewModel);
         }
 
         public ActionResult Add(Guid productId)
         {
-            _cartStorage.AddItem(_userViewModel.Id, productId);
+            var user = _userManager.GetUserAsync(User).Result;
+            _cartStorage.AddItem(Guid.Parse(user.Id), productId);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public ActionResult AddItems(Guid productId, int quantity)
         {
-            _cartStorage.AddItem(_userViewModel.Id, productId, quantity);
+            var user = _userManager.GetUserAsync(User).Result;
+            _cartStorage.AddItem(Guid.Parse(user.Id), productId, quantity);
             return RedirectToAction("Index");
         }
 
         public ActionResult Reduce(Guid productId)
         {
-            _cartStorage.Reduce(_userViewModel.Id, productId);
+            var user = _userManager.GetUserAsync(User).Result;
+            _cartStorage.Reduce(Guid.Parse(user.Id), productId);
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(Guid productId)
         {
-            _cartStorage.DeleteItem(_userViewModel.Id, productId);
+            var user = _userManager.GetUserAsync(User).Result;
+            _cartStorage.DeleteItem(Guid.Parse(user.Id), productId);
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
-            _cartStorage.Clear(_userViewModel.Id);
+            var user = _userManager.GetUserAsync(User).Result;
+            _cartStorage.Clear(Guid.Parse(user.Id));
             return RedirectToAction("Index");
         }
     }

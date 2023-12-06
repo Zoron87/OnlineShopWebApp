@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.DB.Models;
 using OnlineShopWebApp.Interfaces;
 using System;
@@ -27,7 +28,12 @@ namespace OnlineShop.DB.Storages
             return GetAll().FirstOrDefault(order => order.Id == orderId);
         }
 
-        public void UpdateStatus(Guid orderId, OrderStatus orderStatus)
+		public List<Order> TryGetByUserId(string userId)
+		{
+			return GetAll().Where(order => order.UserId.ToString() == userId).ToList();
+		}
+
+		public void UpdateStatus(Guid orderId, OrderStatus orderStatus)
         {
             var orders = GetAll();
             if (orders != null)

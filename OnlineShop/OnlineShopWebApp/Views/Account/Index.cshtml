@@ -1,0 +1,16 @@
+﻿@model User
+
+@{
+	ViewData["Title"] = "Личный профиль пользователя";
+}
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			@await Html.PartialAsync("UserMenu")
+		</div>
+		<div class="col-md-9">
+			<h3 class="section-title mb-3"><span>Профиль пользователя @Model.Email</span></h3>
+		</div>
+	</div>
+</div>
