@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB.Interfaces;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
+using System;
 
 namespace OnlineShopWebApp.Views.Shared.Components.CartInfoFull
 {
@@ -9,16 +12,19 @@ namespace OnlineShopWebApp.Views.Shared.Components.CartInfoFull
     {
         private readonly ICartStorage _cartStorage;
         private readonly UserViewModel _userViewModel;
+        private readonly UserManager<User> _userManager;
 
-        public CartInfoFullViewComponent(ICartStorage cartStorage, UserViewModel userViewModel)
+        public CartInfoFullViewComponent(ICartStorage cartStorage, UserViewModel userViewModel, UserManager<User> userManager)
         {
-            this._cartStorage = cartStorage;
-            this._userViewModel = userViewModel;
+            _cartStorage = cartStorage;
+            _userViewModel = userViewModel;
+            _userManager = userManager;
         }
 
         public IViewComponentResult Invoke()
         {
-            var cartViewModel = _cartStorage.TryGetById(_userViewModel.Id)?.ToCartViewModel();
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse(_userManager.GetUserAsync((System.Security.Claims.ClaimsPrincipal)User).Result.Id) : _userViewModel.Id;
+            var cartViewModel = _cartStorage.TryGetById(userId)?.ToCartViewModel();
             return View("CartInfoFull", cartViewModel);
         }
     }

@@ -16,8 +16,8 @@ namespace OnlineShopWebApp.Controllers
 
         public FavouriteController(IFavouriteStorage favouriteStorage, UserViewModel userViewModel)
         {
-			this._favouriteStorage = favouriteStorage;
-            this._userViewModel = userViewModel;
+			_favouriteStorage = favouriteStorage;
+            _userViewModel = userViewModel;
         }
 		public ActionResult Index()
 		{

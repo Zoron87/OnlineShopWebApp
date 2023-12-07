@@ -1,4 +1,4 @@
-﻿@model List<Order>
+﻿@model List<OrderViewModel>
 
 @{
     ViewData["Title"] = "Список заказов пользователя";
@@ -38,10 +38,10 @@
                                 <td>@order.OrderDetails.Name</td>
                                 <td>@order.OrderDetails.Email</td>
                                 <td>@order.CreatedTime.ToString("dd:MM:yyyy-HH:mm")</td>
-                                <td><strong>order.OrderDetails.Cost()</strong></td>
+                                <td><strong>@order.OrderDetails.Cost()</strong></td>
                                 <td>@EnumHelper.GetDisplayName(@order.OrderStatus)</td>
                                 <td>
-                                    <a asp-controller="Order" asp-action="Details" asp-route-orderid="@order.Id" role="button" class="btn primary-color">
+                                    <a asp-controller="Account" asp-action="Details" asp-route-orderid="@order.Id" role="button" class="btn primary-color">
                                         <i class="fa-solid fa-pen-to-square h5"></i>
                                     </a>
                                 </td>

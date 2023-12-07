@@ -28,9 +28,9 @@ namespace OnlineShop.DB.Storages
             return GetAll().FirstOrDefault(order => order.Id == orderId);
         }
 
-		public List<Order> TryGetByUserId(string userId)
+		public List<Order> TryGetByUserId(Guid userId)
 		{
-			return GetAll().Where(order => order.UserId.ToString() == userId).ToList();
+			return GetAll().Where(order => order.UserId == userId).ToList();
 		}
 
 		public void UpdateStatus(Guid orderId, OrderStatus orderStatus)

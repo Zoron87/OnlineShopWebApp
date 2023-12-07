@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-lg-4 mb-3">
                     <div class="cart-summary p-3 sidebar">
-                        await Component.InvokeAsync("CartInfoShort")
+                        @await Component.InvokeAsync("CartInfoShort")
                         <div class="d-grid">
                             <a asp-controller="Order" asp-action="Details" class="btn btn-primary">Оформить заказ</a>
                         </div>

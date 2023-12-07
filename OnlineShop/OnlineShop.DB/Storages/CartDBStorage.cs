@@ -13,7 +13,7 @@ namespace OnlineShop.DB.Storages
 
         public CartDBStorage(DatabaseContext databaseContext)
         {
-            this._databaseContext = databaseContext;
+            _databaseContext = databaseContext;
         }
 
         public void AddItem(Guid userId, Guid productId, int quantity = 1)

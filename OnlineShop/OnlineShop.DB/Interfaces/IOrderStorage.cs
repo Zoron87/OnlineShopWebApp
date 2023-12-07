@@ -13,6 +13,6 @@ namespace OnlineShopWebApp.Interfaces
 		void UpdateStatus(Guid orderId, OrderStatus orderStatus);
 		void Delete(Order order);
 		void Mapping(Order order, OrderDetails orderDetails);
-		List<Order> TryGetByUserId(string userId);
+		List<Order> TryGetByUserId(Guid userId);
 	}
 }

@@ -27,21 +27,21 @@ namespace OnlineShopWebApp.Controllers
             _userManager = userManager;
         }
 
-        public ActionResult Index()
+        public IActionResult Index()
 		{
 			var orders = _orderStorage.GetAll();
             return View(orders);
 		}
 
-		public ActionResult Details()
+		public IActionResult Details()
 		{
-			var order = _orderStorage.TryGetById(_userViewModel.Id);
-            var cart = _cartStorage.TryGetById(_userViewModel.Id);
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse(_userManager.GetUserAsync(User).Result.Id) : _userViewModel.Id;
+            var cart = _cartStorage.TryGetById(userId);
             var orderDetailViewModel = new OrderDetails(){ Items = cart.Items, DeliveryDate = DateTime.Now }.ToOrderViewModel();
 			return View(orderDetailViewModel);
         }
 
-		public ActionResult ThankYou()
+		public IActionResult ThankYou()
 		{
 			return View();
 		}
@@ -55,13 +55,10 @@ namespace OnlineShopWebApp.Controllers
 			if (orderDetailsViewModel.DeliveryDate.AddDays(1) < DateTime.Now)
 				ModelState.AddModelError("", "Нельзя выбрать дату доставки ранее текущей");
 
-            var user = _userManager.GetUserAsync(User).Result;
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse(_userManager.GetUserAsync(User).Result.Id) : _userViewModel.Id;
 
-            var order = _orderStorage.GetAll().FirstOrDefault(el => el.UserId.ToString() == user.Id);
-			var cart = _cartStorage.TryGetById(Guid.Parse(user.Id));
-
-			if (order == null)
-				order = new Order() { UserId = Guid.Parse(user.Id)  };
+			var order = new Order() { UserId = userId };
+            var cart = _cartStorage.TryGetById(userId);	
 
 			order.OrderDetails = new OrderDetails() { Items = cart.Items };
             _orderStorage.Mapping(order, orderDetailsViewModel.ToOrderDetails());
@@ -69,7 +66,7 @@ namespace OnlineShopWebApp.Controllers
 			if (ModelState.IsValid)
 			{
                 _orderStorage.Add(order);
-                _cartStorage.Clear(Guid.Parse(user.Id));
+                _cartStorage.Clear(userId);
                 return View("ThankYou");
 			}
             return View("Details", order.ToOrderDetailsViewModel());

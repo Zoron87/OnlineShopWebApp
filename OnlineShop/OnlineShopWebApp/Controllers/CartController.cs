@@ -24,44 +24,44 @@ namespace OnlineShopWebApp.Controllers
 
         public ActionResult Index()
         {
-            var userId = User.Identity.IsAuthenticated ? _userManager.GetUserAsync(User).Result.Id : _userViewModel.Id.ToString();
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse(_userManager.GetUserAsync(User).Result.Id) : _userViewModel.Id;
             var cartViewModel = _cartStorage.TryGetById(userId)?.ToCartViewModel();
             return View(cartViewModel);
         }
 
         public ActionResult Add(Guid productId)
         {
-            var user = _userManager.GetUserAsync(User).Result;
-            _cartStorage.AddItem(Guid.Parse(user.Id), productId);
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse(_userManager.GetUserAsync(User).Result.Id) : _userViewModel.Id;
+            _cartStorage.AddItem(userId, productId);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public ActionResult AddItems(Guid productId, int quantity)
         {
-            var user = _userManager.GetUserAsync(User).Result;
-            _cartStorage.AddItem(Guid.Parse(user.Id), productId, quantity);
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse(_userManager.GetUserAsync(User).Result.Id) : _userViewModel.Id;
+            _cartStorage.AddItem(userId, productId, quantity);
             return RedirectToAction("Index");
         }
 
         public ActionResult Reduce(Guid productId)
         {
-            var user = _userManager.GetUserAsync(User).Result;
-            _cartStorage.Reduce(Guid.Parse(user.Id), productId);
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse(_userManager.GetUserAsync(User).Result.Id) : _userViewModel.Id;
+            _cartStorage.Reduce(userId, productId);
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(Guid productId)
         {
-            var user = _userManager.GetUserAsync(User).Result;
-            _cartStorage.DeleteItem(Guid.Parse(user.Id), productId);
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse(_userManager.GetUserAsync(User).Result.Id) : _userViewModel.Id;
+            _cartStorage.DeleteItem(userId, productId);
             return RedirectToAction("Index");
         }
 
         public IActionResult Clear()
         {
-            var user = _userManager.GetUserAsync(User).Result;
-            _cartStorage.Clear(Guid.Parse(user.Id));
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse(_userManager.GetUserAsync(User).Result.Id) : _userViewModel.Id;
+            _cartStorage.Clear(userId);
             return RedirectToAction("Index");
         }
     }
