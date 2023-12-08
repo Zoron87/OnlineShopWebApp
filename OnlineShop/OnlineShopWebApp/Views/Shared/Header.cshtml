@@ -1,5 +1,4 @@
-﻿@using OnlineShop.DB;
-<header class="header">
+﻿<header class="header">
     <div class="header-top py-1">
         <div class="container">
             <div class="row">
@@ -22,13 +21,13 @@
                         {
                             <div class="btn-group me-2">
                                 <div class="dropdown">
-                                    <img class="avatar" src="https://sun156-1.userapi.com/s/v1/ig2/W0_quY3RdeOJNBRyRz9jU1gQqBWIRmZvq4VCFgY5MJsuzcHS6ebk9DfmlxXtLsvhddN7UrEl9rMZ4qVLEWOSbFjs.jpg?size=200x200&quality=95&crop=0,5,400,400&ava=1" alt="">
+                                    @await Component.InvokeAsync("Avatar")
                                     <button class="btn btn-sm dropdown-toggle float-end" type="button"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
-                                            <a class="dropdown-item" aria-disabled="true">Профиль(@User.Identity.Name)</a>
+                                            <a class="dropdown-item" asp-controller="Account" asp-action="Index">Профиль(@User.Identity.Name)</a>
                                         </li>
                                         <li>
                                             <a class="dropdown-item" asp-area="" asp-controller="Authorization" asp-action="Logout">Выход</a>

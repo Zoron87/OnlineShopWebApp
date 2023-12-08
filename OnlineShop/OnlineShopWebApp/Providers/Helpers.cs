@@ -250,12 +250,33 @@ namespace OnlineShopWebApp.Providers
         {
             var userViewModel = new UserViewModel();
             userViewModel.Id = Guid.Parse(user.Id);
-            userViewModel.Name = user.UserName;
+            userViewModel.Name = user.Name;
             userViewModel.Email = user.Email;
             userViewModel.Password = user.PasswordHash;
             userViewModel.Role = user.Role;
 
             return userViewModel;
+        }
+
+        public static ProfileViewModel ToProfileViewModel(this User user)
+        {
+            var profileViewModel = new ProfileViewModel();
+            profileViewModel.Id = Guid.Parse(user.Id);
+            profileViewModel.Name = user.Name;
+            profileViewModel.Email = user.Email;
+            profileViewModel.Role = user.Role;
+
+            return profileViewModel;
+        }
+
+        public static User ToUser(this ProfileViewModel profileViewModel, User user)
+        {
+            user.Name = profileViewModel.Name;
+            user.Address = profileViewModel.Address;
+            user.Phone = profileViewModel.Phone;
+            user.Email = profileViewModel.Email;
+
+            return user;
         }
     }
 

@@ -60,7 +60,7 @@ namespace OnlineShopWebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new User { Email = registerInfo.Email, UserName = registerInfo.Email, Role = Constants.UserRoleName };
+                var user = new User { Email = registerInfo.Email, UserName = registerInfo.Email, Role = Constants.UserRoleName, AvatarImagepath = Constants.BlankAvatar };
                 var result = _userManager.CreateAsync(user, registerInfo.Password).Result;
                 if (result.Succeeded)
                 {

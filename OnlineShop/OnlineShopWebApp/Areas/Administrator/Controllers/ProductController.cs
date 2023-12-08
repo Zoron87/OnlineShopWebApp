@@ -16,7 +16,6 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
     {
         private readonly IProductStorage _productStorage;
         private readonly ImageProvider _imageProvider;
-        private readonly string imageProductsFolder = "/img/products/";
 
         public ProductController(IProductStorage productStorage, IWebHostEnvironment appEnvironent, ImageProvider imageProvider)
         {
@@ -50,10 +49,10 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Add(ItemViewModel item)
         {
-            var imagesViewModel = _imageProvider.AddImages(item, imageProductsFolder);
+            var imagesViewModel = _imageProvider.AddProductImages(item, Constants.ImageProductsFolder);
 
             if (imagesViewModel.Count == 0)
-                imagesViewModel.Add(new ImageViewModel() { URL = imageProductsFolder + "blank-product.jpg" });
+                imagesViewModel.Add(new ImageViewModel() { URL = Constants.ImageProductsFolder + Constants.BlankAvatar });
 
             item.ImagesPath = imagesViewModel;
 
@@ -69,7 +68,7 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         [HttpPost]
         public ActionResult Save(Guid productId, ItemViewModel item)
         {
-            item.ImagesPath = _imageProvider.AddImages(item, imageProductsFolder);
+            item.ImagesPath = _imageProvider.AddProductImages(item, Constants.ImageProductsFolder);
 
             if (ModelState.IsValid)
             {

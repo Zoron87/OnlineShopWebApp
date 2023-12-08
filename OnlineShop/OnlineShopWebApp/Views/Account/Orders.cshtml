@@ -41,7 +41,7 @@
                                 <td><strong>@order.OrderDetails.Cost()</strong></td>
                                 <td>@EnumHelper.GetDisplayName(@order.OrderStatus)</td>
                                 <td>
-                                    <a asp-controller="Account" asp-action="Details" asp-route-orderid="@order.Id" role="button" class="btn primary-color">
+                                    <a asp-controller="Account" asp-action="OrderDetails" asp-route-orderid="@order.Id" role="button" class="btn primary-color">
                                         <i class="fa-solid fa-pen-to-square h5"></i>
                                     </a>
                                 </td>
