@@ -7,6 +7,7 @@ using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
 using System;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Areas.Administrator.Controllers
 {
@@ -22,32 +23,32 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             _productStorage = productStorage;
             _imageProvider = imageProvider;
         }
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var productsViewModel = _productStorage.GetAll().ToProductsViewModel();
+            var productsViewModel = (await _productStorage.GetAllAsync()).ToProductsViewModel();
             return View(productsViewModel);
         }
 
-        public ActionResult Edit(Guid productId)
+        public async Task<IActionResult> EditAsync(Guid productId)
         {
-            var product = _productStorage.TryGetById(productId).ToProductViewModel();
+            var product = (await _productStorage.TryGetByIdAsync(productId)).ToProductViewModel();
             return View(product);
         }
 
-        public ActionResult Delete(Guid productId)
+        public async Task<IActionResult> DeleteAsync(Guid productId)
         {
-            _productStorage.Delete(productId);
+            await _productStorage.DeleteAsync(productId);
             return RedirectToAction("Index");
         }
 
-        public ActionResult Add()
+        public IActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(ItemViewModel item)
+        public async Task<IActionResult> AddAsync(ItemViewModel item)
         {
             var imagesViewModel = _imageProvider.AddProductImages(item, Constants.ImageProductsFolder);
 
@@ -59,21 +60,21 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             if (ModelState.IsValid)
             {
                 var productDb = new Product().ItemViewModelToProduct(item);
-                _productStorage.Add(productDb);
+                await _productStorage.AddAsync(productDb);
                 return RedirectToAction("Index");
             }
             return View(item);
         }
 
         [HttpPost]
-        public ActionResult Save(Guid productId, ItemViewModel item)
+        public async Task<IActionResult> SaveAsync(Guid productId, ItemViewModel item)
         {
             item.ImagesPath = _imageProvider.AddProductImages(item, Constants.ImageProductsFolder);
 
             if (ModelState.IsValid)
             {
-                var product = _productStorage.TryGetById(productId).ItemViewModelToProduct(item);
-                _productStorage.SaveChange();
+                var product = (await _productStorage.TryGetByIdAsync(productId)).ItemViewModelToProduct(item);
+                await _productStorage.SaveChangeAsync();
                 return RedirectToAction("Index");
             }
             return View(item);

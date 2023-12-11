@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB.Interfaces;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
 using System;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -11,33 +13,39 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly ICompareStorage _compareStorage;
         private readonly UserViewModel _userViewModel;
+        private readonly UserManager<User>_userManager;
 
-        public CompareController(ICompareStorage compareStorage, UserViewModel userViewModel)
+        public CompareController(ICompareStorage compareStorage, UserViewModel userViewModel, UserManager<User> userManager)
         {
-            this._compareStorage = compareStorage;
-            this._userViewModel = userViewModel;
+            _compareStorage = compareStorage;
+            _userViewModel = userViewModel;
+            _userManager = userManager;
         }
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var compareProductsViewModel = _compareStorage.TryGetById(_userViewModel.Id)?.ToCompareViewModel();
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
+            var compareProductsViewModel = (await _compareStorage.TryGetByIdAsync(userId))?.ToCompareViewModel();
             return View(compareProductsViewModel);
         }
 
-        public ActionResult Add(Guid productId)
+        public async Task<IActionResult> AddAsync(Guid productId)
         {
-            _compareStorage.Add(_userViewModel.Id, productId);
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
+            await _compareStorage.AddAsync(userId, productId);
             return RedirectToAction("Index");
         }
 
-        public ActionResult Clear()
+        public async Task<IActionResult> ClearAsync()
         {
-            _compareStorage.Clear(_userViewModel.Id);
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
+            await _compareStorage.ClearAsync(userId);
             return RedirectToAction("Index");
         }
 
-        public ActionResult Delete(Guid productId)
+        public async Task<IActionResult> DeleteAsync(Guid productId)
         {
-            _compareStorage.Delete(_userViewModel.Id, productId);
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
+            await _compareStorage.DeleteAsync(userId, productId);
             return RedirectToAction("Index");
         }
     }

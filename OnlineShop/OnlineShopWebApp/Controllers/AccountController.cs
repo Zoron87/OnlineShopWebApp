@@ -8,6 +8,7 @@ using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -27,55 +28,55 @@ namespace OnlineShopWebApp.Controllers
             _imageProvider = imageProvider;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var user = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
             return View(user);
         }
 
-		public IActionResult GetOrders()
+		public async Task<IActionResult> GetOrdersAsync()
 		{
-            var userId = User.Identity.IsAuthenticated ? Guid.Parse(_userManager.GetUserAsync(User).Result.Id) : _userViewModel.Id;
-			var ordersViewModel = _orderStorage.TryGetByUserId(userId).ToOrdersViewModel();
-			return View("Orders", ordersViewModel);
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
+			var orders = await _orderStorage.TryGetByUserIdAsync(userId);
+			return View("Orders", orders.ToOrdersViewModel());
 		}
 
-        public IActionResult OrderDetails(Guid orderId)
+        public async Task<IActionResult> OrderDetailsAsync(Guid orderId)
         {
-            var userId = User.Identity.IsAuthenticated ? Guid.Parse(_userManager.GetUserAsync(User).Result.Id) : _userViewModel.Id;
-            var orderDetailViewModel = _orderStorage.GetAll().FirstOrDefault(o => o.Id == orderId).ToOrderViewModel();
-            return View(orderDetailViewModel);
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
+            var order = (await _orderStorage.GetAllAsync()).FirstOrDefault(o => o.Id == orderId);
+            return View(order.ToOrderViewModel());
         }
 
-        public IActionResult Edit(Guid orderId)
+        public async Task<IActionResult> EditAsync(Guid orderId)
         {
-            var userId = _userManager.GetUserAsync(User).Result.Id;
-            var userViewModel = _userManager.Users.FirstOrDefault(u => u.Id == userId).ToProfileViewModel();
-            return View(userViewModel);
+            var userId = (await _userManager.GetUserAsync(User)).Id;
+            var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
+            return View(user.ToProfileViewModel());
         }
 
         [HttpPost]
-        public IActionResult Save(ProfileViewModel profileViewModel)
+        public async Task<IActionResult> SaveAsync(ProfileViewModel profileViewModel)
         {
             if (ModelState.IsValid)
             {
-                var userId = _userManager.GetUserAsync(User).Result.Id;
+                var userId = (await _userManager.GetUserAsync(User)).Id; 
                 var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
                 
                 if (profileViewModel.UploadedFile != null)
                     user.AvatarImagepath = _imageProvider.AddAvatarImage(profileViewModel);
 
-                var result = _userManager.UpdateAsync(profileViewModel.ToUser(user)).Result;
+                var result = await _userManager.UpdateAsync(profileViewModel.ToUser(user));
                 return RedirectToAction("Index");
             }
             return View("Save", profileViewModel);
         }
 
-        public IActionResult DeleteAvatar(string userId)
+        public async Task<IActionResult> DeleteAvatarAsync(string userId)
         {
             var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
             user.AvatarImagepath = Constants.BlankAvatar;
-            var result = _userManager.UpdateAsync(user).Result;
+            var result = await _userManager.UpdateAsync(user);
 
             return RedirectToAction("Index");
         }

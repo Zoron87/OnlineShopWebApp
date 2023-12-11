@@ -5,6 +5,7 @@ using OnlineShopWebApp.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShop.DB.Storages
 {
@@ -14,48 +15,48 @@ namespace OnlineShop.DB.Storages
 
         public OrderDBStorage(DatabaseContext databaseContext)
         {
-            this._databaseContext = databaseContext;
+            _databaseContext = databaseContext;
         }
 
-        public void Add(Order order)
+        public async Task AddAsync(Order order)
         {
-           _databaseContext.Orders.Add(order);
-           _databaseContext.SaveChanges();
+           await _databaseContext.Orders.AddAsync(order);
+           await _databaseContext.SaveChangesAsync();
         }
 
-        public Order TryGetById(Guid orderId)
+        public async Task<Order> TryGetByIdAsync(Guid orderId)
         {
-            return GetAll().FirstOrDefault(order => order.Id == orderId);
+            return (await GetAllAsync()).FirstOrDefault(order => order.Id == orderId);
         }
 
-		public List<Order> TryGetByUserId(Guid userId)
+		public async Task<List<Order>> TryGetByUserIdAsync(Guid userId)
 		{
-			return GetAll().Where(order => order.UserId == userId).ToList();
+			return (await GetAllAsync()).Where(order => order.UserId == userId).ToList();
 		}
 
-		public void UpdateStatus(Guid orderId, OrderStatus orderStatus)
+		public async Task UpdateStatusAsync(Guid orderId, OrderStatus orderStatus)
         {
-            var orders = GetAll();
+            var orders = await GetAllAsync();
             if (orders != null)
             {
                 orders.FirstOrDefault(order => order.Id == orderId).OrderStatus = orderStatus;
-                _databaseContext.SaveChanges();
+                await _databaseContext.SaveChangesAsync();
             }
         }
 
-        public List<Order> GetAll()
+        public async Task<List<Order>> GetAllAsync()
         {
-            return _databaseContext.Orders.Include(el => el.OrderDetails).ThenInclude(el => el.Items).ThenInclude(el => el.Product).ThenInclude(el => el.ImagesPath).ToList();
+            return await _databaseContext.Orders.Include(el => el.OrderDetails).ThenInclude(el => el.Items).ThenInclude(el => el.Product).ThenInclude(el => el.ImagesPath).ToListAsync();
         }
 
-        public void Delete(Order order)
+        public async Task DeleteAsync(Order order)
         {
-            var orders = GetAll();
+            var orders = await GetAllAsync();
             if (orders != null)
             {
                 var orderForDelete = orders.FirstOrDefault(o => o.Id == order.Id);
                 orders.Remove(orderForDelete);
-                _databaseContext.SaveChanges();
+                await _databaseContext.SaveChangesAsync();
             }
         }
 

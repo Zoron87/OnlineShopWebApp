@@ -5,6 +5,7 @@ using OnlineShop.DB.Models;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Providers;
 using System;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Areas.Administrator.Controllers
 {
@@ -16,24 +17,24 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
 
         public OrderController(IOrderStorage orderStorage)
         {
-            this._orderStorage = orderStorage;
+            _orderStorage = orderStorage;
         }
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var ordersViewModel = _orderStorage.GetAll().ToOrdersViewModel();
-            return View(ordersViewModel);
+            var orders = await _orderStorage.GetAllAsync();
+            return View(orders.ToOrdersViewModel());
         }
 
-        public ActionResult Details(Guid orderId)
+        public async Task<IActionResult> DetailsAsync(Guid orderId)
         {
-            var orderViewModel = _orderStorage.TryGetById(orderId).ToOrderViewModel();
-            return View(orderViewModel);
+            var order = await _orderStorage.TryGetByIdAsync(orderId);
+            return View(order.ToOrderViewModel());
         }
 
         [HttpPost]
-        public IActionResult UpdateStatus(Guid orderId, OrderStatus orderStatus)
+        public async Task<IActionResult> UpdateStatusAsync(Guid orderId, OrderStatus orderStatus)
         {
-            _orderStorage.UpdateStatus(orderId, orderStatus);
+            await _orderStorage.UpdateStatusAsync(orderId, orderStatus);
             return RedirectToAction("Index");
         }
     }

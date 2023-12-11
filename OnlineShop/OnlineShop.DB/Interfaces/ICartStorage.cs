@@ -1,14 +1,15 @@
 ﻿using OnlineShop.DB.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace OnlineShop.DB.Interfaces
 {
     public interface ICartStorage
     {
-        void AddItem(Guid userId, Guid productId, int quantity = 1);
-        void Reduce(Guid userId, Guid productId);
-        void DeleteItem(Guid userId, Guid productId);
-        Cart TryGetById(Guid userGuid);
-        void Clear(Guid userId);
+        Task AddItemAsync(Guid userId, Guid productId, int quantity = 1);
+        Task ReduceAsync(Guid userId, Guid productId);
+        Task DeleteItemAsync(Guid userId, Guid productId);
+        Task<Cart> TryGetByIdAsync(Guid userGuid);
+        Task ClearAsync(Guid userId);
     }
 }

@@ -5,6 +5,7 @@ using OnlineShopWebApp.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Storages
 {
@@ -17,44 +18,44 @@ namespace OnlineShopWebApp.Storages
             this._databaseContext = databaseContext;
         }
 
-        public Favourite TryGetById(Guid userId)
+        public async Task<Favourite> TryGetByIdAsync(Guid userId)
 		{
-			return _databaseContext.Favourites.Include(el => el.Products).ThenInclude(p => p.ImagesPath).FirstOrDefault(f => f.UserId == userId);
+			return await _databaseContext.Favourites.Include(el => el.Products).ThenInclude(p => p.ImagesPath).FirstOrDefaultAsync(f => f.UserId == userId);
 		}
 
-		public void Add(Guid userId, Guid productId)
+		public async Task AddAsync(Guid userId, Guid productId)
 		{
-			var product = _databaseContext.Products.Include(p => p.ImagesPath).FirstOrDefault(el => el.Id == productId);
+			var product = await _databaseContext.Products.Include(p => p.ImagesPath).FirstOrDefaultAsync(el => el.Id == productId);
 
 			if (product == null) throw new Exception("Указанный товар не обнаружен!");
 
-			var favourite = TryGetById(userId);
+			var favourite = await TryGetByIdAsync(userId);
 			if (favourite == null)
 			{
 				favourite = new Favourite() { UserId = userId, Products = new List<Product> { product } };
-                _databaseContext.Favourites.Add(favourite);
+                await _databaseContext.Favourites.AddAsync(favourite);
             }
 			else
 				favourite.Products.Add(product);
             
-            _databaseContext.SaveChanges();
+            await _databaseContext.SaveChangesAsync();
         }
 
-		public void Clear(Guid userId)
+		public async Task ClearAsync(Guid userId)
 		{
-            var favourite = TryGetById(userId);
+            var favourite = await TryGetByIdAsync(userId);
 			_databaseContext.Favourites.Remove(favourite);
-			_databaseContext.SaveChanges() ;
+			await _databaseContext.SaveChangesAsync() ;
 		}
 
-		public void Delete(Guid userId, Guid productId)
+		public async Task DeleteAsync(Guid userId, Guid productId)
 		{
-            var favourite = TryGetById(userId);
-			var favouriteItem = _databaseContext?.Products?.Include(p => p.ImagesPath).FirstOrDefault(p => p.Id == productId);
+            var favourite = await TryGetByIdAsync(userId);
+			var favouriteItem = await _databaseContext?.Products?.Include(p => p.ImagesPath).FirstOrDefaultAsync(p => p.Id == productId);
 
 			if (favouriteItem != null)
 				favourite?.Products?.Remove(favouriteItem);
-			_databaseContext.SaveChanges() ;
+			await _databaseContext.SaveChangesAsync() ;
 		}
 	}
 }

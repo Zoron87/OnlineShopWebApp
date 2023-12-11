@@ -5,6 +5,7 @@ using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Storages
 {
@@ -17,42 +18,42 @@ namespace OnlineShopWebApp.Storages
             this._databaseContext = databaseContext;
         }
 
-        public Compare TryGetById(Guid userId)
+        public async Task<Compare> TryGetByIdAsync(Guid userId)
 		{
-			return _databaseContext.Compares.Include(el => el.Products).ThenInclude(p => p.ImagesPath).FirstOrDefault(c => c.UserId == userId);
+			return await _databaseContext.Compares.Include(el => el.Products).ThenInclude(p => p.ImagesPath).FirstOrDefaultAsync(c => c.UserId == userId);
 		}
 
-		public void Add(Guid userId, Guid productId)
+		public async Task AddAsync(Guid userId, Guid productId)
 		{
 			var product = _databaseContext.Products.Include(p => p.ImagesPath).FirstOrDefault(el => el.Id == productId);
-            var compare = TryGetById(userId);
+            var compare = await TryGetByIdAsync(userId);
 
 			if (compare == null)
 			{
 				compare = new Compare() { UserId = userId, Products = new List<Product> { product } };
-                _databaseContext.Compares.Add(compare);
+                await _databaseContext.Compares.AddAsync(compare);
             }
 			else
 				compare.Products.Add(product);
 
-			_databaseContext.SaveChanges();
+			await _databaseContext.SaveChangesAsync();
         }
 
-		public void Delete(Guid userId, Guid productId)
+		public async Task DeleteAsync(Guid userId, Guid productId)
 		{
-			var compare = TryGetById(userId);
+			var compare = await TryGetByIdAsync(userId);
 			var compareItem = compare?.Products?.FirstOrDefault(p => p.Id == productId);
 
 			if (compareItem != null)
 				compare?.Products?.Remove(compareItem);
-			_databaseContext.SaveChanges();
+			await _databaseContext.SaveChangesAsync();
 		}
 
-		public void Clear(Guid userId)
+		public async Task ClearAsync(Guid userId)
 		{
-			var compare = TryGetById(userId);
+			var compare = await TryGetByIdAsync(userId);
 			compare?.Products?.Clear();
-			_databaseContext.SaveChanges();
+			await _databaseContext.SaveChangesAsync();
 		}
     }
 }

@@ -8,6 +8,7 @@ using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -27,16 +28,16 @@ namespace OnlineShopWebApp.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
 		{
-			var orders = _orderStorage.GetAll();
+			var orders = await _orderStorage.GetAllAsync();
             return View(orders);
 		}
 
-		public IActionResult Details()
+		public async Task<IActionResult> DetailsAsync()
 		{
-            var userId = User.Identity.IsAuthenticated ? Guid.Parse(_userManager.GetUserAsync(User).Result.Id) : _userViewModel.Id;
-            var cart = _cartStorage.TryGetById(userId);
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
+            var cart = await _cartStorage.TryGetByIdAsync(userId);
             var orderDetailViewModel = new OrderDetails(){ Items = cart.Items, DeliveryDate = DateTime.Now }.ToOrderViewModel();
 			return View(orderDetailViewModel);
         }
@@ -47,7 +48,7 @@ namespace OnlineShopWebApp.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Index(OrderDetailsViewModel orderDetailsViewModel)
+		public async Task<IActionResult> Index(OrderDetailsViewModel orderDetailsViewModel)
 		{
 			if (orderDetailsViewModel.Name == null || orderDetailsViewModel.Name.Any(c => char.IsDigit(c)))
 				ModelState.AddModelError("", "В имени получателя допустимо использовать только буквы");
@@ -55,18 +56,18 @@ namespace OnlineShopWebApp.Controllers
 			if (orderDetailsViewModel.DeliveryDate.AddDays(1) < DateTime.Now)
 				ModelState.AddModelError("", "Нельзя выбрать дату доставки ранее текущей");
 
-            var userId = User.Identity.IsAuthenticated ? Guid.Parse(_userManager.GetUserAsync(User).Result.Id) : _userViewModel.Id;
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
 
-			var order = new Order() { UserId = userId };
-            var cart = _cartStorage.TryGetById(userId);	
+            var order = new Order() { UserId = userId };
+            var cart = await _cartStorage.TryGetByIdAsync(userId);	
 
 			order.OrderDetails = new OrderDetails() { Items = cart.Items };
             _orderStorage.Mapping(order, orderDetailsViewModel.ToOrderDetails());
 
 			if (ModelState.IsValid)
 			{
-                _orderStorage.Add(order);
-                _cartStorage.Clear(userId);
+                await _orderStorage.AddAsync(order);
+                await _cartStorage.ClearAsync(userId);
                 return View("ThankYou");
 			}
             return View("Details", order.ToOrderDetailsViewModel());

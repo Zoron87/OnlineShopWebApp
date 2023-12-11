@@ -1,15 +1,16 @@
 ﻿using OnlineShopWebApp.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Interfaces
 {
     public interface IUserStorage
     {
-        void Add(Register register);
-        void Delete(string Email);
-        List<UserViewModel> GetAll();
-        bool CheckExistUser(Login loginInfo);
+        Task Add(Register register);
+        Task Delete(string Email);
+        Task<List<UserViewModel>> GetAll();
+        Task<bool> CheckExistUser(Login loginInfo);
         UserViewModel TryGetByEmail(string Email);
-        void Edit(UserViewModel userViewModel);
+        Task Edit(UserViewModel userViewModel);
     }
 }

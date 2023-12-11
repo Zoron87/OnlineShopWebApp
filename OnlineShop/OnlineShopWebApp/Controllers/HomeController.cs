@@ -4,6 +4,7 @@ using OnlineShop.DB;
 using OnlineShop.DB.Interfaces;
 using OnlineShopWebApp.Providers;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -16,9 +17,9 @@ namespace OnlineShopWebApp.Controllers
             _databaseContext = databaseContext;
         }
 
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var productsViewModel = _databaseContext.Products.Include(p => p.ImagesPath).ToList().ToProductsViewModel();
+            var productsViewModel = (await _databaseContext.Products.Include(p => p.ImagesPath).ToListAsync()).ToProductsViewModel();
             return productsViewModel != null ? View(productsViewModel) : View("Error");
         }
     }

@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.DB;
 using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Areas.Administrator.Controllers
 {
@@ -24,16 +26,16 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             _roleManager = roleManager;
 
         }
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var users = _userManager.Users.ToList();
+            var users = await _userManager.Users.ToListAsync();
             return View(users);
         }
 
-        public ActionResult Delete(string email)
+        public async Task<IActionResult> DeleteAsync(string email)
         {
-            var user = _userManager.FindByEmailAsync(email).Result;
-            _userManager.DeleteAsync(user).Wait();
+            var user = await _userManager.FindByEmailAsync(email);
+            await _userManager.DeleteAsync(user);
             return RedirectToAction("Index");
         }
 
@@ -43,7 +45,7 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Register registerInfo)
+        public async Task<IActionResult> AddAsync(Register registerInfo)
         {
             if (registerInfo.Email == registerInfo.Password)
                 ModelState.AddModelError("", "Email и пароль не должны совпадать");
@@ -62,10 +64,10 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             if (ModelState.IsValid)
             {
                 var user = new User() { Email = registerInfo.Email, UserName = registerInfo.Email, Role = Constants.UserRoleName };
-                var result = _userManager.CreateAsync(user, registerInfo.Password).Result;
+                var result = await _userManager.CreateAsync(user, registerInfo.Password); 
                 if (result.Succeeded)
                 {
-                    _userManager.AddToRoleAsync(user, Constants.UserRoleName).Wait();
+                    await _userManager.AddToRoleAsync(user, Constants.UserRoleName); 
                     return RedirectToAction("Index");
                 }
                 else
@@ -74,25 +76,25 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             return View(registerInfo);
         }
 
-        public IActionResult Details(string Email)
+        public async Task<IActionResult> DetailsAsync(string Email)
         {
-            var user = _userManager.FindByEmailAsync(Email).Result;
+            var user = await _userManager.FindByEmailAsync(Email); 
             return View(user);
         }
 
-        public IActionResult Edit(string Email)
+        public async Task<IActionResult> EditAsync(string Email)
         {
-            var userViewModel = _userManager.FindByEmailAsync(Email).Result.ToUserViewModel();
+            var userViewModel = (await _userManager.FindByEmailAsync(Email)).ToUserViewModel();
             ViewBag.Role = new SelectList(_roleManager.Roles.AsEnumerable(), "Name", "Name");
             return View(userViewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(UserViewModel userViewModel)
+        public async Task<IActionResult> EditAsync(UserViewModel userViewModel)
         {
             if (ModelState.IsValid)
             {
-                var user = _userManager.FindByIdAsync(userViewModel.Id.ToString()).Result;
+                var user = await _userManager.FindByIdAsync(userViewModel.Id.ToString());
                 if (user != null)
                 {
                     user.UserName = userViewModel.Name;
@@ -103,11 +105,11 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
 
                     if (user.Role != userViewModel.Role && userViewModel.Role != null)
                     {
-                        _userManager.RemoveFromRoleAsync(user, user.Role).Wait();
-                        _userManager.AddToRoleAsync(user, userViewModel.Role).Wait();
+                        await _userManager.RemoveFromRoleAsync(user, user.Role); 
+                        await _userManager.AddToRoleAsync(user, userViewModel.Role); 
                         user.Role = userViewModel.Role;
                     }
-                    var result = _userManager.UpdateAsync(user).Result;
+                    var result = await _userManager.UpdateAsync(user);
                     if (result.Succeeded)
                         return RedirectToAction("Index");
                 }

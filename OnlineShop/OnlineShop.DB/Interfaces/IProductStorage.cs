@@ -1,16 +1,17 @@
 ﻿using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShop.DB.Interfaces
 {
     public interface IProductStorage
     {
-        List<Product> GetAll();
-        Product TryGetById(Guid id);
-        List<Product> GetProductsWithPagination(int page, int itemsOnPage);
-        void SaveChange();
-        void Delete(Guid productId);
-        void Add(Product product);
+        Task<List<Product>> GetAllAsync();
+        Task<Product> TryGetByIdAsync(Guid id);
+        Task<List<Product>> GetProductsWithPaginationAsync(int page, int itemsOnPage);
+        Task SaveChangeAsync();
+        Task DeleteAsync(Guid productId);
+        Task AddAsync(Product product);
     }
 }

@@ -1,13 +1,14 @@
 ﻿using OnlineShopWebApp.Areas.Administrator.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Interfaces
 {
     public interface IRoleStorage
     {
-        void Add(Role role);
-        void Delete(string name);
-        List<Role> GetAll();
-        void SaveAll(List<Role> roles);
+        Task Add(Role role);
+        Task Delete(string name);
+        Task<List<Role>> GetAll();
+        Task SaveAll(List<Role> roles);
     }
 }

@@ -5,6 +5,7 @@ using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -18,17 +19,17 @@ namespace OnlineShopWebApp.Controllers
             _signInManager = signInManager;
             _userManager = userInManager;
         }
-        public ActionResult Login(string returnUrl)
+        public  IActionResult Login(string returnUrl)
         {
             return View(new Login() {ReturnUrl = returnUrl });
         }
 
         [HttpPost]
-        public ActionResult Login(Login loginInfo)
+        public async Task<IActionResult> LoginAsync(Login loginInfo)
         {
             if (ModelState.IsValid)
             {
-                var result = _signInManager.PasswordSignInAsync(loginInfo.Email, loginInfo.Password, loginInfo.IsRememberMe, false).Result;
+                var result = await _signInManager.PasswordSignInAsync(loginInfo.Email, loginInfo.Password, loginInfo.IsRememberMe, false);
                 if (result.Succeeded)
                     return Redirect(loginInfo.ReturnUrl ?? "/Home");
                 else 
@@ -43,9 +44,9 @@ namespace OnlineShopWebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Registration(Register registerInfo)
+        public async Task<IActionResult> RegistrationAsync(Register registerInfo)
         {
-            var checkEmail = _userManager.FindByEmailAsync(registerInfo.Email).Result;
+            var checkEmail = await _userManager.FindByEmailAsync(registerInfo.Email);
             if (checkEmail != null)
                 ModelState.AddModelError("Email", "Данный email уже используется. Укажите другой!");
 
@@ -61,11 +62,11 @@ namespace OnlineShopWebApp.Controllers
             if (ModelState.IsValid)
             {
                 var user = new User { Email = registerInfo.Email, UserName = registerInfo.Email, Role = Constants.UserRoleName, AvatarImagepath = Constants.BlankAvatar };
-                var result = _userManager.CreateAsync(user, registerInfo.Password).Result;
+                var result = await _userManager.CreateAsync(user, registerInfo.Password);
                 if (result.Succeeded)
                 {
-                    _signInManager.SignInAsync(user, false).Wait();
-                    _userManager.AddToRoleAsync(user, Constants.UserRoleName).Wait();
+                    await _signInManager.SignInAsync(user, false); 
+                    await _userManager.AddToRoleAsync(user, Constants.UserRoleName);
                     return Redirect(registerInfo.ReturnUrl ?? "/Home");
                 }
                 else
@@ -74,9 +75,9 @@ namespace OnlineShopWebApp.Controllers
             return View(registerInfo);
         }
 
-        public IActionResult Logout()
+        public async Task<IActionResult> LogoutAsync()
         {
-            _signInManager.SignOutAsync().Wait();
+            await _signInManager.SignOutAsync();
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
     }

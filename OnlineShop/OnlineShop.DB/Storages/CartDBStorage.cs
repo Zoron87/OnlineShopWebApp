@@ -4,6 +4,7 @@ using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShop.DB.Storages
 {
@@ -16,9 +17,9 @@ namespace OnlineShop.DB.Storages
             _databaseContext = databaseContext;
         }
 
-        public void AddItem(Guid userId, Guid productId, int quantity = 1)
+        public async Task AddItemAsync(Guid userId, Guid productId, int quantity = 1)
         {
-            var product = _databaseContext.Products.Include(el => el.ImagesPath).FirstOrDefault(p => p.Id == productId);
+            var product = await _databaseContext.Products.Include(el => el.ImagesPath).FirstOrDefaultAsync(p => p.Id == productId);
 
             var cartPositon = new CartItem()
             {
@@ -26,7 +27,7 @@ namespace OnlineShop.DB.Storages
                 Quantity = quantity
             };
 
-            var cart = TryGetById(userId);
+            var cart = await TryGetByIdAsync(userId);
             if (cart == null)
             {
                 cart = new Cart()
@@ -34,8 +35,8 @@ namespace OnlineShop.DB.Storages
                     UserId = userId,
                     Items = new List<CartItem>() { cartPositon }
                 };
-                _databaseContext.Carts.Add(cart);
-                _databaseContext.SaveChanges();
+                await _databaseContext.Carts.AddAsync(cart);
+                await _databaseContext.SaveChangesAsync();
             }
             else
             {
@@ -45,49 +46,49 @@ namespace OnlineShop.DB.Storages
                 else
                     cart.Items.Add(cartPositon);
 
-                _databaseContext.SaveChanges();
+                await _databaseContext.SaveChangesAsync();
             }
         }
 
-        public void Reduce(Guid userId, Guid productId)
+        public async Task ReduceAsync(Guid userId, Guid productId)
         {
-            var cart = TryGetById(userId);
+            var cart = await TryGetByIdAsync(userId);
             var checkSameProduct = cart?.Items?.FirstOrDefault(el => el.Product.Id == productId);
             if (checkSameProduct != null)
             {
                 if (checkSameProduct.Quantity <= 1)
-                    DeleteItem(userId, productId);
+                    DeleteItemAsync(userId, productId);
                 else
                     checkSameProduct.Quantity--;
 
-                _databaseContext.SaveChanges();
+                await _databaseContext.SaveChangesAsync();
             }
         }
 
-        public void DeleteItem(Guid userId, Guid productId)
+        public async Task DeleteItemAsync(Guid userId, Guid productId)
         {
-            var cart = TryGetById(userId);
+            var cart = await TryGetByIdAsync(userId);
             if (cart != null)
             {
                 var cartItemForRemove = cart.Items.FirstOrDefault(el => el.Product.Id == productId);
                 if (cartItemForRemove != null)
                     _databaseContext.Carts.FirstOrDefault(el => el == cart).Items.Remove(cartItemForRemove);
             }
-            _databaseContext.SaveChanges();
+            await _databaseContext.SaveChangesAsync();
         }
 
-        public Cart TryGetById(Guid userId)
+        public async Task<Cart> TryGetByIdAsync(Guid userId)
         {
-            return _databaseContext.Carts.Include(el => el.Items).ThenInclude(el => el.Product).ThenInclude(el => el.ImagesPath).FirstOrDefault(c => c.UserId == userId);
+            return await _databaseContext.Carts.Include(el => el.Items).ThenInclude(el => el.Product).ThenInclude(el => el.ImagesPath).FirstOrDefaultAsync(c => c.UserId == userId);
         }
 
-        public void Clear(Guid userId)
+        public async Task ClearAsync(Guid userId)
         {
-            var cart = TryGetById(userId);
+            var cart = await TryGetByIdAsync(userId);
             if (cart != null)
             {
                 _databaseContext.Carts.Remove(cart);
-                _databaseContext.SaveChanges();
+                await _databaseContext.SaveChangesAsync();
             }
         }
     }

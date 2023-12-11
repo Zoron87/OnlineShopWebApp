@@ -5,6 +5,7 @@ using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
 using System;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Views.Shared.Components.CartInfoShort
 {
@@ -21,10 +22,10 @@ namespace OnlineShopWebApp.Views.Shared.Components.CartInfoShort
             _userManager = userManager;
         }
 
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            var userId = User.Identity.IsAuthenticated ? Guid.Parse(_userManager.GetUserAsync((System.Security.Claims.ClaimsPrincipal)User).Result.Id) : _userViewModel.Id;
-            var cartViewModel = _cartStorage.TryGetById(userId)?.ToCartViewModel();
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync((System.Security.Claims.ClaimsPrincipal)User)).Id) : _userViewModel.Id;
+            var cartViewModel = (await _cartStorage.TryGetByIdAsync(userId))?.ToCartViewModel();
             return View("CartInfoShort", cartViewModel);
         }
     }

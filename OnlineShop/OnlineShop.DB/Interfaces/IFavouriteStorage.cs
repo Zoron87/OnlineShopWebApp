@@ -1,13 +1,14 @@
 ﻿using OnlineShop.DB.Models;
 using System;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Interfaces
 {
     public interface IFavouriteStorage
     {
-        Favourite TryGetById(Guid userId);
-        void Add(Guid userId, Guid productId);
-        void Delete(Guid userId, Guid productId);
-        void Clear(Guid userId);
+        Task<Favourite> TryGetByIdAsync(Guid userId);
+        Task AddAsync(Guid userId, Guid productId);
+        Task DeleteAsync(Guid userId, Guid productId);
+        Task ClearAsync(Guid userId);
     }
 }

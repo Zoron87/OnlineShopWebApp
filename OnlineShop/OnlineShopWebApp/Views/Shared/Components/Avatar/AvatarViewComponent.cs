@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
-using System;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Avatar
 {
@@ -16,10 +16,10 @@ namespace OnlineShopWebApp.Views.Shared.Components.Avatar
             _userManager = userManager;
             _userViewModel = userViewModel;
         }
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            var userId = User.Identity.IsAuthenticated ? _userManager.GetUserAsync((System.Security.Claims.ClaimsPrincipal)User).Result.Id : _userViewModel.Id.ToString();
-            var user = _userManager.FindByIdAsync(userId).Result;
+            var userId = User.Identity.IsAuthenticated ? (await _userManager.GetUserAsync((System.Security.Claims.ClaimsPrincipal)User)).Id : _userViewModel.Id.ToString();
+            var user = await _userManager.FindByIdAsync(userId);
             return View("Avatar", user?.AvatarImagepath ?? "");
          }
     }

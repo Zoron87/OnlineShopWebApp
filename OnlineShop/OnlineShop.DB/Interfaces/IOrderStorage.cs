@@ -2,17 +2,18 @@
 using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Interfaces
 {
 	public interface IOrderStorage
 	{
-		void Add(Order order);
-		List<Order> GetAll();
-		Order TryGetById(Guid orderId);
-		void UpdateStatus(Guid orderId, OrderStatus orderStatus);
-		void Delete(Order order);
-		void Mapping(Order order, OrderDetails orderDetails);
-		List<Order> TryGetByUserId(Guid userId);
+        Task AddAsync(Order order);
+        Task<List<Order>> GetAllAsync();
+        Task<Order> TryGetByIdAsync(Guid orderId);
+        Task UpdateStatusAsync(Guid orderId, OrderStatus orderStatus);
+        Task DeleteAsync(Order order);
+        void Mapping(Order order, OrderDetails orderDetails);
+        Task<List<Order>> TryGetByUserIdAsync(Guid userId);
 	}
 }

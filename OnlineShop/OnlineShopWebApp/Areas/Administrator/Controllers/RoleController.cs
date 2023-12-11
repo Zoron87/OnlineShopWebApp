@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.DB;
 using OnlineShop.DB.Models;
 using OnlineShopWebApp.Areas.Administrator.Models;
@@ -8,6 +9,7 @@ using OnlineShopWebApp.Providers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Areas.Administrator.Controllers
 {
@@ -23,9 +25,9 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             _roleManager = roleManager;
             _userManager = userManager;
         }
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var rolesViewModel = _roleManager.Roles.ToList().ToRoleViewModel();
+            var rolesViewModel = (await _roleManager.Roles.ToListAsync()).ToRoleViewModel();
             return View(rolesViewModel);
         }
 
@@ -35,7 +37,7 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(RoleViewModel roleViewModel)
+        public async Task<IActionResult> AddAsync(RoleViewModel roleViewModel)
         {
             var roles = _roleManager.Roles.ToList();
             if (roles.Any(r => r.Name.ToLower() == roleViewModel.Name.ToString().ToLower()))
@@ -43,16 +45,16 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
 
             if (ModelState.IsValid)
             {
-                _roleManager.CreateAsync(new UserRole(roleViewModel.Name, roleViewModel.Description)).Wait();
+                await _roleManager.CreateAsync(new UserRole(roleViewModel.Name, roleViewModel.Description));
                 return RedirectToAction("Index");
             }
             return View(roleViewModel);
         }
 
-        public ActionResult Delete(RoleViewModel roleViewModel)
+        public async Task<IActionResult> Delete(RoleViewModel roleViewModel)
         {
-            var role = _roleManager.Roles.FirstOrDefault(r => r.Name == roleViewModel.Name);
-            var user = _userManager.Users.FirstOrDefault(u => u.Role == roleViewModel.Name);
+            var role = await _roleManager.Roles.FirstOrDefaultAsync(r => r.Name == roleViewModel.Name);
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Role == roleViewModel.Name);
 
             if (user != null) 
             {
@@ -61,7 +63,7 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
                 throw new Exception($"У роли {roleViewModel.Name} есть привязки к пользователям.");
             }
 
-            _roleManager.DeleteAsync(role).Wait();
+            await _roleManager.DeleteAsync(role);
             return RedirectToAction("Index");
         }
     }

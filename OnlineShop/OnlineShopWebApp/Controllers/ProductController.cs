@@ -3,6 +3,7 @@ using OnlineShop.DB.Interfaces;
 using OnlineShopWebApp.Providers;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -12,27 +13,26 @@ namespace OnlineShopWebApp.Controllers
 
         public ProductController(IProductStorage productStorage)
         {
-            this._productStorage = productStorage;
+            _productStorage = productStorage;
         }
 
-        public IActionResult Index(Guid productId)
+        public async Task<IActionResult> Index(Guid productId)
         {
-            var product = _productStorage.TryGetById(productId).ToProductViewModel();
+            var product = (await _productStorage.TryGetByIdAsync(productId)).ToProductViewModel();
             return product != null ? View(product) : View("Error");
         }
 
-        public IActionResult View(int page = 1, int itemsOnPage = 1)
+        public async Task<IActionResult> ViewAsync(int page = 1, int itemsOnPage = 1)
         {
-            var products = _productStorage.GetProductsWithPagination(page, itemsOnPage).ToProductsViewModel();
+            var products = (await _productStorage.GetProductsWithPaginationAsync(page, itemsOnPage)).ToProductsViewModel();
             return products != null ? View(products) : View("Error");
         }
 
-        public IActionResult Search(string search) 
+        public async Task<IActionResult> SearchAsync(string search) 
         {
             ViewData["Search"] = search;
             search = search.ToLower();
-            var productsViewModel = _productStorage.GetAll().Where(p => p.Name.ToLower().Contains(search) || p.Description.ToLower().Contains(search)).ToList().ToProductsViewModel();
-
+            var productsViewModel = (await _productStorage.GetAllAsync()).Where(p => p.Name.ToLower().Contains(search) || p.Description.ToLower().Contains(search)).ToList().ToProductsViewModel();
             return View(productsViewModel);
         }
     }

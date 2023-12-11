@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using OnlineShop.DB.Models;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
+using System;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Views.Shared.Components.Favourite
 {
@@ -9,16 +13,19 @@ namespace OnlineShopWebApp.Views.Shared.Components.Favourite
     {
         private readonly IFavouriteStorage _favouriteStorage;
         private readonly UserViewModel _userViewModel;
+        private readonly UserManager<User> _userManager;
 
-        public FavouriteViewComponent(IFavouriteStorage favouriteStorage, UserViewModel userViewModel)
+        public FavouriteViewComponent(IFavouriteStorage favouriteStorage, UserViewModel userViewModel, UserManager<User> userManager)
         {
-            this._favouriteStorage = favouriteStorage;
-            this._userViewModel = userViewModel;
+            _favouriteStorage = favouriteStorage;
+            _userViewModel = userViewModel;
+            _userManager = userManager;
         }
 
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            var favouriteProductsViewModel = _favouriteStorage.TryGetById(_userViewModel.Id)?.ToFavouriteViewModel();
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync((System.Security.Claims.ClaimsPrincipal)User)).Id) : _userViewModel.Id;
+            var favouriteProductsViewModel = (await _favouriteStorage.TryGetByIdAsync(userId))?.ToFavouriteViewModel();
             return View("Favourite", favouriteProductsViewModel?.Amount ?? 0);
         }
     }

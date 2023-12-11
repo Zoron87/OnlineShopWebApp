@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB.Models;
 using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
 using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -13,33 +13,39 @@ namespace OnlineShopWebApp.Controllers
 	{
 		private readonly IFavouriteStorage _favouriteStorage;
         private readonly UserViewModel _userViewModel;
+        private readonly UserManager<User> _userManager;
 
-        public FavouriteController(IFavouriteStorage favouriteStorage, UserViewModel userViewModel)
+        public FavouriteController(IFavouriteStorage favouriteStorage, UserViewModel userViewModel, UserManager<User> userManager)
         {
-			_favouriteStorage = favouriteStorage;
+            _favouriteStorage = favouriteStorage;
             _userViewModel = userViewModel;
+            _userManager = userManager;
         }
-		public ActionResult Index()
+        public async Task<IActionResult> Index()
 		{
-			var favouriteProductsViewModel = _favouriteStorage.TryGetById(_userViewModel.Id)?.ToFavouriteViewModel();
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
+            var favouriteProductsViewModel = (await _favouriteStorage.TryGetByIdAsync(userId))?.ToFavouriteViewModel();
             return View(favouriteProductsViewModel);
         }
 
-		public ActionResult Add(Guid productId)
+		public async Task<IActionResult> Add(Guid productId)
 		{
-			_favouriteStorage.Add(_userViewModel.Id, productId);
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
+            await _favouriteStorage.AddAsync(userId, productId);
 			return RedirectToAction("Index");
 		}
 
-		public ActionResult Delete(Guid productId)
+		public async Task<IActionResult> Delete(Guid productId)
 		{
-			_favouriteStorage.Delete(_userViewModel.Id, productId);
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
+            await _favouriteStorage.DeleteAsync(userId, productId);
 			return RedirectToAction("Index");
 		}
 
-		public ActionResult Clear()
+		public async Task<IActionResult> Clear()
 		{
-			_favouriteStorage.Clear(_userViewModel.Id);
+            var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
+            await _favouriteStorage.ClearAsync(userId);
 			return RedirectToAction("Index");
 		}
 	}

@@ -4,6 +4,7 @@ using OnlineShop.DB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace OnlineShop.DB.Storages
 {
@@ -13,63 +14,63 @@ namespace OnlineShop.DB.Storages
 
         public ProductDBStorage(DatabaseContext databaseContext)
         {
-            this._databaseContext = databaseContext;
+            _databaseContext = databaseContext;
         }
 
-        public List<Product> GetAll()
+        public async Task<List<Product>> GetAllAsync()
         {
-            return _databaseContext.Products.Include(p => p.ImagesPath).ToList();
+            return await _databaseContext.Products.Include(p => p.ImagesPath).ToListAsync();
         }
 
-        public void SaveChange()
+        public async Task SaveChangeAsync()
         {
-            _databaseContext.SaveChanges();
+            await _databaseContext.SaveChangesAsync();
         }
 
-        public Product TryGetById(Guid id)
+        public async Task<Product> TryGetByIdAsync(Guid id)
         {
-            var product = _databaseContext.Products.Include(p => p.ImagesPath).FirstOrDefault(product => product.Id == id);
+            var product = await _databaseContext.Products.Include(p => p.ImagesPath).FirstOrDefaultAsync(product => product.Id == id);
             if (product == null) throw new Exception("Указанный продукт не обнаружен!");
             return product;
         }
 
-        public void Delete(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            var product = TryGetById(id);
+            var product = await TryGetByIdAsync(id);
             if (product != null)
             {
                 _databaseContext.Products.Remove(product);
-                _databaseContext.SaveChanges();
+                await _databaseContext.SaveChangesAsync();
             }
         }
 
-        public void Add(Product product)
+        public async Task AddAsync(Product product)
         {
-            _databaseContext.Add(product);
-            _databaseContext.SaveChanges();
+            await _databaseContext.AddAsync(product);
+            await _databaseContext.SaveChangesAsync();
         }
 
-        public List<Product> GetProductsWithPagination(int page, int itemsOnPage)
+        public async Task<List<Product>> GetProductsWithPaginationAsync(int page, int itemsOnPage)
         {
             if (page <= 0) throw new Exception("Номер страницы должен быть больше нуля!");
-            if (CheckExistPage(page, itemsOnPage)) throw new Exception("Такой страницы не существует!");
+            if (await CheckExistPageAsync(page, itemsOnPage)) throw new Exception("Такой страницы не существует!");
             itemsOnPage = itemsOnPage < _databaseContext.Products.Count() ? itemsOnPage : _databaseContext.Products.Count();
 
             if (_databaseContext.Products.Any())
-                return GetOutputProducts(page, itemsOnPage);
+                return await GetOutputProductsAsync(page, itemsOnPage);
 
             throw new Exception("Товаров для вывода не обнаружено!");
         }
 
-        private bool CheckExistPage(int page, int itemsOnPage)
+        private async Task<bool> CheckExistPageAsync(int page, int itemsOnPage)
         {
-            return page > 1 && _databaseContext.Products.Count() - (page - 1) * itemsOnPage <= 0;
+            return page > 1 && await _databaseContext.Products.CountAsync() - (page - 1) * itemsOnPage <= 0;
         }
 
-        private List<Product> GetOutputProducts(int page, int itemsOnPage)
+        private async Task<List<Product>> GetOutputProductsAsync(int page, int itemsOnPage)
         {
             if (page > 1)
-                return _databaseContext.Products.Include(el => el.ImagesPath).Skip((page - 1) * itemsOnPage).Take(itemsOnPage).ToList();
+                return await _databaseContext.Products.Include(el => el.ImagesPath).Skip((page - 1) * itemsOnPage).Take(itemsOnPage).ToListAsync();
 
             return _databaseContext.Products.Include(el => el.ImagesPath).Take(itemsOnPage).ToList();
         }
