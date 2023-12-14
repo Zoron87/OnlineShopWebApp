@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
@@ -7,6 +8,8 @@ using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Areas.Administrator.Controllers
@@ -17,22 +20,26 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
     {
         private readonly IProductStorage _productStorage;
         private readonly ImageProvider _imageProvider;
+        private readonly IMapper _mapper;
 
-        public ProductController(IProductStorage productStorage, IWebHostEnvironment appEnvironent, ImageProvider imageProvider)
+        public ProductController(IProductStorage productStorage, IWebHostEnvironment appEnvironent, ImageProvider imageProvider, IMapper mapper)
         {
             _productStorage = productStorage;
             _imageProvider = imageProvider;
+            _mapper = mapper;
         }
         public async Task<IActionResult> Index()
         {
-            var productsViewModel = (await _productStorage.GetAllAsync()).ToProductsViewModel();
+            var products = await _productStorage.GetAllAsync();
+            var productsViewModel = _mapper.Map<List<ProductViewModel>>(products);
             return View(productsViewModel);
         }
 
         public async Task<IActionResult> EditAsync(Guid productId)
         {
-            var product = (await _productStorage.TryGetByIdAsync(productId)).ToProductViewModel();
-            return View(product);
+            var product = await _productStorage.TryGetByIdAsync(productId);
+            var productViewModel = _mapper.Map<ProductViewModel>(product);
+            return View(productViewModel);
         }
 
         public async Task<IActionResult> DeleteAsync(Guid productId)
@@ -59,7 +66,7 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
 
             if (ModelState.IsValid)
             {
-                var productDb = new Product().ItemViewModelToProduct(item);
+                var productDb = _mapper.Map<ItemViewModel, Product>(item);
                 await _productStorage.AddAsync(productDb);
                 return RedirectToAction("Index");
             }
@@ -69,15 +76,18 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveAsync(Guid productId, ItemViewModel item)
         {
-            item.ImagesPath = _imageProvider.AddProductImages(item, Constants.ImageProductsFolder);
-
             if (ModelState.IsValid)
             {
-                var product = (await _productStorage.TryGetByIdAsync(productId)).ItemViewModelToProduct(item);
+                var product = await _productStorage.TryGetByIdAsync(productId);
+
+                if (item.UploadedFiles != null)
+                    item.ImagesPath = _imageProvider.AddProductImages(item, Constants.ImageProductsFolder);
+
+                product = _mapper.Map(item, product);
                 await _productStorage.SaveChangeAsync();
                 return RedirectToAction("Index");
             }
-            return View(item);
+            return View("Edit", _mapper.Map<ProductViewModel>(item));
         }
     }
 }

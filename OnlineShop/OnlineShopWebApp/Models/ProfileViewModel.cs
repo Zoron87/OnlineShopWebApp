@@ -6,7 +6,7 @@ namespace OnlineShopWebApp.Models
 {
     public class ProfileViewModel
     {
-        public Guid Id = Guid.NewGuid();
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Email пользователя обязателен")]
         [EmailAddress(ErrorMessage = "Некорректный email пользователя")]
@@ -17,9 +17,6 @@ namespace OnlineShopWebApp.Models
         [StringLength(20, MinimumLength = 2, ErrorMessage = "Допустимое количество символов от {2} до {1}")]
         public string Name { get; set; }
 
-        [StringLength(20, MinimumLength = 2, ErrorMessage = "Допустимое количество символов от {2} до {1}")]
-        public string Role { get; set; }
-
         [Phone(ErrorMessage = "Указан некорректный телефон получателя")]
         [StringLength(20, MinimumLength = 6, ErrorMessage = "Длина строки телефона должна быть от {2} до {1} символов")]
         [RegularExpression("((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}", ErrorMessage = "Указан некорректный телефон получателя")]
@@ -28,7 +25,6 @@ namespace OnlineShopWebApp.Models
         [StringLength(100, MinimumLength = 5, ErrorMessage = "Длина строки email должна быть от {2} до {1} символов")]
         public string Address { get; set; }
         public string AvatarImagepath { get; set; }
-
         public IFormFile UploadedFile {get; set;}
     }
 }

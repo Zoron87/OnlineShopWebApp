@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OnlineShop.DB;
-using OnlineShop.DB.Interfaces;
-using OnlineShopWebApp.Providers;
-using System.Linq;
+using OnlineShopWebApp.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
@@ -11,15 +11,18 @@ namespace OnlineShopWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly DatabaseContext _databaseContext;
+        private readonly IMapper _mapper;
 
-        public HomeController(IProductStorage productStorage, DatabaseContext databaseContext)
+        public HomeController(DatabaseContext databaseContext, IMapper mapper)
         {
             _databaseContext = databaseContext;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
-            var productsViewModel = (await _databaseContext.Products.Include(p => p.ImagesPath).ToListAsync()).ToProductsViewModel();
+            var products = (await _databaseContext.Products.Include(p => p.ImagesPath).ToListAsync());
+            var productsViewModel = _mapper.Map<List<ProductViewModel>>(products);
             return productsViewModel != null ? View(productsViewModel) : View("Error");
         }
     }

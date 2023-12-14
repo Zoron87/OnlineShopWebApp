@@ -10,7 +10,7 @@ using OnlineShop.DB;
 namespace OnlineShop.DB.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20231208072315_InitProducts")]
+    [Migration("20231212194848_InitProducts")]
     partial class InitProducts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

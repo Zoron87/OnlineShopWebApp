@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.DB;
 
-namespace OnlineShop.DB.Migraions.Identity
+namespace OnlineShop.DB.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20231208072332_InitRoles")]
-    partial class InitRoles
+    [Migration("20231212194940_InitIdentityContext")]
+    partial class InitIdentityContext
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

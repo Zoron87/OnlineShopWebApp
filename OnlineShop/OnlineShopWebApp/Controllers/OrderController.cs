@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB.Interfaces;
@@ -19,13 +20,15 @@ namespace OnlineShopWebApp.Controllers
 		private readonly ICartStorage _cartStorage;
         private readonly UserViewModel _userViewModel;
 		private readonly UserManager<User> _userManager;
+        private readonly IMapper _mapper;
 
-        public OrderController(ICartStorage cartStorage, IOrderStorage orderStorage, UserViewModel userViewModel, UserManager<User> userManager)
+        public OrderController(ICartStorage cartStorage, IOrderStorage orderStorage, UserViewModel userViewModel, UserManager<User> userManager, IMapper mapper)
         {
             _cartStorage = cartStorage;
             _orderStorage = orderStorage;
             _userViewModel = userViewModel;
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
@@ -38,8 +41,9 @@ namespace OnlineShopWebApp.Controllers
 		{
             var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
             var cart = await _cartStorage.TryGetByIdAsync(userId);
-            var orderDetailViewModel = new OrderDetails(){ Items = cart.Items, DeliveryDate = DateTime.Now }.ToOrderViewModel();
-			return View(orderDetailViewModel);
+            var orderDetail = new OrderDetails() { Items = cart.Items, DeliveryDate = DateTime.Now };
+            var orderDetailViewModel = _mapper.Map<OrderDetailsViewModel>(orderDetail);
+            return View(orderDetailViewModel);
         }
 
 		public IActionResult ThankYou()
@@ -62,15 +66,15 @@ namespace OnlineShopWebApp.Controllers
             var cart = await _cartStorage.TryGetByIdAsync(userId);	
 
 			order.OrderDetails = new OrderDetails() { Items = cart.Items };
-            _orderStorage.Mapping(order, orderDetailsViewModel.ToOrderDetails());
+            order = _mapper.Map(_mapper.Map<OrderDetails>(orderDetailsViewModel), order);
 
-			if (ModelState.IsValid)
+            if (ModelState.IsValid)
 			{
                 await _orderStorage.AddAsync(order);
                 await _cartStorage.ClearAsync(userId);
                 return View("ThankYou");
 			}
-            return View("Details", order.ToOrderDetailsViewModel());
+            return View("Details", _mapper.Map<OrderDetailsViewModel>(order));
         }
     }
 }

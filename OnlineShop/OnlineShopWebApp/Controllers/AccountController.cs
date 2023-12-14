@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
@@ -7,6 +8,7 @@ using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using OnlineShopWebApp.Providers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,13 +21,15 @@ namespace OnlineShopWebApp.Controllers
 		private readonly IOrderStorage _orderStorage;
         private readonly UserViewModel _userViewModel;
         private readonly ImageProvider _imageProvider;
+        private readonly IMapper _mapper;
 
-        public AccountController(UserManager<User> userManager, IOrderStorage orderStorage, UserViewModel userViewModel, ImageProvider imageProvider)
+        public AccountController(UserManager<User> userManager, IOrderStorage orderStorage, UserViewModel userViewModel, ImageProvider imageProvider, IMapper mapper)
         {
             _userManager = userManager;
             _orderStorage = orderStorage;
             _userViewModel = userViewModel;
             _imageProvider = imageProvider;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
@@ -38,21 +42,24 @@ namespace OnlineShopWebApp.Controllers
 		{
             var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
 			var orders = await _orderStorage.TryGetByUserIdAsync(userId);
-			return View("Orders", orders.ToOrdersViewModel());
+            var ordersViewModel = _mapper.Map<List<OrderViewModel>>(orders);
+			return View("Orders", ordersViewModel);
 		}
 
         public async Task<IActionResult> OrderDetailsAsync(Guid orderId)
         {
             var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
             var order = (await _orderStorage.GetAllAsync()).FirstOrDefault(o => o.Id == orderId);
-            return View(order.ToOrderViewModel());
+            var orderViewModel = _mapper.Map<OrderViewModel>(order);
+            return View(orderViewModel);
         }
 
         public async Task<IActionResult> EditAsync(Guid orderId)
         {
             var userId = (await _userManager.GetUserAsync(User)).Id;
             var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
-            return View(user.ToProfileViewModel());
+            var profileViewModel = _mapper.Map<ProfileViewModel>(user);
+            return View(profileViewModel);
         }
 
         [HttpPost]
@@ -62,14 +69,14 @@ namespace OnlineShopWebApp.Controllers
             {
                 var userId = (await _userManager.GetUserAsync(User)).Id; 
                 var user = _userManager.Users.FirstOrDefault(u => u.Id == userId);
-                
+
                 if (profileViewModel.UploadedFile != null)
                     user.AvatarImagepath = _imageProvider.AddAvatarImage(profileViewModel);
 
-                var result = await _userManager.UpdateAsync(profileViewModel.ToUser(user));
+                var result = await _userManager.UpdateAsync(_mapper.Map(profileViewModel, user));
                 return RedirectToAction("Index");
             }
-            return View("Save", profileViewModel);
+            return View("Edit", profileViewModel);
         }
 
         public async Task<IActionResult> DeleteAvatarAsync(string userId)

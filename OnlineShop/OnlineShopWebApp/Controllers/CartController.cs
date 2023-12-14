@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB.Interfaces;
 using OnlineShop.DB.Models;
@@ -14,18 +15,21 @@ namespace OnlineShopWebApp.Controllers
         private readonly ICartStorage _cartStorage;
         private readonly UserViewModel _userViewModel;
         private readonly UserManager<User> _userManager;
+        private readonly IMapper _mapper;
 
-        public CartController(ICartStorage cartStorage, UserViewModel userViewModel, UserManager<User> userManager)
+        public CartController(ICartStorage cartStorage, UserViewModel userViewModel, UserManager<User> userManager, IMapper mapper)
         {
             _cartStorage = cartStorage;
             _userViewModel = userViewModel;
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public async Task<ActionResult> Index()
         {
             var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
-            var cartViewModel = (await _cartStorage.TryGetByIdAsync(userId))?.ToCartViewModel();
+            var cart = await _cartStorage.TryGetByIdAsync(userId);
+            var cartViewModel = _mapper.Map<CartViewModel>(cart);
             return View(cartViewModel);
         }
 

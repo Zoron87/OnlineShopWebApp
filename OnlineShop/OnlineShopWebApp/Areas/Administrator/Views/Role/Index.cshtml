@@ -39,7 +39,11 @@
                                 <th scope="row">@i</th>
                                 <td>@role.Name</td>
                                 <td>@role.Description</td>
-                                <td><a class="btn red" data-bs-toggle="modal" data-bs-target="#modal-delete-role-@role.Name"><i class="fa-regular fa-trash-can h5"></i></a></td>
+                                <td>
+                                    <a class="btn red" data-bs-toggle="modal" data-bs-target="#modal-delete-role-@role.Name">
+                                        <i class="fa-regular fa-trash-can h5"></i>
+                                    </a>
+                                </td>
                             </tr>
                             <div class="modal fade" id="modal-delete-role-@role.Name" tabindex="-1" aria-labelledby="DeleteRoleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">

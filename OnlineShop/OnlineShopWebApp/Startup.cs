@@ -58,6 +58,7 @@ namespace OnlineShopWebApp
 				};
 			});
 
+            services.AddAutoMapper(typeof(MappingProfile));
             services.AddTransient<IFavouriteStorage, FavouriteStorage>();
 			services.AddTransient<ICompareStorage, CompareStorage>();
 			services.AddTransient<IOrderStorage, OrderDBStorage>();

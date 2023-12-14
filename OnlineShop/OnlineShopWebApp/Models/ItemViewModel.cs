@@ -7,7 +7,7 @@ namespace OnlineShopWebApp.Models
 {
     public class ItemViewModel
     {
-        public Guid Id { get;}
+        public Guid Id = Guid.NewGuid();
 
         [Required(ErrorMessage = "Не указано наименование продукта")]
         [StringLength(100, MinimumLength = 2, ErrorMessage = "Длина строки имени должна быть от {2} до {1} символов")]

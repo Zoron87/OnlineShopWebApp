@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,12 +20,13 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<UserRole> _roleManager;
+        private readonly IMapper _mapper;
 
-        public UserController(UserManager<User> userManager, RoleManager<UserRole> roleManager)
+        public UserController(UserManager<User> userManager, RoleManager<UserRole> roleManager, IMapper mapper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
-
+            _mapper = mapper;
         }
         public async Task<IActionResult> Index()
         {
@@ -84,7 +86,8 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
 
         public async Task<IActionResult> EditAsync(string Email)
         {
-            var userViewModel = (await _userManager.FindByEmailAsync(Email)).ToUserViewModel();
+            var user = (await _userManager.FindByEmailAsync(Email)); 
+            var userViewModel = _mapper.Map<UserViewModel>(user);
             ViewBag.Role = new SelectList(_roleManager.Roles.AsEnumerable(), "Name", "Name");
             return View(userViewModel);
         }
@@ -97,7 +100,7 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
                 var user = await _userManager.FindByIdAsync(userViewModel.Id.ToString());
                 if (user != null)
                 {
-                    user.UserName = userViewModel.Name;
+                    user.Name = userViewModel.Name;
                     user.Email = userViewModel.Email;
 
                     if (user.PasswordHash != userViewModel.Password)

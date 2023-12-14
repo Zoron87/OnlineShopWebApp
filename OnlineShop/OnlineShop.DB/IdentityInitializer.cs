@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using OnlineShop.DB.Models;
+using System;
 using System.Threading.Tasks;
 
 namespace OnlineShop.DB
@@ -23,14 +24,14 @@ namespace OnlineShop.DB
 
             if (await userManager.FindByNameAsync(adminEmail) == null)
             {
-                var admin = new User { Email = adminEmail, UserName = adminEmail, Role = Constants.AdminRoleName };
+                var admin = new User {Id = "9e53806c-bdde-4957-8ad7-77dd590e46fa", Email = adminEmail, UserName = adminEmail, Role = Constants.AdminRoleName, AvatarImagepath = Constants.BlankAvatar };
                 var result = await userManager.CreateAsync(admin, password);
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(admin, Constants.AdminRoleName);
                 }
                 else
-                    throw new System.Exception("Дефолтный администратор не был добавлен!");
+                    throw new Exception("Дефолтный администратор не был добавлен!");
             }
         }
     }

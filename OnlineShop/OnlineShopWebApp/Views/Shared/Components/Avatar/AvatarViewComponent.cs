@@ -18,7 +18,7 @@ namespace OnlineShopWebApp.Views.Shared.Components.Avatar
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var userId = User.Identity.IsAuthenticated ? (await _userManager.GetUserAsync((System.Security.Claims.ClaimsPrincipal)User)).Id : _userViewModel.Id.ToString();
+            var userId = User.Identity.IsAuthenticated ? (await _userManager.GetUserAsync(HttpContext.User)).Id : _userViewModel.Id.ToString();
             var user = await _userManager.FindByIdAsync(userId);
             return View("Avatar", user?.AvatarImagepath ?? "");
          }

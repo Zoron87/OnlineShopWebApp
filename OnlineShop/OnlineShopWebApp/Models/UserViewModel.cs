@@ -5,7 +5,7 @@ namespace OnlineShopWebApp.Models
 {
     public class UserViewModel
     {
-        public Guid Id = Guid.NewGuid();
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Email пользователя обязателен")]
         [EmailAddress(ErrorMessage = "Некорректный email пользователя")]

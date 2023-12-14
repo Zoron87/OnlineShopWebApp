@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,15 +20,18 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
     {
         private readonly RoleManager<UserRole> _roleManager;
         private readonly UserManager<User> _userManager;
+        private readonly IMapper _mapper;
 
-        public RoleController(RoleManager<UserRole> roleManager, UserManager<User> userManager)
+        public RoleController(RoleManager<UserRole> roleManager, UserManager<User> userManager, IMapper mapper)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _mapper = mapper;
         }
         public async Task<IActionResult> Index()
         {
-            var rolesViewModel = (await _roleManager.Roles.ToListAsync()).ToRoleViewModel();
+            var roles = await _roleManager.Roles.ToListAsync();
+            var rolesViewModel = _mapper.Map<List<RoleViewModel>>(roles);
             return View(rolesViewModel);
         }
 
