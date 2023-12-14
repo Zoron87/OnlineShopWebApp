@@ -59,17 +59,5 @@ namespace OnlineShop.DB.Storages
                 await _databaseContext.SaveChangesAsync();
             }
         }
-
-        public void Mapping(Order order, OrderDetails orderDetails)
-        {
-            order.OrderDetails.Name = orderDetails.Name;
-            order.OrderDetails.Email = orderDetails.Email;
-            order.OrderDetails.Address = orderDetails.Address;
-            order.OrderDetails.Comment = orderDetails.Comment;
-            order.OrderDetails.Delivery = orderDetails.Delivery;
-            order.OrderDetails.DeliveryDate = orderDetails.DeliveryDate;
-            order.OrderDetails.Pay = orderDetails.Pay;
-            order.OrderDetails.Phone = orderDetails.Phone;
-        }
     }
 }

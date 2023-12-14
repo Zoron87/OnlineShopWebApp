@@ -13,7 +13,6 @@ namespace OnlineShopWebApp.Interfaces
         Task<Order> TryGetByIdAsync(Guid orderId);
         Task UpdateStatusAsync(Guid orderId, OrderStatus orderStatus);
         Task DeleteAsync(Order order);
-        void Mapping(Order order, OrderDetails orderDetails);
         Task<List<Order>> TryGetByUserIdAsync(Guid userId);
 	}
 }
