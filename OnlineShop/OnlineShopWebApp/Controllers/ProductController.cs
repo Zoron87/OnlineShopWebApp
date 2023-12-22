@@ -10,7 +10,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using WebAPI.Helpers;
 using WebAPI.Interfaces;
 using WebAPI.Models;
 

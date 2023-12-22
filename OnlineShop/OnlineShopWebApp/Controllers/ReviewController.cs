@@ -10,8 +10,6 @@ using WebAPI.Helpers;
 
 namespace OnlineShopWebApp.Controllers
 {
-//    [ApiController]
-    //[Route("[controller]")]
     public class ReviewController : Controller
     {
         private readonly ILogger<ReviewController> _logger;

@@ -598,10 +598,13 @@ footer a:hover {
 .hash-list img {
     width: 70px;
 }
-    /* ========================================== Media ======================================== */
 
-    @media only screen and (min-width: 992px) {
-        .header-bottom .navbar .dropdown-menu-end {
+.fs-08 {
+    font-size: 0.8rem;
+}
+/* ========================================== Media ======================================== */
+@media only screen and (min-width: 992px) {
+    .header-bottom .navbar .dropdown-menu-end {
             margin-left: 0;
             border: 0;
         }
