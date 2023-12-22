@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using WebAPI.Models;
 
 namespace OnlineShopWebApp.Models
 {
@@ -21,6 +22,8 @@ namespace OnlineShopWebApp.Models
         [Required(ErrorMessage = "Не указано описание продукта")]
         [StringLength(999, MinimumLength = 10, ErrorMessage = "Описание продукта должно составлять от {2} до {1} символов")]
         public string Description { get; set; }
+
+        public List<ReviewViewModel> Reviews{ get; set; }
 
         public List<IFormFile> UploadedFiles { get; set; }
 

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB.Interfaces;
 using OnlineShop.DB.Models;
 using OnlineShopWebApp.Models;
-using OnlineShopWebApp.Providers;
 using System;
 using System.Threading.Tasks;
 

@@ -25,5 +25,26 @@ namespace OnlineShopWebApp.Controllers
             var productsViewModel = _mapper.Map<List<ProductViewModel>>(products);
             return productsViewModel != null ? View(productsViewModel) : View("Error");
         }
+
+        /// <summary>
+        /// Deletes a specific TodoItem.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(long id)
+        {
+            var item = await _databaseContext.Products.FindAsync(id);
+
+            if (item is null)
+            {
+                return NotFound();
+            }
+
+            _databaseContext.Products.Remove(item);
+            await _databaseContext.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }

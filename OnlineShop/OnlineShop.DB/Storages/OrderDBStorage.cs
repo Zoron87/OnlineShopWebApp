@@ -20,8 +20,8 @@ namespace OnlineShop.DB.Storages
 
         public async Task AddAsync(Order order)
         {
-           await _databaseContext.Orders.AddAsync(order);
-           await _databaseContext.SaveChangesAsync();
+            await _databaseContext.Orders.AddAsync(order);
+            await _databaseContext.SaveChangesAsync();
         }
 
         public async Task<Order> TryGetByIdAsync(Guid orderId)
@@ -29,12 +29,12 @@ namespace OnlineShop.DB.Storages
             return (await GetAllAsync()).FirstOrDefault(order => order.Id == orderId);
         }
 
-		public async Task<List<Order>> TryGetByUserIdAsync(Guid userId)
-		{
-			return (await GetAllAsync()).Where(order => order.UserId == userId).ToList();
-		}
+        public async Task<List<Order>> TryGetByUserIdAsync(Guid userId)
+        {
+            return (await GetAllAsync()).Where(order => order.UserId == userId).ToList();
+        }
 
-		public async Task UpdateStatusAsync(Guid orderId, OrderStatus orderStatus)
+        public async Task UpdateStatusAsync(Guid orderId, OrderStatus orderStatus)
         {
             var orders = await GetAllAsync();
             if (orders != null)

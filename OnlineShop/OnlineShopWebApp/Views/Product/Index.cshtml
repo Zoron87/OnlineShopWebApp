@@ -62,6 +62,22 @@
                     </div>
                 </div>
             </form>
+            <a asp-controller="Product" asp-action="AddReview" asp-route-productId="@Model.Id">Оставить отзыв</a>
+        </div>
+        <div class="container reviews">
+            <div class="mgb-40 padb-30 auto-invert line-b-4 align-center">
+                <h4 class="font-cond-l fg-accent lts-md mgb-10" contenteditable="false">Отзывы наших клиентов</h4>
+            </div>
+            @for (int k=0; k<Model.Reviews.Count; k++)
+            {
+                    <ul class="hash-list cols-3 cols-1-xs pad-30-all align-center text-sm">
+                        <li>
+                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="wpx-100 img-round mgb-20" title="" alt="" >
+                            <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">@Model.Reviews[k].Text</h5>
+                            <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Оценка - @Model.Reviews[k].Grade</h5>
+                        </li>
+                    </ul>
+            }
         </div>
     </div>
 </div>
