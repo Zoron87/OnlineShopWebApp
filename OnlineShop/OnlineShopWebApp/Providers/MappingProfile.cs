@@ -2,6 +2,7 @@
 using OnlineShop.DB.Models;
 using OnlineShopWebApp.Areas.Administrator.Models;
 using OnlineShopWebApp.Models;
+using WebAPI.Models;
 
 namespace OnlineShopWebApp.Providers
 {
@@ -50,6 +51,7 @@ namespace OnlineShopWebApp.Providers
             CreateMap<UserRole, RoleViewModel>().ReverseMap();
             CreateMap<Compare, CompareViewModel>().ReverseMap();
             CreateMap<ItemViewModel, ProductViewModel>().ReverseMap();
+            CreateMap<ReviewDB, ReviewViewModel>().ReverseMap();
         }
         
     }

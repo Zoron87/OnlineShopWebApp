@@ -7,6 +7,7 @@ using WebAPI.Models;
 using WebAPI.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Helpers;
+using AutoMapper;
 
 namespace OnlineShopWebApp.Controllers
 {
@@ -17,11 +18,13 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly ILogger<ReviewController> _logger;
         private readonly IReviewStorage _reviewStorage;
+        private readonly IMapper _mapper;
 
-        public ReviewController(ILogger<ReviewController> logger, IReviewStorage reviewStorage)
+        public ReviewController(ILogger<ReviewController> logger, IReviewStorage reviewStorage, IMapper mapper)
         {
             _logger = logger;
             _reviewStorage = reviewStorage;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -94,7 +97,7 @@ namespace OnlineShopWebApp.Controllers
         {
             try
             {
-                var review = reviewViewModel.ToReviewDB();
+                var review = _mapper.Map<ReviewDB>(reviewViewModel);
                 var result = await _reviewStorage.AddAsync(review);
                 return Ok(result);
             }
