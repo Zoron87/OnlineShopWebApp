@@ -19,7 +19,7 @@
                     </div>
                     <div class="d-grid gap-2 d-md-block mt-3">
                         <button class="btn btn-primary" type="submit">Добавить</button>
-                        <a class="btn btn-warning" role="button" asp-controller="Product" asp-action="Index" asp-area="Administrator">Отмена</a>
+                        <a class="btn btn-warning" role="button" asp-controller="Product" asp-action="Index" asp-route-productId="@Model.ProductId">Отмена</a>
                     </div>
                 </form>
             </div>

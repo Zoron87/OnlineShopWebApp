@@ -35,7 +35,7 @@ namespace OnlineShopWebApp.Controllers
         public async Task<IActionResult> Index(Guid productId)
         {
             var httpClient = _httpClientFactory.CreateClient("ReviewWebAPI");
-            var reviews = await httpClient.GetFromJsonAsync<List<ReviewViewModel>>($"/GetAllByProductId?productId={productId}") ?? new List<ReviewViewModel>();
+            var reviews = await httpClient.GetFromJsonAsync<List<ReviewViewModel>>($"/Review/GetAllByProductId?productId={productId}") ?? new List<ReviewViewModel>();
 
             var product = await _productStorage.TryGetByIdAsync(productId);
             var productViewModel = _mapper.Map<ProductViewModel>(product);
@@ -69,8 +69,10 @@ namespace OnlineShopWebApp.Controllers
         public async Task<IActionResult> AddReviewAsync(ReviewViewModel reviewViewModel)
         {
             var userId = User.Identity.IsAuthenticated ? (await _userManager.GetUserAsync(HttpContext.User)).Id : _userViewModel.Id.ToString();
+            reviewViewModel.UserId = Guid.Parse(userId);
             var httpClient = _httpClientFactory.CreateClient("ReviewWebAPI");
-            await httpClient.PostAsJsonAsync($"/Add?ProductId={reviewViewModel.ProductId}&Text={reviewViewModel.Text}&Grade={reviewViewModel.Grade}&UserId={userId}", new ReviewViewModel());
+            await httpClient.PostAsJsonAsync($"/Review/Add", reviewViewModel);
+
             return RedirectToAction("Index", new { productId = reviewViewModel.ProductId });
         }
     }

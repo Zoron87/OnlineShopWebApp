@@ -10,7 +10,10 @@ using WebAPI.Helpers;
 
 namespace OnlineShopWebApp.Controllers
 {
-    public class ReviewController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    [Produces("application/json")]
+    public class ReviewController : ControllerBase
     {
         private readonly ILogger<ReviewController> _logger;
         private readonly IReviewStorage _reviewStorage;
@@ -38,12 +41,6 @@ namespace OnlineShopWebApp.Controllers
                 _logger.LogError(e.Message, e);
                 return BadRequest(new { Error = e.Message });
             }
-        }
-
-        public async Task<IActionResult> GetAllByProductIdAsync(Guid productId)
-        {
-                var result = await _reviewStorage.GetAllByProductIdAsync(productId);
-                return View(result);
         }
 
         /// <summary>
@@ -90,6 +87,8 @@ namespace OnlineShopWebApp.Controllers
         /// <summary>
         /// Добавление отзыва на продукт
         /// </summary>
+        /// <param name="reviewViewModel"></param>
+        /// <returns></returns>
         [HttpPost("Add")]
         public async Task<ActionResult<ReviewDB>> AddAsync(ReviewViewModel reviewViewModel)
         {
