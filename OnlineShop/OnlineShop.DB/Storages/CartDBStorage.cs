@@ -57,7 +57,7 @@ namespace OnlineShop.DB.Storages
             if (checkSameProduct != null)
             {
                 if (checkSameProduct.Quantity <= 1)
-                    DeleteItemAsync(userId, productId);
+                    await DeleteItemAsync(userId, productId);
                 else
                     checkSameProduct.Quantity--;
 
