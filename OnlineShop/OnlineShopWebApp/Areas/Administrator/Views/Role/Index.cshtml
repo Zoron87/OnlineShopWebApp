@@ -1,0 +1,72 @@
+﻿@model List<RoleViewModel>
+@{
+    ViewData["Title"] = "Список ролей";
+    int i = 1;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            @await Html.PartialAsync("AdminMenu")
+        </div>
+        <div class="col-sm-9">
+            @if (Model == null || Model.Count == 0)
+            {
+                <h3>Список ролей пуст!</h3>
+                <div class="text-start mt-3 cart-buttons">
+                    <div><a role="button" class="btn btn-warning float-start mb-3" asp-controller="Role" asp-action="Add">Добавить новую роль</a></div>
+                </div>
+            }
+            else
+            {
+                <h3 class="section-title mb-3"><span>Список ролей</span></h3>
+                <div class="text-end mt-3 cart-buttons">
+                    <a role="button" class="btn btn-warning float-end mb-3 p-2" asp-controller="Role" asp-action="Add">Добавить новую роль</a>
+                </div>
+                <table class="table align-middle text-center table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">№</th>
+                            <th scope="col">Наименование роли</th>
+                            <th scope="col">Описание</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    @foreach (var role in Model)
+                    {
+                            <tr>
+                                <th scope="row">@i</th>
+                                <td>@role.Name</td>
+                                <td>@role.Description</td>
+                                <td>
+                                    <a class="btn red" data-bs-toggle="modal" data-bs-target="#modal-delete-role-@role.Name">
+                                        <i class="fa-regular fa-trash-can h5"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <div class="modal fade" id="modal-delete-role-@role.Name" tabindex="-1" aria-labelledby="DeleteRoleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="DeleteRoleModalLabel">Подтвердите операцию удаления</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Вы действительно хотите удалить роль '<strong>@role.Name</strong>'?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                                            <a asp-area="Administrator" asp-controller="Role" asp-action="Delete" asp-route-name="@role.Name" type="button" class="btn btn-primary">Да</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        i++;
+                    }
+                    </tbody>
+                </table> 
+            }
+        </div>
+    </div>
+</div>

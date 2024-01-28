@@ -1,0 +1,28 @@
+﻿@model ReviewViewModel
+
+
+<div class="container">
+        <div class="col-md-12">
+            <h3 class="section-title"><span>Оставить отзыв на продукт</span></h3>
+            <div class="row">
+                <form method="post" asp-controller="Product" asp-action="AddReview" asp-route-productId="@Model.ProductId">
+                    <div asp-validation-summary="ModelOnly"></div>
+                <div class="form-group">
+                    <label asp-for="Grade">Оценка продукта</label>
+                    <input type="number" asp-for="Grade" class="form-control" placeholder="Оценка продукта">
+                    <span asp-validation-for="Grade"></span>
+                </div>
+                    <div class="form-group">
+                        <label asp-for="Text">Название:</label>
+                        <textarea asp-for="Text" class="form-control" placeholder="Текст отзыва на продукт" rows="2"></textarea>
+                        <span asp-validation-for="Text"></span>
+                    </div>
+                    <div class="d-grid gap-2 d-md-block mt-3">
+                        <button class="btn btn-primary" type="submit">Добавить</button>
+                        <a class="btn btn-warning" role="button" asp-controller="Product" asp-action="Index" asp-route-productId="@Model.ProductId">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

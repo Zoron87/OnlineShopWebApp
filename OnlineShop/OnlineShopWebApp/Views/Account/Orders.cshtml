@@ -1,0 +1,56 @@
+﻿@model List<OrderViewModel>
+
+@{
+    ViewData["Title"] = "Список заказов пользователя";
+    int i = 0;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            @await Html.PartialAsync("UserMenu")
+        </div>
+        <div class="col-md-9">
+            @if (Model == null || Model.Count == 0)
+            {
+                <h3>Список заказов пуст!</h3>
+            }
+            else
+            {
+                <h3 class="section-title mb-3"><span>Список заказов</span></h3>
+                <table class="table align-middle text-center table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">№</th>
+                            <th scope="col">Имя покупателя</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Дата</th>
+                            <th scope="col">Сумма, р</th>
+                            <th scope="col">Статус</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td><a>@(i + 1)</a></td>
+                                <td>@order.OrderDetails.Name</td>
+                                <td>@order.OrderDetails.Email</td>
+                                <td>@order.CreatedTime.ToString("dd:MM:yyyy-HH:mm")</td>
+                                <td><strong>@order.OrderDetails.Cost()</strong></td>
+                                <td>@EnumHelper.GetDisplayName(@order.OrderStatus)</td>
+                                <td>
+                                    <a asp-controller="Account" asp-action="OrderDetails" asp-route-orderid="@order.Id" role="button" class="btn primary-color">
+                                        <i class="fa-solid fa-pen-to-square h5"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>

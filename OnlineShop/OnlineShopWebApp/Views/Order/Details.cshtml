@@ -1,0 +1,75 @@
+﻿@model OrderDetailsViewModel
+
+@{
+    ViewData["Title"] = "Детали заказа";
+}
+<div class="container">
+    <form method="post" asp-controller="Order" asp-action="Index">
+        <div class="row">
+            <h2 class="section-title"><span>Оформление заказа</span></h2>
+            <div class="col-lg-8 mb-3 mt-4">
+                <div class="checkout-content p-3 h-100 bg-white">
+                    <h5 class="section-title bg-white">Детали заказа:</h5>
+                    <div class="validation" asp-validation-summary="ModelOnly"></div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="Name" class="form-label">Ваше имя:</label>
+                            <input asp-for="Name" class="form-control" placeholder="Имя получателя товара">
+                            <span asp-validation-for="Name"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Email" class="form-label">Электронная почта:</label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="Электронная почта (Email)">
+                            <span asp-validation-for="Email"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Phone" class="form-label">Телефон:</label>
+                            <input asp-for="Phone" type="tel" class="form-control" placeholder="Телефон получателя товара">
+                            <span asp-validation-for="Phone"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Address" class="form-label">Адрес доставки:</label>
+                            <input asp-for="Address" class="form-control" placeholder="Адрес доставки товара">
+                            <span asp-validation-for="Address"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Способ получения товара:</label>
+                            <select asp-for="Delivery" class="form-select">
+                                <option value="Самовывоз">Самовывоз</option>
+                                <option value="Курьер">Курьер</option>
+                            </select>
+                            <span asp-validation-for="Delivery"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="DeliveryDate" class="form-label">Дата получения:</label>
+                            <input asp-for="DeliveryDate" type="date" class="form-control">
+                            <span asp-validation-for="DeliveryDate"></span>
+                        </div>
+
+                        <div class="col">
+                            <label asp-for="Comment" class="form-label">Комментарий:</label>
+                            <textarea asp-for="Comment" class="form-control" placeholder="Дополнительная информация" rows="2"></textarea>
+                            <span asp-validation-for="Comment"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4 mb-3 mt-4">
+                <div class="cart-summary p-3 sidebar h-100">
+                    @await Component.InvokeAsync("CartInfoFull")
+                    <div class="d-grid mt-3">
+                        <button type="submit" class="btn btn-primary">
+                            Оформить заказ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

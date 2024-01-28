@@ -1,0 +1,29 @@
+﻿@model Role
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            @await Html.PartialAsync("AdminMenu")
+        </div>
+        <div class="col-md-9">
+            <form method="post" asp-controller="Role" asp-action="Add">
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="form-group form-outline mb-3">
+                    <label asp-for="Name">Название:</label>
+                    <input asp-for="Name" class="form-control" placeholder="Наименование роли">
+                    <span asp-validation-for="Name"></span>
+                </div>
+                <div class="form-group form-outline mb-3">
+                    <label asp-for="Description">Описание:</label>
+                    <input asp-for="Description" class="form-control" placeholder="Описание роли">
+                    <span asp-validation-for="Description"></span>
+                </div>
+
+                <div class="d-grid gap-2 d-md-block mt-3">
+                    <button class="btn btn-primary" type="submit">Сохранить</button>
+                    <a class="btn btn-warning" role="button" asp-area="Administrator" asp-controller="Role" asp-action="Index">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

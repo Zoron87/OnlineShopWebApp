@@ -1,37 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using OnlineShop.DB;
 using OnlineShopWebApp.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace OnlineShopWebApp.Controllers
 {
-	public class HomeController : Controller
-	{
-		private readonly ILogger<HomeController> _logger;
+    public class HomeController : Controller
+    {
+        private readonly DatabaseContext _databaseContext;
+        private readonly IMapper _mapper;
 
-		public HomeController(ILogger<HomeController> logger)
-		{
-			_logger = logger;
-		}
+        public HomeController(DatabaseContext databaseContext, IMapper mapper)
+        {
+            _databaseContext = databaseContext;
+            _mapper = mapper;
+        }
 
-		public IActionResult Index()
-		{
-			return View();
-		}
+        public async Task<IActionResult> Index()
+        {
+            var products = (await _databaseContext.Products.Include(p => p.ImagesPath).ToListAsync());
+            var productsViewModel = _mapper.Map<List<ProductViewModel>>(products);
+            return productsViewModel != null ? View(productsViewModel) : View("Error");
+        }
 
-		public IActionResult Privacy()
-		{
-			return View();
-		}
+        /// <summary>
+        /// Deletes a specific TodoItem.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(long id)
+        {
+            var item = await _databaseContext.Products.FindAsync(id);
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
-	}
+            if (item is null)
+            {
+                return NotFound();
+            }
+
+            _databaseContext.Products.Remove(item);
+            await _databaseContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+    }
 }

@@ -1,0 +1,54 @@
+﻿@model UserViewModel
+
+@{
+    ViewData["Title"] = "Редактирование пользователя";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            @await Html.PartialAsync("AdminMenu")
+        </div>
+        <div class="col-md-9">
+            @if (Model == null)
+            {
+                <h3>Вы не выбрали пользователя!</h3>
+                <div class="text-start mt-3 cart-buttons">
+                    <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Вернуться на главную страницу</a>
+                </div>
+            }
+            else
+            {
+                <h3 class="section-title mb-3"><span>Редактирование пользователя @Model.Email</span></h3>
+                <form method="post" asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group">
+                        <label asp-for="Email">Email пользователя:</label>
+                        <input asp-for="Email" class="form-control" value="@Model.Email">
+                        <span asp-validation-for="Email"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name">Имя пользователя:</label>
+                        <input asp-for="Name" class="form-control" value="@Model.Name">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password">Пароль:</label>
+                        <input asp-for="Password" class="form-control" type="password" value="@Model.Password">
+                        <span asp-validation-for="Password"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Role">Роль пользователя: </label>
+                        @Html.DropDownList("Role", null, @Model.Role ?? "Выберите роль", htmlAttributes: new { @class = "form-control" })
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-block mt-3">
+                        <button class="btn btn-primary" type="submit">Сохранить</button>
+                        <a class="btn btn-warning" role="button" asp-area="Administrator" asp-controller="User" asp-action="Index">Отмена</a>
+                    </div>
+                </form>     
+            }
+        </div>
+    </div>
+</div>
+

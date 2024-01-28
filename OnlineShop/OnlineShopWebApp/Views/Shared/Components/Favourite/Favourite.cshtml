@@ -1,0 +1,9 @@
+﻿@model int
+
+<a asp-area="" asp-controller="Favourite" asp-action="Index" class="btn p-1">
+    <i class="fa-solid fa-heart icons"></i>
+    @if (Model > 0)
+    {
+        <span class="badge text-bg-primary cart-badge bg-danger rounded-circle">@Model</span>
+    }
+</a>

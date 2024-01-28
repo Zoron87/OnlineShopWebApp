@@ -1,0 +1,50 @@
+﻿@model ProfileViewModel
+
+@{
+    ViewData["Title"] = "Редактирование профиля пользователя";
+    int i = 0;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            @await Html.PartialAsync("UserMenu")
+        </div>
+        <div class="col-md-9">
+            <form method="post" asp-controller="Account" asp-action="Save" asp-route-Id="@Model.Id" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly"></div>
+                <div class="form-group">
+                    <label asp-for="Name">Ваше имя:</label>
+                    <input asp-for="Name" class="form-control" value="@Model.Name">
+                    <span asp-validation-for="Name"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email">Email:</label>
+                    <input asp-for="Email" class="form-control" value="@Model.Email">
+                    <span asp-validation-for="Email"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Phone">Phone:</label>
+                    <input asp-for="Phone" class="form-control" value="@Model.Phone">
+                    <span asp-validation-for="Phone"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address">Адрес:</label>
+                    <input asp-for="Address" class="form-control" value="@Model.Address">
+                    <span asp-validation-for="Address"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UploadedFile">Загрузите аватарку:</label>
+                    <input asp-for="UploadedFile" class="form-control" value="">
+                    <span asp-validation-for="UploadedFile"></span>
+                </div>
+
+                <div class="d-grid gap-2 d-md-block mt-3">
+                    <button class="btn btn-primary" type="submit">Сохранить</button>
+                    <a class="btn btn-warning" role="button" asp-controller="Account" asp-action="Index">Отмена</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

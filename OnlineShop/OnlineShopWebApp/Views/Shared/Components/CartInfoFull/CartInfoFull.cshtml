@@ -1,0 +1,32 @@
+﻿@model CartViewModel
+
+<h5 class="section-title"><span>Сумма заказа:</span></h5>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Продукт</th>
+                <th style="min-width: 100px;">Кол-во</th>
+                <th class="text-end" style="min-width: 100px;">Сумма, р.</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        @item.Product.Name
+                    </td>
+                    <td>x @item.Quantity</td>
+                    <td class="text-end">@item.Cost()</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Итог:</td>
+                <td colspan="3" class="text-end">@Model.Cost(), р</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

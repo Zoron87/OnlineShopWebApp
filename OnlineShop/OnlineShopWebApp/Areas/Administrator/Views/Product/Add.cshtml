@@ -1,0 +1,42 @@
+﻿@model ProductViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            @await Html.PartialAsync("AdminMenu")
+        </div>
+        <div class="col-md-9">
+            <h3 class="section-title"><span>Добавить продукт</span></h3>
+            <div class="row">
+                <form method="post" asp-controller="Product" asp-action="AddReview" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group">
+                        <label asp-for="Name">Название:</label>
+                        <input asp-for="Name" class="form-control" placeholder="Наименование продукта">
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Cost">Цена:</label>
+                        <input asp-for="Cost" class="form-control" placeholder="Стоимость продукта">
+                        <span asp-validation-for="Cost"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description">Описание:</label>
+                        <textarea asp-for="Description" class="form-control" placeholder="Описание продукта"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UploadedFiles">Загрузить изображение:</label>
+                        <input asp-for="UploadedFiles" class="form-control" placeholder="Изображение продукта">
+                        <span asp-validation-for="UploadedFiles"></span>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-block mt-3">
+                        <button class="btn btn-primary" type="submit">Сохранить</button>
+                        <a class="btn btn-warning" role="button" asp-controller="Product" asp-action="Index">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

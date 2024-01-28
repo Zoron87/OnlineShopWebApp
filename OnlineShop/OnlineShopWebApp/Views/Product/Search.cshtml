@@ -1,0 +1,75 @@
+﻿@model List<ProductViewModel>
+
+@{
+	ViewData["Title"] = "Сраница поиска";
+}
+
+@if (Model == null || Model.Count == 0)
+{
+    <div class="container">
+        <div class="row">
+            <h3>По вашему запросу <strong>'@ViewData["Search"]'</strong> ничего не найдено!</h3>
+	        <p>Попробуйте изменить запрос</p>
+            <div class="text-start mb-3 p-0 cart-buttons">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Вернуться на главную страницу</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{   if (Model.Count == 1)
+    {
+        <h3 class="text-center">По вашему запросу <strong>'@ViewData["Search"]'</strong> найден @Model.Count товар: </h3>
+    }
+    else
+    {
+        <h3 class="text-center">По вашему запросу <strong>'@ViewData["Search"]'</strong> найдено @Model.Count товар(ов): </h3>
+    }
+    <section class="featured-products px-lg-3">
+        <div class="container">
+            <div class="row">
+                @foreach (var product in Model)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                        <div class="product-card">
+                            <div class="product-card-offer">
+                                <div class="offer-hit">Hit</div>
+                                <div class="offer-new">New</div>
+                            </div>
+                            <div class="product-thumb">
+                                <a asp-controller="Product" asp-action="Index" asp-route-productId="@product.Id"><img src="@product.ImagesPath[0].URL" alt=""></a>
+                            </div>
+                            <div class="product-details">
+                                <h4>
+                                    <a asp-controller="Product" asp-action="Index" asp-route-productId="@product.Id">@product.Name</a>
+                                </h4>
+                                <p class="product-excerpt">@product.Description</p>
+                                <div class="product-bottom-details d-flex justify-content-between">
+                                    <div class="product-price">@product.Cost</div>
+                                    <div class="product-links">
+                                        <a asp-controller="Cart" asp-action="Add" asp-route-productid="@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-links">
+                                        <a asp-controller="Compare" asp-action="Add" asp-route-productid="@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                            <i class="fa-solid fa-code-compare"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-links">
+                                        <a asp-controller="Favourite" asp-action="Add" asp-route-productid="@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                            <i class="fa-solid fa-star"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+
+

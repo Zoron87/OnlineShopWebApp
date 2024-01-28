@@ -1,0 +1,50 @@
+﻿@model List<ProductViewModel>
+
+@{
+    ViewData["Title"] = "Выборка товара";
+}
+
+    <section class="featured-products px-lg-3">
+        <div class="container">
+            <div class="row">
+                @foreach (var product in Model)
+                {
+                    <div class="col-lg-3 col-md-4 col-sm-6 mb-3">
+                        <div class="product-card">
+                            <div class="product-card-offer">
+                                <div class="offer-hit">Hit</div>
+                                <div class="offer-new">New</div>
+                            </div>
+                            <div class="product-thumb">
+                                <a asp-controller="Product" asp-action="Index" asp-route-productId="@product.Id"><img src="@product.ImagesPath[0].URL" alt=""></a>
+                            </div>
+                            <div class="product-details">
+                                <h4>
+                                    <a asp-controller="Product" asp-action="Index" asp-route-productId="@product.Id">@product.Name</a>
+                                </h4>
+                                <p class="product-excerpt">@product.Description</p>
+                                <div class="product-bottom-details d-flex justify-content-between">
+                                    <div class="product-price">@product.Cost</div>
+                                    <div class="product-links">
+                                        <a asp-controller="Cart" asp-action="Add" asp-route-productid="@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-links">
+                                        <a asp-controller="Compare" asp-action="Add" asp-route-productid="@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                            <i class="fa-solid fa-code-compare"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-links">
+                                        <a asp-controller="Favourite" asp-action="Add" asp-route-productid="@product.Id" class="btn btn-outline-secondary add-to-cart">
+                                            <i class="fa-solid fa-star"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>

@@ -1,0 +1,55 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = "Детали пользователя";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            @await Html.PartialAsync("AdminMenu")
+        </div>
+        <div class="col-sm-9">
+            @if (Model == null)
+            {
+                <h3>Вы не выбрали пользователя!</h3>
+                <div class="text-start mt-3 cart-buttons">
+                    <a asp-controller="Home" asp-action="Index" role="button" class="btn btn-outline-secondary">Вернуться на главную страницу</a>
+                </div>
+            }
+            else
+            {
+                <h3 class="section-title mb-3"><span>Сведения о пользователе @Model.UserName</span></h3>
+                <table class="table align-middle text-center table-hover">
+                    <tbody>
+                        <tr class="text-center">
+                            <td style="width: 50%;">UserName</td>
+                            <td style="width: 50%;">@Model.UserName</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td style="width: 50%;">Email</td>
+                            <td style="width: 50%;">@Model.Email</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td style="width: 50%;">Роли</td>
+                            <td style="width: 50%;" value="@Model.Role">@Model.Role</td>
+                        </tr>
+                        <tr class="text-center">
+                            <td style="width: 50%;">Хеш пароля</td>
+                            <td style="width: 50%;">@Model.PasswordHash</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle float-end mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Действия
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" asp-controller="User" asp-action="Edit" asp-route-email="@Model.Email">Редактирование данных</a></li>
+                        <li><a class="dropdown-item" asp-controller="User" asp-action="Delete" asp-route-email="@Model.Email">Удалить пользователя</a></li>
+                    </ul>
+                </div>         
+}
+        </div>
+    </div>
+</div>

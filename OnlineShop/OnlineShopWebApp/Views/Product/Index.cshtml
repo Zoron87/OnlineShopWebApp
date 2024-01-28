@@ -1,0 +1,83 @@
+﻿@model ProductViewModel
+
+@{
+    ViewData["Title"] = "Страница продукта";
+    int i = 0;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5 col-lg-4 mb-3">
+            <div class="bg-white h-100">
+                <div id="carouselExample" class="carousel slide">
+                    <div class="carousel-inner">
+                        @foreach (var image in Model.ImagesPath)
+                        {
+                            @if (i == 0)
+                            {
+                                <div class="carousel-item active">
+                                    <img src="@Model.ImagesPath[i].URL" class="d-block w-100" alt="@Model.Name">
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="carousel-item">
+                                    <img src="@Model.ImagesPath[i].URL" class="d-block w-100" alt="@Model.Name">
+                                </div>
+                            }
+                            i++;
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7 col-lg-8 mb-3">
+            <form method="post" asp-controller="Cart" asp-action="AddItems" asp-route-productId="@Model.Id">
+                <div class="bg-white product-content p-3 h-100">
+                    <h1 class="section-title h3">
+                        <span>
+                            @Model.Name
+                        </span>
+                    </h1>
+
+                    <div class="product-price">
+                        @Model.Cost р.
+                    </div>
+                    <p>@Model.Description</p>
+                    <div class="product-add-to-cart">
+                        <div class="input-group">
+                            <input type="number" name="quantity" class="form-control" value="1" min="1">
+                            <button type="submit" class="btn btn-primary" style="margin-right: 10px;"><i class="fas fa-shopping-cart"></i> В КОРЗИНУ</button>
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-warning"><i class="fa-solid fa-bag-shopping"></i> ПРОДОЛЖИТЬ ПОКУПКИ</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <a asp-controller="Product" asp-action="AddReview" asp-route-productId="@Model.Id">Оставить отзыв</a>
+        </div>
+        <div class="container reviews">
+            <div class="mgb-40 padb-30 auto-invert line-b-4 align-center">
+                <h4 class="font-cond-l fg-accent lts-md mgb-10" contenteditable="false">Отзывы наших клиентов</h4>
+            </div>
+            @for (int k=0; k<Model.Reviews.Count; k++)
+            {
+                    <ul class="hash-list cols-3 cols-1-xs pad-30-all align-center text-sm">
+                        <li>
+                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="wpx-100 img-round mgb-20" title="" alt="" >
+                            <h5 class="font-cond mgb-5 fg-text-d fs-08 " contenteditable="false">@Model.Reviews[k].Text</h5>
+                            <h5 class="font-cond mgb-5 fg-text-d fs-130" contenteditable="false">Оценка - @Model.Reviews[k].Grade</h5>
+                        </li>
+                    </ul>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+﻿@model CartViewModel
+
+@{
+	ViewData["Title"] = "Корзина";
+}
+
+<div class="container">
+    <div class="row">
+        @if (Model == null || Model.Items.Count == 0 || Model.Items == null)
+        {
+	        <h3>Корзина пуста</h3>
+            <div class="text-start mb-3 mt-3 cart-buttons">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Вернуться на главную страницу</a>
+            </div>
+        }
+        else
+        {
+            <h2 class="section-title"><span>Корзина</span></h2>
+            <div class="btn-group-container d-flex">
+                <div class="col-lg-8">
+                    <div class="cart-content p-2 h-100">
+                        <div class="table-responsive">
+                            <div class="text-end pb-2 cart-buttons">
+                                <a asp-controller="Cart" asp-action="Clear" class="btn btn-outline-dark">Очистить корзину</a>
+                                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Вернуться на главную страницу</a>
+                            </div>
+                            <table class="table align-middle text-center table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Фото</th>
+                                        <th>Наименование</th>
+                                        <th>Цена, р.</th>
+                                        <th>Количество</th>
+                                        <th><i class="fa-regular fa-trash-can"></i></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Items)
+                                    {
+                                        <tr>
+                                            <td class="product-img-td"><a asp-controller="Product" asp-action="Index" asp-route-productId="@item.Product.Id"><img src="@item.Product.ImagesPath[0].URL" alt="@item.Product.Name"></a></td>
+                                            <td>
+                                                <a asp-controller="Product" asp-action="Index" asp-route-productId="@item.Product.Id" class="cart-content-title">
+                                                    @item.Product.Name
+                                                </a>
+                                            </td>
+                                            <td>@item.Product.Cost</td>
+                                            <td>
+                                                <div class="d-flex justify-content-between">
+                                                    <div><a asp-controller="Cart" asp-action="Add" asp-route-productId="@item.Product.Id"><i class="fa-solid fa-plus"></i></a></div>
+                                                    <div>@item.Quantity</div>
+                                                    <div><a asp-controller="Cart" asp-action="Reduce" asp-route-productId="@item.Product.Id"><i class="fa-solid fa-minus"></i></a></div>
+                                                </div>
+                                            <td><a class="btn red" style="display:inline;" asp-controller="Cart" asp-action="Delete" asp-route-productId="@item.Product.Id"><i class="fa-solid fa-circle-xmark h4"></i></a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table> 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="cart-summary p-3 sidebar">
+                        @await Component.InvokeAsync("CartInfoShort")
+                        <div class="d-grid">
+                            <a asp-controller="Order" asp-action="Details" class="btn btn-primary">Оформить заказ</a>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        }
+    </div>
+</div>
+

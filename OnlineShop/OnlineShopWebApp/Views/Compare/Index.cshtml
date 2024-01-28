@@ -1,0 +1,46 @@
+﻿@model CompareViewModel
+
+@{
+	ViewData["Title"] = "Сравнение товаров";
+}
+
+<div class="container">
+	<div class="row">
+		@if (Model == null || Model.Products.Count == 0)
+		{
+			<h3>Список для сравнения пуст!</h3>
+			<div class="text-start mb-3 mt-3 cart-buttons">
+				<a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Вернуться на главную страницу</a>
+			</div>
+		}
+		else
+		{
+			<div class="text-start mb-3 p-0 cart-buttons">
+				<a asp-controller="Compare" asp-action="Clear" class="btn btn-outline-secondary">Очистить список</a>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">Наименование</th>
+						<th scope="col">Стоимость</th>
+						<th scope="col">Описание</th>
+						<th scope="col">Изображение</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model.Products)
+					{
+						<tr>
+							<td>@item.Name</td>
+							<td>@item.Cost</td>
+							<td>@item.Description</td>
+							<td><img style="width: 100px" src="@item.ImagesPath[0].URL" /></td>
+							<td><a class="btn red" style="display:inline;" asp-controller="Compare" asp-action="Delete" asp-route-productId="@item.Id"><i class="fa-solid fa-circle-xmark h4"></i></a></td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		}
+	</div>
+</div>
