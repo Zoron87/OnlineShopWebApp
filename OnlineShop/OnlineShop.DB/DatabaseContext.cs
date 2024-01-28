@@ -22,23 +22,70 @@ namespace OnlineShop.DB
         {
             modelBuilder.Entity<Order>().HasOne(u => u.OrderDetails).WithOne().HasForeignKey<OrderDetails>(x => x.Id);
 
+            // product1
             var product1Id = Guid.Parse("168defec-16fe-4dec-8db1-8d968036bd89");
-
-            var image1 = new Image()
+            var image1Product1 = new Image()
             {
                 Id = Guid.Parse("2f33830e-c282-406c-9484-131dc36caa5c"),
                 URL = "/img/products/notebook_MSI_Katana_17_B12VEK-482XRU_1.jpg",
                 ProductId = product1Id
             };
-
-            var image2 = new Image()
+            var image2Product1 = new Image()
             {
                 Id = Guid.Parse("d1f639d8-ee07-4a1c-92a6-37b9b85f261d"),
                 URL = "/img/products/notebook_MSI_Katana_17_B12VEK-482XRU_2.jpg",
                 ProductId = product1Id
             };
+            modelBuilder.Entity<Image>().HasData(image1Product1, image2Product1);
 
-            modelBuilder.Entity<Image>().HasData(image2, image1);
+            // product2
+            var product2Id = Guid.Parse("06fe75f0-09f2-4489-8d11-42f6c816baef");
+            var image1Product2 = new Image()
+            {
+                Id = Guid.Parse("cec15667-ebba-40a6-8f00-6b82825ae2df"),
+                URL = "/img/products/tv_Samsung_QE43Q60BAU_1.jpg",
+                ProductId = product2Id
+            };
+            var image2Product2 = new Image()
+            {
+                Id = Guid.Parse("d8052407-64bc-4543-b1ba-7da5fac09516"),
+                URL = "/img/products/tv_Samsung_QE43Q60BAU_2.jpg",
+                ProductId = product2Id
+            };
+            modelBuilder.Entity<Image>().HasData(image1Product2, image2Product2);
+
+            // product3
+            var product3Id = Guid.Parse("d3765151-d68f-41ea-a8b9-27bae6f2b8a0");
+            var image1Product3 = new Image()
+            {
+                Id = Guid.Parse("34712b35-335b-4863-a109-0bfb0c612938"),
+                URL = "/img/products/Refrigerator_Midea_MDRB499FGF01IM_1.jpg",
+                ProductId = product3Id
+            };
+            var image2Product3 = new Image()
+            {
+                Id = Guid.Parse("c841fc87-3d4c-47be-ae15-fce88542d3c3"),
+                URL = "/img/products/Refrigerator_Midea_MDRB499FGF01IM_2.jpg",
+                ProductId = product3Id
+            };
+            modelBuilder.Entity<Image>().HasData(image1Product3, image2Product3);
+
+            // product4
+            var product4Id = Guid.Parse("1f06e50b-989b-4827-89db-4859d1d49998");
+            var image1Product4 = new Image()
+            {
+                Id = Guid.Parse("e469883a-82d5-4b1e-9538-fe6d05dd1360"),
+                URL = "/img/products/Robot_Vacuum_Cleaner_Dreame_Bot_Robot_Vacuum_and_Mop_F9_Pro_1.jpg",
+                ProductId = product4Id
+            };
+            var image2Product4 = new Image()
+            {
+                Id = Guid.Parse("683efc32-0514-44a8-bda8-eb3ea45e3f42"),
+                URL = "/img/products/Robot_Vacuum_Cleaner_Dreame_Bot_Robot_Vacuum_and_Mop_F9_Pro_2.jpg",
+                ProductId = product4Id
+            };
+            modelBuilder.Entity<Image>().HasData(image1Product4, image2Product4);
+
 
             modelBuilder.Entity<Product>().HasData(
                new Product()
@@ -47,31 +94,28 @@ namespace OnlineShop.DB
                    Name = "Ноутбук игровой MSI Katana 17 B12VEK-482XRU",
                    Cost = 99999,
                    Description = "Игровой ноутбук MSI Katana 17 B12VEK-482XRU выполнен в пластиковом корпусе размерами 25,2х398х273 мм и весом 2,6 кг.",
+               },
+               new Product()
+               {
+                   Id = product2Id,
+                   Name = "Телевизор Samsung QE43QBAU1",
+                   Cost = 69999,
+                   Description = "Телевизор Samsung QE43QBAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки. ",
+               },
+               new Product()
+               {
+                   Id = product3Id,
+                   Name = "Холодильник Midea MDRB499FG1IM",
+                   Cost = 79999,
+                   Description = "Холодильник Midea MDRB499FG1IM, белый оснащен холодильной камерой объемом 2 л и нижней морозильной камерой объемом 76 л.",
+               },
+               new Product()
+               {
+                   Id = product4Id,
+                   Name = "Робот-пылесос Dreame Bot Robot Vacuum and Mop F9 Pro White",
+                   Cost = 18999,
+                   Description = "Робот-пылесос Dreame Bot Robot Vacuum and Mop D9 Pro White выполняет сухую и влажную уборку и способен обработать до 1 м² площади без подзарядки",
                }
-               //new Product()
-               //{
-               //    Id = Guid.NewGuid(),
-               //    Name = "Телевизор Samsung QE43QBAU1",
-               //    Cost = 69999,
-               //    Description = "Телевизор Samsung QE43QBAU — модель, которая произведена по технологии QLED, что гарантирует вывод насыщенной и яркой картинки. ",
-               //    ImagePath = "tv_Samsung_QE43QBAU_1.jpg"
-               //},
-               //new Product()
-               //{
-               //    Id = Guid.NewGuid(),
-               //    Name = "Холодильник Midea MDRB499FG1IM",
-               //    Cost = 79999,
-               //    Description = "Холодильник Midea MDRB499FG1IM, белый оснащен холодильной камерой объемом 2 л и нижней морозильной камерой объемом 76 л.",
-               //    ImagePath = "Refrigerator_Midea_MDRB499FG1IM_1.jpg"
-               //},
-               //new Product()
-               //{
-               //    Id = Guid.NewGuid(),
-               //    Name = "Робот-пылесос Dreame Bot Robot Vacuum and Mop F9 Pro White",
-               //    Cost = 18999,
-               //    Description = "Робот-пылесос Dreame Bot Robot Vacuum and Mop D9 Pro White выполняет сухую и влажную уборку и способен обработать до 1 м² площади без подзарядки",
-               //    ImagePath = "Robot_Vacuum_Cleaner_Dreame_Bot_Robot_Vacuum_and_Mop_F9_Pro_1.jpg"
-               //},
                //new Product()
                //{
                //    Id = Guid.NewGuid(),
