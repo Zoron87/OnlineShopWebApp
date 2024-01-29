@@ -17,7 +17,6 @@
 version: '3.4'
 
 services:
-
   onlineshopwebapp:
   
     container_name: online_shop_app_mvc
