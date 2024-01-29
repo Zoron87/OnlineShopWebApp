@@ -12,4 +12,41 @@
 
 В приложении использована библиотека Serilog для упрощения процесса отладки.
 
-Вы можете запускать приложение с использованием своей IDE, например, Visual Studio или Visual Studio Code. Также можно использовать Docker Compose для создания контейнеров и запуска приложения в контейнеризованной среде. Для этого нужно загрузить и запустить файл docker-compose.yml. Перед использованием убедитесь, что на вашем компьютере установлен и правильно настроен Docker.
+Вы можете запускать приложение с использованием своей IDE, например, Visual Studio или Visual Studio Code. Также можно использовать готовый образ на hub.docker.com - zoronbet/onlineshopwebapp. Или использовать готовый Docker-Compose файл ниже для создания контейнеров и запуска приложения в контейнеризованной среде. Перед использованием убедитесь, что верно установлен и правильно настроен Docker.
+
+version: '3.4'
+
+services:
+
+  onlineshopwebapp:
+  
+    container_name: online_shop_app_mvc
+    
+    image: zoronbet/onlineshopwebapp
+    
+    ports:
+    
+        - 80:80
+        
+        - 443:443
+        
+    depends_on:
+    
+        - mssqlserver
+        
+    restart: unless-stopped
+    
+    
+  mssqlserver:
+  
+    container_name: online_shop_app_db
+    
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    
+    environment:
+    
+        ACCEPT_EULA: "Y"
+        
+        MSSQL_SA_PASSWORD: "Strong!Passw0rd"
+        
+    restart: unless-stopped
