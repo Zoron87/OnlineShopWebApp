@@ -15,10 +15,8 @@
 Вы можете запускать приложение с использованием своей IDE, например, Visual Studio или Visual Studio Code. Также можно использовать Docker Compose для создания контейнеров и запуска приложения в контейнеризованной среде. Для этого нужно загрузить и запустить файл docker-compose.yml. Перед использованием убедитесь, что верно установлен и правильно настроен Docker.
 
 version: '3.4'
-
 services:
   onlineshopwebapp:
-  
     container_name: online_shop_app_mvc
     image: zoronbet/onlineshopwebapp
     ports:
