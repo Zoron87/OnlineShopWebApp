@@ -60,7 +60,7 @@ namespace OnlineShopWebApp.Areas.Administrator.Controllers
             var imagesViewModel = _imageProvider.AddProductImages(item, Constants.ImageProductsFolder);
 
             if (imagesViewModel.Count == 0)
-                imagesViewModel.Add(new ImageViewModel() { URL = Constants.ImageProductsFolder + Constants.BlankAvatar });
+                imagesViewModel.Add(new ImageViewModel() { URL = Constants.BlankProduct });
 
             item.ImagesPath = imagesViewModel;
 

@@ -14,11 +14,7 @@ namespace OnlineShopWebApp.Providers
             CreateMap<Product, ItemViewModel>().ReverseMap();
             CreateMap<ItemViewModel, Product>()
                 .ForMember(x => x.Id, opt => opt.Ignore())
-                .ForMember(dest => dest.ImagesPath, opt =>
-                {
-                    opt.PreCondition(s => s.UploadedFiles != null);
-                    opt.MapFrom(s => s.ImagesPath);
-                });
+                .ForMember(dest => dest.ImagesPath, opt =>opt.MapFrom(s => s.ImagesPath));
             CreateMap<Image, ImageViewModel>().ReverseMap();
             CreateMap<Cart, CartViewModel>().ReverseMap();
             CreateMap<CartItem, CartItemViewModel>().ReverseMap();
