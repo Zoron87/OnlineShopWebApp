@@ -2,12 +2,10 @@ version: '3.4'
 services:
   onlineshopwebapp:
     container_name: online_shop_app_mvc
-    image: ${DOCKER_REGISTRY-}onlineshopwebapp
-    build:
-      context: .
-      dockerfile: OnlineShopWebApp/Dockerfile
+    image: zoronbet/onlineshopwebapp
     ports:
         - 80:80
+        - 443:443
     depends_on:
         - mssqlserver
     restart: unless-stopped

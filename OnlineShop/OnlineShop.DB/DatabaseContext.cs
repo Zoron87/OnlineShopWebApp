@@ -86,6 +86,70 @@ namespace OnlineShop.DB
             };
             modelBuilder.Entity<Image>().HasData(image1Product4, image2Product4);
 
+            // product5
+            var product5Id = Guid.Parse("2c9d0079-8bdd-43bb-beba-bcde5a43d6c7");
+            var image1Product5 = new Image()
+            {
+                Id = Guid.Parse("91db92bb-3e37-4219-9fcc-62b3d670a15c"),
+                URL = "/img/products/Electric_oven_Gorenje_BO6737E02X_1.jpg",
+                ProductId = product5Id
+            };
+            var image2Product5 = new Image()
+            {
+                Id = Guid.Parse("b2681e3d-da09-41e5-8df0-9867bc47e4f2"),
+                URL = "/img/products/Electric_oven_Gorenje_BO6737E02X_2.jpg",
+                ProductId = product5Id
+            };
+            modelBuilder.Entity<Image>().HasData(image1Product5, image2Product5);
+
+            // product6
+            var product6Id = Guid.Parse("6f74b568-cf38-4caa-92c3-dbc45437a2aa");
+            var image1Product6 = new Image()
+            {
+                Id = Guid.Parse("cf1b1834-bdb7-4fbe-82a2-4dd06d635640"),
+                URL = "/img/products/Air_conditioner_Haier_HSU7HRM3_1.jpg",
+                ProductId = product6Id
+            };
+            var image2Product6 = new Image()
+            {
+                Id = Guid.Parse("67dea053-c686-41a5-9e37-bf33ae82bada"),
+                URL = "/img/products/Air_conditioner_Haier_HSU7HRM3_2.jpg",
+                ProductId = product6Id
+            };
+            modelBuilder.Entity<Image>().HasData(image1Product6, image2Product6);
+
+            // product7
+            var product7Id = Guid.Parse("2842320a-f42d-4f81-880f-488778526f5d");
+            var image1Product7 = new Image()
+            {
+                Id = Guid.Parse("b6596218-042a-48b7-a62e-38ce8ed7ddd0"),
+                URL = "/img/products/Freezer_Haier_HF-82WAA_1.jpg",
+                ProductId = product7Id
+            };
+            var image2Product7 = new Image()
+            {
+                Id = Guid.Parse("a9ccb1f9-56e1-46f5-80f2-5391b9422750"),
+                URL = "/img/products/Freezer_Haier_HF-82WAA_2.jpg",
+                ProductId = product7Id
+            };
+            modelBuilder.Entity<Image>().HasData(image1Product7, image2Product7);
+
+            // product8
+            var product8Id = Guid.Parse("7f15a38b-fcb6-4241-87e8-8148e148e5b4");
+            var image1Product8 = new Image()
+            {
+                Id = Guid.Parse("f5de0b00-1a25-4602-923d-661df4acc2f7"),
+                URL = "/img/products/Built-in_electric_panel_Gorenje_ECT641BX_1.jpg",
+                ProductId = product8Id
+            };
+            var image2Product8 = new Image()
+            {
+                Id = Guid.Parse("b5c66945-d510-49d7-811d-0383d46fdab8"),
+                URL = "/img/products/Built-in_electric_panel_Gorenje_ECT641BX_2.jpg",
+                ProductId = product8Id
+            };
+            modelBuilder.Entity<Image>().HasData(image1Product8, image2Product8);
+
 
             modelBuilder.Entity<Product>().HasData(
                new Product()
@@ -115,47 +179,35 @@ namespace OnlineShop.DB
                    Name = "Робот-пылесос Dreame Bot Robot Vacuum and Mop F9 Pro White",
                    Cost = 18999,
                    Description = "Робот-пылесос Dreame Bot Robot Vacuum and Mop D9 Pro White выполняет сухую и влажную уборку и способен обработать до 1 м² площади без подзарядки",
+               },
+               new Product()
+               {
+                   Id = product5Id,
+                   Name = "Электрический духовой шкаф Gorenje BO67372X",
+                   Cost = 29999,
+                   Description = "Gorenje BO67372X – электрический духовой шкаф с 77-литровой камерой BigSpace. За счёт внушительного объёма внутреннего пространства и его особой форме HomeMade вам будут по плечу самые смелые кулинарные эксперименты.",
+               },
+               new Product()
+               {
+                   Id = product6Id,
+                   Name = "Сплит-система Haier HSU7HRM3/R3",
+                   Cost = 25999,
+                   Description = "Сплит-система Haier HSU7HRM3/R3 в корпусе белого цвета заправлена хладагентом R 32. Устройство работает на охлаждение и обогрев. Модель рекомендована для установки в помещениях площадью до  м². В комплект входит пульт дистанционного управления с дисплеем.",
+               },
+               new Product()
+               {
+                   Id = product7Id,
+                   Name = "Морозильная камера Haier HF-82WAA",
+                   Cost = 19999,
+                   Description = "Компактная морозильная камера Haier HF-82WAA – хороший выбор для тех, кто хочет хранить дома или на даче запас замороженных продуктов и полуфабрикатов, а также делать домашние заготовки.",
+               },
+               new Product()
+               {
+                   Id = product8Id,
+                   Name = "Встраиваемая электрическая панель Gorenje ECT641BX",
+                   Cost = 9999,
+                   Description = "Встраиваемая электрическая панель Gorenje ECT641BX снабжена четырьмя конфорками, установленными под стеклокерамической поверхностью.",
                }
-               //new Product()
-               //{
-               //    Id = Guid.NewGuid(),
-               //    Name = "Электрический духовой шкаф Gorenje BO67372X",
-               //    Cost = 29999,
-               //    Description = "Gorenje BO67372X – электрический духовой шкаф с 77-литровой камерой BigSpace. За счёт внушительного объёма внутреннего пространства и его особой форме HomeMade вам будут по плечу самые смелые кулинарные эксперименты.",
-               //    ImagePath = "Electric_oven_Gorenje_BO67372X_1.jpg"
-               //},
-               //new Product()
-               //{
-               //    Id = Guid.NewGuid(),
-               //    Name = "Сплит-система Haier HSU7HRM3/R3",
-               //    Cost = 25999,
-               //    Description = "Сплит-система Haier HSU7HRM3/R3 в корпусе белого цвета заправлена хладагентом R 32. Устройство работает на охлаждение и обогрев. Модель рекомендована для установки в помещениях площадью до  м². В комплект входит пульт дистанционного управления с дисплеем.",
-               //    ImagePath = "Air_conditioner_Haier_HSU7HRM3_1.jpg" 
-               //},
-               //new Product()
-               //{
-               //    Id = Guid.NewGuid(),
-               //    Name = "Морозильная камера Haier HF-82WAA",
-               //    Cost = 19999,
-               //    Description = "Компактная морозильная камера Haier HF-82WAA – хороший выбор для тех, кто хочет хранить дома или на даче запас замороженных продуктов и полуфабрикатов, а также делать домашние заготовки.",
-               //    ImagePath = "Freezer_Haier_HF-82WAA_1.jpg"
-               //},
-               //new Product()
-               //{
-               //    Id = Guid.NewGuid(),
-               //    Name = "Холодильник Midea MDRB499FG1IM",
-               //    Cost = 21999,
-               //    Description = "Холодильник Midea MDRB499FG1IM",
-               //    ImagePath = "Refrigerator_Midea_MDRB499FG1IM_1.jpg"
-               //},
-               //new Product()
-               //{
-               //    Id = Guid.NewGuid(),
-               //    Name = "Встраиваемая электрическая панель Gorenje ECT641BX",
-               //    Cost = 999,
-               //    Description = "Встраиваемая электрическая панель Gorenje ECT641BX снабжена четырьмя конфорками, установленными под стеклокерамической поверхностью.",
-               //    ImagePath = "Built-in_electric_panel_Gorenje_ECT641BX_1.jpg"
-               //},
                //new Product()
                //{
                //    Id = Guid.NewGuid(),
@@ -260,7 +312,7 @@ namespace OnlineShop.DB
                //    Description = "Телевизор TCL 55C745 обладает габаритами 77х122х32 см. Вес устройства — 15 кг, без подставки — 13,5 кг.",
                //    ImagePath = "TV_TCL_55C745_1.jpg"
                //}
-               ) ;
+               );
         }
     }
 }

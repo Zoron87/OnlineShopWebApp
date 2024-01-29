@@ -36,7 +36,7 @@ namespace OnlineShopWebApp
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			string connection = Configuration.GetConnectionString("online_shop");
+			string connection = Configuration.GetConnectionString("docker");
 			// добавляем контекст MobileContext в качестве 
 			services.AddDbContext<DatabaseContext>(options =>
 				options.UseSqlServer(connection));
