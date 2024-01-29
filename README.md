@@ -36,9 +36,15 @@ services:
     
     
   mssqlserver:
+  
     container_name: online_shop_app_db
+    
     image: mcr.microsoft.com/mssql/server:2022-latest
+    
     environment:
+    
         ACCEPT_EULA: "Y"
+        
         MSSQL_SA_PASSWORD: "Strong!Passw0rd"
+        
     restart: unless-stopped
