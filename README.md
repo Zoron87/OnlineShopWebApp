@@ -1,4 +1,4 @@
-#Проект интернет-магазина с использованием технологий ASP.NET CORE / MVC, LINQ, HTML, CSS, JS, Bootstrap, MS SQL Server, Entity Framework
+#Проект интернет-магазина с использованием технологий ASP.NET CORE / MVC, LINQ, HTML, CSS, JS, Bootstrap, MS SQL Server, Entity Framework + Docker
 
 Это приложение разработано на базе ASP.NET Core Framework и состоит из двух основных частей: веб-приложения и базы данных. Оба компонента взаимодействуют с использованием Entity Framework (EF), который предоставляет доступ к данным. Классы и зависимости внедряются с помощью механизма внедрения зависимостей (DI).
 
