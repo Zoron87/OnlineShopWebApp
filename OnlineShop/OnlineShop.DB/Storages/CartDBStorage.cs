@@ -30,13 +30,7 @@ namespace OnlineShop.DB.Storages
             var cart = await TryGetByIdAsync(userId);
             if (cart == null)
             {
-                cart = new Cart()
-                {
-                    UserId = userId,
-                    Items = new List<CartItem>() { cartPositon }
-                };
-                await _databaseContext.Carts.AddAsync(cart);
-                await _databaseContext.SaveChangesAsync();
+                cart = await CreateAsync(userId, cartPositon);
             }
             else
             {
@@ -48,6 +42,18 @@ namespace OnlineShop.DB.Storages
 
                 await _databaseContext.SaveChangesAsync();
             }
+        }
+
+        public async Task<Cart> CreateAsync(Guid userId, CartItem cartPositon = null)
+        {
+            Cart cart = new Cart()
+            {
+                UserId = userId,
+                Items = cartPositon == null ? new List<CartItem>() { } : new List<CartItem>() { cartPositon }
+            };
+            await _databaseContext.Carts.AddAsync(cart);
+            await _databaseContext.SaveChangesAsync();
+            return cart;
         }
 
         public async Task ReduceAsync(Guid userId, Guid productId)
@@ -90,6 +96,43 @@ namespace OnlineShop.DB.Storages
                 _databaseContext.Carts.Remove(cart);
                 await _databaseContext.SaveChangesAsync();
             }
+        }
+
+        public void MoveToUserCart(Guid fromUser, Guid toUser)
+        {
+            var fromBasket = TryGetByIdAsync(fromUser);
+
+            if (fromBasket == null)
+                return;
+
+            var userBasket = TryGetByIdAsync(toUser);
+
+            //if (userBasket == null)
+            //{
+            //    fromBasket.Id = toUser;
+            //    databaseContext.SaveChanges();
+            //    return;
+            //}
+
+            //var resultBasket = new Basket()
+            //{
+            //    UserName = toUser,
+            //};
+
+            //var unionItems = fromBasket.BasketItems.Union(userBasket.BasketItems)
+            //                                        .GroupBy(x => x.Product.Id)
+            //                                        .Select(x => new BasketItem()
+            //                                        {
+            //                                            Amount = x.Sum(x => x.Amount),
+            //                                            Product = x.First().Product,
+            //                                            Basket = resultBasket
+            //                                        })
+            //                                        .ToList();
+
+            //resultBasket.BasketItems = unionItems;
+            //databaseContext.Add(resultBasket);
+            //Clear(fromUser);
+            //Clear(toUser);
         }
     }
 }

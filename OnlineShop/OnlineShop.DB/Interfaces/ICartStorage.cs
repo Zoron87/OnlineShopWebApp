@@ -11,5 +11,6 @@ namespace OnlineShop.DB.Interfaces
         Task DeleteItemAsync(Guid userId, Guid productId);
         Task<Cart> TryGetByIdAsync(Guid userGuid);
         Task ClearAsync(Guid userId);
+        Task<Cart> CreateAsync(Guid userId, CartItem cartItem = null);
     }
 }

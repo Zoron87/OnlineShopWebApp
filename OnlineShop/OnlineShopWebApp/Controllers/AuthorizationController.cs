@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.DB;
+using OnlineShop.DB.Interfaces;
 using OnlineShop.DB.Models;
+using OnlineShopWebApp.Interfaces;
 using OnlineShopWebApp.Models;
 using System;
 using System.Linq;
@@ -13,11 +15,17 @@ namespace OnlineShopWebApp.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;  // для хранения кук
+        private readonly UserViewModel _userViewModel;
+        private readonly IFavouriteStorage _favouriteStorage;
+        private readonly ICompareStorage _compareStorage;
+        private readonly ICartStorage _cartDBStorage;
 
-        public AuthorizationController(SignInManager<User> signInManager, UserManager<User> userInManager)
+        public AuthorizationController(SignInManager<User> signInManager, UserManager<User> userManager, UserViewModel userViewModel, ICartStorage cartDBStorage)
         {
             _signInManager = signInManager;
-            _userManager = userInManager;
+            _userViewModel = userViewModel;
+            _cartDBStorage = cartDBStorage;
+            _userManager = userManager;
         }
         public  IActionResult Login(string returnUrl)
         {
@@ -31,8 +39,8 @@ namespace OnlineShopWebApp.Controllers
             {
                 var result = await _signInManager.PasswordSignInAsync(loginInfo.Email, loginInfo.Password, loginInfo.IsRememberMe, false);
                 if (result.Succeeded)
-                    return Redirect(loginInfo.ReturnUrl ?? "/Home");
-                else 
+                    return Redirect("/Home");
+                else
                     ModelState.AddModelError("", "Неправильный пароль");
             }
             return View(loginInfo);
@@ -67,7 +75,7 @@ namespace OnlineShopWebApp.Controllers
                 {
                     await _signInManager.SignInAsync(user, false); 
                     await _userManager.AddToRoleAsync(user, Constants.UserRoleName);
-                    return Redirect(registerInfo.ReturnUrl ?? "/Home");
+                    return Redirect("/Home");
                 }
                 else
                     ModelState.AddModelError("", String.Join("\r\n", result.Errors.Select(e => e.Description)));

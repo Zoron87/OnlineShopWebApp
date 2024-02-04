@@ -41,6 +41,7 @@ namespace OnlineShopWebApp.Controllers
 		{
             var userId = User.Identity.IsAuthenticated ? Guid.Parse((await _userManager.GetUserAsync(User)).Id) : _userViewModel.Id;
             var cart = await _cartStorage.TryGetByIdAsync(userId);
+            if (cart == null) cart = await _cartStorage.CreateAsync(userId);
             var orderDetail = new OrderDetails() { Items = cart.Items, DeliveryDate = DateTime.Now };
             var orderDetailViewModel = _mapper.Map<OrderDetailsViewModel>(orderDetail);
             return View(orderDetailViewModel);
