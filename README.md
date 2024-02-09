@@ -1,15 +1,15 @@
 #Проект интернет-магазина с использованием технологий:
 <ul>
 <li>ASP.NET CORE / MVC</li>
-Razor Pages
-LINQ
-HTML, CSS, JS
-Bootstrap
-MS SQL Server
-ASP.NET Identity (система аутентификации и авторизации)
-Entity Framework
-Serilog (журналы логирования и диагностики)
-Docker
+<li>Razor Pages</li>
+<li>LINQ</li>
+<li>HTML, CSS, JS</li>
+<li>Bootstrap</li>
+<li>MS SQL Server</li>
+<li>ASP.NET Identity (система аутентификации и авторизации)</li>
+<li>Entity Framework</li>
+<li>Serilog (журналы логирования и диагностики)</li>
+<li>Docker</li>
 </ul>
 
 ![OnlineShop](https://github.com/Zoron87/OnlineShopWebApp/assets/29422098/71ec85f5-b59d-4a06-aabb-49c355338302)
