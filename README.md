@@ -50,15 +50,14 @@
 
 Вы можете запускать приложение с использованием своей IDE, например, Visual Studio или Visual Studio Code. Также можно использовать готовый образ на hub.docker.com - zoronbet/onlineshopwebapp. Или использовать готовый Docker-Compose файл ниже для создания контейнеров и запуска приложения в контейнеризованной среде. Перед использованием убедитесь, что верно установлен и настроен Docker.
 
+docker-compose.yml
+---------------------------------------------------------------------------------
 ```docker
 version: '3.4'
 services:
   onlineshopwebapp:
     container_name: online_shop_app_mvc
-    image: ${DOCKER_REGISTRY-}onlineshopwebapp
-    build:
-      context: .
-      dockerfile: OnlineShopWebApp/Dockerfile
+    image: zoronbet/onlineshopwebapp
     ports:
         - 80:80
         - 443:443
@@ -74,43 +73,3 @@ services:
         MSSQL_SA_PASSWORD: "Strong!Passw0rd"
     restart: unless-stopped
 ```
-
-
-docker-compose.yml
-----------------------------------------------------------------------------------
-version: '3.4'
-
-services:
-
-  onlineshopwebapp:
-  
-    container_name: online_shop_app_mvc
-    
-    image: zoronbet/onlineshopwebapp
-    
-    ports:
-    
-        - 80:80
-        
-        - 443:443
-        
-    depends_on:
-    
-        - mssqlserver
-        
-    restart: unless-stopped
-    
-    
-  mssqlserver:
-  
-    container_name: online_shop_app_db
-    
-    image: mcr.microsoft.com/mssql/server:2022-latest
-    
-    environment:
-    
-        ACCEPT_EULA: "Y"
-        
-        MSSQL_SA_PASSWORD: "Strong!Passw0rd"
-        
-    restart: unless-stopped
