@@ -12,7 +12,8 @@
 <li>Docker</li>
 </ul>
 
-> [!NOTE]
+> [!IMPORTANT]
+> Key information users need to know to achieve their goal.
 > Для тестирования функций администратора:<br>
 ><em>логин: admin@example.com<br>
 ><em>пароль: Admin123456!</em></p>
