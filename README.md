@@ -1,4 +1,16 @@
-#Проект интернет-магазина с использованием технологий ASP.NET CORE / MVC, LINQ, HTML, CSS, JS, Bootstrap, MS SQL Server, Entity Framework + Docker
+#Проект интернет-магазина с использованием технологий:
+<ul>
+<li>ASP.NET CORE / MVC</li>
+Razor Pages
+LINQ
+HTML, CSS, JS
+Bootstrap
+MS SQL Server
+ASP.NET Identity (система аутентификации и авторизации)
+Entity Framework
+Serilog (журналы логирования и диагностики)
+Docker
+</ul>
 
 ![OnlineShop](https://github.com/Zoron87/OnlineShopWebApp/assets/29422098/71ec85f5-b59d-4a06-aabb-49c355338302)
 
